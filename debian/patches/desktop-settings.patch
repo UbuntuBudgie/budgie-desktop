@@ -5,7 +5,7 @@ Description: [PATCH 1/2] Add support to handle desktop icons for Nemo and
  with a panel key to allow distros to choose their desktop-handler via an
  override or for users to manually update the key value from a choice of
  values.
- Origin: https://github.com/solus-project/budgie-desktop/pull/1839
+Forwarded: https://github.com/solus-project/budgie-desktop/pull/1839
 
 ---
  meson.build                                   |  6 --
@@ -40,9 +40,9 @@ Description: [PATCH 1/2] Add support to handle desktop icons for Nemo and
  
 --- a/meson_options.txt
 +++ b/meson_options.txt
-@@ -2,4 +2,3 @@
+@@ -1,4 +1,3 @@
+ option('with-stateless', type: 'boolean', value: false, description: 'Enable stateless XDG paths')
  option('with-polkit', type: 'boolean', value: true, description: 'Enable PolKit support')
- option('with-bluetooth', type: 'boolean', value: true, description: 'Enable gnome-bluetooth support')
  option('with-gtk-doc', type: 'boolean', value: true, description: 'Build gtk-doc documentation')
 -option('with-desktop-icons', type: 'combo', choices: ['nautilus', 'none'], value: 'nautilus', description: 'Desktop icon handling')
 --- a/src/panel/com.solus-project.budgie-panel.gschema.xml
@@ -109,7 +109,7 @@ Description: [PATCH 1/2] Add support to handle desktop icons for Nemo and
   * This program is free software; you can redistribute it and/or modify
   * it under the terms of the GNU General Public License as published by
   * the Free Software Foundation; either version 2 of the License, or
-@@ -11,118 +11,151 @@
+@@ -11,118 +11,150 @@
  
  namespace Budgie {
  
@@ -257,7 +257,6 @@ Description: [PATCH 1/2] Add support to handle desktop icons for Nemo and
 +            grid.add_row(new SettingsRow(switch_icons,
 +                _("Desktop Icons"),
 +                _("Control whether to allow launchers and icons on the desktop.")));
-+            
 +        }
      }
  

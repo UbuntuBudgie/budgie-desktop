@@ -47,34 +47,6 @@ Files: src/daemon/tabswitcher.vala
 Copyright: 2017, 2018, taaem <taaem@mailbox.org>
 License: GPL-2+
 
-Files: src/imports/*
-Copyright: 2003-2006, Vincent Untz
-  2002, Anders Carlsson <andersca@gnu.org>
-License: LGPL-2+
-
-Files: src/imports/natray/fixedtip.c
-Copyright: 2003-2006, Vincent Untz
-  2001, Havoc Pennington
-License: GPL-2+
-
-Files: src/imports/natray/fixedtip.h
-Copyright: 2003-2006, Vincent Untz
-  2001, Havoc Pennington, 2002, Red Hat Inc.
-License: GPL-2+
-
-Files: src/imports/natray/na-tray-child.c
-  src/imports/natray/na-tray-child.h
-Copyright: 2008, Red Hat, Inc.
-  2003-2006, Vincent Untz
-  2002, Anders Carlsson <andersca@gnu.org>
-License: LGPL-2+
-
-Files: src/imports/natray/na-tray.c
-Copyright: 2007, Christian Persch
-  2003-2006, Vincent Untz
-  2002, Red Hat, Inc.
-License: GPL-2+
-
 Files: src/lib/*
 Copyright: 2015-2019, Budgie Desktop Developers
 License: LGPL-2.1+
@@ -166,15 +138,6 @@ License: GPL-2+
  .
  On Debian systems, the complete text of version 2 of the GNU General
  Public License can be found in '/usr/share/common-licenses/GPL-2'.
-
-License: LGPL-2+
- This program is free software; you can redistribute it and/or modify it
- under the terms of the GNU Library General Public License as published by the
- Free Software Foundation; version 2 of the License, or (at
- your option) any later version.
- .
- On Debian systems, the complete text of version 2 of the GNU Library
- General Public License can be found in `/usr/share/common-licenses/LGPL-2'.
 
 License: LGPL-2.1+
  This program is free software; you can redistribute it and/or modify it

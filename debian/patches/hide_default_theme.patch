@@ -3,7 +3,7 @@ Description: hide the "Default" theme
  The intention of upstream code is to hide Adwaita that does not
  render correctly in budgie. This patch hides this theme.
 Author: David Mohammed <fossfreedom@ubuntu.com>
-Forwarded: no
+Forwarded: not-needed
 Last-Update: 2020-04-06
 
 --- budgie-desktop-10.5.1.orig/src/panel/settings/themes.vala

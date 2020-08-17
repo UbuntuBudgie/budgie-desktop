@@ -3,7 +3,7 @@ Description: Reinstate desktop overrides
  Reinstate these for Debian & Ubuntu to ensure
  clean separation from Budgie and GNOME desktops
 Author: David Mohammed <fossfreedom@ubuntu.com>
-Forwarded: No
+Forwarded: not-needed
 Last-Update: 2019-03-09
 
 Index: budgie-desktop-10.5~git20190308/src/wm/20_solus-project.budgie.wm.gschema.override

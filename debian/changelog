@@ -1,3 +1,36 @@
+budgie-desktop (10.5.1+git20200715-1) unstable; urgency=medium
+
+  * Git build 20200715
+    - Variety of bug-fixes including
+      resolve system tray icon corruption
+      display chromium notifications with their icons
+      option to display windows from all workspaces in tab-switcher
+      show non xkb layouts in keyboard applet
+      respect animations flag for background transitions
+      resolve occasional panel crash when removing applets
+      make screenshot commands configurable via gsettings
+      fix display of spotify artwork in raven
+  * Refresh show-tray-icon.patch but use new name for schema
+  * Add mutter7.patch ready for GNOME 3.38 (mutter7) switch
+  * hide-default-theme.patch hide Debian specific "Default" theme
+    label
+  * Drop the following patches since incorporated in the git build
+    - keygrab.patch
+    - leftright-panel-layouts.patch
+    - Mutter-3.35.90-support-1918.patch
+    - Mutter-3.35.91-1939.patch
+    - pkexec-menu.patch
+    - polkitdialog.patch
+    - popup-scale-factor.patch
+    - strut-calc.patch
+    - use-builtin-session-manager.patch
+    - wnck-shutdown.patch
+    - workspace-max.patch
+  * Refresh debian/copyight for the git build source
+  * All patches now included Forwarded in their dep-3 header
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 17 Aug 2020 20:04:17 +0100
+
 budgie-desktop (10.5.1-8) unstable; urgency=medium
 
   * Fix FTBFS (Closes: #963366)

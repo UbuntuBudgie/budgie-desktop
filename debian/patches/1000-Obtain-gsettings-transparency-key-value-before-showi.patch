@@ -9,11 +9,9 @@ Last-Update: 2018-08-07
  src/panel/manager.vala | 10 +++++++---
  1 file changed, 7 insertions(+), 3 deletions(-)
 
-Index: budgie-desktop-10.5~git20190308/src/panel/manager.vala
-===================================================================
---- budgie-desktop-10.5~git20190308.orig/src/panel/manager.vala
-+++ budgie-desktop-10.5~git20190308/src/panel/manager.vala
-@@ -1304,6 +1304,10 @@ public class PanelManager : DesktopManag
+--- a/src/panel/manager.vala
++++ b/src/panel/manager.vala
+@@ -1310,6 +1310,10 @@
          load_panel(uuid, false);
  
          set_panels();

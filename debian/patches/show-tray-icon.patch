@@ -4,12 +4,11 @@ Description: Show tray icon
  the budgie-desktop-nm-applet will autostart and
  thus show in the tray
 Author: David Mohammed <fossfreedom@ubuntu.com>
-Origin: other
-Forwarded: no
+Forwarded: not-needed
 Last-Update: 2019-12-28
 
 --- /dev/null
-+++ b/src/applets/tray/com.solus-project.tray.gschema.xml
++++ b/src/applets/tray/com.solus-project.tray-nm.gschema.xml
 @@ -0,0 +1,11 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<schemalist gettext-domain="budgie">
@@ -25,13 +24,13 @@ Last-Update: 2019-12-28
 \ No newline at end of file
 --- a/src/applets/tray/meson.build
 +++ b/src/applets/tray/meson.build
-@@ -34,3 +34,8 @@
-     install: true,
-     install_dir: applet_tray_dir,
+@@ -48,3 +48,8 @@
+     'com.solus-project.tray.gschema.xml',
+     install_dir: join_paths(datadir, 'glib-2.0', 'schemas'),
  )
 +
 +install_data(
-+    'com.solus-project.tray.gschema.xml',
++    'com.solus-project.tray-nm.gschema.xml',
 +    install_dir: join_paths(datadir, 'glib-2.0', 'schemas'),
 +)
 --- a/src/session/budgie-desktop-nm-applet.desktop.in
