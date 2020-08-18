@@ -1,3 +1,10 @@
+budgie-desktop (10.5.1+git20200715-2) unstable; urgency=medium
+
+  * Revise show-tray-icon.patch to use an alternate ID to prevent
+    a clash with the system tray schema
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 18 Aug 2020 18:02:40 +0100
+
 budgie-desktop (10.5.1+git20200715-1) unstable; urgency=medium
 
   * Git build 20200715

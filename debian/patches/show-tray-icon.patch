@@ -5,14 +5,14 @@ Description: Show tray icon
  thus show in the tray
 Author: David Mohammed <fossfreedom@ubuntu.com>
 Forwarded: not-needed
-Last-Update: 2019-12-28
+Last-Update: 2020-08-18
 
 --- /dev/null
 +++ b/src/applets/tray/com.solus-project.tray-nm.gschema.xml
 @@ -0,0 +1,11 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<schemalist gettext-domain="budgie">
-+  <schema path="/com/solus-project/tray/" id="com.solus-project.tray">
++  <schema path="/com/solus-project/tray/" id="com.solus-project.tray2">
 +
 +    <key type="b" name="show-nm-trayicon">
 +      <default>true</default>
@@ -39,4 +39,4 @@ Last-Update: 2019-12-28
  X-GNOME-Bugzilla-Product=NetworkManager
  X-GNOME-Bugzilla-Component=nm-applet
  X-GNOME-UsesNotifications=true
-+AutostartCondition=GSettings com.solus-project.tray show-nm-trayicon
++AutostartCondition=GSettings com.solus-project.tray2 show-nm-trayicon
