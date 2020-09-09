@@ -4,4 +4,3 @@ show-tray-icon.patch
 recalc-panel-box-visibility.patch
 desktop-settings.patch
 hide_default_theme.patch
-mutter7.patch

@@ -1,3 +1,15 @@
+budgie-desktop (10.5.1+git20200824-1) experimental; urgency=medium
+
+  * Git build 20200824
+    - mutter-7 build capability
+    - Translations includes upstream translations up-to 20200827
+  * Packaging Changes
+    - drop mutter-7 patch since included in Git build
+    - control: build against mutter-7
+    - control: bump debhelper version
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 09 Sep 2020 18:40:11 +0100
+
 budgie-desktop (10.5.1+git20200715-2) unstable; urgency=medium
 
   * Revise show-tray-icon.patch to use an alternate ID to prevent
