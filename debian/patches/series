@@ -1,6 +1,5 @@
 1000-Obtain-gsettings-transparency-key-value-before-showi.patch
 desktop-override.patch
 show-tray-icon.patch
-recalc-panel-box-visibility.patch
 desktop-settings.patch
 hide_default_theme.patch

@@ -1,6 +1,9 @@
 budgie-desktop (10.5.2-1) UNRELEASED; urgency=medium
 
-  * Refresh all patches
+  * New release
+    - See ChangeLog
+  * Refresh all patches against latest source
+  * Drop recalc-panel-box-visibility.patch since now fixed in release
 
  -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 13 Oct 2020 22:21:25 +0100
 
