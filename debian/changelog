@@ -1,3 +1,22 @@
+budgie-desktop (10.5.2-1) UNRELEASED; urgency=medium
+
+  * Refresh all patches
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 13 Oct 2020 22:21:25 +0100
+
+budgie-desktop (10.5.1+git20200824-3) unstable; urgency=medium
+
+  * debian/tests add superficial as a restriction since the test
+    only covers a limited build artifact (Closes: #971453)
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 30 Sep 2020 22:12:28 +0100
+
+budgie-desktop (10.5.1+git20200824-2) unstable; urgency=medium
+
+  * No change upload to unstable (Closes: #971038)
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sat, 26 Sep 2020 18:32:17 +0100
+
 budgie-desktop (10.5.1+git20200824-1) experimental; urgency=medium
 
   * Git build 20200824

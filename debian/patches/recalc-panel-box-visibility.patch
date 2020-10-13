@@ -11,75 +11,54 @@ Description: [PATCH] Recalculate panel box visibility on applet change
 
 --- a/src/panel/panel.vala
 +++ b/src/panel/panel.vala
-@@ -1,8 +1,8 @@
- /*
-  * This file is part of budgie-desktop
-- * 
-+ *
-  * Copyright © 2015-2019 Budgie Desktop Developers
-- * 
-+ *
-  * This program is free software; you can redistribute it and/or modify
-  * it under the terms of the GNU General Public License as published by
-  * the Free Software Foundation; either version 2 of the License, or
-@@ -19,7 +19,7 @@
-  */
- public class MainPanel : Gtk.Box
- {
-- 
+@@ -136,6 +136,17 @@
+ 			return false;
+ 		}
+ 
++		private void panel_box_visibility() {
++			Gtk.Box[] boxarray = { start_box, center_box, end_box };
++			foreach (var box in boxarray) {
++				bool visible = true;
++				if (box.get_children().length() == 0) {
++					visible = false;
++				}
++				box.set_visible(visible);
++			}
++		}
 +
-     public MainPanel()
-     {
-         Object(orientation: Gtk.Orientation.HORIZONTAL);
-@@ -144,6 +144,18 @@
-         return false;
-     }
+ 		/**
+ 		* Force update the geometry
+ 		*/
+@@ -366,6 +377,7 @@
+ 			/* bit of a no-op. */
+ 			update_sizes();
+ 			load_applets();
++			this.applets_changed.connect(this.panel_box_visibility);
+ 		}
  
-+    private void panel_box_visibility()
-+    {
-+        Gtk.Box[] boxarray = { start_box, center_box, end_box };
-+        foreach (var box in boxarray) {
-+            bool visible = true;
-+            if (box.get_children().length() == 0) {
-+                visible = false;
-+            }
-+            box.set_visible(visible);
-+        }
-+    }
+ 		void do_size_allocate() {
+@@ -732,6 +744,7 @@
+ 
+ 			set_applets();
+ 			budge_em_left(alignment, position);
++			panel_box_visibility();
+ 		}
+ 
+ 		void add_applet(Budgie.AppletInfo? info) {
+@@ -781,6 +794,7 @@
+ 			ulong id = info.notify.connect(applet_updated);
+ 			info.set_data("notify_id", id);
+ 			this.applet_added(info);
++			panel_box_visibility();
+ 
+ 			if (this.is_fully_loaded) {
+ 				return;
+@@ -1534,6 +1548,8 @@
+ 		private bool show_panel() {
+ 			show_panel_id = 0;
+ 
++			panel_box_visibility();
 +
-     /**
-      * Force update the geometry
-      */
-@@ -375,6 +387,7 @@
-         /* bit of a no-op. */
-         update_sizes();
-         load_applets();
-+        this.applets_changed.connect(this.panel_box_visibility);
-     }
- 
-     void do_size_allocate()
-@@ -731,6 +744,7 @@
- 
-         set_applets();
-         budge_em_left(alignment, position);
-+        panel_box_visibility();
-     }
- 
-     void add_applet(Budgie.AppletInfo? info)
-@@ -779,6 +793,7 @@
-         ulong id = info.notify.connect(applet_updated);
-         info.set_data("notify_id", id);
-         this.applet_added(info);
-+        panel_box_visibility();
- 
-         if (this.is_fully_loaded) {
-             return;
-@@ -1561,6 +1576,8 @@
-     {
-         show_panel_id = 0;
- 
-+        panel_box_visibility();
-+
-         if (!this.allow_animation) {
-             return false;
-         }
+ 			if (!this.allow_animation) {
+ 				return false;
+ 			}

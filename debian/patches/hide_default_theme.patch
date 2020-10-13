@@ -6,13 +6,13 @@ Author: David Mohammed <fossfreedom@ubuntu.com>
 Forwarded: not-needed
 Last-Update: 2020-04-06
 
---- budgie-desktop-10.5.1.orig/src/panel/settings/themes.vala
-+++ budgie-desktop-10.5.1/src/panel/settings/themes.vala
-@@ -52,6 +52,7 @@ public class ThemeScanner : GLib.Object
+--- a/src/panel/settings/themes.vala
++++ b/src/panel/settings/themes.vala
+@@ -47,6 +47,7 @@
  
-     string[] gtk_theme_blacklist = {
-         "Adwaita",
-+        "Default",
-         "Breeze",
-         "Clearlooks",
-         "Crux",
+ 	string[] gtk_theme_blacklist = {
+ 		"Adwaita",
++		"Default",
+ 		"Breeze",
+ 		"Clearlooks",
+ 		"Crux",
