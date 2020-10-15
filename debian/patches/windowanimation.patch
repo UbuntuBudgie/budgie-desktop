@@ -1,0 +1,103 @@
+Description: Restore budgie window manager animations
+ Mutter v7 removed the 'scaled-gravity' effect and reworked
+ scaled-gravity effect but rewritten using the now expected
+ clutter API calls.
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Bug: https://github.com/solus-project/budgie-desktop/issues/2040
+Forwarded: TBD
+Last-Update: 2020-10-15
+
+--- budgie-desktop-10.5.1+git20200824.orig/src/wm/wm.vala
++++ budgie-desktop-10.5.1+git20200824/src/wm/wm.vala
+@@ -112,20 +112,16 @@ public interface Switcher: GLib.Object
+ }
+ 
+ public class MinimizeData {
+-    public double scale_x;
+-    public double scale_y;
+-    public double place_x;
+-    public double place_y;
+-    public double old_x;
+-    public double old_y;
++    public float scale_x;
++    public float scale_y;
++    public float anchor_x;
++    public float anchor_y;
+ 
+-    public MinimizeData(double sx, double sy, double px, double py, double ox, double oy) {
++    public MinimizeData(float sx, float sy, float ax, float ay) {
+         scale_x = sx;
+         scale_y = sy;
+-        place_x = px;
+-        place_y = py;
+-        old_x = ox;
+-        old_y = oy;
++        anchor_x = ax;
++        anchor_y = ay;
+     }
+ }
+ 
+@@ -851,19 +847,18 @@ public class BudgieWM : Meta.Plugin
+         actor.transitions_completed.connect(minimize_done);
+ 
+         /* Save the minimize state for later restoration */
+-        var scale_x = (double)(icon.width / actor.width);
+-        var scale_y = (double)(icon.height / actor.height);
+-        var place_x = (double)icon.x;
+-        var place_y = (double)icon.y;
+-        var old_x = actor.x;
+-        var old_y = actor.y;
++        var scale_x = (float)(icon.width / actor.width);
++        var scale_y = (float)(icon.height / actor.height);
++        var anchor_x = (float)(actor.x - icon.x) / (icon.width - actor.width);
++        var anchor_y = (float)(actor.y - icon.y) / (icon.height - actor.height);
+ 
+-        MinimizeData d = new MinimizeData(scale_x, scale_y, place_x, place_y, old_x, old_y);
++        MinimizeData d = new MinimizeData(scale_x, scale_y, anchor_x, anchor_y);
+ 
+         actor.set_data("_minimize_data", d);
+-        actor.set("opacity", 0U, "scale-gravity", Clutter.Gravity.NORTH_WEST,
+-                  "x", d.place_x, "y", d.place_y, "scale-x",
+-                  d.scale_x, "scale-y", d.scale_y);
++        actor.set_scale(d.scale_x, d.scale_y);
++        actor.opacity = 0U;
++        actor.set_content_gravity(Clutter.ContentGravity.TOP_LEFT);
++        actor.set_pivot_point(anchor_x, anchor_y);
+         actor.restore_easing_state();
+     }
+ 
+@@ -896,9 +891,9 @@ public class BudgieWM : Meta.Plugin
+ 
+         finalize_animations(actor);
+ 
+-        actor.set("opacity", 0U, "scale-gravity", Clutter.Gravity.NORTH_WEST,
+-                  "x", d.place_x, "y", d.place_y, "scale-x",
+-                  d.scale_x, "scale-y", d.scale_y);
++        actor.set_pivot_point (d.anchor_x, d.anchor_y);
++        actor.set_scale (d.scale_x, d.scale_y);
++        actor.opacity = 0U;
+ 
+         actor.show();
+ 
+@@ -906,8 +901,8 @@ public class BudgieWM : Meta.Plugin
+         actor.set_easing_mode(Clutter.AnimationMode.EASE_OUT_QUAD);
+         actor.set_easing_duration(UNMINIMIZE_TIMEOUT);
+ 
+-        actor.set("scale-x", 1.0, "scale-y", 1.0, "opacity", 255U,
+-                  "x", d.old_x, "y", d.old_y);
++        actor.set_scale (1.0f, 1.0f);
++        actor.opacity = 255U;
+ 
+         actor.transitions_completed.connect(unminimize_done);
+         state_map.insert(actor, AnimationState.UNMINIMIZE);
+@@ -1193,8 +1188,8 @@ public class BudgieWM : Meta.Plugin
+     }
+ 
+     /* Return sorted list of user open tabs */
+-    private List<weak Meta.Window> get_current_tabs(Meta.Display display, 
+-                     Meta.Workspace workspace, 
++    private List<weak Meta.Window> get_current_tabs(Meta.Display display,
++                     Meta.Workspace workspace,
+                      bool getTabsForAllWindows)
+     {
+         List<weak Meta.Window> tabs;
