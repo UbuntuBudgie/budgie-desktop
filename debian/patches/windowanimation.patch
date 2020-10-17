@@ -11,7 +11,7 @@ Index: budgie-desktop-10.5.1+git20200824/src/wm/wm.vala
 ===================================================================
 --- budgie-desktop-10.5.1+git20200824.orig/src/wm/wm.vala
 +++ budgie-desktop-10.5.1+git20200824/src/wm/wm.vala
-@@ -112,16 +112,20 @@ public interface Switcher: GLib.Object
+@@ -112,14 +112,14 @@ public interface Switcher: GLib.Object
  }
  
  public class MinimizeData {
@@ -23,23 +23,17 @@ Index: budgie-desktop-10.5.1+git20200824/src/wm/wm.vala
 -    public double old_y;
 +    public float scale_x;
 +    public float scale_y;
-+    public float anchor_x;
-+    public float anchor_y;
 +    public float place_x;
 +    public float place_y;
 +    public float old_x;
 +    public float old_y;
  
 -    public MinimizeData(double sx, double sy, double px, double py, double ox, double oy) {
-+    public MinimizeData(float sx, float sy, float ax, float ay, float px, float py, float ox, float oy) {
++    public MinimizeData(float sx, float sy, float px, float py, float ox, float oy) {
          scale_x = sx;
          scale_y = sy;
-+        anchor_x = ax;
-+        anchor_y = ay;
          place_x = px;
-         place_y = py;
-         old_x = ox;
-@@ -820,7 +824,7 @@ public class BudgieWM : Meta.Plugin
+@@ -820,7 +820,7 @@ public class BudgieWM : Meta.Plugin
          finalize_animations(actor as Meta.WindowActor);
      }
  
@@ -48,7 +42,7 @@ Index: budgie-desktop-10.5.1+git20200824/src/wm/wm.vala
  
      public override void minimize(Meta.WindowActor actor)
      {
-@@ -851,19 +855,24 @@ public class BudgieWM : Meta.Plugin
+@@ -851,19 +851,22 @@ public class BudgieWM : Meta.Plugin
          actor.transitions_completed.connect(minimize_done);
  
          /* Save the minimize state for later restoration */
@@ -60,15 +54,12 @@ Index: budgie-desktop-10.5.1+git20200824/src/wm/wm.vala
 -        var old_y = actor.y;
 +        var scale_x = (float)(icon.width / actor.width);
 +        var scale_y = (float)(icon.height / actor.height);
-+        var anchor_x = (float)(actor.x - icon.x) / (icon.width - actor.width);
-+        var anchor_y = (float)(actor.y - icon.y) / (icon.height - actor.height);
 +        var place_x = (float)icon.x;
 +        var place_y = (float)icon.y;
 +        var old_x = (float)actor.x;
 +        var old_y = (float)actor.y;
  
--        MinimizeData d = new MinimizeData(scale_x, scale_y, place_x, place_y, old_x, old_y);
-+        MinimizeData d = new MinimizeData(scale_x, scale_y, anchor_x, anchor_y, place_x, place_y, old_x, old_y);
+         MinimizeData d = new MinimizeData(scale_x, scale_y, place_x, place_y, old_x, old_y);
  
          actor.set_data("_minimize_data", d);
 -        actor.set("opacity", 0U, "scale-gravity", Clutter.Gravity.NORTH_WEST,
@@ -79,11 +70,11 @@ Index: budgie-desktop-10.5.1+git20200824/src/wm/wm.vala
 +        actor.set_y((float)icon.y);
 +        actor.opacity = 0U;
 +        actor.set_content_gravity(Clutter.ContentGravity.TOP_LEFT);
-+        actor.set_pivot_point(anchor_x, anchor_y);
++        actor.set_pivot_point(0f, 0f);
          actor.restore_easing_state();
      }
  
-@@ -876,7 +885,7 @@ public class BudgieWM : Meta.Plugin
+@@ -876,7 +879,7 @@ public class BudgieWM : Meta.Plugin
          finalize_animations(actor as Meta.WindowActor);
      }
  
@@ -92,14 +83,14 @@ Index: budgie-desktop-10.5.1+git20200824/src/wm/wm.vala
  
      /**
       * Handle unminimize animation
-@@ -896,9 +905,11 @@ public class BudgieWM : Meta.Plugin
+@@ -896,9 +899,11 @@ public class BudgieWM : Meta.Plugin
  
          finalize_animations(actor);
  
 -        actor.set("opacity", 0U, "scale-gravity", Clutter.Gravity.NORTH_WEST,
 -                  "x", d.place_x, "y", d.place_y, "scale-x",
 -                  d.scale_x, "scale-y", d.scale_y);
-+        actor.set_pivot_point (d.anchor_x, d.anchor_y);
++        actor.set_pivot_point(0f, 0f);
 +        actor.set_scale (d.scale_x, d.scale_y);
 +        actor.set_x(d.place_x);
 +        actor.set_y(d.place_y);
@@ -107,7 +98,7 @@ Index: budgie-desktop-10.5.1+git20200824/src/wm/wm.vala
  
          actor.show();
  
-@@ -906,8 +917,10 @@ public class BudgieWM : Meta.Plugin
+@@ -906,8 +911,10 @@ public class BudgieWM : Meta.Plugin
          actor.set_easing_mode(Clutter.AnimationMode.EASE_OUT_QUAD);
          actor.set_easing_duration(UNMINIMIZE_TIMEOUT);
  
@@ -120,7 +111,7 @@ Index: budgie-desktop-10.5.1+git20200824/src/wm/wm.vala
  
          actor.transitions_completed.connect(unminimize_done);
          state_map.insert(actor, AnimationState.UNMINIMIZE);
-@@ -1193,8 +1206,8 @@ public class BudgieWM : Meta.Plugin
+@@ -1193,8 +1200,8 @@ public class BudgieWM : Meta.Plugin
      }
  
      /* Return sorted list of user open tabs */
