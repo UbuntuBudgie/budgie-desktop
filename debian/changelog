@@ -7,6 +7,14 @@ budgie-desktop (10.5.2-1) UNRELEASED; urgency=medium
 
  -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 13 Oct 2020 22:21:25 +0100
 
+budgie-desktop (10.5.1+git20200824-4) unstable; urgency=medium
+
+  * Bug fix
+    Restore budgie window minimize and unminimize animation
+    windowanimation.patch (LP: #1900354)
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 18 Oct 2020 22:28:00 +0100
+
 budgie-desktop (10.5.1+git20200824-3) unstable; urgency=medium
 
   * debian/tests add superficial as a restriction since the test
