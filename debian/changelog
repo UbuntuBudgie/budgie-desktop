@@ -1,11 +1,25 @@
-budgie-desktop (10.5.2-1) UNRELEASED; urgency=medium
+budgie-desktop (10.5.2-1) unstable; urgency=medium
 
-  * New release
-    - See ChangeLog
-  * Refresh all patches against latest source
-  * Drop recalc-panel-box-visibility.patch since now fixed in release
+  * New upstream release
+    - upstream release announcement in install changelogs
+  * Packaging Changes
+    - control: Bump StandardsVersion
+    - control: Update build dependency version numbers as per upstream
+      recommendations
+    - drop desktop-settings.patch since new release has support for
+      budgie-desktop-view/desktopfolder/nemo
+    - drop recalc-panel-box-visibility.patch since new release has fixed
+      this issue
+    - drop windowanimation.patch since upstreamed into new release
+    - drop 1000-Obtain-gsettings-transparency-key-value-before-showi.patch
+      since upstreamed into new release
+    - refresh hide_default_theme.patch
+    - copyright bump copyright year to match revised sourcess
+    - update libraven0.symbols
+    - update libbudgie-plugin0.symbols
+    - update watch file for revised upstream version naming
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 13 Oct 2020 22:21:25 +0100
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 02 Dec 2020 19:45:59 +0000
 
 budgie-desktop (10.5.1+git20200824-4) unstable; urgency=medium
 

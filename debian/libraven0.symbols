@@ -10,15 +10,10 @@ libraven.so.0 libraven0 #MINVER#
  BUDGIE_VERSION@Base 10.3
  BUDGIE_WEBSITE@Base 10.3
  budgie_app_sound_control_construct@Base 10.4
- budgie_app_sound_control_get_base_volume@Base 10.5.1
  budgie_app_sound_control_get_type@Base 10.4
  budgie_app_sound_control_new@Base 10.4
- budgie_app_sound_control_on_slider_change@Base 10.4
  budgie_app_sound_control_refresh@Base 10.4
  budgie_app_sound_control_refresh_volume@Base 10.5.1
- budgie_app_sound_control_set_mute_ui@Base 10.4
- budgie_app_sound_control_toggle_mute_state@Base 10.4
- budgie_app_sound_control_volume_at_mute_threshold@Base 10.5.1
  budgie_header_expander_construct@Base 10.3
  budgie_header_expander_get_expanded@Base 10.3
  budgie_header_expander_get_type@Base 10.3
@@ -114,6 +109,8 @@ libraven.so.0 libraven0 #MINVER#
  budgie_raven_iface_set_is_expanded@Base 10.3
  budgie_raven_iface_unref@Base 10.3
  budgie_raven_new@Base 10.3
+ budgie_raven_position_get_display_name@Base 10.5.2
+ budgie_raven_position_get_type@Base 10.5.2
  budgie_raven_remote_get_type@Base 10.4
  budgie_raven_remote_proxy_get_type@Base 10.4
  budgie_raven_remote_register_object@Base 10.4
@@ -140,10 +137,8 @@ libraven.so.0 libraven0 #MINVER#
  budgie_sound_widget_get_type@Base 10.4
  budgie_sound_widget_has_devices@Base 10.4
  budgie_sound_widget_new@Base 10.4
- budgie_start_listening_check_music_support@Base 10.4
  budgie_start_listening_construct@Base 10.4
  budgie_start_listening_get_type@Base 10.4
- budgie_start_listening_launch_music_player@Base 10.4
  budgie_start_listening_new@Base 10.4
  budgie_value_get_raven_iface@Base 10.3
  budgie_value_set_raven_iface@Base 10.3

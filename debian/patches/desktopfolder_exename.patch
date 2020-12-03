@@ -1,0 +1,19 @@
+Description: Rename desktopfolder executable
+ Upstream calls the desktopfolder name
+ differently from Debian.  This patch sets the
+ exename.
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Forwarded: not-needed
+Last-Update: 2020-12-02
+
+--- a/src/panel/settings/settings_desktop.vala
++++ b/src/panel/settings/settings_desktop.vala
+@@ -156,7 +156,7 @@
+ 				case DesktopType.BUDGIE:
+ 					return "us.getsol.budgie-desktop-view";
+ 				case DesktopType.DESKTOPFOLDER:
+-					return "com.github.spheras.desktopfolder";
++					return "desktopfolder";
+ 				case DesktopType.NEMO:
+ 					return "nemo-desktop";
+ 				default:

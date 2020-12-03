@@ -4,7 +4,7 @@ Upstream-Contact: Josh Strobl <joshua@streambits.io>
 Source: https://github.com/solus-project/budgie-desktop
 
 Files: *
-Copyright: 2014-2019, Budgie Desktop Developers
+Copyright: 2014-2020, Budgie Desktop Developers
 License: GPL-2+
 
 Files: data/icons/*
@@ -16,7 +16,7 @@ Copyright: 2008, Brian Tarricone <bjt23@cornell.edu>
 License: GPL-2+
 
 Files: subprojects/translations/*
-Copyright: 2014-2019, Budgie Desktop Developers
+Copyright: 2014-2020, Budgie Desktop Developers
 License: GPL-2
 
 Files: data/icons/actions/pane-show-symbolic.svg
@@ -40,7 +40,7 @@ Copyright: 2015-2019, Budgie Desktop Developers
 License: GPL-2+
 
 Files: src/config/*
-Copyright: 2015-2019, Budgie Desktop Developers
+Copyright: 2015-2020, Budgie Desktop Developers
 License: LGPL-2.1+
 
 Files: src/daemon/tabswitcher.vala
@@ -48,44 +48,44 @@ Copyright: 2017, 2018, taaem <taaem@mailbox.org>
 License: GPL-2+
 
 Files: src/lib/*
-Copyright: 2015-2019, Budgie Desktop Developers
+Copyright: 2015-2020, Budgie Desktop Developers
 License: LGPL-2.1+
 
 Files: src/libsession/*
-Copyright: 2015-2019, Budgie Desktop Developers
+Copyright: 2015-2020, Budgie Desktop Developers
 License: LGPL-2.1+
 
 Files: src/panel/uuid.vala
-Copyright: 2015-2019, Budgie Desktop Developers
+Copyright: 2015-2020, Budgie Desktop Developers
 License: LGPL-2.1+
 
 Files: src/plugin/*
-Copyright: 2015-2019, Budgie Desktop Developers
+Copyright: 2015-2020, Budgie Desktop Developers
 License: LGPL-2.1+
 
 Files: src/polkit/polkitdialog.vala
-Copyright: 2014-2019, Budgie Desktop Developers
+Copyright: 2014-2020, Budgie Desktop Developers
 License: GPL-2+
 
 Files: src/raven/notifications_view.vala
-Copyright: 2015-2019, Budgie Desktop Developers
+Copyright: 2015-2020, Budgie Desktop Developers
   2014, Josh Klar <j@iv597.com> (original Budgie work, prior to Budgie 10)
 License: GPL-2+
 
 Files: src/theme/*
-Copyright: 2015-2019, Budgie Desktop Developers
+Copyright: 2015-2020, Budgie Desktop Developers
 License: LGPL-2.1+
 
 Files: src/theme/render-assets.sh
-Copyright: 2015-2018, Budgie Desktop Developers
+Copyright: 2015-2020, Budgie Desktop Developers
 License: LGPL-2.1+
 
 Files: src/wm/ibus.vala
-Copyright: GNOME Shell Developers (Heavy inspiration, logic theft) / 2016-2019, Budgie Desktop Developers
+Copyright: GNOME Shell Developers (Heavy inspiration, logic theft) / 2016-2020, Budgie Desktop Developers
 License: GPL-2+
 
 Files: src/wm/keyboard.vala
-Copyright: GNOME Shell Developers (Heavy inspiration, logic theft) / 2015-2019, Budgie Desktop Developers
+Copyright: GNOME Shell Developers (Heavy inspiration, logic theft) / 2015-2020, Budgie Desktop Developers
 License: GPL-2+
 
 Files: subprojects/gvc/*
@@ -94,7 +94,7 @@ License: GPL-2+
 
 Files: subprojects/gvc/Makefile.am
   subprojects/gvc/test-audio-device-selection.c
-Copyright: 2014-2018, Budgie Desktop Developers
+Copyright: 2014-2020, Budgie Desktop Developers
 License: GPL-2+
 
 Files: subprojects/gvc/gvc-channel-map.c

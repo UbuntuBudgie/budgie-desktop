@@ -1,3 +1,133 @@
+v10.5.2 Official announcement can be found here:
+https://getsol.us/2020/12/02/budgie-10-5-2-released/
+
+Text of the announcement reproduced below:
+Quality of Life
+
+Budgie 10.5.2 introduces new goodies to make your Budgie experience even better!
+Applets
+Budgie Menu
+
+Budgie Menu has received various refinements for this release:
+
+    Budgie Menu introduces additional checks for an application’s DesktopAppInfo, ensuring that we consistently skip apps and exclude them from calculations when they have Hidden or NoDisplay set, as well as if the NotShowIn contains Budgie.
+    Budgie Menu will no longer show empty categories, a common occurrence when installing applications via WINE.
+    Budgie Menu will now alphabetically sort category names, which is useful when you have custom user desktop directories for applications. They are no longer forced to be below default system-wide desktop directories such as Internet / Networking, Office, Sound & Video, etc.
+    Applications which utilize pkexec in their desktop info will now spawn an asynchronous process, with pkexec being the command and passing the rest of the command line content as arguments.
+
+Icon Tasklist
+The Icon Tasklist applet has seen new features and behaviour refinements in Budgie 10.5.2.
+
+There are now two new options available, disabled by default, to launch a new instance of an application via the respective button for the application: middle click and double click. This expands on our existing option to create a new instance of an application by clicking the + button in the popover of each Icon Button.
+
+The behavior of the Icon Tasklist has been refined in Budgie 10.5.2. We have consolidated duplicate logic in other less used classes into our dedicated application state tracking class, which is used by the Icon Tasklist and IconPopover to provide a list of running applications, their AppInfo, any group they belong to, and more. This consolidation has meant more consistent “skip pager” checks, as well as more consistent rejection of various types of windows, such as:
+
+    DOCK (like budgie-panel)
+    SPLASHSCREEN (temporary splash screen apps, like what you would see for GIMP or LibreOffice)
+    UTILITY (like controls for an emulator).
+
+Thanks to this more consistent window type rejection, we are able to more closely discern between what is budgie-panel versus what is budgie-desktop-settings, which is part of the panel but is otherwise a NORMAL type application. This enabled us to resolve an issue where the pin and new instance buttons were being unintentionally shown, as well as an issue where you could not close Budgie Desktop Settings via the IconPopover controls (right click popover for each Icon Button in the tasklist).
+
+After close discussions with members of the community on our forums on the expected behaviour of the Icon Tasklist, time was spent refining the behaviour of Icon Tasklist and individual Icon Buttons to be more consistent. Here are some examples:
+
+    When the “Show All Windows on Click” option is enabled, we will now more consistently show or minimize all windows on click if one of them is currently active.
+    If only one instance of an application is open and it is on another workspace (in this case the “Restrict to Workspace” option is not enabled), we switch to that workspace and unminimize the window (since the chances are you probably want to see the application in the first place).
+
+We are always listening to feedback on how to improve the behaviour of Icon Tasklist while ensuring it remains simple and approachable to use. If you have an idea on how to improve it further, feel free to file an issue on Budgie’s issue tracker.
+
+Sound
+The Sound applet has seen a redesign and now features a dedicated button for mute toggling, as well as leveraging iconography for the System Settings button rather than text.
+
+System Tray
+Dating back to the days of Budgie 7 in 2014, Budgie had been using an na-tray implementation also seen in desktop environments such as Cinnamon for the creation and management of system tray icons. Thanks to the incredible work by Solus contributor Campbell Jones, the System Tray has been completely rewritten from scratch, supporting tray icons leveraging the XEmbed Protocol. This new implementation resolves numerous issues such as:
+
+    Background icons not refreshing, resulting in instances where it may appear that multiple icons are overlapping.
+    Tray icons not consistently hiding when a panel hides (during “Intelligent” mode).
+    Tray icons blinking when panel transparency is set to “Dynamic”
+    Tray icons getting hidden when switching icon themes.
+
+Additionally, a configuration option has been added for the System Tray that enables the setting of spacing between individual icons, making it perfect for those that want both their applets and tray icons to be equidistant!
+
+Budgie Desktop Settings
+Budgie Desktop View has been updated to provide a clearer differentiation between removing a Panel and removing an applet from a Panel. A dedicated button for removing a panel has been added below the Panel’s applet list, with a description that makes its purpose clearer. This button will not appear when you only have one panel in your Budgie setup. Building on this, we have removed the option to disable the panel removal confirmation dialog. From user reports, the consensus was that this option was too easy to enable, would result in accidental permanent removal of panels more frequently than desired, and lacked a clear user-friendly method to re-enable the prompt.
+
+For those which use Budgie in another language than English, the menu items presented when adding a new Autostart application or command via the Autostart section are now translatable. For any language which has the terms translated, those will be used instead.
+
+Budgie Desktop View
+Budgie 10.5.2 is the first release of Budgie to feature our new desktop icons implementation. In releases dating back to the beginning of Budgie 10, we had been using Nautilus' (now legacy) desktop icons implementation to provide such support. When Nautilus removed their desktop icons support, Solus used an older version of Nautilus to retain it, while some other downstream consumers of Budgie used alternative file managers with similar features to that version of Nautilus, such as Nemo. During that time, other desktop environments have strayed away from providing this functionality with some going so far as to remove it entirely, requiring you to install third-party extensions to re-introduce the functionality.
+
+We have always recognized that for many, desktop icons is an important part of their workflow, and so retaining that support in a sustainable manner was paramount for the release of Budgie 10.5.2. We wanted to enable our downstreams to ship Budgie akin to how Solus does without potentially compromising on functionality.
+
+To facilitate this, our goal from the start for Budgie 10.5.2 was to introduce a new, separate project that could be iterated on independently from Budgie Desktop itself. This project needed to be rigorously focused and developed with an understanding of the scope and intent of the project, not trying to be a file manager but rather a method of quickly accessing the content and applications you consider most important.
+
+Last week, we debuted the first generally public development release of Budgie Desktop View and the feedback has been fantastic, giving us numerous places where we can continue to improve this new project, in addition to what we already have planned for the upcoming releases.
+
+Alongside Budgie 10.5.2, we have just released our first stable 1.0 release of Budgie Desktop View, which builds on the features and focus of the prior development releases with a new option to choose between using a single and double-click to launch items. This enables you to curate the launch behaviour to mimic your favorite graphical file manager, many of which have such “click policies”. By default, we default to a single-click behavior.
+
+This release refactors many of the shared logic between the various item and view classes we have as well, reducing references or copies of values (resulting in reduced memory usage) and paving the way for easier iteration on upcoming functionality.
+
+However 1.0 is not the final form Budgie Desktop View will take! Drag & Drop support will be added in 1.1, keyboard navigation with arrow keys will be implemented in 1.2, and once GTK4 introduces its first stable release, we will also be assessing moving Budgie Desktop View to it to take advantage of all the improvements the GNOME team has done to the latest generation of its toolkit.
+
+Budgie has always been about striking a balance in customization and that extends to the support we provide downstreams like Ubuntu Budgie as well. That is why we worked hard on introducing a new vendor-oriented mechanism to enable downstreams to choose a desktop icons implementation that fits them and their users best. Alongside our own “native” Budgie Desktop View implementation, we are providing official support in the Budgie Desktop Settings application for the configuration of DesktopFolder and Nemo. Our OS Integration wiki page provides details on the typical method that downstreams can leverage to override default GSettings key / values, as well as providing the key should any savvy user decide to do some tinkering themselves!
+
+Raven
+Thanks to Solus contributor Evan Maddock, Budgie 10.5.2 introduces a new option to choose which side of the screen Raven should be. Prior to Budgie 10.5.2, Raven would always appear on the left side when the main panel and trigger were on the left, and appear on the right when the main panel was anywhere else.
+
+Users will be able to choose between this behaviour, called “Automatic”, as well as left and right sides!
+
+Translations
+Thanks to our incredible community members that have stepped up to translate Budgie, Budgie is now more accessible than ever. Budgie 10.5.2 introduces support for three new languages: Afrikaans, Albanian, and Hindi. Budgie now has 40 languages which have 90% or more coverage and we have seen dedicated translators step up for a wide range of languages, many of which are now completely translated, such as:
+
+    Croatian
+    Finnish
+    Malay
+    Punjabi
+    Spanish (Argentina)
+    Spanish (Chile)
+
+We are still working hard to get Budgie translated 100% into many languages. If you are interested in helping translate Budgie into your language, feel free to reach out!
+Other
+
+Here are some other aspects of Budgie that received refinements:
+
+    Animation disabling: Background transitions and workspace switching are no longer always enabled but now honor the option to disable animations in Budgie Desktop Settings
+    Budgie’s Application Switcher
+        Typically referred to as the Alt+Tab switcher, this switcher now supports the Ctrl modifier, adding support for more custom keyboard layouts and mappings.
+        We now support an option to show all windows from all workspaces in the switcher, enabling you to switch between applications and workspaces simultaneously.
+    Budgie Run Dialog can now check keywords, improving search and aligning its behaviour closer to that of Budgie Menu.
+    Budgie now provides a new meson option: xdg-appdir
+        This option enables downstreams such as openSUSE to use its own stateless XDG path.
+    Caffeine Applet: When Caffeine Mode is enabled, the timer will now update the spin button value based on how many minutes are remaining.
+    Forward-specific keyboard layout switching can now be done with Alt+Shift.
+    Transparency is now supported in background images, falling back to the fixed color or gradient behind it.
+    We now provide an option via GSettings to configure the desired screenshot commands, so downstreams can use alternatives to gnome-screenshot.
+
+Bug Fixes
+
+In addition to all the quality of life improvements and features we have added, Budgie 10.5.2 introduces many bug fixes including for some issues dating back years to the early days of Budgie 10.
+
+    Applets
+        Fix Workspace Applet allowing more than max supported workspace count. We will now return a -1 on our WM AppendNewWorkspace if we are rejecting more additions of workspaces, which informs our WorkspaceApplet to not show the + button (even if set to always show) and reject drag actions onto new workspaces.
+    Panel
+        Added missing LEFT and RIGHT panel layouts in the manager, which prevented downstreams and users from using panel.ini files with left or right panels.
+        During panel initialization, we will now appropriately set dock-mode if needed, which fixes an issue where the class would only be applied if the dock mode setting actually changed.
+        Fix a crash when removing an applet with missing information.
+        The Tasklist applet will no longer cause the rest of the panel contents to be thrown into the aether when you have many windows open. You will be able to scroll up / down to get all the windows and we will be working on dedicated buttons in the tasklist applet in Budgie 10.5.3. This resolves two bugs, one from 2014 and another from 2017.
+        Regions which do not have any panel widgets / applets will no longer be shown, allowing applets to take up more space and eliminates weird spacing related issues.
+        When changing away from dock mode on a panel, we will now correctly remove the dock-mode CSS class.
+    Raven
+        Chromium-based browser notifications no longer display with broken icon images. This was due to the fact that these browsers would prefix the icon with file:/// and Chromium-based browsers would not pass the correct path. We will now default to the fallback mail-unread-symbolic icon for these applications.
+        Notifications and Notification Groups can no longer be selected, which would result in a visual change with no obvious or easy way to deselect them. There are no functional changes, as there are no actions which make use of the selection of Notifications or Notification Groups.
+        Notifications are no longer appended to Notification Groups, resulting in older Notifications being higher in a Notification Group’s list than newer ones.
+        The Sound widget will no longer allow raising the volume above 100% when the option is off.
+        The MPRIS player will correct the album art URLs provided by Spotify, which would otherwise be misreported by Spotify, resulting in images which could not be found.
+    Other
+        Budgie Popovers will now properly handle window scale factors.
+        Crash fixes related to the usage of Wnck have been resolved.
+        Fix some custom keyboard shortcuts and media keys not correctly applying after boot or reboot.
+        Night Light will now appropriately start or end if an application has the fullscreen state amongst its many states, and not just being fullscreen. This is useful if you have an application which is fullscreen and above or below other windows, is sticky (maintains position regardless of workspace), shaded, etc.
+
+
 v10.5.1 Official announcement can be found here:
 https://getsol.us/2019/10/03/budgie-and-its-army-of-gnomes/
 

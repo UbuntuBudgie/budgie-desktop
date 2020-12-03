@@ -8,11 +8,11 @@ Last-Update: 2020-04-06
 
 --- a/src/panel/settings/themes.vala
 +++ b/src/panel/settings/themes.vala
-@@ -47,6 +47,7 @@
- 
- 	string[] gtk_theme_blacklist = {
- 		"Adwaita",
-+		"Default",
+@@ -50,6 +50,7 @@
  		"Breeze",
  		"Clearlooks",
  		"Crux",
++		"Default",
+ 		"Emacs",
+ 		"Industrial",
+ 		"Mist",
