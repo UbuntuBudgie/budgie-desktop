@@ -1,2 +1,5 @@
 [org.gnome.settings-daemon.plugins.xsettings:Budgie]
 overrides={'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <'menu:minimize,maximize,close'>}
+
+[com.solus-project.budgie-wm]
+desktop-type-override='budgie'

@@ -1,3 +1,14 @@
+budgie-desktop (10.5.2-2) unstable; urgency=medium
+
+  * Packaging Changes
+    - Add recommendation for budgie-desktop-view together with
+      a gsettings-override to enable desktop-icons support in
+      budgie-desktop-settings
+    - Update Suggests to include minimal suggestions to get a workable
+      basic desktop if these suggestions are installed
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 13 Dec 2020 22:02:35 +0000
+
 budgie-desktop (10.5.2-1) unstable; urgency=medium
 
   * New upstream release
