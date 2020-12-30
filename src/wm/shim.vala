@@ -132,10 +132,13 @@ namespace Budgie {
 		/* Proxy off the OSD Calls */
 		private BudgieOSD? osd_proxy = null;
 
+		private BudgieWM? wm = null;
+
 		[DBus (visible=false)]
-		public ShellShim(Budgie.BudgieWM? wm) {
+		public ShellShim(Budgie.BudgieWM? _wm) {
 			grabs = new HashTable<string,uint?>(str_hash, str_equal);
 
+			wm = _wm;
 			display = wm.get_display();
 			display.accelerator_activated.connect(on_accelerator_activated);
 
@@ -227,6 +230,7 @@ namespace Budgie {
 			try {
 				conn.register_object("/org/gnome/Shell", this);
 				conn.register_object("/org/gnome/SessionManager/EndSessionDialog", handler);
+				conn.register_object("/org/gnome/Shell/Screenshot", ScreenshotManager.init(wm));
 			} catch (Error e) {
 				message("Unable to register ShellShim: %s", e.message);
 			}
@@ -237,6 +241,12 @@ namespace Budgie {
 			Bus.own_name(BusType.SESSION, "org.gnome.Shell",
 				BusNameOwnerFlags.ALLOW_REPLACEMENT|BusNameOwnerFlags.REPLACE,
 				on_bus_acquired, null, null);
+
+			/* Hook up settings daemon screenshot dbus */
+            Bus.own_name (BusType.SESSION, "org.gnome.Shell.Screenshot", BusNameOwnerFlags.REPLACE,
+                () => {},
+                () => {},
+                () => critical ("Could not acquire shell screenshot") );
 		}
 
 		public uint GrabAccelerator(BusName sender, string accelerator, uint flags, Meta.KeyBindingFlags grab_flags) throws DBusError, IOError {

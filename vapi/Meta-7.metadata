@@ -9,6 +9,10 @@ Barrier cheader_filename="meta/barrier.h"
 BarrierEvent cheader_filename="meta/barrier.h"
 CloseDialog cheader_filename="meta/meta-close-dialog.h"
 CursorTracker cheader_filename="meta/meta-cursor-tracker.h"
+CursorTracker.get_for_display parent="Meta.Display" symbol_type="method" instance_idx=0 name="get_cursor_tracker"
+CursorTracker.get_pointer.x out
+CursorTracker.get_pointer.y out
+CursorTracker.get_pointer.mods out
 Display cheader_filename="meta/display.h"
 Dnd cheader_filename="meta/meta-dnd.h"
 IdleMonitor cheader_filename="meta/meta-idle-monitor.h"

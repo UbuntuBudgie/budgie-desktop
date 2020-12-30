@@ -135,6 +135,7 @@ namespace Budgie {
 
 		Settings? settings = null;
 		Settings? gnome_desktop_prefs = null;
+		Settings? gnome_media_keys = null;
 		RavenRemote? raven_proxy = null;
 		ShellShim? shim = null;
 		BudgieWMDBUS? focus_interface = null;
@@ -455,9 +456,9 @@ namespace Budgie {
 
 			/* Custom keybindings */
 			display.add_keybinding("clear-notifications", settings, Meta.KeyBindingFlags.NONE, on_raven_notification_clear);
-			display.add_keybinding("take-full-screenshot", settings, Meta.KeyBindingFlags.NONE, on_take_full_screenshot);
-			display.add_keybinding("take-region-screenshot", settings, Meta.KeyBindingFlags.NONE, on_take_region_screenshot);
-			display.add_keybinding("take-window-screenshot", settings, Meta.KeyBindingFlags.NONE, on_take_window_screenshot);
+			//display.add_keybinding("screenshot", gnome_media_keys, Meta.KeyBindingFlags.NONE, on_take_full_screenshot);
+			//display.add_keybinding("area-screenshot", gnome_media_keys, Meta.KeyBindingFlags.NONE, on_take_region_screenshot);
+			//display.add_keybinding("window-screenshot", gnome_media_keys, Meta.KeyBindingFlags.NONE, on_take_window_screenshot);
 			display.add_keybinding("toggle-raven", settings, Meta.KeyBindingFlags.NONE, on_raven_main_toggle);
 			display.add_keybinding("toggle-notifications", settings, Meta.KeyBindingFlags.NONE, on_raven_notification_toggle);
 			display.overlay_key.connect(on_overlay_key);

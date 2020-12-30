@@ -2,6 +2,8 @@
 ActorBox struct
 Color struct
 Knot struct
+Margin struct
+PaintVolume struct
 PathNode struct
 Perspective struct
 Units struct
@@ -35,11 +37,13 @@ value_get_color nullable
 // method/virtual-method/signal don't match
 Actor
 	.event#method name="emit_event"
-	.get_paint_volume#method skip
+	.get_paint_volume#virtual_method name="get_paint_volume_vfunc"
+	.get_paint_volume#virtual_method.volume out
 	.queue_redraw#signal skip
 	.queue_redraw#virtual_method skip
 Container
 	.add_actor skip=false
+	.class_* skip
 Text
 	.activate#method name="try_activate"
 	.insert_text#signal skip
@@ -58,6 +62,12 @@ Container
 Stage.read_pixels
 	.width default=-1
 	.height default=-1
+Stage.get_capture_final_size
+	.width out
+	.height out
+	.scale out
+Stage.paint_to_buffer
+    .data type="uint8[]"
 Text
 	.position_to_coords.line_height default=null
 
@@ -70,11 +80,8 @@ LayoutManager
 	.create_child_meta skip=false
 
 // Variadic arguments
-Box
-	.pack skip=false
-	.pack_after skip=false
-	.pack_at skip=false
-	.pack_before skip=false
+Backend
+	.get_cogl_context skip=false
 Container
 	.child_get skip=false
 	.child_set skip=false
@@ -90,10 +97,6 @@ LayoutManager
 	.child_set skip=false
 Script
 	.get_objects skip=false
-
-// Changing error domains
-Texture
-	.new_from_file throws="Clutter.TextureError"
 
 // Skipped upstream for unknown reasons
 Interval.register_progress_func skip=false
@@ -111,45 +114,46 @@ ActorBox
 Units.from_* skip
 Color
 	.new skip
+Margin
+	.new skip
 
 // Class methods
 container_class_find_child_property skip
 container_class_list_child_properties skip
 
 // Move symbols
+color_from_* skip
 units_from_* skip
-
-// Classes marked as out but not double ptr
-Actor
-	.get_margin.margin out=false
-DragAction
-	.get_drag_area.drag_area out=false
-InputDevice
-	.get_coords.point out=false
-Rect
-	.get_center.center out=false
-	.intersection.res out=false
-	.union.res out=false
-Timeline
-	.get_cubic_bezier_progress.c_* out=false
-ZoomAction
-	.get_focal_point.point out=false
-	.get_transformed_focal_point.point out=false
 
 // Struct return values
 color_get_static nullable
 
+// Upstream
+Event
+	.get_position.position out
+
+FrameListenerIface skip
+FrameClock.new skip
+
 // Remove for clutter-2.0
 /////////////////////////
 
+StageView.layout skip
+
 Stage
  	.event name="emit_event"
+	.paint_view.redraw_clip type="Cairo.Region"
+
+Capture
+  .image type="Cairo.ImageSurface"
 
 // *Event should be compact classes derived from Clutter.Event
 Event.type skip=false
 AnyEvent struct=false base_type="Clutter.Event"
 ButtonEvent struct=false base_type="Clutter.Event"
 CrossingEvent struct=false base_type="Clutter.Event"
+DeviceEvent struct=false base_type="Clutter.Event"
+IMEvent struct=false base_type="Clutter.Event"
 KeyEvent struct=false base_type="Clutter.Event"
 MotionEvent struct=false base_type="Clutter.Event"
 ScrollEvent struct=false base_type="Clutter.Event"
@@ -157,6 +161,10 @@ StageStateEvent struct=false base_type="Clutter.Event"
 TouchEvent struct=false base_type="Clutter.Event"
 TouchpadPinchEvent struct=false base_type="Clutter.Event"
 TouchpadSwipeEvent struct=false base_type="Clutter.Event"
+ProximityEvent struct=false base_type="Clutter.Event"
+PadButtonEvent struct=false base_type="Clutter.Event"
+PadRingEvent struct=false base_type="Clutter.Event"
+PadStripEvent struct=false base_type="Clutter.Event"
 
 // Keysyms used to be CLUTTER_X instead of CLUTTER_KEY_X
 *#constant skip
