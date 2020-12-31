@@ -13,7 +13,6 @@ budgie_wm_sources = [
     'main.vala',
     'shim.vala',
     'wm.vala',
-    'selectionarea.vala',
     'screenshot.vala'
 ]
 

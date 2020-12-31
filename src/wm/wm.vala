@@ -135,7 +135,6 @@ namespace Budgie {
 
 		Settings? settings = null;
 		Settings? gnome_desktop_prefs = null;
-		Settings? gnome_media_keys = null;
 		RavenRemote? raven_proxy = null;
 		ShellShim? shim = null;
 		BudgieWMDBUS? focus_interface = null;
@@ -263,39 +262,6 @@ namespace Budgie {
 		void has_switcher() {
 			if (switcher_proxy == null) {
 				Bus.get_proxy.begin<Switcher>(BusType.SESSION, SWITCHER_DBUS_NAME, SWITCHER_DBUS_OBJECT_PATH, 0, null, on_switcher_get);
-			}
-		}
-
-		/* Binding for take-full-screenshot */
-		void on_take_full_screenshot(Meta.Display display, Meta.Window? window, Clutter.KeyEvent? event, Meta.KeyBinding binding) {
-			try {
-				string cmd=this.settings.get_string("full-screenshot-cmd");
-				if (cmd != "")
-					Process.spawn_command_line_async(cmd);
-			} catch (SpawnError e) {
-				print("Error: %s\n", e.message);
-			}
-		}
-
-		/* Binding for take-region-screenshot */
-		void on_take_region_screenshot(Meta.Display display, Meta.Window? window, Clutter.KeyEvent? event, Meta.KeyBinding binding) {
-			try {
-				string cmd=this.settings.get_string("take-region-screenshot-cmd");
-				if (cmd != "")
-					Process.spawn_command_line_async(cmd);
-			} catch (SpawnError e) {
-				print("Error: %s\n", e.message);
-			}
-		}
-
-		/* Binding for take-window-screenshot */
-		void on_take_window_screenshot(Meta.Display display, Meta.Window? window, Clutter.KeyEvent? event, Meta.KeyBinding binding) {
-			try {
-				string cmd=this.settings.get_string("take-window-screenshot-cmd");
-				if (cmd != "")
-					Process.spawn_command_line_async(cmd);
-			} catch (SpawnError e) {
-				print("Error: %s\n", e.message);
 			}
 		}
 
@@ -456,9 +422,6 @@ namespace Budgie {
 
 			/* Custom keybindings */
 			display.add_keybinding("clear-notifications", settings, Meta.KeyBindingFlags.NONE, on_raven_notification_clear);
-			//display.add_keybinding("screenshot", gnome_media_keys, Meta.KeyBindingFlags.NONE, on_take_full_screenshot);
-			//display.add_keybinding("area-screenshot", gnome_media_keys, Meta.KeyBindingFlags.NONE, on_take_region_screenshot);
-			//display.add_keybinding("window-screenshot", gnome_media_keys, Meta.KeyBindingFlags.NONE, on_take_window_screenshot);
 			display.add_keybinding("toggle-raven", settings, Meta.KeyBindingFlags.NONE, on_raven_main_toggle);
 			display.add_keybinding("toggle-notifications", settings, Meta.KeyBindingFlags.NONE, on_raven_notification_toggle);
 			display.overlay_key.connect(on_overlay_key);
