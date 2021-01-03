@@ -204,10 +204,15 @@ namespace Budgie {
 			 * otherwise use the PICTURES xdg-dir path
 			 * default is the home folder as the ultimate fallback
 			 */
-			var settings = new Settings("org.gnome.gnome-screenshot");
 			unowned string? base_path = Environment.get_user_special_dir (UserDirectory.PICTURES);
 			if (base_path != null && FileUtils.test (base_path, FileTest.EXISTS)) {
-				var path = settings.get_string("auto-save-directory");
+				var path = "";
+				var settings_schema = "org.gnome.gnome-screenshot";
+				var schema = GLib.SettingsSchemaSource.get_default ().lookup (settings_schema, true);
+				if (schema != null) { // settings schema does exist
+					var settings = new Settings(settings_schema);
+					path = settings.get_string("auto-save-directory");
+				}
 				if (FileUtils.test (path, FileTest.EXISTS)) {
 					return path;
 				} else if (DirUtils.create (path, 0755) == 0) {
