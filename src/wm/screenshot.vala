@@ -16,13 +16,13 @@ namespace Budgie {
 	const string EXTENSION = ".png";
 
 	[DBus (name="org.gnome.Shell.Screenshot")]
-	public class ScreenshotManager : Object {
-		static ScreenshotManager? instance;
+	public class Screenshot : Object {
+		static Screenshot? instance;
 
 		[DBus (visible = false)]
-		public static unowned ScreenshotManager init (BudgieWM wm) {
+		public static unowned Screenshot init (BudgieWM wm) {
 			if (instance == null)
-				instance = new ScreenshotManager (wm);
+				instance = new Screenshot (wm);
 
 			return instance;
 		}
@@ -41,7 +41,7 @@ namespace Budgie {
 			desktop_settings = new Settings ("org.gnome.desktop.interface");
 		}
 
-		ScreenshotManager (BudgieWM _wm) {
+		Screenshot (BudgieWM _wm) {
 			wm = _wm;
 			display = wm.get_display();
 		}
@@ -108,8 +108,6 @@ namespace Budgie {
 		}
 
 		public async void screenshot_window (bool include_frame, bool include_cursor, bool flash, string filename, out bool success, out string filename_used) throws DBusError, IOError {
-			message ("Taking window screenshot");
-
 			var window = display.get_focus_window ();
 
 			if (window == null) {
@@ -217,12 +215,10 @@ namespace Budgie {
 			return Environment.get_home_dir ();
 		}
 
-		static async bool save_image (Cairo.ImageSurface image, string filename, out string used_filename) {
+		private async bool save_image (Cairo.ImageSurface image, string filename, out string used_filename) {
 			used_filename = filename;
 
-			// We only alter non absolute filename because absolute
-			// filename is used for temp clipboard file and shouldn't be changed
-			if (!Path.is_absolute (used_filename)) {
+			if (used_filename != "" && !Path.is_absolute (used_filename)) {
 				if (!used_filename.has_suffix (EXTENSION)) {
 					used_filename = used_filename.concat (EXTENSION);
 				}
@@ -239,14 +235,25 @@ namespace Budgie {
 
 			try {
 				var screenshot = Gdk.pixbuf_get_from_surface (image, 0, 0, image.get_width (), image.get_height ());
-				var file = File.new_for_path (used_filename);
-				FileIOStream stream;
-				if (file.query_exists ()) {
-					stream = yield file.open_readwrite_async (FileCreateFlags.NONE);
-				} else {
-					stream = yield file.create_readwrite_async (FileCreateFlags.NONE);
+				if (used_filename == "") { // save to clipboard
+					var selection = display.get_selection();
+					var stream = new MemoryOutputStream.resizable();
+					yield screenshot.save_to_stream_async (stream, "png");
+					stream.close(null);
+					var source = new Meta.SelectionSourceMemory("image/png", stream.steal_as_bytes());
+					selection.set_owner(Meta.SelectionType.SELECTION_CLIPBOARD, source);
 				}
-				yield screenshot.save_to_stream_async (stream.output_stream, "png");
+				else { // save to file
+					var file = File.new_for_path (used_filename);
+					FileIOStream stream;
+					if (file.query_exists ()) {
+						stream = yield file.open_readwrite_async (FileCreateFlags.NONE);
+					} else {
+						stream = yield file.create_readwrite_async (FileCreateFlags.NONE);
+					}
+					yield screenshot.save_to_stream_async (stream.output_stream, "png");
+				}
+				
 				return true;
 			} catch (GLib.Error e) {
 				warning ("could not save file: %s", e.message);

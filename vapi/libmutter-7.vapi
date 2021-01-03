@@ -507,7 +507,7 @@ namespace Meta {
 		public bool is_recording { get; construct; }
 		public signal void stopped ();
 	}
-	[CCode (cheader_filename = "meta/main.h", type_id = "meta_selection_get_type ()")]
+	[CCode (cheader_filename = "meta/meta-selection.h", type_id = "meta_selection_get_type ()")]
 	public class Selection : GLib.Object {
 		[CCode (has_construct_function = false)]
 		public Selection (Meta.Display display);
@@ -517,7 +517,7 @@ namespace Meta {
 		public void unset_owner (Meta.SelectionType selection_type, Meta.SelectionSource owner);
 		public signal void owner_changed (uint object, Meta.SelectionSource p0);
 	}
-	[CCode (cheader_filename = "meta/main.h", type_id = "meta_selection_source_get_type ()")]
+	[CCode (cheader_filename = "meta/meta-selection.h", type_id = "meta_selection_source_get_type ()")]
 	public class SelectionSource : GLib.Object {
 		[CCode (has_construct_function = false)]
 		protected SelectionSource ();
@@ -527,7 +527,7 @@ namespace Meta {
 		public virtual signal void activated ();
 		public virtual signal void deactivated ();
 	}
-	[CCode (cheader_filename = "meta/main.h", type_id = "meta_selection_source_memory_get_type ()")]
+	[CCode (cheader_filename = "meta/meta-selection-source-memory.h", type_id = "meta_selection_source_memory_get_type ()")]
 	public class SelectionSourceMemory : Meta.SelectionSource {
 		[CCode (has_construct_function = false, type = "MetaSelectionSource*")]
 		public SelectionSourceMemory (string mimetype, GLib.Bytes content);
@@ -1364,7 +1364,7 @@ namespace Meta {
 		CHECK_ALIVE_TIMEOUT;
 		public unowned string to_string ();
 	}
-	[CCode (cheader_filename = "meta/main.h", cprefix = "META_", type_id = "meta_selection_type_get_type ()")]
+	[CCode (cheader_filename = "meta/meta-selection-source.h", cprefix = "META_", type_id = "meta_selection_type_get_type ()")]
 	public enum SelectionType {
 		SELECTION_PRIMARY,
 		SELECTION_CLIPBOARD,

@@ -230,7 +230,7 @@ namespace Budgie {
 			try {
 				conn.register_object("/org/gnome/Shell", this);
 				conn.register_object("/org/gnome/SessionManager/EndSessionDialog", handler);
-				conn.register_object("/org/gnome/Shell/Screenshot", ScreenshotManager.init(wm));
+				conn.register_object("/org/gnome/Shell/Screenshot", Screenshot.init(wm));
 			} catch (Error e) {
 				message("Unable to register ShellShim: %s", e.message);
 			}

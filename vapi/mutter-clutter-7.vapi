@@ -6713,6 +6713,7 @@ namespace Clutter {
 		public void get_layout (Cairo.RectangleInt rect);
 		public virtual void get_offscreen_transformation_matrix (Cogl.Matrix matrix);
 		public unowned Cogl.Framebuffer get_onscreen ();
+		public float get_refresh_rate ();
 		public float get_scale ();
 		public void invalidate_offscreen_blit_pipeline ();
 		[NoWrapper]
