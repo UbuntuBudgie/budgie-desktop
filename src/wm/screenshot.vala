@@ -263,6 +263,7 @@ namespace Budgie {
 
 		Cairo.ImageSurface take_screenshot (int x, int y, int width, int height, bool include_cursor) {
 			Cairo.ImageSurface image;
+#if HAVE_MUTTER_7
 			int image_width, image_height;
 			float scale;
 
@@ -305,6 +306,24 @@ namespace Budgie {
 				}
 
 			}
+#else
+			Clutter.Capture[] captures;
+			var stage = Meta.Compositor.get_stage_for_display(display) as Clutter.Stage;
+			stage.capture (false, {x, y, width, height}, out captures);
+
+			if (captures.length == 0)
+				image = new Cairo.ImageSurface (Cairo.Format.ARGB32, width, height);
+			else if (captures.length == 1)
+				image = captures[0].image;
+			else
+				image = composite_capture_images (captures, x, y, width, height);
+
+			if (include_cursor) {
+				image = composite_stage_cursor (image, { x, y, width, height});
+			}
+
+			image.mark_dirty ();
+#endif
 			return image;
 		}
 

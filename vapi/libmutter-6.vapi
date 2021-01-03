@@ -43,6 +43,8 @@ namespace Meta {
 		public static Meta.ButtonLayout prefs_get_button_layout ();
 		[CCode (cheader_filename = "meta/prefs.h", cname = "meta_prefs_get_center_new_windows")]
 		public static bool prefs_get_center_new_windows ();
+		[CCode (cheader_filename = "meta/prefs.h", cname = "meta_prefs_get_check_alive_timeout")]
+		public static uint prefs_get_check_alive_timeout ();
 		[CCode (cheader_filename = "meta/prefs.h", cname = "meta_prefs_get_compositing_manager")]
 		public static bool prefs_get_compositing_manager ();
 		[CCode (cheader_filename = "meta/prefs.h", cname = "meta_prefs_get_cursor_size")]
@@ -112,7 +114,7 @@ namespace Meta {
 		[CCode (cheader_filename = "meta/util.h", cname = "meta_get_locale_direction")]
 		public static Meta.LocaleDirection get_locale_direction ();
 		[CCode (cheader_filename = "meta/util.h", cname = "meta_gravity_to_string")]
-		public static unowned string gravity_to_string (int gravity);
+		public static unowned string gravity_to_string (Meta.Gravity gravity);
 		[CCode (cheader_filename = "meta/util.h", cname = "meta_is_debugging")]
 		public static bool is_debugging ();
 		[CCode (cheader_filename = "meta/util.h", cname = "meta_is_syncing")]
@@ -147,7 +149,7 @@ namespace Meta {
 		public static void x11_error_trap_push (Meta.X11Display x11_display);
 	}
 	[CCode (cheader_filename = "meta/meta-backend.h", type_id = "meta_backend_get_type ()")]
-	public abstract class Backend : GLib.Object, GLib.Initable {
+	public abstract class Backend : GLib.Object, GLib.Initable, GLib.Initable {
 		[CCode (has_construct_function = false)]
 		protected Backend ();
 		[CCode (cheader_filename = "meta/meta-backend.h", cname = "meta_get_backend")]
@@ -156,6 +158,7 @@ namespace Meta {
 		public unowned Meta.RemoteAccessController get_remote_access_controller ();
 		public unowned Meta.Settings get_settings ();
 		public unowned Clutter.Actor get_stage ();
+		public bool is_rendering_hardware_accelerated ();
 		public void lock_layout_group (uint idx);
 		public void set_keymap (string layouts, string variants, string options);
 		public void set_numlock (bool numlock_state);
@@ -265,9 +268,8 @@ namespace Meta {
 	public class CursorTracker : GLib.Object {
 		[CCode (has_construct_function = false)]
 		protected CursorTracker ();
-		public static unowned Meta.CursorTracker get_for_display (Meta.Display display);
 		public void get_hot (out int x, out int y);
-		public void get_pointer (int x, int y, Clutter.ModifierType mods);
+		public void get_pointer (out int x, out int y, out Clutter.ModifierType mods);
 		public bool get_pointer_visible ();
 		public unowned Cogl.Texture get_sprite ();
 		public void set_pointer_visible (bool visible);
@@ -290,6 +292,8 @@ namespace Meta {
 		public int get_current_monitor ();
 		public uint32 get_current_time ();
 		public uint32 get_current_time_roundtrip ();
+		[CCode (cname = "meta_cursor_tracker_get_for_display")]
+		public unowned Meta.CursorTracker get_cursor_tracker ();
 		public unowned Meta.Window get_focus_window ();
 		public Meta.GrabOp get_grab_op ();
 		public uint get_keybinding_action (uint keycode, ulong mask);
@@ -330,6 +334,7 @@ namespace Meta {
 		public signal void grab_op_begin (Meta.Display object, Meta.Window p0, Meta.GrabOp p1);
 		public signal void grab_op_end (Meta.Display object, Meta.Window p0, Meta.GrabOp p1);
 		public signal void in_fullscreen_changed ();
+		public signal bool init_xserver (GLib.Task object);
 		public signal bool modifiers_accelerator_activated ();
 		public signal void overlay_key ();
 		public signal void pad_mode_switch (Clutter.InputDevice object, uint p0, uint p1);
@@ -481,10 +486,11 @@ namespace Meta {
 	public class RemoteAccessHandle : GLib.Object {
 		[CCode (has_construct_function = false)]
 		protected RemoteAccessHandle ();
+		public bool get_disable_animations ();
 		public virtual void stop ();
 		public signal void stopped ();
 	}
-	[CCode (cheader_filename = "meta/main.h", type_id = "meta_selection_get_type ()")]
+	[CCode (cheader_filename = "meta/meta-selection.h", type_id = "meta_selection_get_type ()")]
 	public class Selection : GLib.Object {
 		[CCode (has_construct_function = false)]
 		public Selection (Meta.Display display);
@@ -494,7 +500,7 @@ namespace Meta {
 		public void unset_owner (Meta.SelectionType selection_type, Meta.SelectionSource owner);
 		public signal void owner_changed (uint object, Meta.SelectionSource p0);
 	}
-	[CCode (cheader_filename = "meta/main.h", type_id = "meta_selection_source_get_type ()")]
+	[CCode (cheader_filename = "meta/meta-selection.h", type_id = "meta_selection_source_get_type ()")]
 	public class SelectionSource : GLib.Object {
 		[CCode (has_construct_function = false)]
 		protected SelectionSource ();
@@ -504,7 +510,7 @@ namespace Meta {
 		public virtual signal void activated ();
 		public virtual signal void deactivated ();
 	}
-	[CCode (cheader_filename = "meta/main.h", type_id = "meta_selection_source_memory_get_type ()")]
+	[CCode (cheader_filename = "meta/meta-selection-source-memory.h", type_id = "meta_selection_source_memory_get_type ()")]
 	public class SelectionSourceMemory : Meta.SelectionSource {
 		[CCode (has_construct_function = false, type = "MetaSelectionSource*")]
 		public SelectionSourceMemory (string mimetype, GLib.Bytes content);
@@ -742,11 +748,13 @@ namespace Meta {
 		public uint user_time { get; }
 		public Meta.WindowType window_type { get; }
 		public string wm_class { get; }
+		public signal void monitor_changed (int old_monitor);
 		public signal void position_changed ();
 		public signal void raised ();
 		public signal void shown ();
 		public signal void size_changed ();
 		public signal void unmanaged ();
+		public signal void unmanaging ();
 		public signal void workspace_changed ();
 	}
 	[CCode (cheader_filename = "meta/meta-window-actor.h", type_id = "meta_window_actor_get_type ()")]
@@ -1006,7 +1014,8 @@ namespace Meta {
 		SHAPES,
 		COMPOSITOR,
 		EDGE_RESISTANCE,
-		DBUS
+		DBUS,
+		INPUT
 	}
 	[CCode (cheader_filename = "meta/main.h", cprefix = "META_DIRECTION_", type_id = "meta_direction_get_type ()")]
 	[Flags]
@@ -1103,6 +1112,20 @@ namespace Meta {
 		KEYBOARD_RESIZING_S,
 		KEYBOARD_RESIZING_SE,
 		KEYBOARD_RESIZING_W
+	}
+	[CCode (cheader_filename = "meta/main.h", cprefix = "META_GRAVITY_", type_id = "meta_gravity_get_type ()")]
+	public enum Gravity {
+		NONE,
+		NORTH_WEST,
+		NORTH,
+		NORTH_EAST,
+		WEST,
+		CENTER,
+		EAST,
+		SOUTH_WEST,
+		SOUTH,
+		SOUTH_EAST,
+		STATIC
 	}
 	[CCode (cheader_filename = "meta/main.h", cprefix = "META_INHIBIT_SHORTCUTS_DIALOG_RESPONSE_", type_id = "meta_inhibit_shortcuts_dialog_response_get_type ()")]
 	public enum InhibitShortcutsDialogResponse {
@@ -1303,10 +1326,11 @@ namespace Meta {
 		AUTO_MAXIMIZE,
 		CENTER_NEW_WINDOWS,
 		DRAG_THRESHOLD,
-		LOCATE_POINTER;
+		LOCATE_POINTER,
+		CHECK_ALIVE_TIMEOUT;
 		public unowned string to_string ();
 	}
-	[CCode (cheader_filename = "meta/main.h", cprefix = "META_", type_id = "meta_selection_type_get_type ()")]
+	[CCode (cheader_filename = "meta/meta-selection-source.h", cprefix = "META_", type_id = "meta_selection_type_get_type ()")]
 	public enum SelectionType {
 		SELECTION_PRIMARY,
 		SELECTION_CLIPBOARD,
@@ -1472,4 +1496,10 @@ namespace Meta {
 	public static void test_init ();
 	[CCode (cheader_filename = "meta/main.h")]
 	public static bool x11_init_gdk_display () throws GLib.Error;
+}
+[CCode (cheader_filename = "libmutter-6-custom.h", has_type_id = false)]
+public struct before_frame {
+}
+[CCode (cheader_filename = "libmutter-6-custom.h", has_type_id = false)]
+public struct frame {
 }

@@ -227,6 +227,7 @@ namespace Cogl {
 		public void set_layer_filters (int layer_index, Cogl.PipelineFilter min_filter, Cogl.PipelineFilter mag_filter);
 		[Version (since = "1.10")]
 		public void set_layer_matrix (int layer_index, Cogl.Matrix matrix);
+		public void set_layer_max_mipmap_level (int layer, int max_level);
 		[Version (since = "1.10")]
 		public void set_layer_null_texture (int layer_index);
 		[Version (since = "2.0")]
@@ -349,6 +350,7 @@ namespace Cogl {
 		public static uint32 error_quark ();
 		[Version (since = "1.10")]
 		public void finish ();
+		public void flush ();
 		[Version (since = "1.10")]
 		public void frustum (float left, float right, float bottom, float top, float z_near, float z_far);
 		[Version (since = "1.8")]
@@ -446,7 +448,7 @@ namespace Cogl {
 		public static uint32 error_quark ();
 		[Version (since = "1.18")]
 		public Cogl.TextureComponents get_components ();
-		public int get_data (Cogl.PixelFormat format, uint rowstride, uint8 data);
+		public int get_data (Cogl.PixelFormat format, uint rowstride, [CCode (array_length = false)] uint8[]? data);
 		public bool get_gl_texture (out uint out_gl_handle, out uint out_gl_target);
 		public uint get_height ();
 		public int get_max_waste ();
@@ -457,7 +459,7 @@ namespace Cogl {
 		[Version (deprecated = true, deprecated_since = "1.18", since = "1.0")]
 		public static Cogl.Texture new_from_bitmap (Cogl.Bitmap bitmap, Cogl.TextureFlags flags, Cogl.PixelFormat internal_format);
 		[Version (deprecated = true, deprecated_since = "1.18", since = "0.8")]
-		public static Cogl.Texture new_from_data (int width, int height, Cogl.TextureFlags flags, Cogl.PixelFormat format, Cogl.PixelFormat internal_format, int rowstride, uint8 data);
+		public static Cogl.Texture new_from_data (int width, int height, Cogl.TextureFlags flags, Cogl.PixelFormat format, Cogl.PixelFormat internal_format, int rowstride, [CCode (array_length = false)] uint8[] data);
 		[Version (deprecated = true, deprecated_since = "1.18", since = "0.8")]
 		public static Cogl.Texture new_from_file (string filename, Cogl.TextureFlags flags, Cogl.PixelFormat internal_format) throws GLib.Error;
 		[Version (deprecated = true, deprecated_since = "1.18", since = "1.2")]
@@ -466,10 +468,10 @@ namespace Cogl {
 		public static Cogl.Texture new_with_size (uint width, uint height, Cogl.TextureFlags flags, Cogl.PixelFormat internal_format);
 		[Version (since = "1.18")]
 		public void set_components (Cogl.TextureComponents components);
-		public bool set_data (Cogl.PixelFormat format, int rowstride, uint8 data, int level) throws GLib.Error;
+		public bool set_data (Cogl.PixelFormat format, int rowstride, [CCode (array_length = false)] uint8[] data, int level) throws GLib.Error;
 		[Version (since = "1.18")]
 		public void set_premultiplied (bool premultiplied);
-		public bool set_region (int src_x, int src_y, int dst_x, int dst_y, uint dst_width, uint dst_height, int width, int height, Cogl.PixelFormat format, uint rowstride, uint8 data);
+		public bool set_region (int src_x, int src_y, int dst_x, int dst_y, uint dst_width, uint dst_height, int width, int height, Cogl.PixelFormat format, uint rowstride, [CCode (array_length = false)] uint8[] data);
 		[Version (since = "1.8")]
 		public bool set_region_from_bitmap (int src_x, int src_y, int dst_x, int dst_y, uint dst_width, uint dst_height, Cogl.Bitmap bitmap);
 	}
@@ -1045,6 +1047,12 @@ namespace Cogl {
 	[Version (deprecated = true, deprecated_since = "1.16")]
 	public static void set_depth_test_enabled (bool setting);
 	[CCode (cheader_filename = "cogl/cogl.h")]
+	public static void set_tracing_disabled_on_thread (void* data);
+	[CCode (cheader_filename = "cogl/cogl.h")]
+	public static void set_tracing_enabled_on_thread (void* data, string group, string filename);
+	[CCode (cheader_filename = "cogl/cogl.h")]
+	public static void set_tracing_enabled_on_thread_with_fd (void* data, string group, int fd);
+	[CCode (cheader_filename = "cogl/cogl.h")]
 	[Version (deprecated = true, deprecated_since = "1.16")]
 	public static Cogl.ShaderType shader_get_type (Cogl.Handle handle);
 	[CCode (cheader_filename = "cogl/cogl.h")]
@@ -1055,7 +1063,7 @@ namespace Cogl {
 	public static Cogl.Texture texture_new_from_bitmap (Cogl.Bitmap bitmap, Cogl.TextureFlags flags, Cogl.PixelFormat internal_format);
 	[CCode (cheader_filename = "cogl/cogl.h")]
 	[Version (deprecated = true, deprecated_since = "1.18", since = "0.8")]
-	public static Cogl.Texture texture_new_from_data (int width, int height, Cogl.TextureFlags flags, Cogl.PixelFormat format, Cogl.PixelFormat internal_format, int rowstride, uint8 data);
+	public static Cogl.Texture texture_new_from_data (int width, int height, Cogl.TextureFlags flags, Cogl.PixelFormat format, Cogl.PixelFormat internal_format, int rowstride, [CCode (array_length = false)] uint8[] data);
 	[CCode (cheader_filename = "cogl/cogl.h")]
 	[Version (deprecated = true, deprecated_since = "1.18", since = "0.8")]
 	public static Cogl.Texture texture_new_from_file (string filename, Cogl.TextureFlags flags, Cogl.PixelFormat internal_format) throws GLib.Error;
