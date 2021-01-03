@@ -235,6 +235,10 @@ namespace Budgie {
 
 			try {
 				var screenshot = Gdk.pixbuf_get_from_surface (image, 0, 0, image.get_width (), image.get_height ());
+				if (screenshot == null) {
+					throw new GLib.Error(0, 1, "Invalid surface image to get pixbuf from");
+				}
+
 				if (used_filename == "") { // save to clipboard
 					var selection = display.get_selection();
 					var stream = new MemoryOutputStream.resizable();
@@ -253,7 +257,7 @@ namespace Budgie {
 					}
 					yield screenshot.save_to_stream_async (stream.output_stream, "png");
 				}
-				
+
 				return true;
 			} catch (GLib.Error e) {
 				warning ("could not save file: %s", e.message);
