@@ -199,10 +199,15 @@ namespace Budgie {
 		}
 
 		static string find_target_path () {
-			// Try to create dedicated "Screenshots" subfolder in PICTURES xdg-dir
+			/*
+			 * If path in gnome-screenshots exists/or can be created then use this path
+			 * otherwise use the PICTURES xdg-dir path
+			 * default is the home folder as the ultimate fallback
+			 */
+			var settings = new Settings("org.gnome.gnome-screenshot");
 			unowned string? base_path = Environment.get_user_special_dir (UserDirectory.PICTURES);
 			if (base_path != null && FileUtils.test (base_path, FileTest.EXISTS)) {
-				var path = Path.build_path (Path.DIR_SEPARATOR_S, base_path, _("Screenshots"));
+				var path = settings.get_string("auto-save-directory");
 				if (FileUtils.test (path, FileTest.EXISTS)) {
 					return path;
 				} else if (DirUtils.create (path, 0755) == 0) {
@@ -260,7 +265,9 @@ namespace Budgie {
 
 				return true;
 			} catch (GLib.Error e) {
-				warning ("could not save file: %s", e.message);
+				if (e.message != null) {
+					warning ("could not save file: %s", e.message);
+				}
 				return false;
 			}
 		}
