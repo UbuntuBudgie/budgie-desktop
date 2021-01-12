@@ -1,0 +1,28 @@
+Origin: commit ce5e658e63382c62012ae234589f169b3d1b0065
+Author: Joshua Strobl <joshua@streambits.io>
+Last-Update: 2021-01-02
+Description: Prevent Budgie Desktop Settings from being pinned via
+ drag-and-drop. Fixes #2085.
+
+---
+ src/applets/icon-tasklist/IconTasklistApplet.vala | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/applets/icon-tasklist/IconTasklistApplet.vala b/src/applets/icon-tasklist/IconTasklistApplet.vala
+index e23610e6..4e7ec694 100644
+--- a/src/applets/icon-tasklist/IconTasklistApplet.vala
++++ b/src/applets/icon-tasklist/IconTasklistApplet.vala
+@@ -268,6 +268,10 @@ public class IconTasklistApplet : Budgie.Applet {
+ 				return;
+ 			}
+ 
++			if (info.get_startup_wm_class() == "budgie-desktop-settings") { // Is Budgie Desktop Settings
++				return; // Don't allow drag & drop
++			}
++
+ 			app_id = info.get_filename();
+ 
+ 			if (buttons.contains(app_id)) {
+-- 
+2.27.0
+

@@ -1,3 +1,18 @@
+budgie-desktop (10.5.2-3) unstable; urgency=medium
+
+  * Bug-fixes
+    - Panel crashes when using wine-based apps with icon-applet
+      keepass_segfaults.patch
+      sync_x_errors_carbon.patch
+    - Do not show budgie-desktop-settings in docks like plank
+      bde_icon_handling.patch
+    - Show/Mute icon in panel when user uses keyboard media keys
+      mute_unmute.patch
+    - All budgie-desktop-settings to be pinned/unpinned in icon applet
+      bde_pinned.patch
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 12 Jan 2021 11:48:18 +0000
+
 budgie-desktop (10.5.2-2) unstable; urgency=medium
 
   * Packaging Changes
