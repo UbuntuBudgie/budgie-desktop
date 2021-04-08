@@ -1,7 +1,7 @@
 /*
  * This file is part of budgie-desktop
  *
- * Copyright © 2020 Budgie Desktop Developers
+ * Copyright © 2021 Budgie Desktop Developers
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 #include "marshal.h"
 
 
-
 // global declarations
 
 #define TRAY_REQUEST_DOCK 0
@@ -26,7 +25,6 @@
 #define TRAY_CANCEL_MESSAGE 2
 
 static unsigned int message_sent_signal;
-
 
 
 // static method header
@@ -43,6 +41,7 @@ static void handle_message_begin(CarbonTray*, XClientMessageEvent*);
 static void handle_message_cancel(CarbonTray*, XClientMessageEvent*);
 static void handle_dock_request(CarbonTray*, XClientMessageEvent*);
 static bool handle_undock_request(GtkSocket*, void*);
+static int handle_x_error(Display* display, XErrorEvent* event);
 
 static void remove_message(CarbonTray*, XClientMessageEvent*);
 static void free_message(CarbonMessage*);
@@ -50,11 +49,9 @@ static void set_xproperties(CarbonTray*);
 static void draw_child(GtkWidget*, void*);
 
 
-
 // define our type with the macro
 
 G_DEFINE_TYPE(CarbonTray, carbon_tray, G_TYPE_OBJECT)
-
 
 
 // public methods
@@ -93,7 +90,7 @@ bool carbon_tray_register(CarbonTray* tray, GdkScreen* screen) {
 
 	int screen_number = XScreenNumberOfScreen(gdk_x11_screen_get_xscreen(screen));
 	char* selection_name = g_strdup_printf("_NET_SYSTEM_TRAY_S%d", screen_number);
-	tray->selectionAtom = gdk_atom_intern(selection_name, FALSE);
+	tray->selectionAtom = gdk_atom_intern(selection_name, false);
 	g_free(selection_name);
 
 	tray->invisible = GTK_WIDGET(g_object_ref(G_OBJECT(invisible)));
@@ -104,7 +101,7 @@ bool carbon_tray_register(CarbonTray* tray, GdkScreen* screen) {
 
 	unsigned int timestamp = gdk_x11_get_server_time(gtk_widget_get_window(invisible));
 	GdkDisplay* display = gdk_screen_get_display(screen);
-	bool succeed = gdk_selection_owner_set_for_display(display, gtk_widget_get_window(invisible), tray->selectionAtom, timestamp, TRUE);
+	bool succeed = gdk_selection_owner_set_for_display(display, gtk_widget_get_window(invisible), tray->selectionAtom, timestamp, true);
 
 	if (succeed) {
 		Window root_window = RootWindowOfScreen(GDK_SCREEN_XSCREEN(screen));
@@ -122,15 +119,17 @@ bool carbon_tray_register(CarbonTray* tray, GdkScreen* screen) {
 		xevent.data.l[3] = 0;
 		xevent.data.l[4] = 0;
 
-		XSendEvent(GDK_DISPLAY_XDISPLAY(display), root_window, False, StructureNotifyMask, (XEvent*) &xevent);
+		XSendEvent(GDK_DISPLAY_XDISPLAY(display), root_window, false, StructureNotifyMask, (XEvent*) &xevent);
 
 		gdk_window_add_filter(gtk_widget_get_window(invisible), window_filter, tray);
 
-		GdkAtom opcode_atom = gdk_atom_intern("_NET_SYSTEM_TRAY_OPCODE", FALSE);
+		GdkAtom opcode_atom = gdk_atom_intern("_NET_SYSTEM_TRAY_OPCODE", false);
 		tray->opcodeAtom = gdk_x11_atom_to_xatom_for_display(display, opcode_atom);
 
-		GdkAtom data_atom = gdk_atom_intern("_NET_SYSTEM_TRAY_MESSAGE_DATA", FALSE);
+		GdkAtom data_atom = gdk_atom_intern("_NET_SYSTEM_TRAY_MESSAGE_DATA", false);
 		tray->dataAtom = gdk_x11_atom_to_xatom_for_display(display, data_atom);
+
+		XSetErrorHandler(handle_x_error);
 	} else {
 		g_object_unref(G_OBJECT(tray->invisible));
 		tray->invisible = NULL;
@@ -141,7 +140,7 @@ bool carbon_tray_register(CarbonTray* tray, GdkScreen* screen) {
 }
 
 void carbon_tray_unregister(CarbonTray* tray) {
-	if (GTK_IS_WIDGET(tray->invisible) == FALSE) {
+	if (!GTK_IS_WIDGET(tray->invisible)) {
 		return;
 	}
 
@@ -151,7 +150,7 @@ void carbon_tray_unregister(CarbonTray* tray) {
 	GdkWindow* owner = gdk_selection_owner_get_for_display(display, tray->selectionAtom);
 
 	if (owner == gtk_widget_get_window(invisible)) {
-		gdk_selection_owner_set_for_display(display, NULL, tray->selectionAtom, gdk_x11_get_server_time(invisibleWindow), TRUE);
+		gdk_selection_owner_set_for_display(display, NULL, tray->selectionAtom, gdk_x11_get_server_time(invisibleWindow), true);
 	}
 
 	gdk_window_remove_filter(invisibleWindow, window_filter, tray);
@@ -159,6 +158,8 @@ void carbon_tray_unregister(CarbonTray* tray) {
 	tray->invisible = NULL;
 	gtk_widget_destroy(invisible);
 	g_object_unref(G_OBJECT(invisible));
+
+	XSetErrorHandler(NULL);
 }
 
 void carbon_tray_set_spacing(CarbonTray* tray, int spacing) {
@@ -217,7 +218,7 @@ static int carbon_tray_draw(GtkWidget* widget, cairo_t* cr) {
 
 	gtk_container_foreach(GTK_CONTAINER(widget), draw_child, &data);
 
-	return TRUE;
+	return true;
 }
 
 static GdkFilterReturn window_filter(GdkXEvent* xev, GdkEvent* event, void* userData) {
@@ -227,7 +228,7 @@ static GdkFilterReturn window_filter(GdkXEvent* xev, GdkEvent* event, void* user
 	XEvent* xevent = (XEvent*) xev;
 	CarbonTray* tray = (CarbonTray*) userData;
 
-	if (GTK_IS_WIDGET(tray->invisible) == FALSE) {
+	if (!GTK_IS_WIDGET(tray->invisible)) {
 		return GDK_FILTER_CONTINUE;
 	}
 
@@ -260,9 +261,9 @@ static GdkFilterReturn window_filter(GdkXEvent* xev, GdkEvent* event, void* user
 static void handle_dock_request(CarbonTray* tray, XClientMessageEvent* xevent) {
 	Window window = (Window) xevent->data.l[2];
 
-	/* check if we already have this window. if we do, we might as well re-dock it at the application's request */
+	/* check if we already have this window. if we do, ignore this request */
 	if (g_hash_table_lookup(tray->socketTable, GUINT_TO_POINTER(window)) != NULL) {
-		handle_undock_request(g_hash_table_lookup(tray->socketTable, GUINT_TO_POINTER(window)), tray);
+		return;
 	}
 
 	/* create the socket */
@@ -275,9 +276,9 @@ static void handle_dock_request(CarbonTray* tray, XClientMessageEvent* xevent) {
 
 	// networkmanager applet should be packed at the end
 	if (child->wmclass != NULL && strcmp(child->wmclass, "Nm-applet") == 0) {
-		gtk_box_pack_end(GTK_BOX(tray->box), socket, FALSE, FALSE, 0);
+		gtk_box_pack_end(GTK_BOX(tray->box), socket, false, false, 0);
 	} else {
-		gtk_box_pack_start(GTK_BOX(tray->box), socket, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(tray->box), socket, false, false, 0);
 		gtk_box_reorder_child(GTK_BOX(tray->box), socket, 0);
 	}
 
@@ -313,7 +314,14 @@ static bool handle_undock_request(GtkSocket* socket, void* userData) {
 	g_hash_table_remove(tray->socketTable, GUINT_TO_POINTER(window));
 
 	// destroys the socket
-	return FALSE;
+	return false;
+}
+
+static int handle_x_error(Display* display, XErrorEvent* event) {
+	char errorText[512];
+	XGetErrorText(display,  event->error_code, errorText, 512);
+	g_warning("Recoverable X error in system tray: %s", errorText);
+	return 0;
 }
 
 static void handle_message_begin(CarbonTray* tray, XClientMessageEvent* xevent) {

@@ -1,7 +1,7 @@
 /*
  * This file is part of budgie-desktop
  *
- * Copyright © 2015-2020 Budgie Desktop Developers
+ * Copyright © 2015-2021 Budgie Desktop Developers
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -155,6 +155,15 @@ namespace Budgie {
 		public void SetDoNotDisturb(bool enable) throws DBusError, IOError {
 			this.dnd_enabled = enable;
 			this.DoNotDisturbChanged(this.dnd_enabled);
+		}
+
+		/**
+		* Notification pausing on fullscreen functionality
+		*/
+		public signal void PauseNotificationsChanged(bool paused);
+
+		public void SetPauseNotifications(bool paused) throws DBusError, IOError {
+			PauseNotificationsChanged(paused);
 		}
 	}
 

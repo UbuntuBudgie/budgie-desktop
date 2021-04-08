@@ -1,7 +1,7 @@
 /*
  * This file is part of budgie-desktop
  *
- * Copyright © 2015-2020 Budgie Desktop Developers
+ * Copyright © 2015-2021 Budgie Desktop Developers
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -266,6 +266,10 @@ public class IconTasklistApplet : Budgie.Applet {
 			DesktopAppInfo? info = new DesktopAppInfo.from_filename(app_id);
 			if (info == null) {
 				return;
+			}
+
+			if (info.get_startup_wm_class() == "budgie-desktop-settings") { // Is Budgie Desktop Settings
+				return; // Don't allow drag & drop
 			}
 
 			app_id = info.get_filename();

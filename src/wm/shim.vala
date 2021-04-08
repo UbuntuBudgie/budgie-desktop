@@ -1,7 +1,7 @@
 /*
  * This file is part of budgie-desktop
  *
- * Copyright © 2015-2020 Budgie Desktop Developers
+ * Copyright © 2015-2021 Budgie Desktop Developers
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -180,7 +180,11 @@ namespace Budgie {
 			foreach (string accelerator in grabs.get_keys()) {
 				if (grabs[accelerator] == action) {
 					var params = new HashTable<string,Variant>(null, null);
+#if HAVE_MUTTER_8
+					params.set("device-name", new Variant.string(dev.get_device_name()));
+#else
 					params.set("device-id", new Variant.uint32(dev.id));
+#endif
 					params.set("action-mode", new Variant.uint32(action));
 					params.set("device-mode", new Variant.string(dev.get_device_node()));
 					params.set("timestamp", new Variant.uint32(timestamp));
