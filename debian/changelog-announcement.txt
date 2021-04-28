@@ -1,3 +1,51 @@
+v10.5.3 Official announcement can be found here:
+https://getsol.us/2021/04/27/fashionable-gnome-forty/
+
+Text of the announcement reproduced below:
+Fashionable GNOME Forty
+
+Budgie 10.5.3 is a minor release that introduces fixes for bugs, various quality-of-life improvements, and support for the GNOME 40 stack.
+Bug Fixes and Cleanup
+
+Budgie 10.5.3 introduces fixes to Budgie panel applets, Raven, and various window state tracking.
+
+    Drop use of Queue and Cancellable in Raven’s NotificationView.
+        Instead of using a Queue (which is not thread safe anyways), just update a reference to a NotificationWindow since we only really cared about the head of the Queue to begin with.
+        Dropped Cancellable usage for async pixbuf scaling. There has not really been a scenario yet where we have not been able to scale an icon within the amount of time before a NotificationWindow is removed.
+    Fix application icons not scaling in Raven’s Notification Group headers.
+    Fix issue with VirtualBox icon not being displayed in IconTaskList applet
+    Fix regression in Budgie Desktop Settings icon handling.
+    MPRIS metadata, playback status, and CanGoPrevious / CanGoNext fetching is now performed immediately rather than being an unnecessary idle operation.
+    Notifications now use a high priority timeout.
+    Notification iconography now uses a consistent IconSize.DIALOG instead of IconSize.INVALID and only scales if the icon provided is not already the desired height.
+    Prevent Budgie Desktop Settings from being pinned via drag-and-drop, fixing an issue where Budgie Desktop Settings was inadvertently pinnable and unable to be unpinned.
+    Sound Indicator applet and Raven
+        Use standard mute/unmute methods, fixing issues like muting with media keys and then trying to unmute via the applet, which would previously not work.
+    System Tray applet
+        Fix issue with KeePass causing panel segfaults.
+        Various stability improvements, such as more proactive X11 error trapping.
+
+GNOME 40 Support
+
+Budgie 10.5.3 introduces support for the GNOME 40 stack. GNOME 40 introduced various changes in Mutter, gsettings-desktop-schemas, and gnome-shell which impacted the ability to use Budgie under a GNOME 40 stack or in conjunction with GDM (GNOME’s login manager which leverages gnome-shell).
+
+When compiled alongside GNOME Settings Daemon 40.x, Budgie will use the migrated font anti-aliasing and hinting options, which were moved from org.gnome.settings-daemon.plugins.xsettings to org.gnome.desktop.interface. In GNOME Shell and GNOME Settings Daemon 40, there were changes introduced which impacted Budgie’s ability to use dedicated screensavers, such as Solus' fork of gnome-screensaver (which we have been using since 2017). This fork has now been formally renamed to budgie-screensaver, bumped to v4, and promoted to a required component of Budgie Desktop, with changes introduced to facilitate Budgie’s continued ability to lock the session and attempt to co-exist in an installation environment alongside GNOME Shell and GDM. As always, we encourage that Budgie be used with lightdm and an optional greeter such as slick-greeter, as opposed to being installed alongside GDM and GNOME Shell.
+Quality-of-life Improvements
+2021 04 Budgie Desktop Settings
+
+Here are some quality-of-life improvements shipping in Budgie 10.5.3
+
+    Filter out audacious notifications so they do not clutter up Raven.
+    Hide “Default”, which is typically Adwaita / GTK’s internal theme. We continue to encourage the use of theming that officially supports Budgie, such as Materia and Plata.
+    Mutter and WM preference schema settings are now only applied for Budgie session.
+    Spacing is now configurable in the Status applet.
+    The application fullscreen state tracking has been slightly rewritten to use the window XIDs, only call our track window state function on specific flags in the changed or current state, and reducing instances where some unset flags would not result in the application being removed as a fullscreen application.
+    There is now an option in Budgie and exposed via Budgie Desktop Settings' “Windows” section to automatically pause notifications when a window is fullscreen and unpause when there no longer is a fullscreen window. This is useful in reducing distractions when gaming or watching content!
+    To improve the default user experience of Budgie on some downstream operating systems such as Arch Linux, Budgie now ships with a default wallpaper, eliminating the need for downstreams to apply supplemental changes or ship a wallpaper package.
+    We will no longer filter device added / removed notifications. This resolves issues where ejection notifications for external media would not get stored in Raven’s Notifications section.
+    When xdotool is available on the operating system, the Lock Keys applet can be clicked to toggle CapsLock and NumLock!
+
+
 v10.5.2 Official announcement can be found here:
 https://getsol.us/2020/12/02/budgie-10-5-2-released/
 

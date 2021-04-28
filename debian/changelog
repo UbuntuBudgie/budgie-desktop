@@ -1,3 +1,24 @@
+budgie-desktop (10.5.3-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+    - upstream release announcement in install changelogs
+  * Packaging Changes
+    - drop all patches except
+      desktopfolder_exename.patch
+      show-tray-icon.patch
+    - control: Replace gnome-screensaver runtime dependency
+      with budgie-screensaver
+      Add BD budgie-screensaver due to build check for executable
+    - control: add Rules-Requires-Root: no
+    - Update libraven0.symbols
+    - Remove lock-keys lintian-override for budgie-core since no longer
+      highlighted as a false positive by lintian
+    - Copyright: Remove copyright for a now removed file
+      Update copyright year
+      Add copyright statement for newly shipped default.jpg wallpaper
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 28 Apr 2021 20:21:28 +0100
+
 budgie-desktop (10.5.2-3) unstable; urgency=medium
 
   * Bug-fixes

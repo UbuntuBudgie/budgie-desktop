@@ -107,6 +107,7 @@ libraven.so.0 libraven0 #MINVER#
  budgie_raven_iface_ref@Base 10.3
  budgie_raven_iface_register_object@Base 10.3
  budgie_raven_iface_set_is_expanded@Base 10.3
+ budgie_raven_iface_SetPauseNotifications@Base 10.5.3
  budgie_raven_iface_unref@Base 10.3
  budgie_raven_new@Base 10.3
  budgie_raven_position_get_display_name@Base 10.5.2

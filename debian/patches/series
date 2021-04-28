@@ -1,9 +1,2 @@
 desktopfolder_exename.patch
-desktop-override.patch
 show-tray-icon.patch
-hide_default_theme.patch
-keepass_segfaults.patch
-bde_icon_handling.patch
-mute_unmute.patch
-bde_pinned.patch
-sync_x_errors_carbon.patch
