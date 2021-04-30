@@ -3,6 +3,14 @@ export DH_VERBOSE = 1
 export LC_ALL=C.UTF-8
 export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
 
+ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
+	SUBSTVARSREC = -Vdist:Recommends="gir1.2-budgie-1.0 (>= 10.5)"
+	SUBSTVARSSUG = -Vdist:Suggests="budgie-desktop-view"
+else
+	SUBSTVARSREC = -Vdist:Recommends="gir1.2-budgie-1.0 (>= 10.5), budgie-desktop-view"
+	SUBSTVARSSUG = -Vdist:Suggests="gnome-terminal"
+endif
+
 %:
 	dh $@
 
@@ -22,6 +30,9 @@ ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo ubuntu),ubuntu)
 	touch ./debian/ubuntu/applied
 endif
 	dh_auto_configure -- --prefix=/usr --libdir=/usr/lib
+
+override_dh_gencontrol:
+	dh_gencontrol -- $(SUBSTVARSREC) $(SUBSTVARSSUG)
 
 override_dh_auto_install:
 	dh_auto_install

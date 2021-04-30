@@ -1,2 +1,3 @@
 desktopfolder_exename.patch
 show-tray-icon.patch
+use-ibus-daemonize.patch

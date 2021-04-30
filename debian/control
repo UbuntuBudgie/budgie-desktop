@@ -92,14 +92,12 @@ Package: budgie-desktop
 Architecture: all
 Depends:
  budgie-core,
- gir1.2-budgie-1.0 (>= 10.5),
  gnome-control-center,
  gnome-menus,
  network-manager-gnome,
- ${misc:Depends},
-Recommends:
- budgie-desktop-view
-Suggests: slick-greeter, nautilus, gnome-terminal
+ ${misc:Depends}
+Recommends: ${dist:Recommends}
+Suggests: slick-greeter, nautilus, gnome-terminal, ${dist:Suggests}
 Description: Desktop package for budgie-desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on
  simplicity and elegance.  It provides a traditional desktop metaphor

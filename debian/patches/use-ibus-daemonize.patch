@@ -1,0 +1,25 @@
+Forwarded: https://github.com/solus-project/budgie-desktop/pull/2111
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Last-Update: 2021-03-09
+Description: [PATCH] Don't start ibus with --panel disable
+ to ensure ibus popups will appear.  Change to use ibus daemonize instead
+
+---
+ src/wm/ibus.vala | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/wm/ibus.vala b/src/wm/ibus.vala
+index d90ee50b..ca11482b 100644
+--- a/src/wm/ibus.vala
++++ b/src/wm/ibus.vala
+@@ -73,7 +73,7 @@ namespace Budgie {
+ 		* Launch the daemon as a child process so that it dies when we die
+ 		*/
+ 		private void startup_ibus() {
+-			string[] cmdline = {"ibus-daemon", "--xim", "--panel", "disable"};
++			string[] cmdline = {"ibus-daemon", "--xim", "--daemonize"};
+ 			try {
+ 				new Subprocess.newv(cmdline, SubprocessFlags.NONE);
+ 			} catch (Error e) {
+-- 
+2.30.2
