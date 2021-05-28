@@ -11,8 +11,8 @@ project(
     ],
 )
 
-budgie_screensaver  = find_program('budgie-screensaver', required: false)
-assert(budgie_screensaver.found(), 'Budgie Screensaver is a required separate component of Budgie Desktop. Please ensure budgie-screensaver is available at configure and run time. You can find this at https://github.com/getsolus/budgie-screensaver')
+#budgie_screensaver  = find_program('budgie-screensaver', required: false)
+#assert(budgie_screensaver.found(), 'Budgie Screensaver is a required separate component of Budgie Desktop. Please ensure budgie-screensaver is available at configure and run time. You can find this at https://github.com/getsolus/budgie-screensaver')
 
 git = find_program('git', required: false)
 
