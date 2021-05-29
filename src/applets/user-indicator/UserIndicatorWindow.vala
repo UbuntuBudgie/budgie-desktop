@@ -70,7 +70,7 @@ public class UserIndicatorWindow : Budgie.Popover {
 			saver = yield Bus.get_proxy(BusType.SESSION, "org.gnome.ScreenSaver", "/org/gnome/ScreenSaver");
 		} catch (Error e) {
 			warning(UNABLE_CONTACT + "gnome-screensaver: %s", e.message);
-			return;
+			saver = null;
 		}
 
 		try {
@@ -365,9 +365,13 @@ public class UserIndicatorWindow : Budgie.Popover {
 		hide();
 		Idle.add(() => {
 			try {
+				if (saver == null) {
+					saver = Bus.get_proxy_sync(BusType.SESSION, "org.gnome.ScreenSaver", "/org/gnome/ScreenSaver");
+				}
 				saver.lock();
 			} catch (Error e) {
 				warning("Cannot lock screen: %s", e.message);
+				saver = null;
 			}
 			return false;
 		});
