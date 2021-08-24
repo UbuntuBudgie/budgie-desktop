@@ -12,7 +12,6 @@ budgie-desktop (10.5.3-1) experimental; urgency=medium
     - upstream release announcement in install changelogs
       (Closes: #992872)
   * Packaging Changes
-    - Force resync with Debian Unstable
     - drop all patches except
       desktopfolder_exename.patch
       show-tray-icon.patch
