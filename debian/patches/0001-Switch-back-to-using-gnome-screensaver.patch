@@ -1,0 +1,72 @@
+From: David Mohammed <fossfreedom@ubuntu.com>
+Last-Update: 2021-05-28
+Subject: [PATCH] Switch back to using gnome-screensaver
+ Upstream uses budgie-screensaver for locking.  This is not available
+ in Debian/Ubuntu as yet so continue using gnome-screensaver via this
+ patch
+Forwarded: Not Needed
+
+---
+ meson.build                                         | 4 ++--
+ src/applets/user-indicator/UserIndicatorWindow.vala | 2 +-
+ src/session/budgie-desktop-screensaver.desktop.in   | 7 ++++---
+ 3 files changed, 7 insertions(+), 6 deletions(-)
+
+--- a/meson.build
++++ b/meson.build
+@@ -11,8 +11,8 @@
+     ],
+ )
+ 
+-budgie_screensaver  = find_program('budgie-screensaver', required: false)
+-assert(budgie_screensaver.found(), 'Budgie Screensaver is a required separate component of Budgie Desktop. Please ensure budgie-screensaver is available at configure and run time. You can find this at https://github.com/getsolus/budgie-screensaver')
++#budgie_screensaver  = find_program('budgie-screensaver', required: false)
++#assert(budgie_screensaver.found(), 'Budgie Screensaver is a required separate component of Budgie Desktop. Please ensure budgie-screensaver is available at configure and run time. You can find this at https://github.com/getsolus/budgie-screensaver')
+ 
+ git = find_program('git', required: false)
+ 
+--- a/src/applets/user-indicator/UserIndicatorWindow.vala
++++ b/src/applets/user-indicator/UserIndicatorWindow.vala
+@@ -69,8 +69,8 @@
+ 		try {
+ 			saver = yield Bus.get_proxy(BusType.SESSION, "org.gnome.ScreenSaver", "/org/gnome/ScreenSaver");
+ 		} catch (Error e) {
+-			warning(UNABLE_CONTACT + "budgie-screensaver: %s", e.message);
+-			return;
++			warning(UNABLE_CONTACT + "gnome-screensaver: %s", e.message);
++			saver = null;
+ 		}
+ 
+ 		try {
+@@ -365,9 +365,13 @@
+ 		hide();
+ 		Idle.add(() => {
+ 			try {
++				if (saver == null) {
++					saver = Bus.get_proxy_sync(BusType.SESSION, "org.gnome.ScreenSaver", "/org/gnome/ScreenSaver");
++				}
+ 				saver.lock();
+ 			} catch (Error e) {
+ 				warning("Cannot lock screen: %s", e.message);
++				saver = null;
+ 			}
+ 			return false;
+ 		});
+--- a/src/session/budgie-desktop-screensaver.desktop.in
++++ b/src/session/budgie-desktop-screensaver.desktop.in
+@@ -3,12 +3,12 @@
+ Name=Screensaver (Budgie Desktop)
+ Comment=Launch screensaver and locker program
+ Icon=preferences-desktop-screensaver
+-Exec=budgie-screensaver
+-TryExec=budgie-screensaver
++Exec=gnome-screensaver
++TryExec=gnome-screensaver
+ OnlyShowIn=Budgie;
+ NoDisplay=true
+ X-GNOME-Autostart-Phase=Application
+ X-GNOME-Autostart-Notify=true
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+-X-GNOME-Bugzilla-Product=budgie-screensaver
++X-GNOME-Bugzilla-Product=gnome-screensaver
+ X-GNOME-Bugzilla-Component=general

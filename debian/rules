@@ -4,15 +4,15 @@ export LC_ALL=C.UTF-8
 export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
 
 ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
-	SUBSTVARSREC = -Vdist:Recommends="gir1.2-budgie-1.0 (>= 10.5)"
+	SUBSTVARSREC = -Vdist:Recommends="nemo-desktop"
 	SUBSTVARSSUG = -Vdist:Suggests="budgie-desktop-view"
 else
-	SUBSTVARSREC = -Vdist:Recommends="gir1.2-budgie-1.0 (>= 10.5), budgie-desktop-view"
-	SUBSTVARSSUG = -Vdist:Suggests="gnome-terminal"
+	SUBSTVARSREC = -Vdist:Recommends="budgie-desktop-view"
+	SUBSTVARSSUG = -Vdist:Suggests="gnome-terminal, nautilus"
 endif
 
 %:
-	dh $@
+	dh $@ --with gir
 
 override_dh_clean:
 	dh_clean
@@ -39,11 +39,12 @@ override_dh_auto_install:
 	mkdir -p "$(CURDIR)/debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/girepository-1.0"
 	mv "$(CURDIR)/debian/tmp/usr/lib/girepository-1.0/Budgie-1.0.typelib" "$(CURDIR)/debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/girepository-1.0"
 	rm -rf "$(CURDIR)/debian/tmp/usr/lib/girepository-1.0"
-
-override_dh_installgsettings:
-	# install override but budgie has to take precedence over
-	# gnome-shell defaults
-	dh_installgsettings --priority=15
+ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo ubuntu),ubuntu)
+	dh_install -pbudgie-desktop debian/15_budgie-desktop-ubuntu.gschema.override /usr/share/glib-2.0/schemas/
+endif
+ifeq ($(shell dpkg-vendor --is Debian && echo yes),yes)
+	dh_install -pbudgie-desktop debian/15_budgie-desktop-debian.gschema.override /usr/share/glib-2.0/schemas/
+endif
 
 override_dh_installchangelogs:
 	dh_installchangelogs debian/changelog-announcement.txt

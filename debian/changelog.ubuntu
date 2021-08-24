@@ -1,8 +1,14 @@
-budgie-desktop (10.5.3-1) experimental; urgency=medium
+budgie-desktop (10.5.3-0ubuntu2) impish; urgency=medium
+
+  * Bug-fixes
+    - Ensure gir package does not have an empty Depends (Closes: #991079) 
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 13 Jul 2021 20:44:35 +0100
+
+budgie-desktop (10.5.3-0ubuntu1) impish; urgency=medium
 
   * New upstream release
     - upstream release announcement in install changelogs
-      (Closes: #992872)
   * Packaging Changes
     - Force resync with Debian Unstable
     - drop all patches except
@@ -25,18 +31,8 @@ budgie-desktop (10.5.3-1) experimental; urgency=medium
       0001-Switch-back-to-using-gnome-screensaver.patch
     - ensure ibus shows suggestions for non xkb layouts
       (LP: #1920639)
-    - control: add python3-distutils and python3-lib2to3 build dependency
-      to allow build against experimental.  This is to be removed
-      when uploading to unstable in future.
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 24 Aug 2021 18:39:15 +0100
-
-budgie-desktop (10.5.2-4) unstable; urgency=medium
-
-  * Bug-fixes
-    - Ensure gir package does not have an empty Depends (Closes: #991079)
-
- -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 13 Jul 2021 19:24:58 +0100
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 13 Jun 2021 10:10:09 +0100
 
 budgie-desktop (10.5.2-3) unstable; urgency=medium
 

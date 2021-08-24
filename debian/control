@@ -4,8 +4,8 @@ Priority: optional
 Maintainer: David Mohammed <fossfreedom@ubuntu.com>
 Homepage: https://github.com/solus-project/budgie-desktop
 Build-Depends:
- debhelper (>= 12),
- debhelper-compat (= 12),
+ debhelper (>= 13),
+ debhelper-compat (= 13),
  gir1.2-gee-0.8,
  gnome-common,
  gnome-settings-daemon-dev (>= 3.36.0),
@@ -21,7 +21,7 @@ Build-Depends:
  libgnome-menu-3-dev,
  libgtk-3-dev (>= 3.24.0),
  libibus-1.0-dev (>= 1.5.10),
- libmutter-7-dev,
+ libmutter-8-dev,
  libnotify-dev (>= 0.7),
  libpeas-dev,
  libpolkit-agent-1-dev,
@@ -29,12 +29,13 @@ Build-Depends:
  libpulse-dev,
  libpulse-mainloop-glib0,
  libupower-glib-dev,
- libwnck-3-dev (>= 3.36.0),
+ libwnck-3-dev,
  meson (>= 0.48.0),
  sassc,
  uuid-dev,
  valac (>= 0.48.0),
- budgie-screensaver
+ python3-distutils (<< 3.10),
+ python3-lib2to3 (<< 3.10)
 Standards-Version: 4.5.1
 Vcs-Browser: https://github.com/UbuntuBudgie/budgie-desktop/tree/debian
 Vcs-Git: https://github.com/UbuntuBudgie/budgie-desktop -b debian
@@ -45,7 +46,7 @@ Architecture: any
 Depends: gnome-settings-daemon,
  gnome-session-bin,
  gnome-session-common,
- budgie-screensaver (>= 4.0),
+ gnome-screensaver,
  ${misc:Depends}, ${shlibs:Depends}
 Description: Core package for Budgie-Desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on
@@ -96,8 +97,8 @@ Depends:
  gnome-menus,
  network-manager-gnome,
  ${misc:Depends}
-Recommends: ${dist:Recommends}
-Suggests: slick-greeter, nautilus, gnome-terminal, ${dist:Suggests}
+Recommends: gir1.2-budgie-1.0 (>= 10.5), ${dist:Recommends}
+Suggests: slick-greeter, ${dist:Suggests}
 Description: Desktop package for budgie-desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on
  simplicity and elegance.  It provides a traditional desktop metaphor
