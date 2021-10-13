@@ -1,32 +1,14 @@
-budgie-desktop (10.5.3-3) UNRELEASED; urgency=medium
+budgie-desktop (10.5.3-0ubuntu2) impish; urgency=medium
 
-  * Upload to experimental
-    - add GNOME 41 support (Closes: #996107)
-      Add-Mutter-9-support-2165.patch
-      Require-GNOME-Stack-41-alpha.patch
+  * Bug-fixes
+    - Ensure gir package does not have an empty Depends (Closes: #991079) 
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 13 Oct 2021 22:07:30 +0100
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 13 Jul 2021 20:44:35 +0100
 
-budgie-desktop (10.5.3-2) unstable; urgency=medium
-
-  * Upload to unstable
-    - part of transition #992872
-  * Packaging Changes
-    - Remove upstream/metadata Homepage which eliminates lintian warning
-    - control remove build-dependencies python3-distutils and
-      python3-lib2to3 added previously to the experimental upload since
-      no longer needed
-    - Remove superficial tests since this now is a lintian warning
-      i.e. upstream do not provide any tests that the package
-      can utilise
-
- -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 12 Sep 2021 15:26:07 +0100
-
-budgie-desktop (10.5.3-1) experimental; urgency=medium
+budgie-desktop (10.5.3-0ubuntu1) impish; urgency=medium
 
   * New upstream release
     - upstream release announcement in install changelogs
-      (Closes: #992872)
   * Packaging Changes
     - Force resync with Debian Unstable
     - drop all patches except
@@ -49,18 +31,8 @@ budgie-desktop (10.5.3-1) experimental; urgency=medium
       0001-Switch-back-to-using-gnome-screensaver.patch
     - ensure ibus shows suggestions for non xkb layouts
       (LP: #1920639)
-    - control: add python3-distutils and python3-lib2to3 build dependency
-      to allow build against experimental.  This is to be removed
-      when uploading to unstable in future.
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 24 Aug 2021 18:39:15 +0100
-
-budgie-desktop (10.5.2-4) unstable; urgency=medium
-
-  * Bug-fixes
-    - Ensure gir package does not have an empty Depends (Closes: #991079)
-
- -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 13 Jul 2021 19:24:58 +0100
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 13 Jun 2021 10:10:09 +0100
 
 budgie-desktop (10.5.2-3) unstable; urgency=medium
 
