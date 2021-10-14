@@ -1,9 +1,14 @@
-budgie-desktop (10.5.3-3) UNRELEASED; urgency=medium
+budgie-desktop (10.5.3-3) experimental; urgency=medium
 
   * Upload to experimental
     - add GNOME 41 support (Closes: #996107)
       Add-Mutter-9-support-2165.patch
       Require-GNOME-Stack-41-alpha.patch
+  * Packaging Changes
+    - control: update gnome-settings-daemon required version
+               using mutter-9 for build-depends
+               update gnome-desktop required version
+    - budgie-core lintian-override custom-library-search-path updated
 
  -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 13 Oct 2021 22:07:30 +0100
 
