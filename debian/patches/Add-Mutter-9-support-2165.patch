@@ -1,17 +1,15 @@
-From 7a2835f2fa247e7201bb9e4a434bade8f4bfe86e Mon Sep 17 00:00:00 2001
-From: Jani Juhani Sinervo <jani@sinervo.fi>
-Date: Fri, 17 Sep 2021 16:47:47 +0300
-Subject: [PATCH] Add Mutter 9 support (#2165)
-
-The following changes:
-
-- Add mutter-9 VAPIs
-- Add convenience method for configuring Meta.Context
-- Build with libmutter-9
-- Fix Clutter.Color.from_string for libmutter-9
-- Get device ID with both libmutter-8 and libmutter-9
-- Use Meta.Context for budgie-wm on libmutter-9
-- Call Meta.Context.notify_ready at required time
+Origin: Commit 7a2835f2fa247e7201bb9e4a434bade8f4bfe86e
+Author: Jani Juhani Sinervo <jani@sinervo.fi>
+Last-Update: 2021-09-17
+Description: [PATCH] Add Mutter 9 support (#2165)
+ The following changes:
+ - Add mutter-9 VAPIs
+ - Add convenience method for configuring Meta.Context
+ - Build with libmutter-9
+ - Fix Clutter.Color.from_string for libmutter-9
+ - Get device ID with both libmutter-8 and libmutter-9
+ - Use Meta.Context for budgie-wm on libmutter-9
+ - Call Meta.Context.notify_ready at required time
 ---
  src/wm/background.vala            |   10 +-
  src/wm/main.vala                  |   31 +

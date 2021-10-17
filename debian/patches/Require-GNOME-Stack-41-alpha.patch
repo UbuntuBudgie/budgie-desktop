@@ -1,9 +1,13 @@
-From 516fe03aeea291f184dc21f7b6bf4ca8471b3672 Mon Sep 17 00:00:00 2001
-From: Joshua Strobl <joshua@streambits.io>
-Date: Fri, 17 Sep 2021 17:00:48 +0300
-Subject: [PATCH] Require GNOME Stack 41 (alpha+)
-
-To reduce maintenance cost, especially for GNOME stack releases that haven't been on Solus for a long time (e.g. libmutter-6 from 3.36.x and libmutter-7 from 3.38.x), the requirements have been raised to GNOME Stack 41, which is set to be released next week. Upgrading these requirements will also enable us to modernize some aspects of the Vala codebase that would otherwise require a new Vala not available on those older releases.
+Origin: Commit 516fe03aeea291f184dc21f7b6bf4ca8471b3672
+Author: Joshua Strobl <joshua@streambits.io>
+Last-Update: 2021-09-17
+Description: [PATCH] Require GNOME Stack 41 (alpha+)
+ To reduce maintenance cost, especially for GNOME stack releases that haven't
+ been on Solus for a long time (e.g. libmutter-6 from 3.36.x and libmutter-7
+ from 3.38.x), the requirements have been raised to GNOME Stack 41, which is
+ set to be released next week. Upgrading these requirements will also enable
+ us to modernize some aspects of the Vala codebase that would otherwise
+ require a new Vala not available on those older releases.
 ---
  meson.build                            |    8 +-
  src/panel/meson.build                  |    4 -
