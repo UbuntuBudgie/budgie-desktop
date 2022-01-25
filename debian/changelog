@@ -1,3 +1,13 @@
+budgie-desktop (10.5.3-5) unstable; urgency=medium
+
+  * Resolve FTBFS
+    add patch meson-Drop-spurious-3rd-positional-argument-to-gnome.patch
+  * Packaging Changes
+    update budgie-core.lintian-overrides to revise definition of
+    mutter RUNPATH override
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 25 Jan 2022 19:18:55 +0000
+
 budgie-desktop (10.5.3-4) unstable; urgency=medium
 
   * Upload to unstable
