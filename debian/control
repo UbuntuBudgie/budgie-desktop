@@ -16,13 +16,13 @@ Build-Depends:
  libgdk-pixbuf2.0-dev,
  libgee-0.8-dev,
  libglib2.0-dev (>= 2.64.0),
- libgnome-bluetooth-dev (>= 3.16),
+ libgnome-bluetooth-dev,
  libgnome-desktop-3-dev (>= 41.0),
  libgnome-menu-3-dev,
- libgtk-3-dev (>= 3.24.0),
- libibus-1.0-dev (>= 1.5.10),
+ libgtk-3-dev,
+ libibus-1.0-dev,
  libmutter-9-dev,
- libnotify-dev (>= 0.7),
+ libnotify-dev,
  libpeas-dev,
  libpolkit-agent-1-dev,
  libpolkit-gobject-1-dev,
@@ -30,7 +30,7 @@ Build-Depends:
  libpulse-mainloop-glib0,
  libupower-glib-dev,
  libwnck-3-dev,
- meson (>= 0.48.0),
+ meson,
  sassc,
  uuid-dev,
  valac (>= 0.48.0),
@@ -95,7 +95,7 @@ Depends:
  gnome-menus,
  network-manager-gnome,
  ${misc:Depends}
-Recommends: gir1.2-budgie-1.0 (>= 10.5), ${dist:Recommends}
+Recommends: gir1.2-budgie-1.0, ${dist:Recommends}
 Suggests: slick-greeter, ${dist:Suggests}
 Description: Desktop package for budgie-desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on

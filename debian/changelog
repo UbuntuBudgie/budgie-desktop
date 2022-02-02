@@ -4,6 +4,11 @@ budgie-desktop (10.5.3-6) UNRELEASED; urgency=medium
   * Remove obsolete fields Contact, Name from debian/upstream/metadata (already
     present in machine-readable debian/copyright).
   * Update standards version to 4.6.0, no changes needed.
+  * Remove constraints unnecessary since buster:
+    + Build-Depends: Drop versioned constraint on libgnome-bluetooth-dev,
+      libgtk-3-dev, libibus-1.0-dev, libnotify-dev and meson.
+    + budgie-desktop: Drop versioned constraint on gir1.2-budgie-1.0 in
+      Recommends.
 
  -- Debian Janitor <janitor@jelmer.uk>  Wed, 02 Feb 2022 11:16:43 -0000
 
