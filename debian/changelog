@@ -1,6 +1,8 @@
 budgie-desktop (10.5.3-6) UNRELEASED; urgency=medium
 
   * Use canonical URL in Vcs-Git.
+  * Remove obsolete fields Contact, Name from debian/upstream/metadata (already
+    present in machine-readable debian/copyright).
 
  -- Debian Janitor <janitor@jelmer.uk>  Wed, 02 Feb 2022 11:16:43 -0000
 
