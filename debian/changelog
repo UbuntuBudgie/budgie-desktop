@@ -37,6 +37,8 @@ budgie-desktop (10.5.3+gitxx-1) UNRELEASED; urgency=medium
       affect the public ABI/API
     - d/upstream/metadata update for the new maintainers of the
       budgie-desktop
+    - d/watch update for the new maintainers repo
+    - d/control update for the new maintainers repo
 
  -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 09 Feb 2022 20:46:18 +0000
 

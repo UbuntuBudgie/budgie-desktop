@@ -2,7 +2,7 @@ Source: budgie-desktop
 Section: x11
 Priority: optional
 Maintainer: David Mohammed <fossfreedom@ubuntu.com>
-Homepage: https://github.com/solus-project/budgie-desktop
+Homepage: https://github.com/buddiesofbudgie/budgie-desktop
 Build-Depends:
  debhelper (>= 13),
  debhelper-compat (= 13),
@@ -36,8 +36,8 @@ Build-Depends:
  uuid-dev,
  valac (>= 0.48.0),
 Standards-Version: 4.6.0
-Vcs-Browser: https://github.com/UbuntuBudgie/budgie-desktop/tree/debian
-Vcs-Git: https://github.com/UbuntuBudgie/budgie-desktop.git -b debian
+Vcs-Browser: https://github.com/buddiesofbudgie/budgie-desktop/tree/debian
+Vcs-Git: https://github.com/buddiesofbudgie/budgie-desktop.git -b debian
 Rules-Requires-Root: no
 
 Package: budgie-core
