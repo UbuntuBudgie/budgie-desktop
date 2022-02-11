@@ -1,7 +1,5 @@
 desktopfolder_exename.patch
 show-tray-icon.patch
 use-ibus-daemonize.patch
-0001-Switch-back-to-using-gnome-screensaver.patch
-Add-Mutter-9-support-2165.patch
-Require-GNOME-Stack-41-alpha.patch
-meson-Drop-spurious-3rd-positional-argument-to-gnome.patch
+reverse_sound_overdrive.patch
+revert_replace_gnome_control_center.patch

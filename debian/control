@@ -30,6 +30,7 @@ Build-Depends:
  libpulse-mainloop-glib0,
  libupower-glib-dev,
  libwnck-3-dev,
+ gnome-screensaver,
  meson,
  sassc,
  uuid-dev,

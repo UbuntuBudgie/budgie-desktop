@@ -1,0 +1,167 @@
+Description: revert gnome-control-center changes
+ Upstream has moved to a fork called budgie-control-center and
+ has adapted to use this.  This patch is needed to revert
+ these changes until B-C-C is accepted into the archive.
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Origin: Commit - 93bfa83ba67507c68c3fcc69664207da863ae38e
+Forwarded: not-needed
+Reviewed-By: David Mohammed <fossfreedom@ubuntu.com>
+Last-Update: 2022-02-09
+
+--- budgie-desktop-10.5.3+gitxx.orig/src/abomination/utils.vala
++++ budgie-desktop-10.5.3+gitxx/src/abomination/utils.vala
+@@ -30,6 +30,7 @@ namespace Budgie.Abomination {
+ 		// i.e. Chrome profile launcher, android studio emulator
+ 		if (name == null || name == "") {
+ 			name = window.get_name();
++			warning("Fallback to using window name for %s", name);
+ 		}
+ 
+ 		if (name != null) {
+--- budgie-desktop-10.5.3+gitxx.orig/src/applets/clock/ClockApplet.vala
++++ budgie-desktop-10.5.3+gitxx/src/applets/clock/ClockApplet.vala
+@@ -190,7 +190,7 @@ public class ClockApplet : Budgie.Applet
+ 
+ 	void on_date_activate() {
+ 		this.popover.hide();
+-		var app_info = new DesktopAppInfo("budgie-datetime-panel.desktop");
++		var app_info = new DesktopAppInfo("gnome-datetime-panel.desktop");
+ 
+ 		if (app_info == null) {
+ 			return;
+@@ -198,7 +198,7 @@ public class ClockApplet : Budgie.Applet
+ 		try {
+ 			app_info.launch(null, null);
+ 		} catch (Error e) {
+-			message("Unable to launch budgie-datetime-panel.desktop: %s", e.message);
++			message("Unable to launch gnome-datetime-panel.desktop: %s", e.message);
+ 		}
+ 	}
+ 
+--- budgie-desktop-10.5.3+gitxx.orig/src/applets/icon-tasklist/IconButton.vala
++++ budgie-desktop-10.5.3+gitxx/src/applets/icon-tasklist/IconButton.vala
+@@ -348,6 +348,10 @@ public class IconButton : Gtk.ToggleButt
+ 			return;
+ 		}
+ 
++		if (this.class_group != null) {
++			warning("Button have both a group and a window defined");
++		}
++
+ 		if (this.abomination.is_disallowed_window_type(window)) {
+ 			return;
+ 		}
+--- budgie-desktop-10.5.3+gitxx.orig/src/applets/icon-tasklist/IconTasklistApplet.vala
++++ budgie-desktop-10.5.3+gitxx/src/applets/icon-tasklist/IconTasklistApplet.vala
+@@ -351,6 +351,8 @@ public class IconTasklistApplet : Budgie
+ 			if (this.buttons.contains(launcher) && this.buttons.get(launcher).pinned) {
+ 				first_app_id = launcher;
+ 			}
++		} else {
++			warning("No app info");
+ 		}
+ 
+ 		// Trigger an animation when a new instance of a window is launched while another is already open
+--- budgie-desktop-10.5.3+gitxx.orig/src/applets/night-light/IndicatorWindow.vala
++++ budgie-desktop-10.5.3+gitxx/src/applets/night-light/IndicatorWindow.vala
+@@ -54,7 +54,7 @@ namespace NightLight {
+ 
+ 		[GtkCallback]
+ 		private void open_settings() {
+-			DesktopAppInfo app_info = new DesktopAppInfo("budgie-display-panel.desktop");
++			DesktopAppInfo app_info = new DesktopAppInfo("gnome-display-panel.desktop");
+ 
+ 			if (app_info == null) {
+ 				return;
+@@ -64,7 +64,7 @@ namespace NightLight {
+ 				this.hide();
+ 				app_info.launch(null, null);
+ 			} catch (Error e) {
+-				message("Unable to launch budgie-display-panel.desktop: %s", e.message);
++				message("Unable to launch gnome-display-panel.desktop: %s", e.message);
+ 			}
+ 		}
+ 	}
+--- budgie-desktop-10.5.3+gitxx.orig/src/applets/status/BluetoothIndicator.vala
++++ budgie-desktop-10.5.3+gitxx/src/applets/status/BluetoothIndicator.vala
+@@ -196,14 +196,14 @@ public class BluetoothIndicator : Gtk.Bi
+ 	void on_settings_activate() {
+ 		this.popover.hide();
+ 
+-		var app_info = new DesktopAppInfo("budgie-bluetooth-panel.desktop");
++		var app_info = new DesktopAppInfo("gnome-bluetooth-panel.desktop");
+ 		if (app_info == null) {
+ 			return;
+ 		}
+ 		try {
+ 			app_info.launch(null, null);
+ 		} catch (Error e) {
+-			message("Unable to launch budgie-bluetooth-panel.desktop: %s", e.message);
++			message("Unable to launch gnome-bluetooth-panel.desktop: %s", e.message);
+ 		}
+ 	}
+ 
+--- budgie-desktop-10.5.3+gitxx.orig/src/applets/status/PowerIndicator.vala
++++ budgie-desktop-10.5.3+gitxx/src/applets/status/PowerIndicator.vala
+@@ -233,7 +233,7 @@ public class PowerIndicator : Gtk.Bin {
+ 	void open_power_settings() {
+ 		popover.hide();
+ 
+-		var app_info = new DesktopAppInfo("budgie-power-panel.desktop");
++		var app_info = new DesktopAppInfo("gnome-power-panel.desktop");
+ 
+ 		if (app_info == null) {
+ 			return;
+--- budgie-desktop-10.5.3+gitxx.orig/src/applets/status/SoundIndicator.vala
++++ budgie-desktop-10.5.3+gitxx/src/applets/status/SoundIndicator.vala
+@@ -339,7 +339,7 @@ public class SoundIndicator : Gtk.Bin {
+ 	void open_sound_settings() {
+ 		popover.hide();
+ 
+-		var app_info = new DesktopAppInfo("budgie-sound-panel.desktop");
++		var app_info = new DesktopAppInfo("gnome-sound-panel.desktop");
+ 
+ 		if (app_info == null) {
+ 			return;
+@@ -348,7 +348,7 @@ public class SoundIndicator : Gtk.Bin {
+ 		try {
+ 			app_info.launch(null, null);
+ 		} catch (Error e) {
+-			message("Unable to launch budgie-sound-panel.desktop: %s", e.message);
++			message("Unable to launch gnome-sound-panel.desktop: %s", e.message);
+ 		}
+ 	}
+ }
+--- budgie-desktop-10.5.3+gitxx.orig/src/daemon/menus.vala
++++ budgie-desktop-10.5.3+gitxx/src/daemon/menus.vala
+@@ -82,7 +82,7 @@ namespace Budgie {
+ 		* Launch main settings (gnome control center)
+ 		*/
+ 		private void settings_activate() {
+-			launch_desktop_name("budgie-control-center.desktop");
++			launch_desktop_name("gnome-control-center.desktop");
+ 		}
+ 
+ 		/**
+--- budgie-desktop-10.5.3+gitxx.orig/src/panel/com.solus-project.budgie-panel.gschema.xml
++++ budgie-desktop-10.5.3+gitxx/src/panel/com.solus-project.budgie-panel.gschema.xml
+@@ -112,7 +112,7 @@
+     </key>
+ 
+     <key type="as" name="spam-apps">
+-      <default>['Spotify', 'Lollypop', 'audacious', 'budgie-desktop-nm-applet.desktop', 'lollypop.desktop', 'budgie-power-panel', 'budgie-printer-panel', 'gnome-power-panel', 'gnome-printer-panel', 'nm-applet']</default>
++      <default>['Spotify', 'Lollypop', 'audacious', 'budgie-desktop-nm-applet.desktop', 'lollypop.desktop', 'gnome-power-panel', 'gnome-printer-panel', 'nm-applet']</default>
+       <summary>Spam Apps</summary>
+       <description>Notifications send by these apps will not be displayed in Raven.</description>
+     </key>
+--- budgie-desktop-10.5.3+gitxx.orig/src/wm/background.vala
++++ budgie-desktop-10.5.3+gitxx/src/wm/background.vala
+@@ -16,7 +16,7 @@ namespace Budgie {
+ 	public const string SECONDARY_COLOR_KEY = "secondary-color";
+ 	public const string COLOR_SHADING_TYPE_KEY = "color-shading-type";
+ 	public const string BACKGROUND_STYLE_KEY = "picture-options";
+-	public const string GNOME_COLOR_HACK = "budgie-control-center/pixmaps/noise-texture-light.png";
++	public const string GNOME_COLOR_HACK = "gnome-control-center/pixmaps/noise-texture-light.png";
+ 	public const string ACCOUNTS_SCHEMA = "org.freedesktop.Accounts";
+ 
+ 	public class BudgieBackground : Clutter.Actor {

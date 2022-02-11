@@ -10,7 +10,7 @@ Last-Update: 2020-12-02
 +++ b/src/panel/settings/settings_desktop.vala
 @@ -156,7 +156,7 @@
  				case DesktopType.BUDGIE:
- 					return "us.getsol.budgie-desktop-view";
+ 					return "org.buddiesofbudgie.budgie-desktop-view";
  				case DesktopType.DESKTOPFOLDER:
 -					return "com.github.spheras.desktopfolder";
 +					return "desktopfolder";

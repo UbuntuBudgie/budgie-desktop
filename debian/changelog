@@ -1,5 +1,6 @@
-budgie-desktop (10.5.3-6) UNRELEASED; urgency=medium
+budgie-desktop (10.5.3+gitxx-1) UNRELEASED; urgency=medium
 
+  [ Debian Janitor ]
   * Use canonical URL in Vcs-Git.
   * Remove obsolete fields Contact, Name from debian/upstream/metadata (already
     present in machine-readable debian/copyright).
@@ -10,7 +11,34 @@ budgie-desktop (10.5.3-6) UNRELEASED; urgency=medium
     + budgie-desktop: Drop versioned constraint on gir1.2-budgie-1.0 in
       Recommends.
 
- -- Debian Janitor <janitor@jelmer.uk>  Wed, 02 Feb 2022 11:16:43 -0000
+  [ David Mohammed ]
+  * git master release
+    - Reverse gnome-control-center to budgie-control-center
+      changes.  This patch can be removed once B-C-C is
+      added to the archive.
+      revert_replace_gnome_control_center.patch
+    - Reverse source overdrive changes.  This patch can be
+      removed once B-C-C is added to the archive
+      reverse_sound_overdrive.patch
+    - Drop the following patches since now in this git release
+      meson-Drop-spurious-3rd-positional-argument-to-gnome.patch
+      Add-Mutter-9-support-2165.patch
+      0001-Switch-back-to-using-gnome-screensaver.patch
+    - Refresh desktopfolder_exename.patch
+  * Packaging Changes
+    - d/copyright - remove superfluous translation copyright statement
+      update copyright years to 2022
+      update contact details for the new maintainers of budgie
+    - Remove debian/*.1 man files since upstream build now installs these
+    - d/rules build with gnome-screensaver; we previously patched this
+      but now the git release incorporates the requisite changes
+      d/control add gnome-screensaver to build-depends
+    - Update symbols for revisions in the source.  These do not
+      affect the public ABI/API
+    - d/upstream/metadata update for the new maintainers of the
+      budgie-desktop
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 09 Feb 2022 20:46:18 +0000
 
 budgie-desktop (10.5.3-5) unstable; urgency=medium
 

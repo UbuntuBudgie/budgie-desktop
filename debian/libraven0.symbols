@@ -1,19 +1,17 @@
 libraven.so.0 libraven0 #MINVER#
 * Build-Depends-Package: budgie-core-dev
- BUDGIE_CONFDIR@Base 10.3
- BUDGIE_DATADIR@Base 10.3
- BUDGIE_ESCAPE_STRINGS@Base 10.4
- BUDGIE_GETTEXT_PACKAGE@Base 10.3
- BUDGIE_LOCALEDIR@Base 10.3
- BUDGIE_MODULE_DATA_DIRECTORY@Base 10.3
- BUDGIE_MODULE_DIRECTORY@Base 10.3
- BUDGIE_VERSION@Base 10.3
- BUDGIE_WEBSITE@Base 10.3
  budgie_app_sound_control_construct@Base 10.4
  budgie_app_sound_control_get_type@Base 10.4
  budgie_app_sound_control_new@Base 10.4
  budgie_app_sound_control_refresh@Base 10.4
  budgie_app_sound_control_refresh_volume@Base 10.5.1
+ budgie_dispatcher_get_do_not_disturb@Base 10.5.3+gitxx
+ budgie_dispatcher_get_notifications_paused@Base 10.5.3+gitxx
+ budgie_dispatcher_get_type@Base 10.5.3+gitxx
+ budgie_dispatcher_proxy_get_type@Base 10.5.3+gitxx
+ budgie_dispatcher_register_object@Base 10.5.3+gitxx
+ budgie_dispatcher_set_notifications_paused@Base 10.5.3+gitxx
+ budgie_dispatcher_toggle_do_not_disturb@Base 10.5.3+gitxx
  budgie_header_expander_construct@Base 10.3
  budgie_header_expander_get_expanded@Base 10.3
  budgie_header_expander_get_type@Base 10.3
@@ -36,7 +34,6 @@ libraven.so.0 libraven0 #MINVER#
  budgie_main_view_get_type@Base 10.3
  budgie_main_view_new@Base 10.3
  budgie_main_view_set_clean@Base 10.3
- budgie_notification_close_reason_get_type@Base 10.3
  budgie_notification_group_add_notification@Base 10.4
  budgie_notification_group_construct@Base 10.4
  budgie_notification_group_dismiss_all@Base 10.4
@@ -47,26 +44,9 @@ libraven.so.0 libraven0 #MINVER#
  budgie_notification_placeholder_construct@Base 10.3
  budgie_notification_placeholder_get_type@Base 10.3
  budgie_notification_placeholder_new@Base 10.3
- budgie_notification_position_get_type@Base 10.5~git20190202
- budgie_notification_window_begin_decay@Base 10.3
- budgie_notification_window_construct@Base 10.3
- budgie_notification_window_get_owner@Base 10.3
- budgie_notification_window_get_type@Base 10.3
- budgie_notification_window_new@Base 10.3
- budgie_notification_window_set_actions@Base 10.3
- budgie_notification_window_set_from_notify@Base 10.3
- budgie_notification_window_set_from_notify_finish@Base 10.3
- budgie_notification_window_set_owner@Base 10.3
- budgie_notification_window_stop_decay@Base 10.3
- budgie_notifications_view_CloseNotification@Base 10.3
- budgie_notifications_view_GetServerInformation@Base 10.3
- budgie_notifications_view_Notify@Base 10.3
  budgie_notifications_view_construct@Base 10.3
- budgie_notifications_view_get_capabilities@Base 10.3
- budgie_notifications_view_get_capabilities_finish@Base 10.3
  budgie_notifications_view_get_type@Base 10.3
  budgie_notifications_view_new@Base 10.3
- budgie_notifications_view_register_object@Base 10.3
  budgie_param_spec_raven_iface@Base 10.3
  budgie_power_strip_construct@Base 10.3
  budgie_power_strip_get_type@Base 10.3
@@ -90,11 +70,9 @@ libraven.so.0 libraven0 #MINVER#
  budgie_raven_get_type@Base 10.3
  budgie_raven_iface_ClearNotifications@Base 10.4
  budgie_raven_iface_Dismiss@Base 10.3
- budgie_raven_iface_GetDoNotDisturbState@Base 10.4
  budgie_raven_iface_GetExpanded@Base 10.3
  budgie_raven_iface_GetLeftAnchored@Base 10.4
  budgie_raven_iface_GetNotificationCount@Base 10.3
- budgie_raven_iface_SetDoNotDisturb@Base 10.4
  budgie_raven_iface_SetExpanded@Base 10.3
  budgie_raven_iface_Toggle@Base 10.3
  budgie_raven_iface_ToggleAppletView@Base 10.3
@@ -107,15 +85,10 @@ libraven.so.0 libraven0 #MINVER#
  budgie_raven_iface_ref@Base 10.3
  budgie_raven_iface_register_object@Base 10.3
  budgie_raven_iface_set_is_expanded@Base 10.3
- budgie_raven_iface_SetPauseNotifications@Base 10.5.3
  budgie_raven_iface_unref@Base 10.3
  budgie_raven_new@Base 10.3
  budgie_raven_position_get_display_name@Base 10.5.2
  budgie_raven_position_get_type@Base 10.5.2
- budgie_raven_remote_get_type@Base 10.4
- budgie_raven_remote_proxy_get_type@Base 10.4
- budgie_raven_remote_register_object@Base 10.4
- budgie_raven_set_dnd_state@Base 10.4
  budgie_raven_set_expanded@Base 10.3
  budgie_raven_set_manager@Base 10.3
  budgie_raven_set_notification_count@Base 10.3
@@ -124,7 +97,6 @@ libraven.so.0 libraven0 #MINVER#
  budgie_raven_set_screen_edge@Base 10.4
  budgie_raven_setup_dbus@Base 10.3
  budgie_raven_update_geometry@Base 10.3
- budgie_safe_markup_string@Base 10.3
  budgie_screen_saver_get_type@Base 10.3
  budgie_screen_saver_lock@Base 10.3
  budgie_screen_saver_proxy_get_type@Base 10.3
@@ -199,10 +171,11 @@ libraven.so.0 libraven0 #MINVER#
  mpris_widget_setup_dbus_finish@Base 10.3
  new_iface@Base 10.3
  new_iface_finish@Base 10.3
- notification_clone_Dismiss@Base 10.4
- notification_clone_construct@Base 10.4
- notification_clone_get_type@Base 10.4
- notification_clone_new@Base 10.4
+ notification_widget_Dismiss@Base 10.5.3+gitxx
+ notification_widget_construct@Base 10.5.3+gitxx
+ notification_widget_get_notification@Base 10.5.3+gitxx
+ notification_widget_get_type@Base 10.5.3+gitxx
+ notification_widget_new@Base 10.5.3+gitxx
  player_iface_get_can_control@Base 10.3
  player_iface_get_can_go_next@Base 10.3
  player_iface_get_can_go_previous@Base 10.3

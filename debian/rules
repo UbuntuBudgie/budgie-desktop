@@ -29,7 +29,7 @@ ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo ubuntu),ubuntu)
 	patch -p1 < debian/ubuntu/show_nm-applet_in_tray.patch
 	touch ./debian/ubuntu/applied
 endif
-	dh_auto_configure -- --prefix=/usr --libdir=/usr/lib
+	dh_auto_configure -- --prefix=/usr --libdir=/usr/lib -Dwith-gnome-screensaver=true
 
 override_dh_gencontrol:
 	dh_gencontrol -- $(SUBSTVARSREC) $(SUBSTVARSSUG)
