@@ -1,4 +1,4 @@
-budgie-desktop (10.5.3+gitxx-1) UNRELEASED; urgency=medium
+budgie-desktop (10.5.3+git20220217-1) unstable; urgency=medium
 
   [ Debian Janitor ]
   * Use canonical URL in Vcs-Git.
@@ -13,13 +13,7 @@ budgie-desktop (10.5.3+gitxx-1) UNRELEASED; urgency=medium
 
   [ David Mohammed ]
   * git master release
-    - Reverse gnome-control-center to budgie-control-center
-      changes.  This patch can be removed once B-C-C is
-      added to the archive.
-      revert_replace_gnome_control_center.patch
-    - Reverse source overdrive changes.  This patch can be
-      removed once B-C-C is added to the archive
-      reverse_sound_overdrive.patch
+    - commit 96ea41416016b82ebb847ef44ad97f42e4a3a76f
     - Drop the following patches since now in this git release
       meson-Drop-spurious-3rd-positional-argument-to-gnome.patch
       Add-Mutter-9-support-2165.patch
@@ -40,7 +34,7 @@ budgie-desktop (10.5.3+gitxx-1) UNRELEASED; urgency=medium
     - d/watch update for the new maintainers repo
     - d/control update for the new maintainers repo
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 09 Feb 2022 20:46:18 +0000
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 17 Feb 2022 18:41:32 +0000
 
 budgie-desktop (10.5.3-5) unstable; urgency=medium
 

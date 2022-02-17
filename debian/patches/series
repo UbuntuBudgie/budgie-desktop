@@ -1,5 +1,3 @@
 desktopfolder_exename.patch
 show-tray-icon.patch
 use-ibus-daemonize.patch
-reverse_sound_overdrive.patch
-revert_replace_gnome_control_center.patch
