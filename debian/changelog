@@ -1,4 +1,4 @@
-budgie-desktop (10.5.3+git20220217-1) unstable; urgency=medium
+budgie-desktop (10.5.3+git20220217a-1) unstable; urgency=medium
 
   [ Debian Janitor ]
   * Use canonical URL in Vcs-Git.

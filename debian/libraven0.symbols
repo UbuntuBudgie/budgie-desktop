@@ -5,13 +5,13 @@ libraven.so.0 libraven0 #MINVER#
  budgie_app_sound_control_new@Base 10.4
  budgie_app_sound_control_refresh@Base 10.4
  budgie_app_sound_control_refresh_volume@Base 10.5.1
- budgie_dispatcher_get_do_not_disturb@Base 10.5.3+git20220217
- budgie_dispatcher_get_notifications_paused@Base 10.5.3+git20220217
- budgie_dispatcher_get_type@Base 10.5.3+git20220217
- budgie_dispatcher_proxy_get_type@Base 10.5.3+git20220217
- budgie_dispatcher_register_object@Base 10.5.3+git20220217
- budgie_dispatcher_set_notifications_paused@Base 10.5.3+git20220217
- budgie_dispatcher_toggle_do_not_disturb@Base 10.5.3+git20220217
+ budgie_dispatcher_get_do_not_disturb@Base 10.5.3+git20220217a
+ budgie_dispatcher_get_notifications_paused@Base 10.5.3+git20220217a
+ budgie_dispatcher_get_type@Base 10.5.3+git20220217a
+ budgie_dispatcher_proxy_get_type@Base 10.5.3+git20220217a
+ budgie_dispatcher_register_object@Base 10.5.3+git20220217a
+ budgie_dispatcher_set_notifications_paused@Base 10.5.3+git20220217a
+ budgie_dispatcher_toggle_do_not_disturb@Base 10.5.3+git20220217a
  budgie_header_expander_construct@Base 10.3
  budgie_header_expander_get_expanded@Base 10.3
  budgie_header_expander_get_type@Base 10.3
@@ -171,11 +171,11 @@ libraven.so.0 libraven0 #MINVER#
  mpris_widget_setup_dbus_finish@Base 10.3
  new_iface@Base 10.3
  new_iface_finish@Base 10.3
- notification_widget_Dismiss@Base 10.5.3+git20220217
- notification_widget_construct@Base 10.5.3+git20220217
- notification_widget_get_notification@Base 10.5.3+git20220217
- notification_widget_get_type@Base 10.5.3+git20220217
- notification_widget_new@Base 10.5.3+git20220217
+ notification_widget_Dismiss@Base 10.5.3+git20220217a
+ notification_widget_construct@Base 10.5.3+git20220217a
+ notification_widget_get_notification@Base 10.5.3+git20220217a
+ notification_widget_get_type@Base 10.5.3+git20220217a
+ notification_widget_new@Base 10.5.3+git20220217a
  player_iface_get_can_control@Base 10.3
  player_iface_get_can_go_next@Base 10.3
  player_iface_get_can_go_previous@Base 10.3
