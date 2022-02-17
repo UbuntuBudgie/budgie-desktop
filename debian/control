@@ -92,7 +92,7 @@ Package: budgie-desktop
 Architecture: all
 Depends:
  budgie-core,
- gnome-control-center,
+ budgie-control-center,
  gnome-menus,
  network-manager-gnome,
  ${misc:Depends}
