@@ -1,3 +1,4 @@
 desktopfolder_exename.patch
 show-tray-icon.patch
 use-ibus-daemonize.patch
+Add-support-for-mutter-10-GNOME42.patch
