@@ -1,3 +1,18 @@
+budgie-desktop (10.6.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+    - upstream release announcement in install changelog
+    - Resolve SEGV when using not using ibus and ALT+L to switch
+      sources (Closes: #999609)
+    - Allow ibus suggestion window to display
+      use-ibus-daemonize.patch (Closes: #985619)
+  * Packaging Changes:
+    - drop Add-support-for-mutter-10-GNOME42.patch since included in the
+      new release
+    - remove spurious changelog.ubuntu
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 06 Mar 2022 10:36:52 +0000
+
 budgie-desktop (10.5.3+git20220217a-2) experimental; urgency=medium
 
   * Add mutter10 build support
