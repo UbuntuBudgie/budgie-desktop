@@ -1,3 +1,5 @@
 desktopfolder_exename.patch
 show-tray-icon.patch
 use-ibus-daemonize.patch
+Add-a-null-check-to-budgie_popover_manager_ungrab.patch
+Fix-inconsistency-when-opening-Raven-68.patch
