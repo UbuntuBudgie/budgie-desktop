@@ -1,12 +1,15 @@
-budgie-desktop (10.6-1ubuntu1) jammy; urgency=medium
+budgie-desktop (10.6-2) experimental; urgency=medium
 
   * Bug-fixes
     - Prevent crash when popover is removed
       Add-a-null-check-to-budgie_popover_manager_ungrab.patch
     - Open on the notifications stack when the notification applet clicked
       Fix-inconsistency-when-opening-Raven-68.patch
+  * - Ensure notifications stack when apps such as lollypop fire
+      notifications in quick succession
+      improve-notification-racyness.patch
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 08 Mar 2022 21:00:52 +0000
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 16 Mar 2022 18:49:26 +0000
 
 budgie-desktop (10.6-1) experimental; urgency=medium
 
