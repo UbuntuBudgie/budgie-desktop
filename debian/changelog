@@ -1,3 +1,18 @@
+budgie-desktop (10.6-3) UNRELEASED; urgency=medium
+
+  * Bug-fixes
+    - Fix drag-drop regression in icon-tasklist
+      Fix-regression-in-IconTasklist.patch
+    - Fix regression where Super+C no longer clears notifications
+      Re-connect-to-the-Raven-signal-to-clear-all-notifica.patch
+    - Fix regression where new application icons that don't
+      appear in the icon-tasklist
+      Ensure-new-applications-icons-are-displayed-in-taskl.patch
+    - Don't spam the journal log when clearing notifications
+      Don-t-modify-notification-group-HashTables-while-ite.patch
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 20 Mar 2022 16:32:36 +0000
+
 budgie-desktop (10.6-2) experimental; urgency=medium
 
   * Bug-fixes

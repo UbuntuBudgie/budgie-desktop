@@ -1,0 +1,27 @@
+Applied-Upstream: commit: 62fb5419daa667a5b72d1b24064576ca842b4b98
+Author: Julien Guillot <julienguillot@protonmail.com>
+Last-Update: 2022-03-17
+Description: [PATCH] Ensure new applications icons are displayed in tasklist when
+ using restrict-to-workspace
+
+Fixes #73
+---
+ src/applets/icon-tasklist/IconTasklistApplet.vala | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/applets/icon-tasklist/IconTasklistApplet.vala b/src/applets/icon-tasklist/IconTasklistApplet.vala
+index d00cc776..20c033b7 100644
+--- a/src/applets/icon-tasklist/IconTasklistApplet.vala
++++ b/src/applets/icon-tasklist/IconTasklistApplet.vala
+@@ -392,7 +392,7 @@ public class IconTasklistApplet : Budgie.Applet {
+ 			button.set_wnck_window(app.get_window());
+ 		}
+ 
+-		button.update();
++		this.update_button(button);
+ 	}
+ 
+ 	private void on_app_closed(Budgie.Abomination.RunningApp app) {
+-- 
+2.34.1
+

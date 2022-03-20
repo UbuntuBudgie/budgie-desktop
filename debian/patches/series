@@ -4,3 +4,7 @@ use-ibus-daemonize.patch
 Add-a-null-check-to-budgie_popover_manager_ungrab.patch
 Fix-inconsistency-when-opening-Raven-68.patch
 improve-notification-racyness.patch
+Re-connect-to-the-Raven-signal-to-clear-all-notifica.patch
+Ensure-new-applications-icons-are-displayed-in-taskl.patch
+Don-t-modify-notification-group-HashTables-while-ite.patch
+Fix-regression-in-IconTasklist.patch

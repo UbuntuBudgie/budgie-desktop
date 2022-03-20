@@ -1,0 +1,37 @@
+Applied-Upstream: commit: fc882065f8fa68f4f9cdf237159eac75da8bd1b6
+Author: Evan Maddock <5157277+EbonJaeger@users.noreply.github.com>
+Last-Update: 2022-03-19
+Description: [PATCH] Don't modify notification group HashTables while iterating
+ over them (#77)
+
+This prevents a critical message when dismissing notification groups. When iterating over a HashTable using the `foreach` method, the table should not be modified. Instead, use `foreach_steal` to iterate and remove from the notifications table.
+
+Signed-off-by: Evan Maddock <maddock.evan@vivaldi.net>
+---
+ src/raven/notifications_group.vala | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/src/raven/notifications_group.vala b/src/raven/notifications_group.vala
+index b0d56256..d1ecdeef 100644
+--- a/src/raven/notifications_group.vala
++++ b/src/raven/notifications_group.vala
+@@ -109,11 +109,13 @@ namespace Budgie {
+ 		 * dismiss_all is responsible for dismissing all notifications
+ 		 */
+ 		public void dismiss_all() {
+-			notifications.foreach((id, notification) => { // For reach notification
+-				remove_notification(id); // Remove this notification
++			notifications.foreach_steal((id, notification) => {
++				list.remove(notification.get_parent());
++				notification.destroy();
++				dismissed_notification(id);
++				return true;
+ 			});
+ 
+-			notifications.steal_all();
+ 			update_count();
+ 			dismissed_group(app_name);
+ 		}
+-- 
+2.34.1
+

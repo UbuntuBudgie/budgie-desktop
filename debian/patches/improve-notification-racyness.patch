@@ -1,8 +1,8 @@
 Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/70
 Author: Evan Maddock <maddock.evan@vivaldi.net>
 Last-Update: 2022-03-15
-Description: [PATCH] Improve	racyness when a	notification is	closed and
- another one shown in	quick succession
+Description: [PATCH] Improve racyness when a notification is closed and
+ another one shown in quick succession
 
 Signed-off-by: Evan Maddock <maddock.evan@vivaldi.net>
 ---
