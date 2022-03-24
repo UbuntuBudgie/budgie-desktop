@@ -1,4 +1,4 @@
-budgie-desktop (10.6-3) UNRELEASED; urgency=medium
+budgie-desktop (10.6-3) experimental; urgency=medium
 
   * Bug-fixes
     - Fix drag-drop regression in icon-tasklist
@@ -10,8 +10,13 @@ budgie-desktop (10.6-3) UNRELEASED; urgency=medium
       Ensure-new-applications-icons-are-displayed-in-taskl.patch
     - Don't spam the journal log when clearing notifications
       Don-t-modify-notification-group-HashTables-while-ite.patch
+    - Fix regression where apps such as discord that has splash screens
+      are not removed from icon-tasklist
+      Remove-check-for-window-hints-when-removing-button-i.patch
+  * Packaging Changes
+    - update libraven symbols for new methods from raven signal patch
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 20 Mar 2022 16:32:36 +0000
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 24 Mar 2022 22:38:57 +0000
 
 budgie-desktop (10.6-2) experimental; urgency=medium
 

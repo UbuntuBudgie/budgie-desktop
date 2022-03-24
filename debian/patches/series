@@ -8,3 +8,4 @@ Re-connect-to-the-Raven-signal-to-clear-all-notifica.patch
 Ensure-new-applications-icons-are-displayed-in-taskl.patch
 Don-t-modify-notification-group-HashTables-while-ite.patch
 Fix-regression-in-IconTasklist.patch
+Remove-check-for-window-hints-when-removing-button-i.patch
