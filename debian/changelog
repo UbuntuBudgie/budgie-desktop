@@ -1,3 +1,10 @@
+budgie-desktop (10.6-4) unstable; urgency=medium
+
+  * Upload to unstable
+    - part of the GNOME 42/mutter transition
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 28 Mar 2022 19:22:00 +0100
+
 budgie-desktop (10.6-3) experimental; urgency=medium
 
   * Bug-fixes
