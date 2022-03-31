@@ -5,7 +5,9 @@ budgie-desktop (10.6.1-1) UNRELEASED; urgency=medium
       desktopfolder_exename.patch,
       show-tray-icon.patch,
       use-ibus-daemonize.patch
-      (LP: #)
+      (LP: #1967282)
+  * Packaging Changes
+    - d/changelog-announcement incorporates upstream release notice
 
  -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 31 Mar 2022 12:33:01 +0100
 
