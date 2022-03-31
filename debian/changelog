@@ -1,3 +1,14 @@
+budgie-desktop (10.6.1-1) UNRELEASED; urgency=medium
+
+  * New upstream bug-fix release
+    - Drop all patches since the microrelease contains these except
+      desktopfolder_exename.patch,
+      show-tray-icon.patch,
+      use-ibus-daemonize.patch
+      (LP: #)
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 31 Mar 2022 12:33:01 +0100
+
 budgie-desktop (10.6-4) unstable; urgency=medium
 
   * Upload to unstable
