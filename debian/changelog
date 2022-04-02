@@ -1,4 +1,4 @@
-budgie-desktop (10.6.1-1) UNRELEASED; urgency=medium
+budgie-desktop (10.6.1-1) unstable; urgency=medium
 
   * New upstream bug-fix release
     - Drop all patches since the microrelease contains these except

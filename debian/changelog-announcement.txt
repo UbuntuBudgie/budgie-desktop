@@ -1,3 +1,36 @@
+v10.6.1 Official announcement can be found here:
+https://blog.buddiesofbudgie.org/budgie-10-6-1-released/
+
+# Budgie 10.6.1
+
+Budgie 10.6.1 is the first minor release that introduces fixes for bugs in the 10.6 series of our Budgie Desktop environment.
+Bug Fixes
+
+    Icon Tasklist
+        Fixed new applications not displaying in the tasklist when using restrict-to-workspace. #73
+        Fixed a regression in no longer being able to move non-favorited / non-pinned applications. #79
+        Fixed a regression where some IconButtons would remain in the IconTasklist. #78
+        Introduced a supplmental buttons check that will also attempt to filter out any .desktop from an application ID for buttons, if we cannot find the button with an app id.
+        Removed delay when opening apps. This was introduced in Abomination in an attempt to fix Chrome profile manager closing sequence but endend up breaking some other apps (such as Steam) closing sequence. Instead, try to reparent first app of group when an app associated with a pinned icon is closed so that the pinned button is reused. #85
+    Notification Server
+        Improved racyness when a notification is closed and another one shown in quick succession, causing incorrect notification positioning. This was noticeable when using applications that did not fully adhere to the Desktop Notifications Spec and the Replaces ID component of a Notification (to replace an existing notification), such as in the Lollypop audio player.
+    Popover Manager
+        Added a null check to budgie_popover_manager_ungrab for added safety.
+    Raven
+        No longer modify NotificationGroup HashTables while iterating over them. This prevents a critical message when dismissing notification groups. When iterating over a HashTable using the foreach method, the table should not be modified. Instead, use foreach_steal to iterate and remove from the notifications table.
+        Fixed use of the Raven "Clear All Notifications" shortcut. #75
+        Introduced a fix where clicking the notification bell, or alternatively when clicking the Raven trigger for the first time, would sometimes fail to open the correct page. This was due to those pages not yet being visible and in that scenario, GTK would silently fail during the GtkStack page changing. #31
+
+Contributor List
+
+Budgie Desktop is developed by Buddies of Budgie and contributors from around the world. Here is a list of all the contributor that made this release possible:
+
+    Campbell Jones
+    Evan Maddock
+    Guillot Julien
+    Joshua Strobl
+
+
 v10.6 Official announcement can be found here:
 https://github.com/BuddiesOfBudgie/budgie-desktop/releases/tag/v10.6
 
