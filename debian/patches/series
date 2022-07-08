@@ -1,3 +1,17 @@
 desktopfolder_exename.patch
 show-tray-icon.patch
 use-ibus-daemonize.patch
+fractional.patch
+darktheme/0001-Support-freedesktop-color-scheme.patch
+darktheme/0002-Hook-up-color-scheme-and-some-logic-interaction-with.patch
+darktheme/0003-Add-another-GSD42-code-guard-to-prevent-segmentation.patch
+darktheme/0004-Bump-expected-supported-mutter-versions-GNOME-43-and.patch
+darktheme/0005-Logic-for-determining-light-dark-includes-looking-wi.patch
+darktheme/0006-Remove-last-remaining-and-obsolete-GSD42-guard.patch
+screenshot/Regenerate-vapi-for-mutter-10.patch
+screenshot/Introduce-our-native-screenshot-capability.patch
+screenshot/Improve-style-across-different-themes.patch
+screenshot/Fix-button-icon-disappearing-after-set_buttoncontent.patch
+screenshot/Tidy-up-introduced-deprecations-and-make-menu-comman.patch
+Add-short-delay-to-keyboard-sources.patch
+fix-broken-C-std-for-gvc-subproject-146.patch

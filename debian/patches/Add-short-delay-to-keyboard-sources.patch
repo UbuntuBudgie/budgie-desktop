@@ -1,0 +1,46 @@
+Forwarded: no
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Last-Update: 2022-07-07
+Description: [PATCH] Add short delay to keyboard sources to allow mutter
+ initialisation
+ This is a Debian/Ubuntu specific patch since no other distros have reported
+ similar issues where keyboard sources are not fully initialised at login
+ resulting in a source not reflecting the current source e.g. defaulting
+ to US when GB is current.
+
+---
+ src/wm/keyboard.vala | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/src/wm/keyboard.vala b/src/wm/keyboard.vala
+index fc87bcca..deca9fd2 100644
+--- a/src/wm/keyboard.vala
++++ b/src/wm/keyboard.vala
+@@ -76,12 +76,18 @@ namespace Budgie {
+ 		public KeyboardManager(Budgie.BudgieWM? wm) {
+ 			Object(wm: wm);
+ 
+-			xkb = new Gnome.XkbInfo();
+-
+-			/* Only hook things up when ibus is setup, whether it failed or not */
+-			ibus_manager = new IBusManager(this);
+-			ibus_manager.ready.connect(on_ibus_ready);
+-			ibus_manager.do_init();
++			Timeout.add (2000, () => {
++				/* wait a while for mutter to initialise fully
++				   otherwise keyboard layouts will not set up correctly
++				*/
++                xkb = new Gnome.XkbInfo();
++
++				/* Only hook things up when ibus is setup, whether it failed or not */
++				ibus_manager = new IBusManager(this);
++				ibus_manager.ready.connect(on_ibus_ready);
++				ibus_manager.do_init();
++				return false;
++            });
+ 		}
+ 
+ 		private void on_ibus_ready() {
+-- 
+2.36.1
+

@@ -1,0 +1,190 @@
+Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/128
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Last-Update: 2022-05-23
+Subject: [PATCH 2/6] Hook up color-scheme and some logic interaction with
+ themes
+
+---
+ src/panel/settings/settings_style.vala | 36 +++++++++++++++++++++----
+ src/theme/theme-manager.c              | 37 +++++++++++++++++---------
+ 2 files changed, 56 insertions(+), 17 deletions(-)
+
+diff --git a/src/panel/settings/settings_style.vala b/src/panel/settings/settings_style.vala
+index 993abc0c..955b7e28 100644
+--- a/src/panel/settings/settings_style.vala
++++ b/src/panel/settings/settings_style.vala
+@@ -16,10 +16,10 @@ namespace Budgie {
+ 	*/
+ 	public class StylePage : Budgie.SettingsPage {
+ 		private Gtk.ComboBox? combobox_gtk;
++		private Gtk.ComboBox? combobox_preferred_style;
+ 		private Gtk.ComboBox? combobox_icon;
+ 		private Gtk.ComboBox? combobox_cursor;
+ 		private Gtk.ComboBox? combobox_notification_position;
+-		private Gtk.Switch? switch_dark;
+ 		private Gtk.Switch? switch_builtin;
+ 		private Gtk.Switch? switch_animations;
+ 		private Settings ui_settings;
+@@ -47,6 +47,11 @@ namespace Budgie {
+ 				_("Widgets"),
+ 				_("Set the appearance of window decorations and controls")));
+ 
++			combobox_preferred_style = new Gtk.ComboBox();
++			grid.add_row(new SettingsRow(combobox_preferred_style,
++				_("Styling"),
++				_("Set the preferred application style")));
++
+ 			combobox_icon = new Gtk.ComboBox();
+ 			grid.add_row(new SettingsRow(combobox_icon,
+ 				_("Icons"),
+@@ -64,13 +69,11 @@ namespace Budgie {
+ 
+ 			/* Stick the combos in a size group */
+ 			group.add_widget(combobox_gtk);
++			group.add_widget(combobox_preferred_style);
+ 			group.add_widget(combobox_icon);
+ 			group.add_widget(combobox_cursor);
+ 			group.add_widget(combobox_notification_position);
+ 
+-			switch_dark = new Gtk.Switch();
+-			grid.add_row(new SettingsRow(switch_dark, _("Dark theme")));
+-
+ 			bool show_builtin = budgie_settings.get_boolean("show-builtin-theme-option");
+ 
+ 			if (show_builtin) {
+@@ -87,6 +90,27 @@ namespace Budgie {
+ 				_("Animations"),
+ 				_("Control whether windows and controls use animations")));
+ 
++			/* Add options for the preferred styling options */
++			var pref_model = new Gtk.ListStore(2, typeof(string), typeof(string));
++			string[] pref_style_display = {
++				_("Prefer Dark"),
++				_("Application Preference"),
++				_("Prefer Light")
++			};
++			const string[] pref_style_values = {
++				"prefer-dark",
++				"default",
++				"prefer-light",
++			};
++			Gtk.TreeIter pref_iter;
++			for (int i = 0; i < pref_style_values.length; i++) {
++				pref_model.append(out pref_iter);
++				pref_model.set(pref_iter, 0, pref_style_values[i], 1, pref_style_display[i], -1);
++			}
++
++			combobox_preferred_style.set_model(pref_model);
++			combobox_preferred_style.set_id_column(0);
++
+ 			/* Add options for notification position */
+ 			var model = new Gtk.ListStore(3, typeof(string), typeof(string), typeof(Budgie.NotificationPosition));
+ 
+@@ -110,6 +134,8 @@ namespace Budgie {
+ 			var render = new Gtk.CellRendererText();
+ 			combobox_gtk.pack_start(render, true);
+ 			combobox_gtk.add_attribute(render, "text", 0);
++			combobox_preferred_style.pack_start(render, true);
++			combobox_preferred_style.add_attribute(render, "text", 1);
+ 			combobox_icon.pack_start(render, true);
+ 			combobox_icon.add_attribute(render, "text", 0);
+ 			combobox_cursor.pack_start(render, true);
+@@ -118,7 +144,7 @@ namespace Budgie {
+ 			combobox_notification_position.add_attribute(render, "text", 1);
+ 
+ 			/* Hook up settings */
+-			budgie_settings.bind("dark-theme", switch_dark, "active", SettingsBindFlags.DEFAULT);
++			ui_settings.bind("color-scheme", combobox_preferred_style, "active-id", SettingsBindFlags.DEFAULT);
+ 
+ 			if (show_builtin) {
+ 				budgie_settings.bind("builtin-theme", switch_builtin, "active", SettingsBindFlags.DEFAULT);
+diff --git a/src/theme/theme-manager.c b/src/theme/theme-manager.c
+index d3bbca02..6add586b 100644
+--- a/src/theme/theme-manager.c
++++ b/src/theme/theme-manager.c
+@@ -32,7 +32,7 @@ static void budgie_theme_manager_set_theme_css(BudgieThemeManager* self, const g
+ static void budgie_theme_manager_theme_changed(BudgieThemeManager* self, GParamSpec* prop, GtkSettings* settings);
+ static void budgie_theme_manager_builtin_changed(BudgieThemeManager* self, const gchar* key, GSettings* settings);
+ #ifdef GSD42
+-static void budgie_theme_manager_dark_theme_changed(BudgieThemeManager* self, GParamSpec* prop, GSettings* settings);
++static void budgie_theme_manager_preferred_style_changed(BudgieThemeManager* self, GParamSpec* prop, GSettings* settings);
+ #endif
+ 
+ G_DEFINE_TYPE(BudgieThemeManager, budgie_theme_manager, G_TYPE_OBJECT)
+@@ -86,15 +86,15 @@ static void budgie_theme_manager_init(BudgieThemeManager* self) {
+ 
+ 	settings = gtk_settings_get_default();
+ 	g_signal_connect_swapped(settings, "notify::gtk-theme-name", G_CALLBACK(budgie_theme_manager_theme_changed), self);
++	budgie_theme_manager_theme_changed(self, NULL, settings);
+ 
+ 	/* Bind the dark-theme option for the whole process */
+ 	g_settings_bind(self->desktop_settings, "dark-theme", settings, "gtk-application-prefer-dark-theme", G_SETTINGS_BIND_GET);
+ #ifdef GSD42
+-	g_signal_connect_swapped(self->desktop_settings, "changed::dark-theme", G_CALLBACK(budgie_theme_manager_dark_theme_changed), self);
++	g_signal_connect_swapped(self->ui_settings, "changed::color-scheme", G_CALLBACK(budgie_theme_manager_preferred_style_changed), self);
+ 
+-	budgie_theme_manager_dark_theme_changed(self, NULL, self->desktop_settings);
++	budgie_theme_manager_preferred_style_changed(self, NULL, self->ui_settings);
+ #endif
+-	budgie_theme_manager_theme_changed(self, NULL, settings);
+ }
+ 
+ /**
+@@ -157,17 +157,31 @@ static void budgie_theme_manager_theme_changed(BudgieThemeManager* self, __attri
+ 	gchar* theme_name = NULL;
+ 	const gchar* theme_css = NULL;
+ 
++	g_object_get(settings, "gtk-theme-name", &theme_name, NULL);
++
+ 	/* Set theme_css NULL if internal theming is disabled */
+ 	if (self->builtin_enabled) {
+-		g_object_get(settings, "gtk-theme-name", &theme_name, NULL);
+ 		if (theme_name && g_str_equal(theme_name, "HighContrast")) {
+ 			theme_css = "theme_hc";
+ 		} else {
+ 			theme_css = "theme";
+ 		}
+-		g_free(theme_name);
+ 	}
+ 
++	if (prop != NULL) { /* changed theme only invoked from the combobox signal */
++		if (g_str_has_suffix(theme_name, "-dark")) {
++			g_settings_set_string(self->ui_settings, "color-scheme", "prefer-dark");
++		}
++		else if (g_str_has_suffix(theme_name, "-light")) {
++			g_settings_set_string(self->ui_settings, "color-scheme", "prefer-light");
++		}
++		else {
++			g_settings_reset(self->ui_settings, "color-scheme");
++		}
++	}
++
++	g_free(theme_name);
++
+ 	budgie_theme_manager_set_theme_css(self, theme_css);
+ }
+ 
+@@ -178,15 +192,14 @@ static void budgie_theme_manager_builtin_changed(BudgieThemeManager* self, const
+ }
+ 
+ #ifdef GSD42
+-static void budgie_theme_manager_dark_theme_changed(BudgieThemeManager* self, __attribute__((unused)) GParamSpec* prop, GSettings* settings) {
+-	gboolean dark_theme = g_settings_get_boolean(settings, "dark-theme");
++static void budgie_theme_manager_preferred_style_changed(BudgieThemeManager* self, __attribute__((unused)) GParamSpec* prop, GSettings* settings) {
++	gchar* preferred_style = g_settings_get_string(settings, "color-scheme");
+ 
+-	if (dark_theme) {
+-		g_settings_set_string(self->ui_settings, "color-scheme", "prefer-dark");
++	if (g_str_equal(preferred_style, "prefer-dark")) {
++		g_settings_set_boolean(self->desktop_settings, "dark-theme", TRUE);
+ 	}
+ 	else {
+-		g_settings_reset(self->ui_settings, "color-scheme");
++		g_settings_reset(self->desktop_settings, "dark-theme");
+ 	}
+-
+ }
+ #endif
+-- 
+2.34.1
+

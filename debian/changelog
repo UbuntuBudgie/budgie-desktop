@@ -1,3 +1,34 @@
+budgie-desktop (10.6.1-2) unstable; urgency=medium
+
+  * Add native screenshot capability
+    screenshot/Regenerate-vapi-for-mutter-10.patch
+    screenshot/Introduce-our-native-screenshot-capability.patch
+    screenshot/Improve-style-across-different-themes.patch
+    screenshot/Fix-button-icon-disappearing-after-set_buttoncontent.patch
+  * screenshot/Tidy-up-introduced-deprecations-and-make-menu-comman.patch
+  * Add dark-light mode capability
+    darktheme/0001-Support-freedesktop-color-scheme.patch
+    darktheme/0002-Hook-up-color-scheme-and-some-logic-interaction-with.patch
+    darktheme/0003-Add-another-GSD42-code-guard-to-prevent-segmentation.patch
+    darktheme/0004-Bump-expected-supported-mutter-versions-GNOME-43-and.patch
+    darktheme/0005-Logic-for-determining-light-dark-includes-looking-wi.patch
+    darktheme/0006-Remove-last-remaining-and-obsolete-GSD42-guard.patch
+  * Fix FTBFS due to C standard being assumed
+    fix-broken-C-std-for-gvc-subproject-146.patch
+  * Bug-fix
+    - Update message displayed to users when fractional scaling is used
+      to ensure the correct course of action (restart session) is done
+      (LP: #1972007)
+      fractional.patch
+  * Packaging Changes
+    d/control StandardsVersion bump
+    d/control add B/D libgstreamer1.0-dev for screenshot patches
+    d/budgie-core.manpages install budgie-screenshot man-page
+    d/budgie-core.lintian-overrides update to incorporate [] syntax
+    d/budgie-core-dev.lintian-overrides update to incorporate [] syntax
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 08 Jul 2022 13:27:51 +0100
+
 budgie-desktop (10.6.1-1) unstable; urgency=medium
 
   * New upstream bug-fix release

@@ -1,0 +1,91 @@
+Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/124
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Last-Update: 2022-06-30
+Description: [PATCH] Tidy up introduced deprecations and make menu/commandline
+ invocation reliable
+
+---
+ src/daemon/screenshot.vala      | 16 ++++------------
+ src/daemon/screenshot_main.vala |  4 ++++
+ 2 files changed, 8 insertions(+), 12 deletions(-)
+
+diff --git a/src/daemon/screenshot.vala b/src/daemon/screenshot.vala
+index 4cf05dd9..e9609aa3 100644
+--- a/src/daemon/screenshot.vala
++++ b/src/daemon/screenshot.vala
+@@ -487,8 +487,8 @@ namespace BudgieScr {
+ 			var iconfile =  new ThemedIcon(name="shootscreen-symbolic");
+ 			Gtk.Image shootimage = new Gtk.Image.from_gicon(iconfile,Gtk.IconSize.DND);
+ 			shootimage.pixel_size = 24;
+-			shootimage.margin_left = 10;
+-			shootimage.margin_right = 10;
++			shootimage.margin_start = 10;
++			shootimage.margin_end = 10;
+ 			shootbutton.add(shootimage);
+ 			shootbutton.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+ 			shootbutton.clicked.connect(()=> {
+@@ -1041,8 +1041,8 @@ namespace BudgieScr {
+ 			var iconfile =  new ThemedIcon(name=icon);
+ 			Gtk.Image buttonimage = new Gtk.Image.from_gicon(iconfile,Gtk.IconSize.BUTTON);
+ 			buttonimage.pixel_size = 24;
+-			buttonimage.margin_left = 8;
+-			buttonimage.margin_right = 8;
++			buttonimage.margin_start = 8;
++			buttonimage.margin_end = 8;
+ 			b.add(buttonimage);
+ 			b.show_all();
+ 		}
+@@ -1267,14 +1267,6 @@ namespace BudgieScr {
+ 			dialog.show();
+ 		}
+ 
+-		private void set_margins(Gtk.Grid grid, int left, int right, int top, int bottom) {
+-			// setting margins for a grid
+-			grid.set_margin_start(left);
+-			grid.set_margin_end(right);
+-			grid.set_margin_top(top);
+-			grid.set_margin_bottom(bottom);
+-		}
+-
+ 		private void item_changed(Gtk.ComboBox combo) {
+ 			/*
+ 			* on combo selection change, check if we need to add custom
+diff --git a/src/daemon/screenshot_main.vala b/src/daemon/screenshot_main.vala
+index 42acd2a8..9a6486a9 100644
+--- a/src/daemon/screenshot_main.vala
++++ b/src/daemon/screenshot_main.vala
+@@ -59,6 +59,7 @@ namespace Budgie {
+                         message("Failed to StartMainWindow: %s", e.message);
+                     }
+                 });
++                GLib.Thread.usleep(2000); // pause the thread to allow the dbus call to complete
+                 return 0;
+             }
+             if (area) {
+@@ -69,6 +70,7 @@ namespace Budgie {
+                         message("Failed to StartAreaSelect: %s", e.message);
+                     }
+                 });
++                GLib.Thread.usleep(2000); // pause the thread to allow the dbus call to complete
+                 return 0;
+             }
+             if (window){
+@@ -79,6 +81,7 @@ namespace Budgie {
+                         message("Failed to StartWindowScreenshot: %s", e.message);
+                     }
+                 });
++                GLib.Thread.usleep(2000); // pause the thread to allow the dbus call to complete
+                 return 0;
+             }
+ 
+@@ -89,6 +92,7 @@ namespace Budgie {
+                     message("Failed to StartFullScreenshot: %s", e.message);
+                 }
+             });
++            GLib.Thread.usleep(2000); // pause the thread to allow the dbus call to complete
+             return 0;
+         }
+         catch (Error e) {
+-- 
+2.34.1
+
