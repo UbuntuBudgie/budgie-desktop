@@ -71,6 +71,7 @@ Depends:
  libbudgie-plugin0 (= ${binary:Version}),
  libbudgie-private0 (= ${binary:Version}),
  libbudgietheme0 (= ${binary:Version}),
+ libbudgie-appindexer (= ${binary:Version}),
  libglib2.0-dev,
  libgtk-3-dev,
  libpeas-dev,
@@ -191,3 +192,17 @@ Description: Raven library for budgie-desktop
  sub-systems such as GNOME-Session and Mutter.
  .
  This provides the budgie-desktop user-defined settings called raven.
+
+Package: libbudgie-appindexer
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Menu library for budgie-desktop
+ Budgie-Desktop is a GTK+ based desktop environment which focuses on
+ simplicity and elegance.  It provides a traditional desktop metaphor
+ based interface utilising customisable panel based menu driven system.
+ Budgie-Desktop is written from scratch utilising many GNOME based
+ sub-systems such as GNOME-Session and Mutter.
+ .
+ This manages all of the application and category menu states for
+ installed applications on the system.
