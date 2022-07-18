@@ -1,3 +1,47 @@
+v10.6.2 Official announcement can be found here:
+https://blog.buddiesofbudgie.org/budgie-10-6-2-released/
+
+# Budgie 10.6.2
+
+Budgie 10.6.2 is the second minor release in the 10.6 series of our Budgie Desktop environment, introducing fixes for bugs and improving code quality!
+
+These fixes are backported from our in-progress 10.7 series, which will feature major upgrades to Budgie Menu, our internal theming, and more. This development process allows us to focus longer-term on features and larger overhauls while still being able to address issues raised on our issue tracker in a timely manner.
+Bug Fixes & Improvements
+
+    Abomination
+        Attempt re-adding nameless windows on name change. Fixes an issue with application tracking of some Flatpak-based applications like Spotify. #105
+    Budgie Daemon
+        Disconnect from the allocation changed signal to avoid having notification popups move unexpectedly. Fixes an issue where Notifications could move when trying to close them. #147
+        Drop unnecessary Comment in daemon desktop that produces warning.
+        Fixes spec compliance for closing notifications. #118
+        Set notif popup position after size allocation. Fixes an issue with notification positioning. #139
+        Set a minimum expiry timeout for notification popups. Some applications set a timeout of 0, which the spec says means that it should never expire. Our implementation doesn't really fit that, since persistence is done by Raven, not the notification server. So, we should have a minimum show time for the popups to ensure that one is actually shown when it should be. #129
+    Budgie Panel
+        Fix math for calculating right panel strut. This fixes an issue where a right-positioned panel could overlap with windows. #145
+        IconTasklist: Swap button key in hashtable when first_app changes. Fixes an issue when multiple apps could be shown as active. #93
+        Rewrite initial applet layout to prevent position desync. #72
+    Icon Tasklist
+        Prevent segfault when attempting to swap buttons.
+        Reset ITL buttons if group updated while pinned. This fixes an issue where pinned LibreOffice buttons would no longer appear when launching its instance. #107
+        Reset ITL button's first_app and class group app on swap. This allows the tooltip of affected apps like Discord to update after the app is initially launched.
+    Power Indicator
+        Fix journal spam by only emitting warning once when we fail to get device data. This is typically seen on virtual environments. #151
+    Workspace Applet
+        Adjust app spacing and align with panel edges. #108
+        Increase size and density of workspaces in workspace applet. #106
+        Workspace item size now independent of workspace width
+
+Alongside the above mentioned fixes, this release has code quality improvements, such as updates to our Meson build system support, cleanup of deprecated functions from third-party libraries, and reducing compiler warnings.
+Contributor List
+
+Budgie Desktop is developed by Buddies of Budgie and contributors from around the world. Here is a list of all the contributors that made this release possible:
+
+    Campbell Jones
+    David Mohammed
+    Evan Maddock
+    Joshua Strobl
+
+
 v10.6.1 Official announcement can be found here:
 https://blog.buddiesofbudgie.org/budgie-10-6-1-released/
 

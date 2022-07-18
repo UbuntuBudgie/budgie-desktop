@@ -1,3 +1,19 @@
+budgie-desktop (10.6.2-1) unstable; urgency=medium
+
+  * New upstream bug-fix release
+  * Packaging Changes
+    drop screenshot/Regenerate-vapi-for-mutter-10.patch since included
+    in this release
+    drop fix-broken-C-std-for-gvc-subproject-146.patch since included
+    in this release
+    drop Add-short-delay-to-keyboard-sources.patch since does not resolve
+    original issue and therefore is not needed.
+    refresh to remove fuzz:
+    screenshot/Introduce-our-native-screenshot-capability.patch
+    d/changelog-announcement incorporates upstream release notice
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 15 Jul 2022 09:46:58 +0100
+
 budgie-desktop (10.6.1-2) unstable; urgency=medium
 
   * Add native screenshot capability

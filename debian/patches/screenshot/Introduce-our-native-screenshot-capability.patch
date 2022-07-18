@@ -1,6 +1,6 @@
 Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/124
 Author: David Mohammed <fossfreedom@ubuntu.com>
-Last-Update: 2022-05-16
+Last-Update: 2022-07-15
 Description: [PATCH2/5] Introduce our native screenshot capability. This commit adds
  a native screenshot capability namely the ability to take screengrabs through
  a dedicated graphical interface and also directly through screenshot keyboard
@@ -108,7 +108,7 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
 +
 --- a/meson.build
 +++ b/meson.build
-@@ -53,6 +53,8 @@
+@@ -37,6 +37,8 @@
  dep_gdkx11 = dependency('gdk-x11-3.0', version: '>= 3.24.0')
  dep_libuuid = dependency('uuid')
  dep_vala = dependency('vapigen', version: '>= 0.52.5')
@@ -844,7 +844,7 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
  		/**
 --- a/src/daemon/meson.build
 +++ b/src/daemon/meson.build
-@@ -19,6 +19,7 @@
+@@ -27,6 +27,7 @@
      'endsession.vala',
      'notifications/dbus.vala',
      'notifications/popup.vala',
@@ -852,7 +852,7 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
      'main.vala',
      'manager.vala',
      'menus.vala',
-@@ -33,6 +34,8 @@
+@@ -40,6 +41,8 @@
      dep_gdkx11,
      dep_notify,
      dep_wnck,
@@ -861,7 +861,7 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
      link_libbudgieprivate,
      libplugin_vapi,
      link_libappsys,
-@@ -41,7 +44,6 @@
+@@ -48,7 +51,6 @@
      link_libsession,
  ]
  
@@ -869,7 +869,7 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
  # Need absolute path to gresource
  gresource = join_paths(meson.current_source_dir(), 'budgie-daemon.gresource.xml')
  
-@@ -76,3 +78,35 @@
+@@ -86,3 +88,35 @@
      ],
      install: true,
  )
@@ -3144,8 +3144,8 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
  			} catch (SpawnError e) {
  				print("Error: %s\n", e.message);
  			}
-@@ -343,6 +402,17 @@
- 			}
+@@ -352,6 +411,17 @@
+ 			});
  		}
  
 +		/* Set up the proxy when screenshotcontrol appears */
@@ -3162,7 +3162,7 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
  		/* Set up the proxy when raven appears */
  		void has_raven() {
  			if (raven_proxy == null) {
-@@ -501,6 +571,10 @@
+@@ -513,6 +583,10 @@
  			Bus.watch_name(BusType.SESSION, SWITCHER_DBUS_NAME, BusNameWatcherFlags.NONE,
  				has_switcher, lost_switcher);
  
@@ -3173,7 +3173,7 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
  			/* Keep an eye out for systemd stuffs */
  			if (have_logind()) {
  				get_logind();
-@@ -536,6 +610,9 @@
+@@ -548,6 +622,9 @@
  			keyboard.hook_extra();
  
  			display.get_workspace_manager().override_workspace_layout(Meta.DisplayCorner.TOPLEFT, false, 1, -1);
