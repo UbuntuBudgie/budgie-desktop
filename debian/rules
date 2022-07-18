@@ -4,7 +4,7 @@ export LC_ALL=C.UTF-8
 export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
 
 ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
-	SUBSTVARSREC = -Vdist:Recommends="nemo-desktop"
+	SUBSTVARSREC = -Vdist:Recommends="nemo"
 	SUBSTVARSSUG = -Vdist:Suggests="budgie-desktop-view"
 else
 	SUBSTVARSREC = -Vdist:Recommends="budgie-desktop-view"

@@ -1,3 +1,11 @@
+budgie-desktop (10.6.2-2) UNRELEASED; urgency=medium
+
+  * Packaging Changes
+    d/rules correct ubuntu recommendation to use nemo rather than the
+    invalid nemo-desktop package
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 18 Jul 2022 14:14:19 +0100
+
 budgie-desktop (10.6.2-1) unstable; urgency=medium
 
   * New upstream bug-fix release
