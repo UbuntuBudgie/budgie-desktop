@@ -12,3 +12,4 @@ screenshot/Introduce-our-native-screenshot-capability.patch
 screenshot/Improve-style-across-different-themes.patch
 screenshot/Fix-button-icon-disappearing-after-set_buttoncontent.patch
 screenshot/Tidy-up-introduced-deprecations-and-make-menu-comman.patch
+screenshot/More-meaningful-name-description.patch
