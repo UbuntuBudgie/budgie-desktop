@@ -1,0 +1,54 @@
+Applied-Upstream: commit:481817675bc27826a7cf9f39e209a27853fda75b
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Last-Update: 2022-07-29
+Description: [PATCH] Update session and components to use the reverseDNS notation
+
+---
+ src/session/budgie-desktop.in |  2 +-
+ src/session/meson.build       | 10 +++++-----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/src/session/budgie-desktop.in b/src/session/budgie-desktop.in
+index b1a026ac..2cb3bad9 100755
+--- a/src/session/budgie-desktop.in
++++ b/src/session/budgie-desktop.in
+@@ -13,4 +13,4 @@ if [ -z $XDG_CURRENT_DESKTOP ]; then
+   export XDG_CURRENT_DESKTOP
+ fi
+ 
+-exec gnome-session --builtin --session=budgie-desktop $*
++exec gnome-session --builtin --session=org.buddiesofbudgie.BudgieDesktop $*
+diff --git a/src/session/meson.build b/src/session/meson.build
+index 52064a6d..568ed217 100644
+--- a/src/session/meson.build
++++ b/src/session/meson.build
+@@ -43,13 +43,13 @@ gsd_324_max = [
+ 
+ # Always in Budgie
+ budgie_components = [
+-    'budgie-wm',
+-    'budgie-daemon',
+-    'budgie-panel',
++    'org.buddiesofbudgie.BudgieWm',
++    'org.buddiesofbudgie.BudgieDaemon',
++    'org.buddiesofbudgie.BudgiePanel',
+ ]
+ 
+ if with_polkit == true
+-    budgie_components += 'budgie-polkit'
++    budgie_components += 'org.buddiesofbudgie.BudgiePolkit'
+ endif
+ 
+ dep_gsd = dependency('gnome-settings-daemon', version: gnome_minimum_version)
+@@ -81,7 +81,7 @@ session_conf = configure_file(
+ # Now merge the translations of the .desktop.in to a .desktop
+ custom_target('desktop-file-session-main',
+     input : session_conf,
+-    output : 'budgie-desktop.session',
++    output : 'org.buddiesofbudgie.BudgieDesktop.session',
+     command : [intltool, '--desktop-style', podir, '@INPUT@', '@OUTPUT@'],
+     install : true,
+     install_dir : join_paths(datadir, 'gnome-session', 'sessions'),
+-- 
+2.36.1
+

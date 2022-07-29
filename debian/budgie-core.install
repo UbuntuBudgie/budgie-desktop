@@ -6,6 +6,6 @@ usr/share/glib-2.0
 usr/share/gnome-session
 usr/share/icons
 usr/share/locale
-usr/share/xsessions/budgie-desktop.desktop
+usr/share/xsessions/org.buddiesofbudgie.BudgieDesktop.desktop
 usr/share/backgrounds/budgie/default.jpg
 usr/share/budgie/budgie-version.xml

@@ -1,2 +1,2 @@
 version=4
-opts=pgpsigurlmangle=s/$/.asc/ https://github.com/buddiesofbudgie/budgie-desktop/releases .*/budgie-desktop-v([0-9.]+)\.tar\.xz
+opts=filenamemangle=s/$/.asc/ https://github.com/buddiesofbudgie/budgie-desktop/releases .*/budgie-desktop-v([0-9.]+)\.tar\.xz

@@ -1,7 +1,6 @@
 desktopfolder_exename.patch
 show-tray-icon.patch
 use-ibus-daemonize.patch
-fractional.patch
 darktheme/0001-Support-freedesktop-color-scheme.patch
 darktheme/0002-Hook-up-color-scheme-and-some-logic-interaction-with.patch
 darktheme/0003-Add-another-GSD42-code-guard-to-prevent-segmentation.patch
@@ -13,3 +12,5 @@ screenshot/Improve-style-across-different-themes.patch
 screenshot/Fix-button-icon-disappearing-after-set_buttoncontent.patch
 screenshot/Tidy-up-introduced-deprecations-and-make-menu-comman.patch
 screenshot/More-meaningful-name-description.patch
+Update-session-and-components-to-use-reverseDNS.patch
+Rework-keyboard-handling-to-layouts-ibus-handling.patch

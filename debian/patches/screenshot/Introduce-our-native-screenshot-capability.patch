@@ -1,6 +1,6 @@
 Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/124
 Author: David Mohammed <fossfreedom@ubuntu.com>
-Last-Update: 2022-07-15
+Last-Update: 2022-07-28
 Description: [PATCH2/5] Introduce our native screenshot capability. This commit adds
  a native screenshot capability namely the ability to take screengrabs through
  a dedicated graphical interface and also directly through screenshot keyboard
@@ -108,15 +108,15 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
 +
 --- a/meson.build
 +++ b/meson.build
-@@ -37,6 +37,8 @@
+@@ -38,6 +38,8 @@
  dep_gdkx11 = dependency('gdk-x11-3.0', version: '>= 3.24.0')
  dep_libuuid = dependency('uuid')
  dep_vala = dependency('vapigen', version: '>= 0.52.5')
 +dep_gst = dependency('gstreamer-1.0')
 +dep_cairo = dependency('cairo')
  
- # Needed for keyboardy bits
- dep_ibus = dependency('ibus-1.0', version: '>= 1.5.10')
+ # Needed for Budgie Menu
+ dep_cairo = dependency('cairo', version: '>= 1.15.10')
 --- /dev/null
 +++ b/src/daemon/aftershot.ui
 @@ -0,0 +1,138 @@
@@ -824,10 +824,10 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
  		Budgie.MenuManager? menus;
  		Budgie.TabSwitcher? switcher;
 +		BudgieScr.ScreenshotServer? screenshotcontrol;
+ 		Budgie.XDGDirTracker? xdg_tracker;
  
  		/**
- 		* Construct a new ServiceManager and initialiase appropriately
-@@ -42,6 +43,14 @@
+@@ -44,6 +45,15 @@
  			menus.setup_dbus(replace);
  			switcher = new Budgie.TabSwitcher();
  			switcher.setup_dbus(replace);
@@ -839,9 +839,10 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
 +			catch (Error e) {
 +				warning("ServiceManager %s\n", e.message);
 +			}
++
+ 			xdg_tracker = new Budgie.XDGDirTracker();
+ 			xdg_tracker.setup_dbus(replace);
  		}
- 
- 		/**
 --- a/src/daemon/meson.build
 +++ b/src/daemon/meson.build
 @@ -27,6 +27,7 @@
@@ -852,7 +853,7 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
      'main.vala',
      'manager.vala',
      'menus.vala',
-@@ -40,6 +41,8 @@
+@@ -41,6 +42,8 @@
      dep_gdkx11,
      dep_notify,
      dep_wnck,
@@ -861,7 +862,7 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
      link_libbudgieprivate,
      libplugin_vapi,
      link_libappsys,
-@@ -48,7 +51,6 @@
+@@ -49,7 +52,6 @@
      link_libsession,
  ]
  
@@ -869,7 +870,7 @@ Description: [PATCH2/5] Introduce our native screenshot capability. This commit 
  # Need absolute path to gresource
  gresource = join_paths(meson.current_source_dir(), 'budgie-daemon.gresource.xml')
  
-@@ -86,3 +88,35 @@
+@@ -87,3 +89,35 @@
      ],
      install: true,
  )

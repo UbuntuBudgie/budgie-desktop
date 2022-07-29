@@ -1,12 +1,28 @@
-budgie-desktop (10.6.2-2) UNRELEASED; urgency=medium
+budgie-desktop (10.6.2+git20220728-1) experimental; urgency=medium
 
+  * git master release
+    - includes menu rewrite.  This introduces a new packaging
+      library binary libappindexer0
+    - drop fractional.patch since this is contained in this release
+    - Resolve login issues due to reverseDNS changes
+      Update-session-and-components-to-use-reverseDNS.patch
+    - Resolve multi-keyboard layouts switching
+      Rework-keyboard-handling-to-layouts-ibus-handling.patch
   * Packaging Changes
     d/rules correct ubuntu recommendation to use nemo rather than the
     invalid nemo-desktop package
     Correct lintian warning for screenshot man-page:
     screenshot/More-meaningful-name-description.patch
+  * d/control add libbudgie-appindexer0 binary package
+    d/control add libbudgie-appindexer0 to dev package
+  * d/watch and d/upstream change to unsigned temporarily for this
+    git tarball release
+  * d/libbudgie-private0.symbols update
+  * d/libbudgie-appindexer0.symbols create and populate
+  * add d/budgie-core.maintscript to remove old budgie /etc config files;
+    these have been replaced with reverseDNS named config files
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 19 Jul 2022 10:34:21 +0100
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 28 Jul 2022 10:51:16 +0100
 
 budgie-desktop (10.6.2-1) unstable; urgency=medium
 

@@ -20,6 +20,7 @@ libbudgie-private.so.0 libbudgie-private0 #MINVER#
  budgie_desktop_manager_set_dock_mode@Base 10.4
  budgie_desktop_manager_set_placement@Base 10.4
  budgie_desktop_manager_set_size@Base 10.4
+ budgie_desktop_manager_set_spacing@Base 10.6.2+git20220728
  budgie_desktop_manager_set_transparency@Base 10.4
  budgie_desktop_manager_slots_available@Base 10.4
  budgie_desktop_manager_slots_used@Base 10.4
@@ -83,6 +84,7 @@ libbudgie-private.so.0 libbudgie-private0 #MINVER#
  budgie_toplevel_get_autohide@Base 10.4
  budgie_toplevel_get_dock_mode@Base 10.4
  budgie_toplevel_get_intended_size@Base 10.4
+ budgie_toplevel_get_intended_spacing@Base 10.6.2+git20220728
  budgie_toplevel_get_intersected@Base 10.4
  budgie_toplevel_get_position@Base 10.4
  budgie_toplevel_get_shadow_depth@Base 10.4
@@ -97,6 +99,7 @@ libbudgie-private.so.0 libbudgie-private0 #MINVER#
  budgie_toplevel_set_autohide@Base 10.4
  budgie_toplevel_set_dock_mode@Base 10.4
  budgie_toplevel_set_intended_size@Base 10.4
+ budgie_toplevel_set_intended_spacing@Base 10.6.2+git20220728
  budgie_toplevel_set_intersected@Base 10.4
  budgie_toplevel_set_position@Base 10.4
  budgie_toplevel_set_shadow_depth@Base 10.4
