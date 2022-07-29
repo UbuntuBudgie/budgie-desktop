@@ -48,6 +48,9 @@ libraven.so.0 libraven0 #MINVER#
  budgie_notifications_view_get_type@Base 10.3
  budgie_notifications_view_new@Base 10.3
  budgie_param_spec_raven_iface@Base 10.3
+ budgie_raven_interface_get_type@Base 10.6
+ budgie_raven_interface_proxy_get_type@Base 10.6
+ budgie_raven_interface_register_object@Base 10.6
  budgie_power_strip_construct@Base 10.3
  budgie_power_strip_get_type@Base 10.3
  budgie_power_strip_new@Base 10.3
