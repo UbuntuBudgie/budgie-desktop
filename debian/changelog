@@ -1,3 +1,14 @@
+budgie-desktop (10.6.2+git20220728-2) experimental; urgency=medium
+
+  * Revert the xsession rename - this allows the desktop to
+    launch from lightdm/slick-greeter
+    Revert-the-xsession-rename.patch
+  * Packaging Changes
+    d/budgie-core.install - ensure built session file from the above
+    patch is installed
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 10 Aug 2022 14:41:06 +0100
+
 budgie-desktop (10.6.2+git20220728-1) experimental; urgency=medium
 
   * git master release
