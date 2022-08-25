@@ -1,4 +1,4 @@
-budgie-desktop (10.6.2-1) jammy; urgency=medium
+budgie-desktop (10.6.3.1-1) jammy; urgency=medium
 
   * Bug-fixes
     - Prevent crash when popover is removed
