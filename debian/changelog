@@ -1,3 +1,15 @@
+budgie-desktop (10.6.3+git20220821-1) experimental; urgency=medium
+
+  * git master release
+    - add support for mutter-11 (GNOME 43) when required for the
+      GNOME 43 transition
+    - drop patches Revert-the-xsession-rename.patch,
+      Update-session-and-components-to-use-reverseDNS.patch and
+      darktheme/0004-Bump-expected-supported-mutter-versions-GNOME-43-and.patch
+      since included in this release
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 22 Aug 2022 11:57:27 +0100
+
 budgie-desktop (10.6.2+git20220728-2) experimental; urgency=medium
 
   * Revert the xsession rename - this allows the desktop to
