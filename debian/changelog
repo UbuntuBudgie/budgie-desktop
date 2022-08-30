@@ -1,3 +1,15 @@
+budgie-desktop (10.6.4+git20220830-1) experimental; urgency=medium
+
+  * git master release
+    - resolve multiple issues with the workspace applet
+    - update timezone if no custom timezone set
+    - make notification popup body consistent avoiding large popups
+      covering the screen
+  * Packaging Changes
+    d/control remove B/D and dependency on gnome-menu since no longer needed
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 30 Aug 2022 18:50:59 +0100
+
 budgie-desktop (10.6.3+git20220821-1) experimental; urgency=medium
 
   * git master release
