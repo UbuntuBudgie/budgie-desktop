@@ -18,10 +18,9 @@ Build-Depends:
  libglib2.0-dev (>= 2.64.0),
  libgnome-bluetooth-dev,
  libgnome-desktop-3-dev (>= 41.0),
- libgnome-menu-3-dev,
  libgtk-3-dev,
  libibus-1.0-dev,
- libmutter-10-dev,
+ libmutter-11-dev,
  libnotify-dev,
  libpeas-dev,
  libpolkit-agent-1-dev,
@@ -95,7 +94,6 @@ Architecture: all
 Depends:
  budgie-core,
  budgie-control-center,
- gnome-menus,
  network-manager-gnome,
  ${misc:Depends}
 Recommends: gir1.2-budgie-1.0, ${dist:Recommends}
