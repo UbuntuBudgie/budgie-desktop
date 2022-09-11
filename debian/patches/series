@@ -12,3 +12,4 @@ screenshot/Fix-button-icon-disappearing-after-set_buttoncontent.patch
 screenshot/Tidy-up-introduced-deprecations-and-make-menu-comman.patch
 screenshot/More-meaningful-name-description.patch
 Rework-keyboard-handling-to-layouts-ibus-handling.patch
+Initialise-ibus-within-the-class-constructor.patch
