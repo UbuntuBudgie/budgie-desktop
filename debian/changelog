@@ -1,3 +1,9 @@
+budgie-desktop (10.6.4+git20220830-3) unstable; urgency=medium
+
+  * Upload to unstable to support the GNOME 43/mutter-11 transition
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 28 Sep 2022 14:50:45 +0100
+
 budgie-desktop (10.6.4+git20220830-2) experimental; urgency=medium
 
   * Add patch to initialise ibus to prevent window manager crash
