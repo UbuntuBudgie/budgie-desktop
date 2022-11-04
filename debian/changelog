@@ -4,6 +4,7 @@ budgie-desktop (10.6.4+git20220830-4) UNRELEASED; urgency=medium
     - d/control budgie:update dependencies and suggestions for underlying
       required packages used in the source together with suggested packages
       to enhance the experience
+    - d/watch(.nopgp) update to resolve github release URL changes
 
  -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 04 Nov 2022 10:22:35 +0000
 

@@ -96,7 +96,7 @@ Architecture: all
 Depends:
  budgie-control-center,
  budgie-core,
- dconf-cli
+ dconf-cli,
  ${misc:Depends},
  network-manager-gnome,
  xdotool,
