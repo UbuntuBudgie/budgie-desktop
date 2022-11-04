@@ -123,6 +123,7 @@ Section: doc
 Architecture: all
 Depends: ${misc:Depends}
 Suggests: devhelp
+Multi-Arch: foreign
 Description: documentation files for the budgie-desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on
  simplicity and elegance.  It provides a traditional desktop metaphor
