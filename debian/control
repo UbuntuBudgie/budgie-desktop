@@ -95,9 +95,11 @@ Depends:
  budgie-core,
  budgie-control-center,
  network-manager-gnome,
+ xdotool,
+ dconf-cli
  ${misc:Depends}
 Recommends: gir1.2-budgie-1.0, ${dist:Recommends}
-Suggests: slick-greeter, ${dist:Suggests}
+Suggests: slick-greeter, ${dist:Suggests}, arc-theme, gnome-bluetooth-sendto
 Description: Desktop package for budgie-desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on
  simplicity and elegance.  It provides a traditional desktop metaphor

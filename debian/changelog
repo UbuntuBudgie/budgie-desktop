@@ -1,3 +1,12 @@
+budgie-desktop (10.6.4+git20220830-4) UNRELEASED; urgency=medium
+
+  * Packaging Changes
+    - d/control budgie:update dependencies and suggestions for underlying
+      required packages used in the source together with suggested packages
+      to enhance the experience
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 04 Nov 2022 10:22:35 +0000
+
 budgie-desktop (10.6.4+git20220830-3) unstable; urgency=medium
 
   * Upload to unstable to support the GNOME 43/mutter-11 transition
