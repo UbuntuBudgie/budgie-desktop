@@ -9,11 +9,11 @@ Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/budgie-desktop/+bug/199821
  src/wm/keyboard.vala | 15 ++++++++++++---
  1 file changed, 12 insertions(+), 3 deletions(-)
 
-diff --git a/src/wm/keyboard.vala b/src/wm/keyboard.vala
-index 4021f8b3..c4a72915 100644
---- a/src/wm/keyboard.vala
-+++ b/src/wm/keyboard.vala
-@@ -125,9 +125,18 @@ namespace Budgie {
+Index: budgie-desktop-10.6.4+git20220830/src/wm/keyboard.vala
+===================================================================
+--- budgie-desktop-10.6.4+git20220830.orig/src/wm/keyboard.vala
++++ budgie-desktop-10.6.4+git20220830/src/wm/keyboard.vala
+@@ -128,9 +128,18 @@ namespace Budgie {
  			settings.changed.connect(on_settings_changed);
  			update_fallback();
  
@@ -35,6 +35,3 @@ index 4021f8b3..c4a72915 100644
  		}
  
  		public delegate void KeyHandlerFunc(Meta.Display display, Meta.Window? window, Clutter.KeyEvent? event, Meta.KeyBinding binding);
--- 
-2.37.2
-
