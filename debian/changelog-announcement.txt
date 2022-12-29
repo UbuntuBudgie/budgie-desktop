@@ -1,3 +1,80 @@
+v10.6.2 Official announcement can be found here:
+https://blog.buddiesofbudgie.org/budgie-10-6-2-released/
+
+# Budgie 10.6.2
+
+Budgie 10.6.2 is the second minor release in the 10.6 series of our Budgie Desktop environment, introducing fixes for bugs and improving code quality!
+
+These fixes are backported from our in-progress 10.7 series, which will feature major upgrades to Budgie Menu, our internal theming, and more. This development process allows us to focus longer-term on features and larger overhauls while still being able to address issues raised on our issue tracker in a timely manner.
+Bug Fixes & Improvements
+
+    Abomination
+        Attempt re-adding nameless windows on name change. Fixes an issue with application tracking of some Flatpak-based applications like Spotify. #105
+    Budgie Daemon
+        Disconnect from the allocation changed signal to avoid having notification popups move unexpectedly. Fixes an issue where Notifications could move when trying to close them. #147
+        Drop unnecessary Comment in daemon desktop that produces warning.
+        Fixes spec compliance for closing notifications. #118
+        Set notif popup position after size allocation. Fixes an issue with notification positioning. #139
+        Set a minimum expiry timeout for notification popups. Some applications set a timeout of 0, which the spec says means that it should never expire. Our implementation doesn't really fit that, since persistence is done by Raven, not the notification server. So, we should have a minimum show time for the popups to ensure that one is actually shown when it should be. #129
+    Budgie Panel
+        Fix math for calculating right panel strut. This fixes an issue where a right-positioned panel could overlap with windows. #145
+        IconTasklist: Swap button key in hashtable when first_app changes. Fixes an issue when multiple apps could be shown as active. #93
+        Rewrite initial applet layout to prevent position desync. #72
+    Icon Tasklist
+        Prevent segfault when attempting to swap buttons.
+        Reset ITL buttons if group updated while pinned. This fixes an issue where pinned LibreOffice buttons would no longer appear when launching its instance. #107
+        Reset ITL button's first_app and class group app on swap. This allows the tooltip of affected apps like Discord to update after the app is initially launched.
+    Power Indicator
+        Fix journal spam by only emitting warning once when we fail to get device data. This is typically seen on virtual environments. #151
+    Workspace Applet
+        Adjust app spacing and align with panel edges. #108
+        Increase size and density of workspaces in workspace applet. #106
+        Workspace item size now independent of workspace width
+
+Alongside the above mentioned fixes, this release has code quality improvements, such as updates to our Meson build system support, cleanup of deprecated functions from third-party libraries, and reducing compiler warnings.
+Contributor List
+
+Budgie Desktop is developed by Buddies of Budgie and contributors from around the world. Here is a list of all the contributors that made this release possible:
+
+    Campbell Jones
+    David Mohammed
+    Evan Maddock
+    Joshua Strobl
+
+
+v10.6.1 Official announcement can be found here:
+https://blog.buddiesofbudgie.org/budgie-10-6-1-released/
+
+# Budgie 10.6.1
+
+Budgie 10.6.1 is the first minor release that introduces fixes for bugs in the 10.6 series of our Budgie Desktop environment.
+Bug Fixes
+
+    Icon Tasklist
+        Fixed new applications not displaying in the tasklist when using restrict-to-workspace. #73
+        Fixed a regression in no longer being able to move non-favorited / non-pinned applications. #79
+        Fixed a regression where some IconButtons would remain in the IconTasklist. #78
+        Introduced a supplmental buttons check that will also attempt to filter out any .desktop from an application ID for buttons, if we cannot find the button with an app id.
+        Removed delay when opening apps. This was introduced in Abomination in an attempt to fix Chrome profile manager closing sequence but endend up breaking some other apps (such as Steam) closing sequence. Instead, try to reparent first app of group when an app associated with a pinned icon is closed so that the pinned button is reused. #85
+    Notification Server
+        Improved racyness when a notification is closed and another one shown in quick succession, causing incorrect notification positioning. This was noticeable when using applications that did not fully adhere to the Desktop Notifications Spec and the Replaces ID component of a Notification (to replace an existing notification), such as in the Lollypop audio player.
+    Popover Manager
+        Added a null check to budgie_popover_manager_ungrab for added safety.
+    Raven
+        No longer modify NotificationGroup HashTables while iterating over them. This prevents a critical message when dismissing notification groups. When iterating over a HashTable using the foreach method, the table should not be modified. Instead, use foreach_steal to iterate and remove from the notifications table.
+        Fixed use of the Raven "Clear All Notifications" shortcut. #75
+        Introduced a fix where clicking the notification bell, or alternatively when clicking the Raven trigger for the first time, would sometimes fail to open the correct page. This was due to those pages not yet being visible and in that scenario, GTK would silently fail during the GtkStack page changing. #31
+
+Contributor List
+
+Budgie Desktop is developed by Buddies of Budgie and contributors from around the world. Here is a list of all the contributor that made this release possible:
+
+    Campbell Jones
+    Evan Maddock
+    Guillot Julien
+    Joshua Strobl
+
+
 v10.6 Official announcement can be found here:
 https://github.com/BuddiesOfBudgie/budgie-desktop/releases/tag/v10.6
 

@@ -8,8 +8,8 @@ budgie-core: custom-library-search-path RUNPATH /usr/lib/*/mutter-* [usr/bin/bud
 # It has been concluded that these are false positives; objdump -Tx full_path_to_library.so
 # has been run and only the expected linked libraries are reported. Plugins for GLib-based
 # softare often don't use libc directly - only via GLib.
-budgie-core: library-not-linked-against-libc usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.separator/libseparatorapplet.so
-budgie-core: library-not-linked-against-libc usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.show-desktop/libshowdesktopapplet.so
-budgie-core: library-not-linked-against-libc usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.spacer/libspacerapplet.so
-budgie-core: library-not-linked-against-libc usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.tasklist/libtasklistapplet.so
-budgie-core: library-not-linked-against-libc usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.caffeine/libcaffeineapplet.so
+budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.separator/libseparatorapplet.so]
+budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.show-desktop/libshowdesktopapplet.so]
+budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.spacer/libspacerapplet.so]
+budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.tasklist/libtasklistapplet.so]
+budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.caffeine/libcaffeineapplet.so]
