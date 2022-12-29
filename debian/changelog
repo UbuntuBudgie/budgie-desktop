@@ -1,12 +1,201 @@
 budgie-desktop (10.6.4.1-1) jammy; urgency=medium
 
+  * git master build
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 29 Dec 2022 19:41:06 +0000
+
+budgie-desktop (10.6.4+git20220830-4) unstable; urgency=medium
+
+  * Bug-fix
+    - Ensure last keyboard layout used is the keyboard layout chosen
+      on logon
+      Add-a-small-delay-to-ensure-keyboard-layout-defaults.patch
+      (LP: #1998214)
+  * Packaging Changes
+    - d/control budgie:update dependencies and suggestions for underlying
+      required packages used in the source together with suggested packages
+      to enhance the experience
+    - d/control apply multiarch hint to budgie-desktop-doc
+    - d/watch(.nopgp) update to resolve github release URL changes
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 29 Nov 2022 15:04:14 +0000
+
+budgie-desktop (10.6.4+git20220830-3) unstable; urgency=medium
+
+  * Upload to unstable to support the GNOME 43/mutter-11 transition
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 28 Sep 2022 14:50:45 +0100
+
+budgie-desktop (10.6.4+git20220830-2) experimental; urgency=medium
+
+  * Add patch to initialise ibus to prevent window manager crash
+    Initialise-ibus-within-the-class-constructor.patch
+  * d/control B/D on mutter-11
+  * d/control B/D on libgdk-pixbuf-2.0-dev
+    (closes: #1019308)
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 11 Sep 2022 22:15:41 +0100
+
+budgie-desktop (10.6.4+git20220830-1) experimental; urgency=medium
+
+  * git master release
+    - resolve multiple issues with the workspace applet
+    - update timezone if no custom timezone set
+    - make notification popup body consistent avoiding large popups
+      covering the screen
+  * Packaging Changes
+    d/control remove B/D and dependency on gnome-menu since no longer needed
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 30 Aug 2022 18:50:59 +0100
+
+budgie-desktop (10.6.3+git20220821-1) experimental; urgency=medium
+
+  * git master release
+    - add support for mutter-11 (GNOME 43) when required for the
+      GNOME 43 transition
+    - drop patches Revert-the-xsession-rename.patch,
+      Update-session-and-components-to-use-reverseDNS.patch and
+      darktheme/0004-Bump-expected-supported-mutter-versions-GNOME-43-and.patch
+      since included in this release
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 22 Aug 2022 11:57:27 +0100
+
+budgie-desktop (10.6.2+git20220728-2) experimental; urgency=medium
+
+  * Revert the xsession rename - this allows the desktop to
+    launch from lightdm/slick-greeter
+    Revert-the-xsession-rename.patch
+  * Packaging Changes
+    d/budgie-core.install - ensure built session file from the above
+    patch is installed
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 10 Aug 2022 14:41:06 +0100
+
+budgie-desktop (10.6.2+git20220728-1) experimental; urgency=medium
+
+  * git master release
+    - includes menu rewrite.  This introduces a new packaging
+      library binary libappindexer0
+    - drop fractional.patch since this is contained in this release
+    - Resolve login issues due to reverseDNS changes
+      Update-session-and-components-to-use-reverseDNS.patch
+    - Resolve multi-keyboard layouts switching
+      Rework-keyboard-handling-to-layouts-ibus-handling.patch
+  * Packaging Changes
+    d/rules correct ubuntu recommendation to use nemo rather than the
+    invalid nemo-desktop package
+    Correct lintian warning for screenshot man-page:
+    screenshot/More-meaningful-name-description.patch
+  * d/control add libbudgie-appindexer0 binary package
+    d/control add libbudgie-appindexer0 to dev package
+  * d/watch and d/upstream change to unsigned temporarily for this
+    git tarball release
+  * d/libbudgie-private0.symbols update
+  * d/libbudgie-appindexer0.symbols create and populate
+  * add d/budgie-core.maintscript to remove old budgie /etc config files;
+    these have been replaced with reverseDNS named config files
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 28 Jul 2022 10:51:16 +0100
+
+budgie-desktop (10.6.2-1) unstable; urgency=medium
+
+  * New upstream bug-fix release
+  * Packaging Changes
+    drop screenshot/Regenerate-vapi-for-mutter-10.patch since included
+    in this release
+    drop fix-broken-C-std-for-gvc-subproject-146.patch since included
+    in this release
+    drop Add-short-delay-to-keyboard-sources.patch since does not resolve
+    original issue and therefore is not needed.
+    refresh to remove fuzz:
+    screenshot/Introduce-our-native-screenshot-capability.patch
+    d/changelog-announcement incorporates upstream release notice
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 15 Jul 2022 09:46:58 +0100
+
+budgie-desktop (10.6.1-2) unstable; urgency=medium
+
+  * Add native screenshot capability
+    screenshot/Regenerate-vapi-for-mutter-10.patch
+    screenshot/Introduce-our-native-screenshot-capability.patch
+    screenshot/Improve-style-across-different-themes.patch
+    screenshot/Fix-button-icon-disappearing-after-set_buttoncontent.patch
+  * screenshot/Tidy-up-introduced-deprecations-and-make-menu-comman.patch
+  * Add dark-light mode capability
+    darktheme/0001-Support-freedesktop-color-scheme.patch
+    darktheme/0002-Hook-up-color-scheme-and-some-logic-interaction-with.patch
+    darktheme/0003-Add-another-GSD42-code-guard-to-prevent-segmentation.patch
+    darktheme/0004-Bump-expected-supported-mutter-versions-GNOME-43-and.patch
+    darktheme/0005-Logic-for-determining-light-dark-includes-looking-wi.patch
+    darktheme/0006-Remove-last-remaining-and-obsolete-GSD42-guard.patch
+  * Fix FTBFS due to C standard being assumed
+    fix-broken-C-std-for-gvc-subproject-146.patch
+  * Bug-fix
+    - Update message displayed to users when fractional scaling is used
+      to ensure the correct course of action (restart session) is done
+      (LP: #1972007)
+      fractional.patch
+  * Packaging Changes
+    d/control StandardsVersion bump
+    d/control add B/D libgstreamer1.0-dev for screenshot patches
+    d/budgie-core.manpages install budgie-screenshot man-page
+    d/budgie-core.lintian-overrides update to incorporate [] syntax
+    d/budgie-core-dev.lintian-overrides update to incorporate [] syntax
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 08 Jul 2022 13:27:51 +0100
+
+budgie-desktop (10.6.1-1) unstable; urgency=medium
+
+  * New upstream bug-fix release
+    - Drop all patches since the microrelease contains these except
+      desktopfolder_exename.patch,
+      show-tray-icon.patch,
+      use-ibus-daemonize.patch
+      (LP: #1967282)
+  * Packaging Changes
+    - d/changelog-announcement incorporates upstream release notice
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 31 Mar 2022 12:33:01 +0100
+
+budgie-desktop (10.6-4) unstable; urgency=medium
+
+  * Upload to unstable
+    - part of the GNOME 42/mutter transition
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 28 Mar 2022 19:22:00 +0100
+
+budgie-desktop (10.6-3) experimental; urgency=medium
+
+  * Bug-fixes
+    - Fix drag-drop regression in icon-tasklist
+      Fix-regression-in-IconTasklist.patch
+    - Fix regression where Super+C no longer clears notifications
+      Re-connect-to-the-Raven-signal-to-clear-all-notifica.patch
+    - Fix regression where new application icons that don't
+      appear in the icon-tasklist
+      Ensure-new-applications-icons-are-displayed-in-taskl.patch
+    - Don't spam the journal log when clearing notifications
+      Don-t-modify-notification-group-HashTables-while-ite.patch
+    - Fix regression where apps such as discord that has splash screens
+      are not removed from icon-tasklist
+      Remove-check-for-window-hints-when-removing-button-i.patch
+  * Packaging Changes
+    - update libraven symbols for new methods from raven signal patch
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 24 Mar 2022 22:38:57 +0000
+
+budgie-desktop (10.6-2) experimental; urgency=medium
+
   * Bug-fixes
     - Prevent crash when popover is removed
       Add-a-null-check-to-budgie_popover_manager_ungrab.patch
     - Open on the notifications stack when the notification applet clicked
       Fix-inconsistency-when-opening-Raven-68.patch
+  * - Ensure notifications stack when apps such as lollypop fire
+      notifications in quick succession
+      improve-notification-racyness.patch
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 08 Mar 2022 21:00:52 +0000
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 16 Mar 2022 18:49:26 +0000
 
 budgie-desktop (10.6-1) experimental; urgency=medium
 
