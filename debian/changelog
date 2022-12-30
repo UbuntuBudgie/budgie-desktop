@@ -1,3 +1,17 @@
+budgie-desktop (10.6.4+git20221230-1) unstable; urgency=medium
+
+  * git master release
+    upstream release dates will not coincide with debian freeze; git master
+    has been used to provide the best experience for the stable release
+    period
+  * Fix for workspace icon sizing using the french locale
+  * Native screenshot now incorporated in git master - associated
+    patches have been dropped
+  * Right-click window shows window options
+  * Run dialog refactored - works across monitors
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 30 Dec 2022 14:34:35 +0000
+
 budgie-desktop (10.6.4+git20220830-4) unstable; urgency=medium
 
   * Bug-fix
