@@ -6,6 +6,7 @@ libbudgie-appindexer.so.0 libbudgie-appindexer0 #MINVER#
  budgie_app_index_queue_refresh@Base 10.6.2+git20220728
  budgie_application_construct@Base 10.6.2+git20220728
  budgie_application_get_categories@Base 10.6.2+git20220728
+ budgie_application_get_dbus_activatable@Base 10.6.4+git20221230
  budgie_application_get_description@Base 10.6.2+git20220728
  budgie_application_get_desktop_id@Base 10.6.2+git20220728
  budgie_application_get_desktop_path@Base 10.6.2+git20220728
@@ -15,6 +16,7 @@ libbudgie-appindexer.so.0 libbudgie-appindexer0 #MINVER#
  budgie_application_get_keywords@Base 10.6.2+git20220728
  budgie_application_get_name@Base 10.6.2+git20220728
  budgie_application_get_prefers_default_gpu@Base 10.6.2+git20220728
+ budgie_application_get_should_show@Base 10.6.4+git20221230
  budgie_application_get_type@Base 10.6.2+git20220728
  budgie_application_launch@Base 10.6.2+git20220728
  budgie_application_new@Base 10.6.2+git20220728
