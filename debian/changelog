@@ -1,3 +1,11 @@
+budgie-desktop (10.6.4+git20221230-2) unstable; urgency=medium
+
+  * Packaging
+    - d/control: Add runtime dependency on zenity to allow budgie-mutter
+      based dialogs to display
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 09 Jan 2023 19:42:41 +0000
+
 budgie-desktop (10.6.4+git20221230-1) unstable; urgency=medium
 
   * git master release

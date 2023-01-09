@@ -47,6 +47,7 @@ Depends:
  gnome-session-bin,
  gnome-session-common,
  gnome-settings-daemon,
+ zenity,
  ${misc:Depends},
  ${shlibs:Depends},
 Description: Core package for Budgie-Desktop
