@@ -53,7 +53,6 @@ libbudgie-private.so.0 libbudgie-private0 #MINVER#
  budgie_notification_set_image@Base 10.5.3+git20220217a
  budgie_notification_set_summary@Base 10.5.3+git20220217a
  budgie_notification_set_timestamp@Base 10.5.3+git20220217a
- budgie_notification_urgency_get_type@Base 10.5.3+git20220217a
  budgie_panel_transparency_get_type@Base 10.4
  budgie_position_class_name@Base 10.4
  budgie_prop_change_copy@Base 10.4
