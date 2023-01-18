@@ -109,40 +109,21 @@ libraven.so.0 libraven0 #MINVER#
  budgie_session_manager_get_type@Base 10.3
  budgie_session_manager_proxy_get_type@Base 10.3
  budgie_session_manager_register_object@Base 10.3
- budgie_sound_widget_construct@Base 10.4
- budgie_sound_widget_get_type@Base 10.4
- budgie_sound_widget_has_devices@Base 10.4
- budgie_sound_widget_new@Base 10.4
- budgie_start_listening_construct@Base 10.4
- budgie_start_listening_get_type@Base 10.4
- budgie_start_listening_new@Base 10.4
+ budgie_sound_input_widget_construct@Base 10.6.4.1
+ budgie_sound_input_widget_get_type@Base 10.6.4.1
+ budgie_sound_input_widget_has_devices@Base 10.6.4.1
+ budgie_sound_input_widget_new@Base 10.6.4.1
+ budgie_sound_output_widget_construct@Base 10.6.4.1
+ budgie_sound_output_widget_get_type@Base 10.6.4.1
+ budgie_sound_output_widget_has_devices@Base 10.6.4.1
+ budgie_sound_output_widget_new@Base 10.6.4.1
  budgie_value_get_raven_iface@Base 10.3
  budgie_value_set_raven_iface@Base 10.3
  budgie_value_take_raven_iface@Base 10.3
  calendar_widget_construct@Base 10.3
  calendar_widget_get_type@Base 10.3
  calendar_widget_new@Base 10.3
- client_image_construct@Base 10.3
- client_image_construct_from_icon_name@Base 10.3
- client_image_construct_from_pixbuf@Base 10.3
- client_image_get_type@Base 10.3
- client_image_new@Base 10.3
- client_image_new_from_icon_name@Base 10.3
- client_image_new_from_pixbuf@Base 10.3
- client_widget_construct@Base 10.3
- client_widget_get_type@Base 10.3
- client_widget_new@Base 10.3
- client_widget_update_from_meta@Base 10.3
- client_widget_update_width@Base 10.3
  create_row@Base 10.3
- dbus_impl_get_type@Base 10.3
- dbus_impl_list_names@Base 10.3
- dbus_impl_list_names_finish@Base 10.3
- dbus_impl_proxy_get_type@Base 10.3
- dbus_impl_register_object@Base 10.3
- dbus_prop_iface_get_type@Base 10.3
- dbus_prop_iface_proxy_get_type@Base 10.3
- dbus_prop_iface_register_object@Base 10.3
  mpris_client_construct@Base 10.3
  mpris_client_get_player@Base 10.3
  mpris_client_get_prop@Base 10.3
@@ -150,6 +131,19 @@ libraven.so.0 libraven0 #MINVER#
  mpris_client_new@Base 10.3
  mpris_client_set_player@Base 10.3
  mpris_client_set_prop@Base 10.3
+ mpris_client_widget_construct@Base 10.6.4.1
+ mpris_client_widget_get_type@Base 10.6.4.1
+ mpris_client_widget_new@Base 10.6.4.1
+ mpris_client_widget_update_from_meta@Base 10.6.4.1
+ mpris_client_widget_update_width@Base 10.6.4.1
+ mpris_dbus_impl_get_type@Base 10.6.4.1
+ mpris_dbus_impl_list_names@Base 10.6.4.1
+ mpris_dbus_impl_list_names_finish@Base 10.6.4.1
+ mpris_dbus_impl_proxy_get_type@Base 10.6.4.1
+ mpris_dbus_impl_register_object@Base 10.6.4.1
+ mpris_dbus_prop_iface_get_type@Base 10.6.4.1
+ mpris_dbus_prop_iface_proxy_get_type@Base 10.6.4.1
+ mpris_dbus_prop_iface_register_object@Base 10.6.4.1
  mpris_iface_get_can_quit@Base 10.3
  mpris_iface_get_can_raise@Base 10.3
  mpris_iface_get_can_set_fullscreen@Base 10.3
@@ -167,6 +161,44 @@ libraven.so.0 libraven0 #MINVER#
  mpris_iface_raise_finish@Base 10.3
  mpris_iface_register_object@Base 10.3
  mpris_iface_set_can_quit@Base 10.3
+ mpris_player_iface_get_can_control@Base 10.6.4.1
+ mpris_player_iface_get_can_go_next@Base 10.6.4.1
+ mpris_player_iface_get_can_go_previous@Base 10.6.4.1
+ mpris_player_iface_get_can_pause@Base 10.6.4.1
+ mpris_player_iface_get_can_play@Base 10.6.4.1
+ mpris_player_iface_get_can_seek@Base 10.6.4.1
+ mpris_player_iface_get_loop_status@Base 10.6.4.1
+ mpris_player_iface_get_maximum_rate@Base 10.6.4.1
+ mpris_player_iface_get_metadata@Base 10.6.4.1
+ mpris_player_iface_get_minimum_rate@Base 10.6.4.1
+ mpris_player_iface_get_playback_status@Base 10.6.4.1
+ mpris_player_iface_get_position@Base 10.6.4.1
+ mpris_player_iface_get_rate@Base 10.6.4.1
+ mpris_player_iface_get_shuffle@Base 10.6.4.1
+ mpris_player_iface_get_type@Base 10.6.4.1
+ mpris_player_iface_get_volume@Base 10.6.4.1
+ mpris_player_iface_next@Base 10.6.4.1
+ mpris_player_iface_next_finish@Base 10.6.4.1
+ mpris_player_iface_open_uri@Base 10.6.4.1
+ mpris_player_iface_open_uri_finish@Base 10.6.4.1
+ mpris_player_iface_pause@Base 10.6.4.1
+ mpris_player_iface_pause_finish@Base 10.6.4.1
+ mpris_player_iface_play@Base 10.6.4.1
+ mpris_player_iface_play_finish@Base 10.6.4.1
+ mpris_player_iface_play_pause@Base 10.6.4.1
+ mpris_player_iface_play_pause_finish@Base 10.6.4.1
+ mpris_player_iface_previous@Base 10.6.4.1
+ mpris_player_iface_previous_finish@Base 10.6.4.1
+ mpris_player_iface_proxy_get_type@Base 10.6.4.1
+ mpris_player_iface_register_object@Base 10.6.4.1
+ mpris_player_iface_seek@Base 10.6.4.1
+ mpris_player_iface_seek_finish@Base 10.6.4.1
+ mpris_player_iface_set_loop_status@Base 10.6.4.1
+ mpris_player_iface_set_rate@Base 10.6.4.1
+ mpris_player_iface_set_shuffle@Base 10.6.4.1
+ mpris_player_iface_set_volume@Base 10.6.4.1
+ mpris_player_iface_stop@Base 10.6.4.1
+ mpris_player_iface_stop_finish@Base 10.6.4.1
  mpris_widget_construct@Base 10.3
  mpris_widget_get_type@Base 10.3
  mpris_widget_new@Base 10.3
@@ -179,45 +211,11 @@ libraven.so.0 libraven0 #MINVER#
  notification_widget_get_notification@Base 10.5.3+git20220217a
  notification_widget_get_type@Base 10.5.3+git20220217a
  notification_widget_new@Base 10.5.3+git20220217a
- player_iface_get_can_control@Base 10.3
- player_iface_get_can_go_next@Base 10.3
- player_iface_get_can_go_previous@Base 10.3
- player_iface_get_can_pause@Base 10.3
- player_iface_get_can_play@Base 10.3
- player_iface_get_can_seek@Base 10.3
- player_iface_get_loop_status@Base 10.3
- player_iface_get_maximum_rate@Base 10.3
- player_iface_get_metadata@Base 10.3
- player_iface_get_minimum_rate@Base 10.3
- player_iface_get_playback_status@Base 10.3
- player_iface_get_position@Base 10.3
- player_iface_get_rate@Base 10.3
- player_iface_get_shuffle@Base 10.3
- player_iface_get_type@Base 10.3
- player_iface_get_volume@Base 10.3
- player_iface_next@Base 10.3
- player_iface_next_finish@Base 10.3
- player_iface_open_uri@Base 10.3
- player_iface_open_uri_finish@Base 10.3
- player_iface_pause@Base 10.3
- player_iface_pause_finish@Base 10.3
- player_iface_play@Base 10.3
- player_iface_play_finish@Base 10.3
- player_iface_play_pause@Base 10.3
- player_iface_play_pause_finish@Base 10.3
- player_iface_previous@Base 10.3
- player_iface_previous_finish@Base 10.3
- player_iface_proxy_get_type@Base 10.3
- player_iface_register_object@Base 10.3
- player_iface_seek@Base 10.3
- player_iface_seek_finish@Base 10.3
- player_iface_set_loop_status@Base 10.3
- player_iface_set_rate@Base 10.3
- player_iface_set_shuffle@Base 10.3
- player_iface_set_volume@Base 10.3
- player_iface_stop@Base 10.3
- player_iface_stop_finish@Base 10.3
  raven_widget_construct@Base 10.4
  raven_widget_get_type@Base 10.4
  raven_widget_new@Base 10.4
  raven_widget_set_show@Base 10.4
+ start_listening_construct@Base 10.6.4.1
+ start_listening_get_type@Base 10.6.4.1
+ start_listening_new@Base 10.6.4.1
+ 
