@@ -4,3 +4,4 @@
 # There is no known upstream nor packaging workaround available.
 budgie-core-dev: pkg-config-unavailable-for-cross-compilation [usr/lib/pkgconfig/budgie-1.0.pc]
 budgie-core-dev: pkg-config-unavailable-for-cross-compilation [usr/lib/pkgconfig/budgie-theme-1.0.pc]
+budgie-core-dev: pkg-config-unavailable-for-cross-compilation [usr/lib/pkgconfig/budgie-raven-plugin-1.0.pc]

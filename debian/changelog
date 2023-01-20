@@ -1,4 +1,4 @@
-budgie-desktop (10.6.4.1-0ubuntu1) jammy; urgency=medium
+budgie-desktop (10.6.4.1-0ubuntu1) kinetic; urgency=medium
 
   * packaging from 20221230 debian release
 

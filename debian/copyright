@@ -26,11 +26,11 @@ Copyright: 2017, Jeremy Bicha <jbicha@debian.org>
   2016, 2017, David Mohammed <foss.freedom@gmail.com>
 License: GPL-2+
 
-Files: src/applets/icon-tasklist/animation.vala
+Files: src/panel/applets/icon-tasklist/animation.vala
 Copyright: 2015-2022, Budgie Desktop Developers
 License: LGPL-2.1+
 
-Files: src/applets/status/BluetoothIndicator.vala
+Files: src/panel/applets/status/BluetoothIndicator.vala
 Copyright: 2015-2022, Budgie Desktop Developers
   2015, Alberts Muktupāvels
 License: GPL-2+
@@ -58,10 +58,6 @@ License: LGPL-2.1+
 Files: src/plugin/*
 Copyright: 2015-2021, Budgie Desktop Developers
 License: LGPL-2.1+
-
-Files: src/polkit/polkitdialog.vala
-Copyright: 2014-2021, Budgie Desktop Developers
-License: GPL-2+
 
 Files: src/raven/notifications_view.vala
 Copyright: 2015-2021, Budgie Desktop Developers
