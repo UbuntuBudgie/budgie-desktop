@@ -15,8 +15,11 @@ budgie-desktop (10.7-1) experimental; urgency=medium
     d/libraven0.symbols update
     d/libbudgie-raven-plugin.symbols create and populate
     d/copyright - update year to 2023, adjust specific copyright for files
-    due to applet source restructure, remove copyright for polkitdialog
-    since src files removed in upstream tarball
+     due to applet source restructure, remove copyright for polkitdialog
+     since src files removed in upstream tarball
+    d/copyright - replace CC-BY-SA copyright for the default.jpg file with
+    CC0-1.0 since upstream has replaced the default.jpg image
+    (See README for the revised license designation)
     Refresh Rework-keyboard-handling-to-layouts-ibus-handling.patch
     Refresh show-tray-icon.patch
 

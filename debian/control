@@ -164,7 +164,7 @@ Description: GNOME introspection library for budgie-desktop (raven)
  .
  This is the introspection library and allows creating plugins in
  python3, C and Vala for the raven sidebar
- 
+
 Package: libbudgie-appindexer0
 Section: libs
 Architecture: any
