@@ -70,6 +70,7 @@ Section: libdevel
 Architecture: any
 Depends:
  gir1.2-budgie-1.0 (= ${binary:Version}),
+ gir1.2-budgieraven-1.0 (= ${binary:Version}),
  libbudgie-appindexer0 (= ${binary:Version}),
  libbudgie-plugin0 (= ${binary:Version}),
  libbudgie-private0 (= ${binary:Version}),
@@ -101,7 +102,7 @@ Depends:
  ${misc:Depends},
  network-manager-gnome,
  xdotool,
-Recommends: gir1.2-budgie-1.0, ${dist:Recommends}
+Recommends: gir1.2-budgie-1.0, gir1.2-budgieraven-1.0, ${dist:Recommends}
 Suggests:
  arc-theme,
  gnome-bluetooth-sendto,
@@ -150,6 +151,20 @@ Description: GNOME introspection library for budgie-desktop
  This is the introspection library and allows creating plugins in
  python3, C and Vala
 
+Package: gir1.2-budgieraven-1.0
+Section: introspection
+Architecture: any
+Depends: ${gir:Depends}, ${misc:Depends}, ${shlibs:Depends}
+Description: GNOME introspection library for budgie-desktop (raven)
+ Budgie-Desktop is a GTK+ based desktop environment which focuses on
+ simplicity and elegance.  It provides a traditional desktop metaphor
+ based interface utilising customisable panel based menu driven system.
+ Budgie-Desktop is written from scratch utilising many GNOME based
+ sub-systems such as GNOME-Session and Mutter.
+ .
+ This is the introspection library and allows creating plugins in
+ python3, C and Vala for the raven sidebar
+ 
 Package: libbudgie-appindexer0
 Section: libs
 Architecture: any
@@ -164,6 +179,19 @@ Description: Menu library for budgie-desktop
  This manages all of the application and category menu states for
  installed applications on the system.
 
+Package: libbudgie-raven-plugin0
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Raven Plugin library for budgie-desktop
+ Budgie-Desktop is a GTK+ based desktop environment which focuses on
+ simplicity and elegance.  It provides a traditional desktop metaphor
+ based interface utilising customisable panel based menu driven system.
+ Budgie-Desktop is written from scratch utilising many GNOME based
+ sub-systems such as GNOME-Session and Mutter.
+ .
+ This add the raven plugin library to budgie-desktop
+
 Package: libbudgie-plugin0
 Section: libs
 Architecture: any
@@ -175,7 +203,7 @@ Description: Plugin library for budgie-desktop
  Budgie-Desktop is written from scratch utilising many GNOME based
  sub-systems such as GNOME-Session and Mutter.
  .
- This adds the plugin library to budgie-desktop
+ This adds the panel plugin library to budgie-desktop
 
 Package: libbudgie-private0
 Section: libs

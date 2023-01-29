@@ -15,7 +15,10 @@ libbudgie-private.so.0 libbudgie-private0 #MINVER#
  budgie_desktop_manager_delete_panel@Base 10.4
  budgie_desktop_manager_get_panel_plugins@Base 10.4
  budgie_desktop_manager_get_panels@Base 10.4
+ budgie_desktop_manager_get_raven_plugins@Base 10.7
  budgie_desktop_manager_get_type@Base 10.4
+ budgie_desktop_manager_rescan_panel_plugins@Base 10.7
+ budgie_desktop_manager_rescan_raven_plugins@Base 10.7
  budgie_desktop_manager_set_autohide@Base 10.4
  budgie_desktop_manager_set_dock_mode@Base 10.4
  budgie_desktop_manager_set_placement@Base 10.4
@@ -53,7 +56,6 @@ libbudgie-private.so.0 libbudgie-private0 #MINVER#
  budgie_notification_set_image@Base 10.5.3+git20220217a
  budgie_notification_set_summary@Base 10.5.3+git20220217a
  budgie_notification_set_timestamp@Base 10.5.3+git20220217a
- budgie_notification_urgency_get_type@Base 10.5.3+git20220217a
  budgie_panel_transparency_get_type@Base 10.4
  budgie_position_class_name@Base 10.4
  budgie_prop_change_copy@Base 10.4

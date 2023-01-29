@@ -5,10 +5,10 @@ Description: Show tray icon
  thus show in the tray
 Author: David Mohammed <fossfreedom@ubuntu.com>
 Forwarded: not-needed
-Last-Update: 2020-08-18
+Last-Update: 2022-01-29
 
 --- /dev/null
-+++ b/src/applets/tray/com.solus-project.tray-nm.gschema.xml
++++ b/src/panel/applets/tray/com.solus-project.tray-nm.gschema.xml
 @@ -0,0 +1,11 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<schemalist gettext-domain="budgie">
@@ -22,8 +22,8 @@ Last-Update: 2020-08-18
 +
 +</schemalist>
 \ No newline at end of file
---- a/src/applets/tray/meson.build
-+++ b/src/applets/tray/meson.build
+--- a/src/panel/applets/tray/meson.build
++++ b/src/panel/applets/tray/meson.build
 @@ -48,3 +48,8 @@
      'com.solus-project.tray.gschema.xml',
      install_dir: join_paths(datadir, 'glib-2.0', 'schemas'),

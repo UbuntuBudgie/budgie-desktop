@@ -1,6 +1,6 @@
 Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/168
 Authord: David Mohammed <fossfreedom@ubuntu.com>
-Last-Update: 2022-07-21
+Last-Update: 2023-01-29
 Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  works on logon
 
@@ -282,7 +282,7 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  }
 --- a/src/wm/wm.vala
 +++ b/src/wm/wm.vala
-@@ -145,8 +145,6 @@
+@@ -156,8 +156,6 @@
  
  		private Meta.BackgroundGroup? background_group;
  
@@ -291,7 +291,7 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  		Settings? settings = null;
  		Settings? gnome_desktop_prefs = null;
  		RavenRemote? raven_proxy = null;
-@@ -618,8 +616,7 @@
+@@ -652,8 +650,7 @@
  			display_group.show();
  			stage.show();
  

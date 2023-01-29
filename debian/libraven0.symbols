@@ -1,17 +1,22 @@
 libraven.so.0 libraven0 #MINVER#
 * Build-Depends-Package: budgie-core-dev
- budgie_app_sound_control_construct@Base 10.4
- budgie_app_sound_control_get_type@Base 10.4
- budgie_app_sound_control_new@Base 10.4
- budgie_app_sound_control_refresh@Base 10.4
- budgie_app_sound_control_refresh_volume@Base 10.5.1
- budgie_dispatcher_get_do_not_disturb@Base 10.5.3+git20220217a
- budgie_dispatcher_get_notifications_paused@Base 10.5.3+git20220217a
- budgie_dispatcher_get_type@Base 10.5.3+git20220217a
- budgie_dispatcher_proxy_get_type@Base 10.5.3+git20220217a
- budgie_dispatcher_register_object@Base 10.5.3+git20220217a
- budgie_dispatcher_set_notifications_paused@Base 10.5.3+git20220217a
- budgie_dispatcher_toggle_do_not_disturb@Base 10.5.3+git20220217a
+ BUDGIE_CONFDIR@Base 10.7
+ BUDGIE_DATADIR@Base 10.7
+ BUDGIE_GETTEXT_PACKAGE@Base 10.7
+ BUDGIE_LOCALEDIR@Base 10.7
+ BUDGIE_MODULE_DATA_DIRECTORY@Base 10.7
+ BUDGIE_MODULE_DIRECTORY@Base 10.7
+ BUDGIE_RAVEN_PLUGIN_DATADIR@Base 10.7
+ BUDGIE_RAVEN_PLUGIN_LIBDIR@Base 10.7
+ BUDGIE_VERSION@Base 10.7
+ BUDGIE_WEBSITE@Base 10.7
+ budgie_dispatcher_get_do_not_disturb@Base 10.5.3git20220217a
+ budgie_dispatcher_get_notifications_paused@Base 10.5.3git20220217a
+ budgie_dispatcher_get_type@Base 10.5.3git20220217a
+ budgie_dispatcher_proxy_get_type@Base 10.5.3git20220217a
+ budgie_dispatcher_register_object@Base 10.5.3git20220217a
+ budgie_dispatcher_set_notifications_paused@Base 10.5.3git20220217a
+ budgie_dispatcher_toggle_do_not_disturb@Base 10.5.3git20220217a
  budgie_header_expander_construct@Base 10.3
  budgie_header_expander_get_expanded@Base 10.3
  budgie_header_expander_get_type@Base 10.3
@@ -29,10 +34,14 @@ libraven.so.0 libraven0 #MINVER#
  budgie_header_widget_set_expanded@Base 10.3
  budgie_header_widget_set_icon_name@Base 10.3
  budgie_header_widget_set_text@Base 10.3
+ budgie_main_view_add_widget_instance@Base 10.7
  budgie_main_view_construct@Base 10.3
  budgie_main_view_expose_notification@Base 10.3
  budgie_main_view_get_type@Base 10.3
+ budgie_main_view_move_widget_instance_by_offset@Base 10.7
  budgie_main_view_new@Base 10.3
+ budgie_main_view_raven_expanded@Base 10.7
+ budgie_main_view_remove_widget_instance@Base 10.7
  budgie_main_view_set_clean@Base 10.3
  budgie_notification_group_add_notification@Base 10.4
  budgie_notification_group_construct@Base 10.4
@@ -48,15 +57,16 @@ libraven.so.0 libraven0 #MINVER#
  budgie_notifications_view_get_type@Base 10.3
  budgie_notifications_view_new@Base 10.3
  budgie_param_spec_raven_iface@Base 10.3
+ budgie_param_spec_raven_plugin_manager@Base 10.7
+ budgie_param_spec_raven_widget_data@Base 10.7
  budgie_raven_interface_get_type@Base 10.6
  budgie_raven_interface_proxy_get_type@Base 10.6
  budgie_raven_interface_register_object@Base 10.6
- budgie_power_strip_construct@Base 10.3
- budgie_power_strip_get_type@Base 10.3
- budgie_power_strip_new@Base 10.3
+ budgie_raven_move_widget_by_offset@Base 10.7
  budgie_raven_ReadNotifications@Base 10.3
  budgie_raven_UnreadNotifications@Base 10.3
  budgie_raven_construct@Base 10.3
+ budgie_raven_create_widget_instance@Base 10.7
  budgie_raven_expander_construct@Base 10.3
  budgie_raven_expander_get_expanded@Base 10.3
  budgie_raven_expander_get_type@Base 10.3
@@ -64,6 +74,7 @@ libraven.so.0 libraven0 #MINVER#
  budgie_raven_expander_set_expanded@Base 10.3
  budgie_raven_expose_main_view@Base 10.3
  budgie_raven_expose_notification@Base 10.3
+ budgie_raven_get_existing_widgets@Base 10.7
  budgie_raven_get_expanded@Base 10.3
  budgie_raven_get_instance@Base 10.3
  budgie_raven_get_manager@Base 10.3
@@ -90,8 +101,23 @@ libraven.so.0 libraven0 #MINVER#
  budgie_raven_iface_set_is_expanded@Base 10.3
  budgie_raven_iface_unref@Base 10.3
  budgie_raven_new@Base 10.3
+ budgie_raven_plugin_manager_clear_widget_instance_info@Base 10.7
+ budgie_raven_plugin_manager_clear_widget_instance_settings@Base 10.7
+ budgie_raven_plugin_manager_construct@Base 10.7
+ budgie_raven_plugin_manager_get_all_plugins@Base 10.7
+ budgie_raven_plugin_manager_get_type@Base 10.7
+ budgie_raven_plugin_manager_get_widget_info_from_uuid@Base 10.7
+ budgie_raven_plugin_manager_is_plugin_loaded@Base 10.7
+ budgie_raven_plugin_manager_modprobe@Base 10.7
+ budgie_raven_plugin_manager_new@Base 10.7
+ budgie_raven_plugin_manager_new_widget_instance_for_plugin@Base 10.7
+ budgie_raven_plugin_manager_ref@Base 10.7
+ budgie_raven_plugin_manager_rescan_plugins@Base 10.7
+ budgie_raven_plugin_manager_setup_plugins@Base 10.7
+ budgie_raven_plugin_manager_unref@Base 10.7
  budgie_raven_position_get_display_name@Base 10.5.2
  budgie_raven_position_get_type@Base 10.5.2
+ budgie_raven_remove_widget@Base 10.7
  budgie_raven_set_expanded@Base 10.3
  budgie_raven_set_manager@Base 10.3
  budgie_raven_set_notification_count@Base 10.3
@@ -100,124 +126,28 @@ libraven.so.0 libraven0 #MINVER#
  budgie_raven_set_screen_edge@Base 10.4
  budgie_raven_setup_dbus@Base 10.3
  budgie_raven_update_geometry@Base 10.3
- budgie_screen_saver_get_type@Base 10.3
- budgie_screen_saver_lock@Base 10.3
- budgie_screen_saver_proxy_get_type@Base 10.3
- budgie_screen_saver_register_object@Base 10.3
- budgie_session_manager_Logout@Base 10.3
- budgie_session_manager_Logout_finish@Base 10.3
- budgie_session_manager_get_type@Base 10.3
- budgie_session_manager_proxy_get_type@Base 10.3
- budgie_session_manager_register_object@Base 10.3
- budgie_sound_widget_construct@Base 10.4
- budgie_sound_widget_get_type@Base 10.4
- budgie_sound_widget_has_devices@Base 10.4
- budgie_sound_widget_new@Base 10.4
- budgie_start_listening_construct@Base 10.4
- budgie_start_listening_get_type@Base 10.4
- budgie_start_listening_new@Base 10.4
+ budgie_raven_update_uuids@Base 10.7
+ budgie_raven_widget_creation_result_get_type@Base 10.7
+ budgie_raven_widget_data_construct@Base 10.7
+ budgie_raven_widget_data_get_plugin_info@Base 10.7
+ budgie_raven_widget_data_get_supports_settings@Base 10.7
+ budgie_raven_widget_data_get_type@Base 10.7
+ budgie_raven_widget_data_get_uuid@Base 10.7
+ budgie_raven_widget_data_get_widget_instance@Base 10.7
+ budgie_raven_widget_data_new@Base 10.7
+ budgie_raven_widget_data_ref@Base 10.7
+ budgie_raven_widget_data_unref@Base 10.7
  budgie_value_get_raven_iface@Base 10.3
+ budgie_value_get_raven_plugin_manager@Base 10.7
+ budgie_value_get_raven_widget_data@Base 10.7
  budgie_value_set_raven_iface@Base 10.3
+ budgie_value_set_raven_plugin_manager@Base 10.7
+ budgie_value_set_raven_widget_data@Base 10.7
  budgie_value_take_raven_iface@Base 10.3
- calendar_widget_construct@Base 10.3
- calendar_widget_get_type@Base 10.3
- calendar_widget_new@Base 10.3
- client_image_construct@Base 10.3
- client_image_construct_from_icon_name@Base 10.3
- client_image_construct_from_pixbuf@Base 10.3
- client_image_get_type@Base 10.3
- client_image_new@Base 10.3
- client_image_new_from_icon_name@Base 10.3
- client_image_new_from_pixbuf@Base 10.3
- client_widget_construct@Base 10.3
- client_widget_get_type@Base 10.3
- client_widget_new@Base 10.3
- client_widget_update_from_meta@Base 10.3
- client_widget_update_width@Base 10.3
- create_row@Base 10.3
- dbus_impl_get_type@Base 10.3
- dbus_impl_list_names@Base 10.3
- dbus_impl_list_names_finish@Base 10.3
- dbus_impl_proxy_get_type@Base 10.3
- dbus_impl_register_object@Base 10.3
- dbus_prop_iface_get_type@Base 10.3
- dbus_prop_iface_proxy_get_type@Base 10.3
- dbus_prop_iface_register_object@Base 10.3
- mpris_client_construct@Base 10.3
- mpris_client_get_player@Base 10.3
- mpris_client_get_prop@Base 10.3
- mpris_client_get_type@Base 10.3
- mpris_client_new@Base 10.3
- mpris_client_set_player@Base 10.3
- mpris_client_set_prop@Base 10.3
- mpris_iface_get_can_quit@Base 10.3
- mpris_iface_get_can_raise@Base 10.3
- mpris_iface_get_can_set_fullscreen@Base 10.3
- mpris_iface_get_desktop_entry@Base 10.3
- mpris_iface_get_fullscreen@Base 10.3
- mpris_iface_get_has_track_list@Base 10.3
- mpris_iface_get_identity@Base 10.3
- mpris_iface_get_supported_mime_types@Base 10.3
- mpris_iface_get_supported_uri_schemes@Base 10.3
- mpris_iface_get_type@Base 10.3
- mpris_iface_proxy_get_type@Base 10.3
- mpris_iface_quit@Base 10.3
- mpris_iface_quit_finish@Base 10.3
- mpris_iface_raise@Base 10.3
- mpris_iface_raise_finish@Base 10.3
- mpris_iface_register_object@Base 10.3
- mpris_iface_set_can_quit@Base 10.3
- mpris_widget_construct@Base 10.3
- mpris_widget_get_type@Base 10.3
- mpris_widget_new@Base 10.3
- mpris_widget_setup_dbus@Base 10.3
- mpris_widget_setup_dbus_finish@Base 10.3
- new_iface@Base 10.3
- new_iface_finish@Base 10.3
- notification_widget_Dismiss@Base 10.5.3+git20220217a
- notification_widget_construct@Base 10.5.3+git20220217a
- notification_widget_get_notification@Base 10.5.3+git20220217a
- notification_widget_get_type@Base 10.5.3+git20220217a
- notification_widget_new@Base 10.5.3+git20220217a
- player_iface_get_can_control@Base 10.3
- player_iface_get_can_go_next@Base 10.3
- player_iface_get_can_go_previous@Base 10.3
- player_iface_get_can_pause@Base 10.3
- player_iface_get_can_play@Base 10.3
- player_iface_get_can_seek@Base 10.3
- player_iface_get_loop_status@Base 10.3
- player_iface_get_maximum_rate@Base 10.3
- player_iface_get_metadata@Base 10.3
- player_iface_get_minimum_rate@Base 10.3
- player_iface_get_playback_status@Base 10.3
- player_iface_get_position@Base 10.3
- player_iface_get_rate@Base 10.3
- player_iface_get_shuffle@Base 10.3
- player_iface_get_type@Base 10.3
- player_iface_get_volume@Base 10.3
- player_iface_next@Base 10.3
- player_iface_next_finish@Base 10.3
- player_iface_open_uri@Base 10.3
- player_iface_open_uri_finish@Base 10.3
- player_iface_pause@Base 10.3
- player_iface_pause_finish@Base 10.3
- player_iface_play@Base 10.3
- player_iface_play_finish@Base 10.3
- player_iface_play_pause@Base 10.3
- player_iface_play_pause_finish@Base 10.3
- player_iface_previous@Base 10.3
- player_iface_previous_finish@Base 10.3
- player_iface_proxy_get_type@Base 10.3
- player_iface_register_object@Base 10.3
- player_iface_seek@Base 10.3
- player_iface_seek_finish@Base 10.3
- player_iface_set_loop_status@Base 10.3
- player_iface_set_rate@Base 10.3
- player_iface_set_shuffle@Base 10.3
- player_iface_set_volume@Base 10.3
- player_iface_stop@Base 10.3
- player_iface_stop_finish@Base 10.3
- raven_widget_construct@Base 10.4
- raven_widget_get_type@Base 10.4
- raven_widget_new@Base 10.4
- raven_widget_set_show@Base 10.4
+ budgie_value_take_raven_plugin_manager@Base 10.7
+ budgie_value_take_raven_widget_data@Base 10.7
+ notification_widget_Dismiss@Base 10.5.3git20220217a
+ notification_widget_construct@Base 10.5.3git20220217a
+ notification_widget_get_notification@Base 10.5.3git20220217a
+ notification_widget_get_type@Base 10.5.3git20220217a
+ notification_widget_new@Base 10.5.3git20220217a
