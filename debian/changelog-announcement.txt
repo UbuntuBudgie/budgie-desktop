@@ -37,7 +37,8 @@ Dual-GPU Support
 Budgie Menu now leverages switcheroo-control if available to switch between GPU environments when launching applications that request it. Users with dual-GPU setups can now launch their applications without necessarily having to worry about which GPU is in use and manually switching between them.
 Personal User Menu
 
-Budgie Menu now provides a "personal user menu" which has quick XDG directory access. This feature enables you to open up a file manager (or technically whatever your inode/directory handler is) directly to folders like Home, Documents, Music, etc. This follows the XDG Base Directory Specification, so if you have for example a different path set for Music (or your system locale is not English) that will be respected. Folders which do not exist will be automatically hidden, so the menu will only show items which are relevant to you!
+Budgie Menu now provides a "personal user menu" which has quick XDG directory access. This feature enables you to open up a file manager (or technically whatever your inode/directory handler is) directly to folders like Home, Documents, Music, etc. This follows the XDG Base Directory Specification, so if you have for example a different path set for Music (or your system locale is not English) that will be respected. Folders which do not exist will be automatically hidden, so the menu will only
+show items which are relevant to you!
 Quick Settings and Power Access
 
 In the new bottom strip of Budgie Menu, we now have buttons for launching Budgie Desktop Settings, Budgie Control Center, and our new Power Dialog (which we will get into later). You no longer need to search for these in the menu or access them by right-clicking on the desktop.
@@ -82,7 +83,8 @@ There has been a swath of improvements to our rendering of notifications:
 
 BudgieNotificationsBodyText
 
-    Width chars were added so that the body text always has the same minimum and maximum size per line, so the entire popup body is filled by the label. Lines is set to 2, so only two lines of text is displayed. Note that this does not mean two lines in the popup; it's two lines of the actual notification text. This allows long lines to wrap (and wrapped lines don't count towards lines, because reasons) without popups taking up large amounts of screen real-estate. Xalign is set to 0 to ensure that the text always starts at the left (because halign and justify isn't enough).
+    Width chars were added so that the body text always has the same minimum and maximum size per line, so the entire popup body is filled by the label. Lines is set to 2, so only two lines of text is displayed. Note that this does not mean two lines in the popup; it's two lines of the actual notification text. This allows long lines to wrap (and wrapped lines don't count towards lines, because reasons) without popups taking up large amounts of screen real-estate. Xalign is set to 0 to ensure that the
+    text always starts at the left (because halign and justify isn't enough).
 
 Notification Summary
 
