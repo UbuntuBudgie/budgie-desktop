@@ -35,7 +35,7 @@ Build-Depends:
  sassc,
  uuid-dev,
  valac (>= 0.48.0),
-Standards-Version: 4.6.1.0
+Standards-Version: 4.6.2
 Vcs-Browser: https://github.com/ubuntubudgie/budgie-desktop/tree/debian
 Vcs-Git: https://github.com/ubuntubudgie/budgie-desktop.git -b debian
 Rules-Requires-Root: no
@@ -47,6 +47,7 @@ Depends:
  gnome-session-bin,
  gnome-session-common,
  gnome-settings-daemon,
+ zenity,
  ${misc:Depends},
  ${shlibs:Depends},
 Description: Core package for Budgie-Desktop
@@ -163,7 +164,7 @@ Description: GNOME introspection library for budgie-desktop (raven)
  .
  This is the introspection library and allows creating plugins in
  python3, C and Vala for the raven sidebar
- 
+
 Package: libbudgie-appindexer0
 Section: libs
 Architecture: any
