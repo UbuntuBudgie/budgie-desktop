@@ -1,8 +1,37 @@
-budgie-desktop (10.6.4.1-0ubuntu1) kinetic; urgency=medium
+budgie-desktop (10.7-1) experimental; urgency=medium
 
-  * packaging from 20221230 debian release
+  * New upstream release
+    upstream release announcement in install changelogs
+  * Packaging Changes
+    d/changelog-announcement incorporates upstream release notice
+    d/rules install new BudgieRaven typelib in the girepository
+    d/control add gir1.2-budgieraven-1.0 binary package
+    d/control add libbudgie-raven-plugin0 binary package
+    d/control clarify the description for libbudgie-plugin0
+    d/control update budgie-core-dev dependencies for the new
+    binaries
+    d/watch and d/upstream change to signed for this upstream release
+    d/libbudgie-private0.symbols update
+    d/libraven0.symbols update
+    d/libbudgie-raven-plugin.symbols create and populate
+    d/copyright - update year to 2023, adjust specific copyright for files
+     due to applet source restructure, remove copyright for polkitdialog
+     since src files removed in upstream tarball
+    d/copyright - replace CC-BY-SA copyright for the default.jpg file with
+    CC0-1.0 since upstream has replaced the default.jpg image
+    (See README for the revised license designation)
+    Refresh Rework-keyboard-handling-to-layouts-ibus-handling.patch
+    Refresh show-tray-icon.patch
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Sat, 31 Dec 2022 11:12:27 +0000
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sat, 28 Jan 2023 23:32:08 +0000
+
+budgie-desktop (10.6.4+git20221230-2) unstable; urgency=medium
+
+  * Packaging
+    - d/control: Add runtime dependency on zenity to allow budgie-mutter
+      based dialogs to display
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 09 Jan 2023 19:42:41 +0000
 
 budgie-desktop (10.6.4+git20221230-1) unstable; urgency=medium
 
