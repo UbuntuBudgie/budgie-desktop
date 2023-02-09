@@ -1,3 +1,32 @@
+budgie-desktop (10.7-2) unstable; urgency=medium
+
+  * Upload to unstable
+  * Patches added
+    - appindexer-Take-into-account-default-handlers-for-re.patch
+      Adjust the relevancy score of applications relative to a search term
+      based on if that application is the default handler for the MIME types
+      it supports. This should make it more likely that applications set as
+      default for a content type is shown above other applications.
+    - feat-Automatically-update-Calendar-widget-when-showi.patch
+      eliminates an unnecessary 30 second timer that existed for the purposes
+      of highlighting the current day.
+    - Ensure-screenshot-popover-labels-match-their-corresp.patch
+      Display the correct keyboard label for the keyboard shortcut
+    - Plugin-chooser-escape-description-markup-symbols-293.patch
+      When a plugin has an "&" in their "description=" line in the .plugin
+      file, the description fails to properly show. (set_markup error).
+    - Test-if-the-window-of-type-desktop-before-taking-a-w.patch
+      Where invoking the screenshot and taking a window screenshot of an
+      empty desktop, the empty desktop displaying icons is actually a
+      hidden window.  In this case we should take a full screenshot.
+    - appindexer-Check-if-an-application-name-contains-a-s.patch
+      make it easier to find applications by only typing a part of the
+      application's name.
+  * Packaging Changes:
+    - update missing libbudgie-appindexer0 symbols
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 09 Feb 2023 22:05:01 +0000
+
 budgie-desktop (10.7-1) experimental; urgency=medium
 
   * New upstream release

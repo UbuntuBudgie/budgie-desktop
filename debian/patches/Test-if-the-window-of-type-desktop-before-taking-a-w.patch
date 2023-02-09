@@ -1,0 +1,34 @@
+Origin: commit:0cfee956f810385fda4967cc775fb1e1358958fc
+Author: David Mohammed <fossfreedom@users.noreply.github.com>
+Last-Update: 2023-02-06
+Description: [PATCH 09/10] Test if the window of type desktop before taking a
+ window screenshot. (#287)
+
+Where invoking the screenshot and taking a window screenshot of an
+empty desktop, the empty desktop displaying icons is actually a
+hidden window.  In this case we should take a full screenshot.
+
+Co-authored-by: Joshua Strobl <JoshStrobl@users.noreply.github.com>
+---
+ src/wm/screenshot.vala | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/wm/screenshot.vala b/src/wm/screenshot.vala
+index 8050cc56..217c5a02 100644
+--- a/src/wm/screenshot.vala
++++ b/src/wm/screenshot.vala
+@@ -133,6 +133,11 @@ namespace Budgie {
+ 				throw new DBusError.FAILED("Cannot find active window");
+ 			}
+ 
++			if (window.get_window_type() == Meta.WindowType.DESKTOP) {
++				yield screenshot(include_cursor, flash, filename, out success, out filename_used);
++				return;
++			}
++
+ 			var window_actor = (Meta.WindowActor) window.get_compositor_private();
+ 
+ 			float actor_x, actor_y;
+-- 
+2.37.2
+

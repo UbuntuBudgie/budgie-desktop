@@ -1,0 +1,28 @@
+Origin: commit:e59a2003d4e27d5b2ced7ce12747901446edfb15
+Author: David Mohammed <fossfreedom@users.noreply.github.com>
+Last-Update: 2023-02-01
+Description: [PATCH 07/10] Ensure screenshot popover labels match their
+ corresponding keyboard shortcut (#285)
+
+Co-authored-by: Joshua Strobl <JoshStrobl@users.noreply.github.com>
+---
+ src/daemon/screenshot.vala | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/daemon/screenshot.vala b/src/daemon/screenshot.vala
+index faf7a0c9..88131e69 100644
+--- a/src/daemon/screenshot.vala
++++ b/src/daemon/screenshot.vala
+@@ -436,8 +436,8 @@ namespace BudgieScr {
+ 			Label[] shortcutnames = {
+ 				// Translators: be as brief as possible; popovers ar cut off if broader than the window
+ 				new Label(_("Screenshot entire screen") + ":\t"),
+-				new Label(_("Screenshot selected area") + ":\t"),
+ 				new Label(_("Screenshot active window") + ":\t"),
++				new Label(_("Screenshot selected area") + ":\t"),
+ 			};
+ 
+ 			shortcutlabels = {};
+-- 
+2.37.2
+

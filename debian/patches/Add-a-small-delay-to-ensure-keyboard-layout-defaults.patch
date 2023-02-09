@@ -1,5 +1,5 @@
 Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/168
-Authord: David Mohammed <fossfreedom@ubuntu.com>
+Author: David Mohammed <fossfreedom@ubuntu.com>
 Last-Update: 2022-11-27
 Description: [PATCH] Add a small delay to ensure keyboard layout defaults to the
  current layout rather than the first available

@@ -9,3 +9,9 @@ darktheme/0006-Remove-last-remaining-and-obsolete-GSD42-guard.patch
 Rework-keyboard-handling-to-layouts-ibus-handling.patch
 Initialise-ibus-within-the-class-constructor.patch
 Add-a-small-delay-to-ensure-keyboard-layout-defaults.patch
+appindexer-Take-into-account-default-handlers-for-re.patch
+feat-Automatically-update-Calendar-widget-when-showi.patch
+Ensure-screenshot-popover-labels-match-their-corresp.patch
+Plugin-chooser-escape-description-markup-symbols-293.patch
+Test-if-the-window-of-type-desktop-before-taking-a-w.patch
+appindexer-Check-if-an-application-name-contains-a-s.patch
