@@ -1,6 +1,6 @@
 Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/168
 Authord: David Mohammed <fossfreedom@ubuntu.com>
-Last-Update: 2023-01-29
+Last-Update: 2023-02-23
 Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  works on logon
 
@@ -156,7 +156,7 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  		void apply_layout_group() {
  			unowned InputSource? source;
  			string[] layouts = {};
-@@ -219,6 +251,7 @@
+@@ -220,6 +252,7 @@
  		}
  
  		/* Apply an indexed layout, i.e. 0 for now */
@@ -164,8 +164,8 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  		void apply_layout(uint idx) {
  			if (idx > sources.length) {
  				idx = 0;
-@@ -227,9 +260,10 @@
- 			Meta.Backend.get_backend().lock_layout_group(idx);
+@@ -230,9 +263,10 @@
+ 			ctx.get_backend().lock_layout_group(idx);
  			/* Send this off to gsettings so that clients know what our idx is */
  			this.write_source_index(idx);
 -		}
@@ -176,7 +176,7 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  		void update_fallback() {
  			string? type = null;
  			string? id = null;
-@@ -265,16 +299,19 @@
+@@ -268,16 +302,19 @@
  		/**
  		* Update the index in gsettings so that clients know the current
  		*/
@@ -196,7 +196,7 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  		private void on_current_source_changed() {
  			uint new_source = this.settings.get_uint("current");
  			this.hold_keyboard();
-@@ -285,6 +322,7 @@
+@@ -288,6 +325,7 @@
  		/**
  		* Apply the ibus engine and then release the keyboard
  		*/
@@ -204,7 +204,7 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  		private void apply_ibus() {
  			string engine_name;
  			InputSource? current = sources.index(current_source);
-@@ -299,6 +337,7 @@
+@@ -302,6 +340,7 @@
  		/**
  		* Unfreeze the keyboard
  		*/
@@ -212,7 +212,7 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  		public void release_keyboard() {
  			if (!is_keyboard_held) {
  				return;
-@@ -310,6 +349,7 @@
+@@ -313,6 +352,7 @@
  		/**
  		* Freeze the keyboard so we don't loose input events
  		*/
@@ -220,7 +220,7 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  		public void hold_keyboard() {
  			if (is_keyboard_held) {
  				return;
-@@ -317,5 +357,59 @@
+@@ -320,5 +360,59 @@
  			wm.get_display().freeze_keyboard(wm.get_display().get_current_time());
  			is_keyboard_held = true;
  		}
@@ -291,7 +291,7 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  		Settings? settings = null;
  		Settings? gnome_desktop_prefs = null;
  		RavenRemote? raven_proxy = null;
-@@ -652,8 +650,7 @@
+@@ -654,8 +652,7 @@
  			display_group.show();
  			stage.show();
  

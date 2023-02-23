@@ -49,10 +49,13 @@ libraven.so.0 libraven0 #MINVER#
  budgie_notification_group_get_type@Base 10.4
  budgie_notification_group_new@Base 10.4
  budgie_notification_group_remove_notification@Base 10.4
+ budgie_notification_group_set_sort_mode@Base 10.7.1
  budgie_notification_group_update_count@Base 10.4
  budgie_notification_placeholder_construct@Base 10.3
  budgie_notification_placeholder_get_type@Base 10.3
  budgie_notification_placeholder_new@Base 10.3
+ budgie_notification_sort_get_display_name@Base 10.7.1
+ budgie_notification_sort_get_type@Base 10.7.1
  budgie_notifications_view_construct@Base 10.3
  budgie_notifications_view_get_type@Base 10.3
  budgie_notifications_view_new@Base 10.3

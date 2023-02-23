@@ -1,6 +1,6 @@
 Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/168
 Authord: David Mohammed <fossfreedom@ubuntu.com>
-Last-Update: 2022-09-11
+Last-Update: 2023-02-23
 Description: [PATCH] Initialise ibus within the class constructor to prevent
  crashes with the new gnomekbd and cleanup
 
@@ -85,15 +85,15 @@ Description: [PATCH] Initialise ibus within the class constructor to prevent
  					sources.append_val(source);
  				}
  			}
-@@ -256,6 +262,7 @@
+@@ -257,6 +263,7 @@
  			if (idx > sources.length) {
  				idx = 0;
  			}
 +
  			this.current_source = idx;
- 			Meta.Backend.get_backend().lock_layout_group(idx);
- 			/* Send this off to gsettings so that clients know what our idx is */
-@@ -326,11 +333,13 @@
+ 			Meta.Display display = wm.get_display();
+ 			Meta.Context ctx = display.get_context();
+@@ -329,11 +336,13 @@
  		private void apply_ibus() {
  			string engine_name;
  			InputSource? current = sources.index(current_source);
@@ -107,7 +107,7 @@ Description: [PATCH] Initialise ibus within the class constructor to prevent
  			this.ibus_manager.set_engine(engine_name);
  		}
  
-@@ -342,6 +351,7 @@
+@@ -345,6 +354,7 @@
  			if (!is_keyboard_held) {
  				return;
  			}

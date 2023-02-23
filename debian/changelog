@@ -1,3 +1,25 @@
+budgie-desktop (10.7.1-1) unstable; urgency=medium
+
+  * Service release
+  * Drop patches introduced in 10.7-2 since these are included in this
+    release
+    - Additional changes released:
+      Fix inability to screenshot full-screen applications
+    - Align BDS panel settings margins to be the same as raven settings
+    - Updated Translations
+    - Fix ellipsizing overflowing text in media control widget causing
+      raven expansion
+    - Add Mutter 12 ABI support if source is compiled with this version
+  * Refresh patches
+    - Rework-keyboard-handling-to-layouts-ibus-handling.patch
+    - Initialise-ibus-within-the-class-constructor.patch
+  * Correct schema names
+    Fix-SoundOutput-and-Calendar-widget-settings-schemas.patch
+  * Packaging changes
+    d/libraven.symbols update with new symbols
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 23 Feb 2023 20:03:16 +0000
+
 budgie-desktop (10.7-2) unstable; urgency=medium
 
   * Upload to unstable

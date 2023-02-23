@@ -1,0 +1,61 @@
+From 8635974d5d47ae5881591cec4e08c5476a2da7c6 Mon Sep 17 00:00:00 2001
+From: Campbell Jones <git@serebit.com>
+Date: Sun, 19 Feb 2023 21:42:40 -0500
+Subject: [PATCH] Fix SoundOutput and Calendar widget settings schemas
+
+---
+ ...budgie-desktop.raven.widget.Calendar.gschema.xml | 13 +++++++++----
+ ...gie-desktop.raven.widget.SoundOutput.gschema.xml | 13 ++++---------
+ 2 files changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/src/raven/widgets/calendar/org.buddiesofbudgie.budgie-desktop.raven.widget.Calendar.gschema.xml b/src/raven/widgets/calendar/org.buddiesofbudgie.budgie-desktop.raven.widget.Calendar.gschema.xml
+index 6610739d..4e2a97c0 100644
+--- a/src/raven/widgets/calendar/org.buddiesofbudgie.budgie-desktop.raven.widget.Calendar.gschema.xml
++++ b/src/raven/widgets/calendar/org.buddiesofbudgie.budgie-desktop.raven.widget.Calendar.gschema.xml
+@@ -1,10 +1,15 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <schemalist gettext-domain="budgie">
+-  <schema id="org.buddiesofbudgie.budgie-desktop.raven.widget.SoundOutput">
+-    <key type="b" name="allow-volume-overdrive">
++  <schema id="org.buddiesofbudgie.budgie-desktop.raven.widget.Calendar">
++    <key type="b" name="show-week-numbers">
+       <default>false</default>
+-      <summary>Allow raising volume above 100%</summary>
+-      <description>This setting overrides the one provided by org.gnome.desktop.sound.</description>
++      <summary>Display week numbers</summary>
++      <description>This setting enables the display of week numbers in the calendar.</description>
++    </key>
++    <key type="b" name="show-day-names">
++      <default>true</default>
++      <summary>Display day names</summary>
++      <description>This setting enables the display of day-of-the-week names in the calendar.</description>
+     </key>
+   </schema>
+ </schemalist>
+diff --git a/src/raven/widgets/sound-output/org.buddiesofbudgie.budgie-desktop.raven.widget.SoundOutput.gschema.xml b/src/raven/widgets/sound-output/org.buddiesofbudgie.budgie-desktop.raven.widget.SoundOutput.gschema.xml
+index 4e2a97c0..6610739d 100644
+--- a/src/raven/widgets/sound-output/org.buddiesofbudgie.budgie-desktop.raven.widget.SoundOutput.gschema.xml
++++ b/src/raven/widgets/sound-output/org.buddiesofbudgie.budgie-desktop.raven.widget.SoundOutput.gschema.xml
+@@ -1,15 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <schemalist gettext-domain="budgie">
+-  <schema id="org.buddiesofbudgie.budgie-desktop.raven.widget.Calendar">
+-    <key type="b" name="show-week-numbers">
++  <schema id="org.buddiesofbudgie.budgie-desktop.raven.widget.SoundOutput">
++    <key type="b" name="allow-volume-overdrive">
+       <default>false</default>
+-      <summary>Display week numbers</summary>
+-      <description>This setting enables the display of week numbers in the calendar.</description>
+-    </key>
+-    <key type="b" name="show-day-names">
+-      <default>true</default>
+-      <summary>Display day names</summary>
+-      <description>This setting enables the display of day-of-the-week names in the calendar.</description>
++      <summary>Allow raising volume above 100%</summary>
++      <description>This setting overrides the one provided by org.gnome.desktop.sound.</description>
+     </key>
+   </schema>
+ </schemalist>
+-- 
+2.37.2
+
