@@ -1,15 +1,13 @@
-From 8635974d5d47ae5881591cec4e08c5476a2da7c6 Mon Sep 17 00:00:00 2001
-From: Campbell Jones <git@serebit.com>
-Date: Sun, 19 Feb 2023 21:42:40 -0500
-Subject: [PATCH] Fix SoundOutput and Calendar widget settings schemas
+Origin: commit:8635974d5d47ae5881591cec4e08c5476a2da7c6
+Author: Campbell Jones <git@serebit.com>
+Last-Update: 2023-02-19
+Description: [PATCH] Fix SoundOutput and Calendar widget settings schemas
 
 ---
  ...budgie-desktop.raven.widget.Calendar.gschema.xml | 13 +++++++++----
  ...gie-desktop.raven.widget.SoundOutput.gschema.xml | 13 ++++---------
  2 files changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/src/raven/widgets/calendar/org.buddiesofbudgie.budgie-desktop.raven.widget.Calendar.gschema.xml b/src/raven/widgets/calendar/org.buddiesofbudgie.budgie-desktop.raven.widget.Calendar.gschema.xml
-index 6610739d..4e2a97c0 100644
 --- a/src/raven/widgets/calendar/org.buddiesofbudgie.budgie-desktop.raven.widget.Calendar.gschema.xml
 +++ b/src/raven/widgets/calendar/org.buddiesofbudgie.budgie-desktop.raven.widget.Calendar.gschema.xml
 @@ -1,10 +1,15 @@
@@ -32,8 +30,6 @@ index 6610739d..4e2a97c0 100644
      </key>
    </schema>
  </schemalist>
-diff --git a/src/raven/widgets/sound-output/org.buddiesofbudgie.budgie-desktop.raven.widget.SoundOutput.gschema.xml b/src/raven/widgets/sound-output/org.buddiesofbudgie.budgie-desktop.raven.widget.SoundOutput.gschema.xml
-index 4e2a97c0..6610739d 100644
 --- a/src/raven/widgets/sound-output/org.buddiesofbudgie.budgie-desktop.raven.widget.SoundOutput.gschema.xml
 +++ b/src/raven/widgets/sound-output/org.buddiesofbudgie.budgie-desktop.raven.widget.SoundOutput.gschema.xml
 @@ -1,15 +1,10 @@
@@ -56,6 +52,3 @@ index 4e2a97c0..6610739d 100644
      </key>
    </schema>
  </schemalist>
--- 
-2.37.2
-

@@ -1,0 +1,41 @@
+Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/317
+Author: Jacob-Vlijm <vlijm@planet.nl>
+Last-Update: 2023-02-24
+Description: [PATCH] Fix Gtk gdk_x11_window_get_frame_extents - change since Gtk
+ version 3.24.36.
+
+---
+ src/plugin/panel/popover.c | 16 ++++++++++++++--
+ 1 file changed, 14 insertions(+), 2 deletions(-)
+
+diff --git a/src/plugin/panel/popover.c b/src/plugin/panel/popover.c
+index 0b923480..c885e4ff 100644
+--- a/src/plugin/panel/popover.c
++++ b/src/plugin/panel/popover.c
+@@ -816,9 +816,21 @@ static gboolean budgie_popover_button_press(GtkWidget* widget, GdkEventButton* b
+ 	/* Inside our window? Continue as normal. */
+ 	gint scale_factor = gtk_widget_get_scale_factor(widget);
+ 
++
++#if GTK_CHECK_VERSION(3, 24, 36)
++
++/**
++ * Since Gtk version 3.24.36, there is a change in definition of gdk_x11_window_get_frame_extents
++ *
++ * https://gitlab.gnome.org/GNOME/gtk/-/commit/c43e3c43396abcdbd6b0f6e2565f8563b52c5027
++ */
++	x = x * scale_factor;
++	y = y * scale_factor;
++#endif
++
+ 	if (((root_x * scale_factor) >= x && (root_x * scale_factor) <= x + (w * scale_factor)) &&
+-		((root_y * scale_factor) >= y && (root_y * scale_factor) <= y + (h * scale_factor))) {
+-		return GDK_EVENT_PROPAGATE;
++	((root_y * scale_factor) >= y && (root_y * scale_factor) <= y + (h * scale_factor))) {
++	return GDK_EVENT_PROPAGATE;
+ 	}
+ 
+ 	/* Happened outside, we're done. */
+-- 
+2.37.2
+

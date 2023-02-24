@@ -9,11 +9,18 @@ Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/budgie-desktop/+bug/199821
  src/wm/keyboard.vala | 15 ++++++++++++---
  1 file changed, 12 insertions(+), 3 deletions(-)
 
-Index: budgie-desktop-10.6.4+git20220830/src/wm/keyboard.vala
-===================================================================
---- budgie-desktop-10.6.4+git20220830.orig/src/wm/keyboard.vala
-+++ budgie-desktop-10.6.4+git20220830/src/wm/keyboard.vala
-@@ -128,9 +128,18 @@ namespace Budgie {
+--- a/src/wm/keyboard.vala
++++ b/src/wm/keyboard.vala
+@@ -117,7 +117,7 @@
+ 			settings = new GLib.Settings.full (schema, null, null);
+ 			Signal.connect (settings, "changed", (Callback) set_keyboard_layout, this);
+ 
+-			set_keyboard_layout ("current");
++			//set_keyboard_layout ("current");
+ 		}
+ 
+ 		[CCode (instance_pos = -1)]
+@@ -128,9 +128,18 @@
  			settings.changed.connect(on_settings_changed);
  			update_fallback();
  

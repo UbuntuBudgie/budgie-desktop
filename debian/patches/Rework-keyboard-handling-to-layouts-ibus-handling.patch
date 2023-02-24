@@ -46,10 +46,10 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
 +		public static void init (Budgie.BudgieWM? wm) {
 +			if (instance != null)
 +				return;
++
++			instance = new KeyboardManager (wm);
  
 -			xkb = new Gnome.XkbInfo();
-+			instance = new KeyboardManager (wm);
-+
 +			var display = wm.get_display();
 +			display.modifiers_accelerator_activated.connect (instance.handle_modifiers_accelerator_activated);
 +		}
@@ -67,12 +67,12 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
 +			wm.get_display().add_keybinding("switch-input-source", schema, Meta.KeyBindingFlags.NONE, switch_input_source);
 +			wm.get_display().add_keybinding("switch-input-source-backward", schema, Meta.KeyBindingFlags.NONE, switch_input_source_backward);
 +		}
-+
+ 
 +		construct {
 +			var schema = GLib.SettingsSchemaSource.get_default ().lookup ("org.gnome.desktop.input-sources", true);
 +			if (schema == null)
 +				return;
- 
++
 +			settings = new GLib.Settings.full (schema, null, null);
 +			Signal.connect (settings, "changed", (Callback) set_keyboard_layout, this);
 +
@@ -220,7 +220,7 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
  		public void hold_keyboard() {
  			if (is_keyboard_held) {
  				return;
-@@ -320,5 +360,59 @@
+@@ -320,5 +360,61 @@
  			wm.get_display().freeze_keyboard(wm.get_display().get_current_time());
  			is_keyboard_held = true;
  		}
@@ -276,7 +276,9 @@ Description: [PATCH] Rework keyboard handling to layouts & ibus handling always
 +				variant = variant + ",";
 +			}
 +
-+			Meta.Backend.get_backend ().set_keymap (layout, variant, options);
++			Meta.Display display = wm.get_display();
++			Meta.Context ctx = display.get_context();
++			ctx.get_backend ().set_keymap (layout, variant, options);
 +		}
  	}
  }

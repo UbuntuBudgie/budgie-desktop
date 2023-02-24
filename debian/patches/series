@@ -10,3 +10,4 @@ Rework-keyboard-handling-to-layouts-ibus-handling.patch
 Initialise-ibus-within-the-class-constructor.patch
 Add-a-small-delay-to-ensure-keyboard-layout-defaults.patch
 Fix-SoundOutput-and-Calendar-widget-settings-schemas.patch
+Fix-Gtk-gdk_x11_window_get_frame_extents.patch
