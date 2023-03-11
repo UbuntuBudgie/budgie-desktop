@@ -22,7 +22,7 @@ Build-Depends:
  libgstreamer1.0-dev,
  libgtk-3-dev,
  libibus-1.0-dev,
- libmutter-11-dev,
+ libmutter-12-dev,
  libnotify-dev,
  libpeas-dev,
  libpolkit-agent-1-dev,
