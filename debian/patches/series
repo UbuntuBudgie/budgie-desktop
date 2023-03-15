@@ -11,3 +11,11 @@ Initialise-ibus-within-the-class-constructor.patch
 Add-a-small-delay-to-ensure-keyboard-layout-defaults.patch
 Fix-SoundOutput-and-Calendar-widget-settings-schemas.patch
 Fix-Gtk-gdk_x11_window_get_frame_extents.patch
+notifications/0001-Limited-the-number-of-notifications-to-prevent-infin.patch
+notifications/0002-Minor-optimizations-edited-comments.patch
+notifications/0003-Added-code-to-manage-max_notifications_per_group.patch
+notifications/0004-Update-src-raven-notifications_group.vala.patch
+notifications/0005-Update-src-raven-notifications_group.vala.patch
+notifications/0006-Update-src-raven-notifications_view.vala.patch
+notifications/0007-Edited-in-latest-comments.patch
+notifications/0008-Fix-panel-growing-memory-consumption-over-increasing.patch

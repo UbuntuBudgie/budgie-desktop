@@ -1,0 +1,27 @@
+Origin: commit: f12f2782ea2f0f0e7d624159900cc609943d274f
+Author: Jacob Vlijm <vlijm@planet.nl>
+Last-Update: 2023-03-13
+Description: [PATCH 6/7] Update src/raven/notifications_view.vala
+
+Co-authored-by: Evan Maddock <5157277+EbonJaeger@users.noreply.github.com>
+---
+ src/raven/notifications_view.vala | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/src/raven/notifications_view.vala b/src/raven/notifications_view.vala
+index 1d67d47a..82d4bc26 100644
+--- a/src/raven/notifications_view.vala
++++ b/src/raven/notifications_view.vala
+@@ -340,8 +340,7 @@ namespace Budgie {
+ 			if (n_groups == 0) {
+ 				/* if no notifications left, set to DEFAULT_MAX_PERGROUP */
+ 				newmax = DEFAULT_MAX_PERGROUP;
+-			}
+-			else if (len > TOTAL_MAX_NOTIFICATIONS) {
++			} else if (len > TOTAL_MAX_NOTIFICATIONS) {
+ 				/* if totalmax is exceeded, reduce max per group */
+ 				newmax = (uint)((float)TOTAL_MAX_NOTIFICATIONS/(float)n_groups);
+ 				trim = true;
+-- 
+2.34.1
+

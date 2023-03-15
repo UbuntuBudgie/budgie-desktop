@@ -1,0 +1,50 @@
+Origin: commit: 2a266b66f502e9270acd95811cb2aa078b4b0c2e
+Author: Jacob-Vlijm <vlijm@planet.nl>
+Last-Update: 2023-03-08
+Description: [PATCH 1/7] Limited the number of notifications to prevent infinit
+ accumulation, causing raven to choke.
+
+---
+ src/raven/notifications_group.vala | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/src/raven/notifications_group.vala b/src/raven/notifications_group.vala
+index 4c684de6..0285f66f 100644
+--- a/src/raven/notifications_group.vala
++++ b/src/raven/notifications_group.vala
+@@ -142,11 +142,32 @@ namespace Budgie {
+ 			}
+ 		}
+ 
++		/**
++		 * too many notifications will choke raven and the desktop, so let's set a limit
++		 */
++		private void limit_notifications (int tokeep) {
++			GLib.List<uint32> currnotifs = notifications.get_keys();
++			CompareFunc<int> intcmp = (a, b) => {
++				return (int) (a > b) - (int) (a < b);
++			};
++			currnotifs.sort(intcmp);
++			int n_remove = (int)currnotifs.length() - tokeep;
++			int count = 0;
++			foreach (uint n in currnotifs) {
++				if (count < n_remove) {remove_notification(n);}
++				else {break;}
++				count += 1;
++			}
++		}
++
+ 		/**
+ 		 * update_count updates our notifications count for this group
+ 		 */
+ 		public void update_count() {
++			/* tokeep is currently hardcoded, but preferably into BDS later? */
++			int tokeep = 12;
+ 			count = (int) notifications.length;
++			if (count > tokeep) {limit_notifications(tokeep);}
+ 			app_label.set_markup("<b>%s (%i)</b>".printf(app_name, count));
+ 		}
+ 
+-- 
+2.34.1
+

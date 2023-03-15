@@ -1,0 +1,26 @@
+Origin: commit: 6117a4a913c2cb0330b14fb4c12836209408bdca
+Author: Jacob Vlijm <vlijm@planet.nl>
+Last-Update: 2023-03-13
+Description: [PATCH 4/7] Update src/raven/notifications_group.vala
+
+Co-authored-by: Evan Maddock <5157277+EbonJaeger@users.noreply.github.com>
+---
+ src/raven/notifications_group.vala | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/raven/notifications_group.vala b/src/raven/notifications_group.vala
+index 542cf7e1..9bee41a9 100644
+--- a/src/raven/notifications_group.vala
++++ b/src/raven/notifications_group.vala
+@@ -172,7 +172,7 @@ namespace Budgie {
+ 				else {
+ 					break;
+ 				}
+-				count += 1;
++				count++;
+ 			}
+ 		}
+ 
+-- 
+2.34.1
+

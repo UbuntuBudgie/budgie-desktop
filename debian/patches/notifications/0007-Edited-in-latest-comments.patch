@@ -1,0 +1,82 @@
+Origin: commit: de33021076216c60576d2bd5ce9b4bca5073997e
+Author: Jacob-Vlijm <vlijm@planet.nl>
+Last-Update: 2023-03-14
+Description: [PATCH 7/7] Edited in latest comments.
+
+---
+ src/raven/notifications_group.vala | 12 +++---------
+ src/raven/notifications_view.vala  |  7 +++----
+ 2 files changed, 6 insertions(+), 13 deletions(-)
+
+diff --git a/src/raven/notifications_group.vala b/src/raven/notifications_group.vala
+index 81735d1f..df16dd39 100644
+--- a/src/raven/notifications_group.vala
++++ b/src/raven/notifications_group.vala
+@@ -148,7 +148,6 @@ namespace Budgie {
+ 		 * keep the latest n-notifications of current group, delete older ones
+ 		 */
+ 		public void limit_notifications () {
+-
+ 			GLib.List<uint32> currnotifs = notifications.get_keys();
+ 			currnotifs.sort((a, b) => {
+ 				return (int) (a > b) - (int) (a < b);
+@@ -158,17 +157,13 @@ namespace Budgie {
+ 			 * no need to reduce if the current number of notifications is below our threshold
+ 			 * and we shouldn't attempt to set a negative uint
+ 			 */
+-			if (n_currnotifs <= tokeep) {
+-				return;
+-			}
++			if (n_currnotifs <= tokeep) return;
+ 			uint n_remove = n_currnotifs - tokeep;
+-			print(@"inside: count = $count, n_remove is $n_remove\n");
+ 			int count = 0;
+ 			foreach (uint n in currnotifs) {
+ 				if (count < n_remove) {
+ 					remove_notification(n);
+-				}
+-				else {
++				} else {
+ 					break;
+ 				}
+ 				count++;
+@@ -179,9 +174,8 @@ namespace Budgie {
+ 		 * if the total number of notifications exceeds threshold, NotificationsView will
+ 		 * update the max number per group ('tokeep')
+ 		 */
+-		public void set_group_maxnotifications(uint keep) {
++		public void set_group_max_notifications(uint keep) {
+ 			tokeep = keep;
+-			print(@"newtokeep set in group: $tokeep\n");
+ 		}
+ 
+ 		/**
+diff --git a/src/raven/notifications_view.vala b/src/raven/notifications_view.vala
+index 82d4bc26..2b960d8c 100644
+--- a/src/raven/notifications_view.vala
++++ b/src/raven/notifications_view.vala
+@@ -324,9 +324,9 @@ namespace Budgie {
+ 			this.notifications.remove(id);
+ 		}
+ 
+-		void adjust_max_per_group (uint newmax, bool trim) {
++		void adjust_max_per_group(uint newmax, bool trim) {
+ 			notification_groups.foreach((app_name, notification_group) => {
+-				notification_group.set_group_maxnotifications(max_per_group);
++				notification_group.set_group_max_notifications(max_per_group);
+ 				if (trim) {
+ 					notification_group.limit_notifications();
+ 				}
+@@ -344,8 +344,7 @@ namespace Budgie {
+ 				/* if totalmax is exceeded, reduce max per group */
+ 				newmax = (uint)((float)TOTAL_MAX_NOTIFICATIONS/(float)n_groups);
+ 				trim = true;
+-			}
+-			else if (
++			} else if (
+ 				max_per_group < DEFAULT_MAX_PERGROUP &&
+ 				(n_groups * (max_per_group + 1)) <= TOTAL_MAX_NOTIFICATIONS
+ 			) {
+-- 
+2.34.1
+

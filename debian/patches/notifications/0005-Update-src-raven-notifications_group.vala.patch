@@ -1,0 +1,30 @@
+Origin: commit: 32b365696223dd38c78b0fc98c0756c31d7ae392
+Author: Jacob Vlijm <vlijm@planet.nl>
+Last-Update: 2023-03-13
+Description: [PATCH 5/7] Update src/raven/notifications_group.vala
+
+Co-authored-by: Evan Maddock <5157277+EbonJaeger@users.noreply.github.com>
+---
+ src/raven/notifications_group.vala | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/src/raven/notifications_group.vala b/src/raven/notifications_group.vala
+index 9bee41a9..81735d1f 100644
+--- a/src/raven/notifications_group.vala
++++ b/src/raven/notifications_group.vala
+@@ -150,10 +150,9 @@ namespace Budgie {
+ 		public void limit_notifications () {
+ 
+ 			GLib.List<uint32> currnotifs = notifications.get_keys();
+-			CompareFunc<int> intcmp = (a, b) => {
++			currnotifs.sort((a, b) => {
+ 				return (int) (a > b) - (int) (a < b);
+-			};
+-			currnotifs.sort(intcmp);
++			});
+ 			uint n_currnotifs = currnotifs.length();
+ 			/**
+ 			 * no need to reduce if the current number of notifications is below our threshold
+-- 
+2.34.1
+

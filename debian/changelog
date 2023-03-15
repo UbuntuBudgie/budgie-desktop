@@ -1,3 +1,20 @@
+budgie-desktop (10.7.1-1ubuntu2) lunar; urgency=medium
+
+  * Bug-fixes
+    - Stop raven breaking when notification numbers exceed 500 or more
+      0001-Limited-the-number-of-notifications-to-prevent-infin.patch
+      0002-Minor-optimizations-edited-comments.patch
+      0003-Added-code-to-manage-max_notifications_per_group.patch
+      0004-Update-src-raven-notifications_group.vala.patch
+      0005-Update-src-raven-notifications_group.vala.patch
+      0006-Update-src-raven-notifications_view.vala.patch
+      0007-Edited-in-latest-comments.patch
+    - Stop excessive memory consumption when the number of notifications
+      increase
+      0008-Fix-panel-growing-memory-consumption-over-increasing.patch
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 15 Mar 2023 20:18:46 +0000
+
 budgie-desktop (10.7.1-1ubuntu1) lunar; urgency=medium
 
   * Build with mutter-12-beta (part of GNOME 44 transition)

@@ -1,0 +1,189 @@
+Origin: commit: f1a27037143c40f66f91a04232c0f5416756e6ec
+Author: Jacob-Vlijm <vlijm@planet.nl>
+Last-Update: 2023-03-12
+Description: [PATCH 3/7] Added code to manage max_notifications_per_group.
+
+---
+ src/raven/notifications_group.vala | 34 +++++++++++++++++------
+ src/raven/notifications_view.vala  | 44 ++++++++++++++++++++++++++++--
+ 2 files changed, 67 insertions(+), 11 deletions(-)
+
+diff --git a/src/raven/notifications_group.vala b/src/raven/notifications_group.vala
+index 7f5e2700..542cf7e1 100644
+--- a/src/raven/notifications_group.vala
++++ b/src/raven/notifications_group.vala
+@@ -22,6 +22,7 @@ namespace Budgie {
+ 		private Gtk.Label? app_label = null;
+ 		private string? app_name;
+ 		private Gtk.Button? dismiss_button = null;
++		private uint? tokeep;
+ 
+ 		/**
+ 		 * Signals
+@@ -29,10 +30,11 @@ namespace Budgie {
+ 		public signal void dismissed_group(string app_name);
+ 		public signal void dismissed_notification(uint32 id);
+ 
+-		public NotificationGroup(string c_app_icon, string c_app_name, NotificationSort sort_mode) {
++		public NotificationGroup(string c_app_icon, string c_app_name, NotificationSort sort_mode, uint keep) {
+ 			Object(orientation: Gtk.Orientation.VERTICAL, spacing: 4);
+ 			can_focus = false; // Disable focus to prevent scroll on click
+ 			focus_on_click = false;
++			tokeep = keep;
+ 
+ 			get_style_context().add_class("raven-notifications-group");
+ 
+@@ -94,9 +96,9 @@ namespace Budgie {
+ 			}
+ 
+ 			var widget = new NotificationWidget(notification);
+-
+ 			notifications.insert(id, widget);
+ 			list.prepend(widget);
++
+ 			list.invalidate_sort();
+ 			update_count();
+ 
+@@ -135,7 +137,6 @@ namespace Budgie {
+ 				notification.destroy(); // Nuke the notification
+ 				update_count(); // Update our counter
+ 				dismissed_notification(id); // Notify anything listening
+-
+ 				if (count == 0) { // This was the last notification
+ 					dismissed_group(app_name); // Dismiss the group
+ 				}
+@@ -146,13 +147,23 @@ namespace Budgie {
+ 		 * too many notifications will choke raven and the desktop, so let's set a limit;
+ 		 * keep the latest n-notifications of current group, delete older ones
+ 		 */
+-		private void limit_notifications (uint tokeep) {
++		public void limit_notifications () {
++
+ 			GLib.List<uint32> currnotifs = notifications.get_keys();
+ 			CompareFunc<int> intcmp = (a, b) => {
+ 				return (int) (a > b) - (int) (a < b);
+ 			};
+ 			currnotifs.sort(intcmp);
+-			uint n_remove = currnotifs.length() - tokeep;
++			uint n_currnotifs = currnotifs.length();
++			/**
++			 * no need to reduce if the current number of notifications is below our threshold
++			 * and we shouldn't attempt to set a negative uint
++			 */
++			if (n_currnotifs <= tokeep) {
++				return;
++			}
++			uint n_remove = n_currnotifs - tokeep;
++			print(@"inside: count = $count, n_remove is $n_remove\n");
+ 			int count = 0;
+ 			foreach (uint n in currnotifs) {
+ 				if (count < n_remove) {
+@@ -165,15 +176,22 @@ namespace Budgie {
+ 			}
+ 		}
+ 
++		/**
++		 * if the total number of notifications exceeds threshold, NotificationsView will
++		 * update the max number per group ('tokeep')
++		 */
++		public void set_group_maxnotifications(uint keep) {
++			tokeep = keep;
++			print(@"newtokeep set in group: $tokeep\n");
++		}
++
+ 		/**
+ 		 * update_count updates our notifications count for this group
+ 		 */
+ 		public void update_count() {
+-			/* tokeep is currently hardcoded, but would preferably go into a gschema and into BDS later? */
+-			uint tokeep = 12;
+ 			count = (int) notifications.length;
+ 			if (count > tokeep) {
+-				limit_notifications(tokeep);
++				limit_notifications();
+ 			}
+ 			app_label.set_markup("<b>%s (%i)</b>".printf(app_name, count));
+ 		}
+diff --git a/src/raven/notifications_view.vala b/src/raven/notifications_view.vala
+index d8e9e88a..1d67d47a 100644
+--- a/src/raven/notifications_view.vala
++++ b/src/raven/notifications_view.vala
+@@ -73,6 +73,9 @@ namespace Budgie {
+ 		private const string BUDGIE_RAVEN_SCHEMA = "com.solus-project.budgie-raven";
+ 		private const string APPLICATION_SCHEMA = "org.gnome.desktop.notifications.application";
+ 		private const string APPLICATION_PREFIX = "/org/gnome/desktop/notifications/application";
++		private const uint TOTAL_MAX_NOTIFICATIONS = 500;
++		private const uint DEFAULT_MAX_PERGROUP = 25;
++		private uint max_per_group = DEFAULT_MAX_PERGROUP;
+ 
+ 		private HeaderWidget? header = null;
+ 		private Gtk.Button button_mute;
+@@ -285,7 +288,7 @@ namespace Budgie {
+ 					// Look for an existing group. If one doesn't exist, create it
+ 					var group = this.notification_groups.lookup(name);
+ 					if (group == null) {
+-						group = new NotificationGroup(app_icon, name, sort_mode);
++						group = new NotificationGroup(app_icon, name, sort_mode, max_per_group);
+ 						this.listbox.add(group);
+ 
+ 						group.dismissed_group.connect((name) => { // When we dismiss the group
+@@ -318,12 +321,46 @@ namespace Budgie {
+ 					Raven.get_instance().UnreadNotifications();
+ 				}
+ 			}
+-
+ 			this.notifications.remove(id);
+ 		}
+ 
++		void adjust_max_per_group (uint newmax, bool trim) {
++			notification_groups.foreach((app_name, notification_group) => {
++				notification_group.set_group_maxnotifications(max_per_group);
++				if (trim) {
++					notification_group.limit_notifications();
++				}
++			});
++		}
++
++		void check_notification_allocation(uint len) {
++			uint n_groups = notification_groups.length;
++			uint newmax = max_per_group;
++			bool trim = false;
++			if (n_groups == 0) {
++				/* if no notifications left, set to DEFAULT_MAX_PERGROUP */
++				newmax = DEFAULT_MAX_PERGROUP;
++			}
++			else if (len > TOTAL_MAX_NOTIFICATIONS) {
++				/* if totalmax is exceeded, reduce max per group */
++				newmax = (uint)((float)TOTAL_MAX_NOTIFICATIONS/(float)n_groups);
++				trim = true;
++			}
++			else if (
++				max_per_group < DEFAULT_MAX_PERGROUP &&
++				(n_groups * (max_per_group + 1)) <= TOTAL_MAX_NOTIFICATIONS
++			) {
++				/* if we previously reduced group size but now can add at least one back */
++				newmax = (uint)((float)TOTAL_MAX_NOTIFICATIONS/(float)n_groups);
++			}
++			if (newmax != max_per_group) {
++				max_per_group = newmax;
++				adjust_max_per_group(newmax, trim);
++			}
++		}
++
+ 		void update_child_count() {
+-			int len = 0;
++			uint len = 0;
+ 
+ 			if (notification_groups.length != 0) {
+ 				notification_groups.foreach((app_name, notification_group) => { // For each notifications list
+@@ -343,6 +380,7 @@ namespace Budgie {
+ 			Raven.get_instance().set_notification_count(len);
+ 			header.text = text;
+ 			clear_notifications_button.set_visible((len >= 1)); // Only show clear notifications button if we actually have notifications
++			check_notification_allocation(len);
+ 		}
+ 
+ 		void clear_all() {
+-- 
+2.34.1
+
