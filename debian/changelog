@@ -12,6 +12,8 @@ budgie-desktop (10.7.1-1ubuntu2) lunar; urgency=medium
     - Stop excessive memory consumption when the number of notifications
       increase
       0008-Fix-panel-growing-memory-consumption-over-increasing.patch
+  * Packaging Changes
+    - d/libraven0.symbols update due to notification patchwork
 
  -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 15 Mar 2023 20:18:46 +0000
 
