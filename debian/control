@@ -35,6 +35,7 @@ Build-Depends:
  sassc,
  uuid-dev,
  valac (>= 0.48.0),
+ zenity
 Standards-Version: 4.6.2
 Vcs-Browser: https://github.com/ubuntubudgie/budgie-desktop/tree/debian
 Vcs-Git: https://github.com/ubuntubudgie/budgie-desktop.git -b debian
