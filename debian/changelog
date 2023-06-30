@@ -1,3 +1,60 @@
+budgie-desktop (10.7.2-1) experimental; urgency=medium
+
+  * New upstream release
+  * Packaging changes
+    - add zenity as a build dependency for budgie-desktop
+    - d/rules build with use-old-zenity=true
+  * Refresh patches
+    - Rework-keyboard-handling-to-layouts-ibus-handling.patch
+  * Drop patches now part of 10.7.2
+    - Fix-SoundOutput-and-Calendar-widget-settings-schemas.patch
+    - Fix-Gtk-gdk_x11_window_get_frame_extents.patch
+    - 0001-Limited-the-number-of-notifications-to-prevent-infin.patch
+    - 0002-Minor-optimizations-edited-comments.patch
+    - 0003-Added-code-to-manage-max_notifications_per_group.patch
+    - 0004-Update-src-raven-notifications_group.vala.patch
+    - 0005-Update-src-raven-notifications_group.vala.patch
+    - 0006-Update-src-raven-notifications_view.vala.patch
+    - 0007-Edited-in-latest-comments.patch
+    - 0008-Fix-panel-growing-memory-consumption-over-increasing.patch
+    - screenshot_area_selection.patch
+
+ -- Samuel Lane <samlane00@gmail.com>  Fri, 30 Jun 2023 09:05:37 -0400
+
+budgie-desktop (10.7.1-1ubuntu3) lunar; urgency=medium
+
+  * Bug-fix
+    - Fix screenshot area selection broken due to changes with mutter-12
+      screenshot_area_selection.patch
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 24 Mar 2023 20:27:08 +0000
+
+budgie-desktop (10.7.1-1ubuntu2) lunar; urgency=medium
+
+  * Bug-fixes
+    - Stop raven breaking when notification numbers exceed 500 or more
+      0001-Limited-the-number-of-notifications-to-prevent-infin.patch
+      0002-Minor-optimizations-edited-comments.patch
+      0003-Added-code-to-manage-max_notifications_per_group.patch
+      0004-Update-src-raven-notifications_group.vala.patch
+      0005-Update-src-raven-notifications_group.vala.patch
+      0006-Update-src-raven-notifications_view.vala.patch
+      0007-Edited-in-latest-comments.patch
+    - Stop excessive memory consumption when the number of notifications
+      increase
+      0008-Fix-panel-growing-memory-consumption-over-increasing.patch
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 15 Mar 2023 20:18:46 +0000
+
+budgie-desktop (10.7.1-1ubuntu1) lunar; urgency=medium
+
+  * Build with mutter-12-beta (part of GNOME 44 transition)
+  * Packaging changes
+    - d/control B/D mutter-12
+    - d/control B/D remove all version checks since no longer needed
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sat, 25 Feb 2023 10:37:11 +0000
+
 budgie-desktop (10.7.1-1) unstable; urgency=medium
 
   * Service release
