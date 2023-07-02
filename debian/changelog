@@ -1,5 +1,7 @@
-budgie-desktop (10.7.2-1) experimental; urgency=medium
+budgie-desktop (10.7.2-0.1) experimental; urgency=medium
 
+  * NMU (non-maintainer upload)
+    - verified by the maintainer David Mohammed
   * New upstream release
   * Drop patches introduced in 10.7.1-1 since these are included in this
     release
@@ -10,6 +12,7 @@ budgie-desktop (10.7.2-1) experimental; urgency=medium
   * Packaging changes
     - d/changelog-announcement incorporates upstream release notice
     - d/control build-depends on libmutter-12
+    - d/control B/D remove all version checks since no longer needed
     - d/control add zenity to build-depends
     - d/rules build with use-old-zenity=true
     - d/libraven.symbols update with new symbols
