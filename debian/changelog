@@ -1,3 +1,16 @@
+budgie-desktop (10.8-0ubuntu1) mantic; urgency=medium
+
+  * New upstream release
+  * Packaging changes
+    - Drop show-tray-icon.patch since now obsolete with v10.8
+    - d/rules - drop ubuntu specific patch
+    - d/control - change B/D from mutter to magpie
+    - d/libraven0.symbols refresh changed symbols
+    - d/libbudgie-appindexer0.symbols refresh changed symbols
+    - d/budgie-core.lintian-overrides change from mutter to magpie
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 17 Aug 2023 22:18:36 +0100
+
 budgie-desktop (10.7.2-0.1) experimental; urgency=medium
 
   * NMU (non-maintainer upload)

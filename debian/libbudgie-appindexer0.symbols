@@ -49,3 +49,4 @@ libbudgie-appindexer.so.0 libbudgie-appindexer0 #MINVER#
  budgie_switcheroo_get_dual_gpu@Base 10.6.2+git20220728
  budgie_switcheroo_get_type@Base 10.6.2+git20220728
  budgie_switcheroo_new@Base 10.6.2+git20220728
+ fuzzer_get_fuzzy_score@Base 10.8

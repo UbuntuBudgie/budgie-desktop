@@ -9,8 +9,6 @@ Description: [PATCH 5/6] Logic for determining light/dark includes looking withi
  src/theme/theme-manager.c | 38 ++++++++++++++++++++++++++------------
  2 files changed, 26 insertions(+), 20 deletions(-)
 
-diff --git a/src/theme/meson.build b/src/theme/meson.build
-index e0e28b83..d166fa13 100644
 --- a/src/theme/meson.build
 +++ b/src/theme/meson.build
 @@ -1,14 +1,6 @@
@@ -26,13 +24,11 @@ index e0e28b83..d166fa13 100644
 -)
 -
  # Compile to CSS dynamically.
- sassc = find_program('sassc')
- 
-diff --git a/src/theme/theme-manager.c b/src/theme/theme-manager.c
-index 4fe124d9..8737d0ea 100644
+ sass = find_program('sass', required: false)
+ sass_args = ['--no-source-map', '--style', 'compressed', '@INPUT@', '@OUTPUT@']
 --- a/src/theme/theme-manager.c
 +++ b/src/theme/theme-manager.c
-@@ -31,9 +31,7 @@ struct _BudgieThemeManager {
+@@ -31,9 +31,7 @@
  static void budgie_theme_manager_set_theme_css(BudgieThemeManager* self, const gchar* theme_portion);
  static void budgie_theme_manager_theme_changed(BudgieThemeManager* self, GParamSpec* prop, GtkSettings* settings);
  static void budgie_theme_manager_builtin_changed(BudgieThemeManager* self, const gchar* key, GSettings* settings);
@@ -42,7 +38,7 @@ index 4fe124d9..8737d0ea 100644
  
  G_DEFINE_TYPE(BudgieThemeManager, budgie_theme_manager, G_TYPE_OBJECT)
  
-@@ -156,9 +154,14 @@ remove_provider:
+@@ -156,9 +154,14 @@
  static void budgie_theme_manager_theme_changed(BudgieThemeManager* self, __attribute__((unused)) GParamSpec* prop, GtkSettings* settings) {
  	gchar* theme_name = NULL;
  	const gchar* theme_css = NULL;
@@ -57,7 +53,7 @@ index 4fe124d9..8737d0ea 100644
  	/* Set theme_css NULL if internal theming is disabled */
  	if (self->builtin_enabled) {
  		if (theme_name && g_str_equal(theme_name, "HighContrast")) {
-@@ -168,19 +171,32 @@ static void budgie_theme_manager_theme_changed(BudgieThemeManager* self, __attri
+@@ -168,19 +171,32 @@
  		}
  	}
  
@@ -98,7 +94,7 @@ index 4fe124d9..8737d0ea 100644
  
  	g_free(theme_name);
  
-@@ -193,7 +209,6 @@ static void budgie_theme_manager_builtin_changed(BudgieThemeManager* self, const
+@@ -193,7 +209,6 @@
  	budgie_theme_manager_theme_changed(self, NULL, gtk_settings_get_default());
  }
  
@@ -106,11 +102,8 @@ index 4fe124d9..8737d0ea 100644
  static void budgie_theme_manager_preferred_style_changed(BudgieThemeManager* self, __attribute__((unused)) GParamSpec* prop, GSettings* settings) {
  	gchar* preferred_style = g_settings_get_string(settings, "color-scheme");
  
-@@ -204,4 +219,3 @@ static void budgie_theme_manager_preferred_style_changed(BudgieThemeManager* sel
+@@ -204,4 +219,3 @@
  		g_settings_reset(self->desktop_settings, "dark-theme");
  	}
  }
 -#endif
--- 
-2.34.1
-

@@ -3,11 +3,16 @@ libraven.so.0 libraven0 #MINVER#
  BUDGIE_CONFDIR@Base 10.7
  BUDGIE_DATADIR@Base 10.7
  BUDGIE_GETTEXT_PACKAGE@Base 10.7
+ BUDGIE_HAS_SECONDARY_PLUGIN_DIRS@Base 10.8
  BUDGIE_LOCALEDIR@Base 10.7
  BUDGIE_MODULE_DATA_DIRECTORY@Base 10.7
+ BUDGIE_MODULE_DATA_DIRECTORY_SECONDARY@Base 10.8
  BUDGIE_MODULE_DIRECTORY@Base 10.7
+ BUDGIE_MODULE_DIRECTORY_SECONDARY@Base 10.8
  BUDGIE_RAVEN_PLUGIN_DATADIR@Base 10.7
+ BUDGIE_RAVEN_PLUGIN_DATADIR_SECONDARY@Base 10.8
  BUDGIE_RAVEN_PLUGIN_LIBDIR@Base 10.7
+ BUDGIE_RAVEN_PLUGIN_LIBDIR_SECONDARY@Base 10.8
  BUDGIE_VERSION@Base 10.7
  BUDGIE_WEBSITE@Base 10.7
  budgie_dispatcher_get_do_not_disturb@Base 10.5.3git20220217a
@@ -46,13 +51,19 @@ libraven.so.0 libraven0 #MINVER#
  budgie_notification_group_add_notification@Base 10.4
  budgie_notification_group_construct@Base 10.4
  budgie_notification_group_dismiss_all@Base 10.4
+ budgie_notification_group_get_app_icon@Base 10.8
+ budgie_notification_group_get_app_name@Base 10.8
+ budgie_notification_group_get_noti_count@Base 10.8
+ budgie_notification_group_get_noti_sort_mode@Base 10.8
+ budgie_notification_group_get_tokeep@Base 10.8
  budgie_notification_group_get_type@Base 10.4
  budgie_notification_group_limit_notifications@Base 10.7.2
  budgie_notification_group_new@Base 10.4
  budgie_notification_group_remove_notification@Base 10.4
  budgie_notification_group_set_group_max_notifications@Base 10.7.2
+ budgie_notification_group_set_noti_sort_mode@Base 10.8
  budgie_notification_group_set_sort_mode@Base 10.7.1
- budgie_notification_group_update_count@Base 10.4
+ budgie_notification_group_set_tokeep@Base 10.8
  budgie_notification_placeholder_construct@Base 10.3
  budgie_notification_placeholder_get_type@Base 10.3
  budgie_notification_placeholder_new@Base 10.3

@@ -1,5 +1,4 @@
 desktopfolder_exename.patch
-show-tray-icon.patch
 use-ibus-daemonize.patch
 darktheme/0001-Support-freedesktop-color-scheme.patch
 darktheme/0002-Hook-up-color-scheme-and-some-logic-interaction-with.patch

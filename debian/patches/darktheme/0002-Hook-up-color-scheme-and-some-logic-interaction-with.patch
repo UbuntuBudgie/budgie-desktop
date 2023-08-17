@@ -9,11 +9,9 @@ Subject: [PATCH 2/6] Hook up color-scheme and some logic interaction with
  src/theme/theme-manager.c              | 37 +++++++++++++++++---------
  2 files changed, 56 insertions(+), 17 deletions(-)
 
-diff --git a/src/panel/settings/settings_style.vala b/src/panel/settings/settings_style.vala
-index 993abc0c..955b7e28 100644
 --- a/src/panel/settings/settings_style.vala
 +++ b/src/panel/settings/settings_style.vala
-@@ -16,10 +16,10 @@ namespace Budgie {
+@@ -16,10 +16,10 @@
  	*/
  	public class StylePage : Budgie.SettingsPage {
  		private Gtk.ComboBox? combobox_gtk;
@@ -25,7 +23,7 @@ index 993abc0c..955b7e28 100644
  		private Gtk.Switch? switch_builtin;
  		private Gtk.Switch? switch_animations;
  		private Settings ui_settings;
-@@ -47,6 +47,11 @@ namespace Budgie {
+@@ -47,6 +47,11 @@
  				_("Widgets"),
  				_("Set the appearance of window decorations and controls")));
  
@@ -37,7 +35,7 @@ index 993abc0c..955b7e28 100644
  			combobox_icon = new Gtk.ComboBox();
  			grid.add_row(new SettingsRow(combobox_icon,
  				_("Icons"),
-@@ -64,13 +69,11 @@ namespace Budgie {
+@@ -64,13 +69,11 @@
  
  			/* Stick the combos in a size group */
  			group.add_widget(combobox_gtk);
@@ -52,7 +50,7 @@ index 993abc0c..955b7e28 100644
  			bool show_builtin = budgie_settings.get_boolean("show-builtin-theme-option");
  
  			if (show_builtin) {
-@@ -87,6 +90,27 @@ namespace Budgie {
+@@ -87,6 +90,27 @@
  				_("Animations"),
  				_("Control whether windows and controls use animations")));
  
@@ -80,8 +78,8 @@ index 993abc0c..955b7e28 100644
  			/* Add options for notification position */
  			var model = new Gtk.ListStore(3, typeof(string), typeof(string), typeof(Budgie.NotificationPosition));
  
-@@ -110,6 +134,8 @@ namespace Budgie {
- 			var render = new Gtk.CellRendererText();
+@@ -112,6 +136,8 @@
+ 			render.ellipsize = Pango.EllipsizeMode.END;
  			combobox_gtk.pack_start(render, true);
  			combobox_gtk.add_attribute(render, "text", 0);
 +			combobox_preferred_style.pack_start(render, true);
@@ -89,7 +87,7 @@ index 993abc0c..955b7e28 100644
  			combobox_icon.pack_start(render, true);
  			combobox_icon.add_attribute(render, "text", 0);
  			combobox_cursor.pack_start(render, true);
-@@ -118,7 +144,7 @@ namespace Budgie {
+@@ -120,7 +146,7 @@
  			combobox_notification_position.add_attribute(render, "text", 1);
  
  			/* Hook up settings */
@@ -98,11 +96,9 @@ index 993abc0c..955b7e28 100644
  
  			if (show_builtin) {
  				budgie_settings.bind("builtin-theme", switch_builtin, "active", SettingsBindFlags.DEFAULT);
-diff --git a/src/theme/theme-manager.c b/src/theme/theme-manager.c
-index d3bbca02..6add586b 100644
 --- a/src/theme/theme-manager.c
 +++ b/src/theme/theme-manager.c
-@@ -32,7 +32,7 @@ static void budgie_theme_manager_set_theme_css(BudgieThemeManager* self, const g
+@@ -32,7 +32,7 @@
  static void budgie_theme_manager_theme_changed(BudgieThemeManager* self, GParamSpec* prop, GtkSettings* settings);
  static void budgie_theme_manager_builtin_changed(BudgieThemeManager* self, const gchar* key, GSettings* settings);
  #ifdef GSD42
@@ -111,7 +107,7 @@ index d3bbca02..6add586b 100644
  #endif
  
  G_DEFINE_TYPE(BudgieThemeManager, budgie_theme_manager, G_TYPE_OBJECT)
-@@ -86,15 +86,15 @@ static void budgie_theme_manager_init(BudgieThemeManager* self) {
+@@ -86,15 +86,15 @@
  
  	settings = gtk_settings_get_default();
  	g_signal_connect_swapped(settings, "notify::gtk-theme-name", G_CALLBACK(budgie_theme_manager_theme_changed), self);
@@ -130,7 +126,7 @@ index d3bbca02..6add586b 100644
  }
  
  /**
-@@ -157,17 +157,31 @@ static void budgie_theme_manager_theme_changed(BudgieThemeManager* self, __attri
+@@ -157,17 +157,31 @@
  	gchar* theme_name = NULL;
  	const gchar* theme_css = NULL;
  
@@ -164,7 +160,7 @@ index d3bbca02..6add586b 100644
  	budgie_theme_manager_set_theme_css(self, theme_css);
  }
  
-@@ -178,15 +192,14 @@ static void budgie_theme_manager_builtin_changed(BudgieThemeManager* self, const
+@@ -178,15 +192,14 @@
  }
  
  #ifdef GSD42
@@ -185,6 +181,3 @@ index d3bbca02..6add586b 100644
 -
  }
  #endif
--- 
-2.34.1
-
