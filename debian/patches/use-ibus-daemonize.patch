@@ -1,4 +1,4 @@
-Forwarded: https://github.com/solus-project/budgie-desktop/pull/2111
+Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/414
 Author: David Mohammed <fossfreedom@ubuntu.com>
 Last-Update: 2021-03-09
 Description: [PATCH] Don't start ibus with --panel disable

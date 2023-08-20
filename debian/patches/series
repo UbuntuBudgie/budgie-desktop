@@ -8,3 +8,4 @@ darktheme/0006-Remove-last-remaining-and-obsolete-GSD42-guard.patch
 Rework-keyboard-handling-to-layouts-ibus-handling.patch
 Initialise-ibus-within-the-class-constructor.patch
 Add-a-small-delay-to-ensure-keyboard-layout-defaults.patch
+allow-AppIndicator-if-System-Tray-is-not-present.patch
