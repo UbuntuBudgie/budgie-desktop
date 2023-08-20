@@ -7,10 +7,8 @@ budgie-desktop (10.8-1) experimental; urgency=medium
     - Drop show-tray-icon.patch since now obsolete with v10.8
   * Packaging changes
     - d/rules - drop ubuntu specific patch show-tray-icon
-    - d/control - change B/D to magpie with mutter as alternate
     - d/libraven0.symbols refresh changed symbols
     - d/libbudgie-appindexer0.symbols refresh changed symbols
-    - d/budgie-core.lintian-overrides change from mutter to magpie
 
  -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 20 Aug 2023 18:18:36 +0100
 
