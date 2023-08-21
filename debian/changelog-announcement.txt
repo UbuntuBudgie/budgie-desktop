@@ -1,3 +1,67 @@
+v10.8 Official announcement can be found here:
+https://buddiesofbudgie.org/blog/budgie-10.8-released
+
+Budgie 10.8 is a brand new release series for Budgie Desktop, featuring improvements to Budgie Menu, adoption of StatusNotifier support in System Tray, Magpie v0.x support, and more!
+Budgie Trash Applet
+
+The previously third-party Budgie Trash Applet, developed by Buddies of Budgie team member Evan Maddock, has been merged into mainline Budgie Desktop to become a part of the default applets available to users out-of-the-box. This trash applet enables the user to quickly access and empty the contents of their trashcan as well as restore files.
+Magpie v0.x Support
+Budgie 10.8 is the first release which includes support for our Magpie ABI. To quickly summarize for those that did not catch our blog post on planned Wayland support and may not be familiar with Magpie, as well as to offer a bit of a history lesson, we will quickly go over the important parts. Historically, Budgie Desktop has used GNOME's Mutter window manager (nowadays Mutter is also a Wayland compositor) to do the heavy lifting for budgie-wm. budgie-wm has served as a small layer on top of Mutter, handling select keybindings for Budgie-specific functionality, input management, animations, screenshot management, backgrounds, and so forth. With every GNOME Stack release, Mutter ABI would change and Budgie Desktop would need to be updated to support the latest ABI and typically two or three ABIs prior so those on older GNOME stacks could still get newer Budgie Desktop releases. On many occasions, this resulted in significant pressure on the team as late ABI changes would land and we would need to work quickly to adapt to them. As GNOME has pursued improvements around their Wayland support, this has understandably at times resulted in regressions in its support for X11. As Budgie Desktop currently uses X11, this has created a less optimal user experience for our users. This reached a turning point with GNOME 44 / mutter-12 ABI when there was a larger split between Wayland and X11 support in Mutter, resulting in many regressions in its X11 support that to this day remain unresolved. During our team discussions, we came to the conclusion that we wanted to address this in two manners:
+
+    Restore X11 support / functionality expected by our users for the immediate future.
+    Prioritize adoption of Wayland, a longer-term goal, by developing a wlroots-based compositor that would serve as our window manager for both future Budgie 10.x releases when we go Wayland-only, as well as Budgie 11.
+
+To accomplish these goals, we first decided to soft-fork Mutter at the state it was in for GNOME 43, eliminating the regressions introduces in GNOME 44 / mutter-12. This version of Magpie is < 1.0 (e.g. 0.9.x) and is designed to be a temporary fork catered to Budgie and its current X11-only support. Alongside this effort, we are building "Magpie 1.0" as the wlroots-based Wayland compositor, with the plan to fully drop X11 support once Magpie 1.0 is ready for consumption. In the case of Budgie 10.8, this series supports magpie-0 ABI, which is effectively identical to the mutter-12 ABI. This provides us a stable ABI that can be leveraged across multiple GNOME Stack releases until Magpie 1.0 is released. Magpie v0.x should be used for GNOME 44+ and we will not be pursuing support for newer mutter ABIs, such as mutter-13 ABI for GNOME 45, as this would not be the most optimal use of our engineering bandwidth over development efforts around Wayland and Budgie 11.
+Privilege Escalation Dialog Improvements
+Wonder what is prompting that PolicyKit authentication dialog? Wonder no longer! In this release of Budgie Desktop, our polkit dialog will now show the action description and action ID when graphical privilege escalation is requested. Alongside this change, we made sure the dialog could no longer be resized.
+Performance / Power Modes In Battery Status Applet
+Budgie's battery indicator in the Status applet now provides the ability to control the Performance / Power profile modes offered by power-profiles-daemon. When available on a supported system, you will get access to various options such as:
+
+    Balanced
+    Power Saver
+    Performance
+
+System Tray Adopts Status Notifier Specification
+The System Tray applet has been overhauled for Budgie 10.8. As we elaborated on in our Wayland blog post, historically we have used either na-tray or the XEmbed Protocol for the creation, management, and rendering of trays icons. This had notable downsides, such as:
+
+    Icons not scaling with panel size
+    High DPI scaling relied on the application providing the icon to support DPI scaling
+    Inconsistent styling of tray menus
+    Relies on X11 APIs, which is not viable for our Wayland-only future
+
+For Budgie 10.8, our System Tray has adopted the Status Notifier specification. This is a modern, vendor-agnostic solution that enables applications to communicate all relevant information for the rendering of their tray icon over DBus rather than being responsible for drawing tray icons and menus themselves, promoting the development of catered solutions by desktop environments and those developing panels for user experiences such as tiling window managers. The result of this on the Budgie Desktop side is that we can draw all menus and items in a manner that is visually consistent. Going into Budgie 11, we will have a similar solution and paired with multiple panels across multiple monitors (a requirement for Budgie 11), you will even be able to have multiple tray applet instances enabled, which was not otherwise possible with the XEmbed-based solutions.
+General Improvements
+Budgie 10.8 features a bunch of smaller improvements, complementing our major new features and changes.
+Budgie Menu
+Our Application Indexer's fuzzy scoring function has been ported to C. When transpiling to C, Vala would mangle this function, causing it to crash randomly on non-Latin text. Porting it to C fixed the crashing issue while still producing the desired search results. For Budgie Menu, we made changes to the organization of some applications based on user feedback. Applications that previously were put into the Other category ended up fitting better in other existing categories and some application exclusions no longer making sense either. The Utilities category has been removed entirely, as we found it had considerable overlap with the System Tools category and it was not immediately clear what the difference was between Accessories and Utilities. Now, applications previously in Utilities can be found in the System Tools category.
+Internal Theme Refinements
+We have made some small refinements and recoloring to our internal theme. Historically, the primary accent color in our internal theme mirrored that of the Solus blue. When Budgie Desktop development began under Buddies of Budgie, the decision was made early on to move to our adopted light green primary color. This was chosen to be more like greenery and common (green) budgerigars. The first to be updated was the Budgie logo itself and the color has finally made its way to our default internal theme as well. Alongside this change, we have darkened some elements such as Budgie Menu, the panel, and Raven's background. Raven widgets, text, and iconography should contrast better against the darker background as a result!
+Other Small Things
+
+    Kvantum and Murrine themes are now hidden in Budgie Desktop Settings #393
+    power-dialog: We have removed style class changes and made it behave more like polkit dialog. This fixes the case where themes which do not style the dialog end up having a transparent background, making it very hard to see and use the dialog #381
+    We now search for plugins in both /usr and /usr/local #404
+    We have moved the battery label setting to Budgie Desktop Settings as well as moved the percentage label from left of icon to right #389
+
+Bug Fixes
+It would not be a Budgie release without some bug squashing. In this release, we have:
+
+    Enabled ellipsize for Style boxes in BDS #403
+    Fixed Icon Tasklist not showing Private Internet Access #379
+    Fixed Polkit dialog resizing
+    Prevented notifications and screenshot from locking up when sink is locked
+    keyboard-layout: Don't try to initialize IBus #418
+        IBus already gets initialized in wm, and calling that function here causes severe breakage, leading to budgie-panel being repeatedly killed for OOM.
+
+Code Cleanup & Improvements
+While working on bug squashing and new features, we did not forget to go back and clean up some legacy cruft!
+
+    We now use is_empty() instead of length checks on collections #407
+    vapi: We have dropped all Vapi files that are included with Vala
+    We now look for dart-sass or ruby-sass before sassc
+    Adopted ngettext for plural strings #400
+
+
 v10.7.2 Official announcement can be found here:
 https://blog.buddiesofbudgie.org/budgie-10-7-2/
 

@@ -1,3 +1,11 @@
+budgie-desktop (10.8-2) unstable; urgency=medium
+
+  * Upload to unstable to support the GNOME 44/mutter-12 transition
+    (Closes: #1050149)
+  * Add missing changelog-announcement.txt entry for v10.8
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 21 Aug 2023 19:05:07 +0100
+
 budgie-desktop (10.8-1) experimental; urgency=medium
 
   * New upstream release
