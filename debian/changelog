@@ -1,4 +1,4 @@
-budgie-desktop (10.7.2-1ubuntu1) mantic; urgency=medium
+budgie-desktop (10.8-0ubuntu1) mantic; urgency=medium
 
   * Bug-fixes
     - Stop raven breaking when notification numbers exceed 500 or more
