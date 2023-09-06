@@ -10,3 +10,4 @@ usr/share/icons
 usr/share/locale
 usr/share/xsessions/budgie-desktop.desktop
 usr/libexec
+usr/share/xdg-desktop-portal/budgie-portals.conf
