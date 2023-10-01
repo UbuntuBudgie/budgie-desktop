@@ -1,3 +1,29 @@
+budgie-desktop (10.8.1-1) unstable; urgency=medium
+
+  * New upstream release
+    - upstream release announcement in install changelogs
+    - drop patches since the dark theme capability is now included
+      in this release
+      0001-Support-freedesktop-color-scheme.patch
+      0002-Hook-up-color-scheme-and-some-logic-interaction-with.patch
+      0003-Add-another-GSD42-code-guard-to-prevent-segmentation.patch
+      0005-Logic-for-determining-light-dark-includes-looking-wi.patch
+      0006-Remove-last-remaining-and-obsolete-GSD42-guard.patch
+    - resolve 3 keyboard layout issue where 2nd keyboard layout always
+      defaults to US
+      Merge existing ibus patches into one patch
+      Rework-keyboard-ibus-handling.patch
+      Drop the following ibus related patches
+      Add-a-small-delay-to-ensure-keyboard-layout-defaults.patch
+      Initialise-ibus-within-the-class-constructor.patch
+      use-ibus-daemonize.patch
+    - Add budgie-portals.conf for xdg-desktop-portal
+      (Closes: #1050905)
+  * Packaging Changes
+    - refresh libbudgie-private0 and libraven0 symbols
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 01 Oct 2023 21:12:11 +0100
+
 budgie-desktop (10.8-2) unstable; urgency=medium
 
   * Upload to unstable to support the GNOME 44/mutter-12 transition

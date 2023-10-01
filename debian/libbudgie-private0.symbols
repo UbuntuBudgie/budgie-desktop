@@ -34,8 +34,8 @@ libbudgie-private.so.0 libbudgie-private0 #MINVER#
  budgie_notification_close_reason_get_type@Base 10.5.3+git20220217a
  budgie_notification_construct@Base 10.5.3+git20220217a
  budgie_notification_get_actions@Base 10.5.3+git20220217a
- budgie_notification_get_app_icon@Base 10.5.3+git20220217a
  budgie_notification_get_app_id@Base 10.5.3+git20220217a
+ budgie_notification_get_app_image@Base 10.8.1
  budgie_notification_get_app_info@Base 10.5.3+git20220217a
  budgie_notification_get_app_name@Base 10.5.3+git20220217a
  budgie_notification_get_body@Base 10.5.3+git20220217a
@@ -44,12 +44,14 @@ libbudgie-private.so.0 libbudgie-private0 #MINVER#
  budgie_notification_get_hints@Base 10.5.3+git20220217a
  budgie_notification_get_id@Base 10.5.3+git20220217a
  budgie_notification_get_image@Base 10.5.3+git20220217a
+ budgie_notification_get_notification_icon@Base 10.8.1
  budgie_notification_get_summary@Base 10.5.3+git20220217a
  budgie_notification_get_timestamp@Base 10.5.3+git20220217a
  budgie_notification_get_type@Base 10.5.3+git20220217a
  budgie_notification_get_urgency@Base 10.5.3+git20220217a
  budgie_notification_new@Base 10.5.3+git20220217a
  budgie_notification_position_get_type@Base 10.5.3+git20220217a
+ budgie_notification_set_app_image@Base 10.8.1
  budgie_notification_set_body@Base 10.5.3+git20220217a
  budgie_notification_set_category@Base 10.5.3+git20220217a
  budgie_notification_set_expire_timeout@Base 10.6

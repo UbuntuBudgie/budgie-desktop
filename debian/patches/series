@@ -1,11 +1,3 @@
 desktopfolder_exename.patch
-use-ibus-daemonize.patch
-darktheme/0001-Support-freedesktop-color-scheme.patch
-darktheme/0002-Hook-up-color-scheme-and-some-logic-interaction-with.patch
-darktheme/0003-Add-another-GSD42-code-guard-to-prevent-segmentation.patch
-darktheme/0005-Logic-for-determining-light-dark-includes-looking-wi.patch
-darktheme/0006-Remove-last-remaining-and-obsolete-GSD42-guard.patch
-Rework-keyboard-handling-to-layouts-ibus-handling.patch
-Initialise-ibus-within-the-class-constructor.patch
-Add-a-small-delay-to-ensure-keyboard-layout-defaults.patch
+Rework-keyboard-ibus-handling.patch
 allow-AppIndicator-if-System-Tray-is-not-present.patch
