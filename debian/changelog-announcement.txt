@@ -1,3 +1,18 @@
+v10.8.2 Official announcement can be found here:
+https://buddiesofbudgie.org/blog/budgie-10-8-2-released
+
+Budgie 10.8.2 is the second minor release in the 10.8 series of our Budgie Desktop environment. This release features some bug fixes around the system tray, notifications, and a small improvement to Budgie Screenshot.
+Bug Fixes
+
+    System Tray icon scaling will now be correctly applied on initial launch, fixing a bug where you needed to toggle the scaling on and off again for it to re-apply in the "off" position. #467
+    Fix custom icon path reading in System Tray, resulting in an unresponsive panel over time for some users. #456
+    Added fallback logic to our AppInfo fetching for Notifications. Some applications (such as nemo and streamlink-twitch-gui) have a mismatch between the desktop-entry they provide and their desktop file. In cases where the hint fails, we will now try to guess the ID using the application's name given to us from DBus. #477
+
+Improvements
+
+    Budgie Screenshot will now use a more limited scoped directory for the temporary image it generates. This temporary image will attempt to store itself as .budgiescreenshot_tempfile in the user's XDG_RUNTIME_DIR, falling back to the user's HOME directory if that runtime directory does not exist. This is more aligned with the XDG Base Directory Specification, which specifies that user-specific runtime and other file objects should be placed in XDG_RUNTIME_DIR.
+
+
 v10.8.1 Official announcement can be found here:
 https://buddiesofbudgie.org/blog/budgie-10-8-1-released
 

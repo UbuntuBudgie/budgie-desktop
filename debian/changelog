@@ -1,3 +1,10 @@
+budgie-desktop (10.8.2-1) unstable; urgency=medium
+
+  * New upstream release
+    - upstream release announcement in install changelogs
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 19 Oct 2023 18:40:24 +0100
+
 budgie-desktop (10.8.1-2) unstable; urgency=medium
 
   * Bug-fix
