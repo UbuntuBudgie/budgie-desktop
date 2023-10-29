@@ -31,6 +31,7 @@ Build-Depends:
  libpulse-mainloop-glib0,
  libupower-glib-dev,
  libwnck-3-dev,
+ libxfce4windowing-0-dev,
  meson,
  sassc,
  uuid-dev,
