@@ -1,3 +1,11 @@
+budgie-desktop (10.8.2-2) unstable; urgency=medium
+
+  * d/rules - build with new zenity; this is needed to display the
+    display dialog when a user changes the resolution
+    d/control - add zenity version for B/D and budgie-core dependency
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 07 Dec 2023 21:02:44 +0000
+
 budgie-desktop (10.8.2-1) unstable; urgency=medium
 
   * New upstream release

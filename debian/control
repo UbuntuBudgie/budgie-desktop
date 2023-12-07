@@ -35,7 +35,7 @@ Build-Depends:
  sassc,
  uuid-dev,
  valac,
- zenity,
+ zenity (>= 3.99),
 Standards-Version: 4.6.2
 Vcs-Browser: https://github.com/ubuntubudgie/budgie-desktop/tree/debian
 Vcs-Git: https://github.com/ubuntubudgie/budgie-desktop.git -b debian
@@ -48,7 +48,7 @@ Depends:
  gnome-session-bin,
  gnome-session-common,
  gnome-settings-daemon,
- zenity,
+ zenity (>= 3.99),
  ${misc:Depends},
  ${shlibs:Depends},
 Description: Core package for Budgie-Desktop
