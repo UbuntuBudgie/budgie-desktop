@@ -31,6 +31,7 @@ Build-Depends:
  libpulse-mainloop-glib0,
  libupower-glib-dev,
  libwnck-3-dev,
+ libxfce4windowing-0-dev,
  meson,
  sassc,
  uuid-dev,
@@ -45,8 +46,7 @@ Package: budgie-core
 Architecture: any
 Depends:
  gnome-screensaver,
- gnome-session-bin,
- gnome-session-common,
+ budgie-session,
  gnome-settings-daemon,
  zenity (>= 3.99),
  ${misc:Depends},
@@ -56,7 +56,7 @@ Description: Core package for Budgie-Desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This is the base package for budgie-desktop.  This package provides:
   GNOME Network Manager autostart file specifically for Budgie
@@ -87,7 +87,7 @@ Description: Development package for budgie-desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This package provides the development files allowing compilation
  through the budgie-desktop API.  This package provides:
@@ -115,7 +115,7 @@ Description: Desktop package for budgie-desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This package installs the minimal GNOME based package-set together with
  the key budgie-desktop packages to produce a working desktop
@@ -132,7 +132,7 @@ Description: documentation files for the budgie-desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This package contains the API documentation in HTML format
 
@@ -147,7 +147,7 @@ Description: GNOME introspection library for budgie-desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This is the introspection library and allows creating plugins in
  python3, C and Vala
@@ -161,7 +161,7 @@ Description: GNOME introspection library for budgie-desktop (raven)
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This is the introspection library and allows creating plugins in
  python3, C and Vala for the raven sidebar
@@ -175,7 +175,7 @@ Description: Menu library for budgie-desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This manages all of the application and category menu states for
  installed applications on the system.
@@ -189,7 +189,7 @@ Description: Raven Plugin library for budgie-desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This add the raven plugin library to budgie-desktop
 
@@ -202,7 +202,7 @@ Description: Plugin library for budgie-desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This adds the panel plugin library to budgie-desktop
 
@@ -215,7 +215,7 @@ Description: Budgie Private library for budgie-desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This provides a private ABI for raven and the budgie panel
 
@@ -228,7 +228,7 @@ Description: Theme library for budgie-desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This adds the theme controls for budgie-desktop
 
@@ -241,6 +241,6 @@ Description: Raven library for budgie-desktop
  simplicity and elegance.  It provides a traditional desktop metaphor
  based interface utilising customisable panel based menu driven system.
  Budgie-Desktop is written from scratch utilising many GNOME based
- sub-systems such as GNOME-Session and Mutter.
+ sub-systems such as GVC and gnome-settings-daemon.
  .
  This provides the budgie-desktop user-defined settings called raven.
