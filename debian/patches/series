@@ -1,3 +1,4 @@
 desktopfolder_exename.patch
 #Rework-keyboard-ibus-handling.patch
 allow-AppIndicator-if-System-Tray-is-not-present.patch
+switch_to_gnome_session.patch

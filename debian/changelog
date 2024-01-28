@@ -2,6 +2,8 @@ budgie-desktop (10.9-1) experimental; urgency=medium
 
   * New upstream release
     - upstream release announcement in install changelogs
+  * switch to using gnome-session
+    switch_to_gnome_session.patch
   * d/control - update packaging descriptions
     Add B/D with libxfce4windowing-0-dev
   * d/control - restrict gnome-session to less than v46 since budgie
