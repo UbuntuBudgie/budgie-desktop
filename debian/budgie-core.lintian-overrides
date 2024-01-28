@@ -1,7 +1,6 @@
 # The following lintian error has been reported upstream
 # https://github.com/budgie-desktop/budgie-desktop/issues/920
 # There is no known upstream nor packaging workaround available.
-#budgie-core: custom-library-search-path RUNPATH /usr/lib/*/magpie-* [usr/bin/budgie-wm]
 budgie-core: custom-library-search-path RUNPATH /usr/lib/*/mutter-* [usr/bin/budgie-wm]
 # The following lintian errors have been reported upstream
 # https://github.com/solus-project/budgie-desktop/issues/1471
@@ -9,7 +8,7 @@ budgie-core: custom-library-search-path RUNPATH /usr/lib/*/mutter-* [usr/bin/bud
 # has been run and only the expected linked libraries are reported. Plugins for GLib-based
 # softare often don't use libc directly - only via GLib.
 budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.separator/libseparatorapplet.so]
-budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.show-desktop/libshowdesktopapplet.so]
+#budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.show-desktop/libshowdesktopapplet.so]
 budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.spacer/libspacerapplet.so]
 budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.tasklist/libtasklistapplet.so]
 budgie-core: library-not-linked-against-libc [usr/lib/budgie-desktop/plugins/org.budgie-desktop.applet.caffeine/libcaffeineapplet.so]

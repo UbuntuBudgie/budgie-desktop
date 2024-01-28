@@ -1,12 +1,13 @@
-budgie-desktop (10.9-1) UNRELEASED; urgency=medium
+budgie-desktop (10.9-1) experimental; urgency=medium
 
   * New upstream release
     - upstream release announcement in install changelogs
-  * d/control - switch from using gnome-session* to budgie-session including
-    updating packaging descriptions
+  * d/control - update packaging descriptions
     Add B/D with libxfce4windowing-0-dev
-    d/patches build with an updated Rework-keyboard-ibus-handling.patch
-    that works with magpie
+  * d/control - restrict gnome-session to less than v46 since budgie
+    will not launch with v46 and later; add budgie-session as an alternate
+  * d/patches - refresh Rework-keyboard-ibus-handling.patch that will
+    work with magpie; not built with patch until the magpie switch occurs
 
  -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 28 Jan 2024 15:18:12 +0000
 

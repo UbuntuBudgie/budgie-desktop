@@ -46,7 +46,8 @@ Package: budgie-core
 Architecture: any
 Depends:
  gnome-screensaver,
- budgie-session,
+ gnome-session-bin (<< 46) | budgie-session,
+ gnome-session-common (<< 46) | budgie-session,
  gnome-settings-daemon,
  zenity (>= 3.99),
  ${misc:Depends},
