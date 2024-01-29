@@ -1,3 +1,12 @@
+budgie-desktop (10.9-2) experimental; urgency=medium
+
+  * d/control - replace suggestions with budgie-desktop-environment
+    d/control - gir1.2-budgie-1.0 remove now obsolete replace/breaks
+    d/control - drop B/D libgnome-bluetooth-dev (Closes: #1059486)
+    d/control - add B/D cmake, libcanberra-gtk3-dev
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 29 Jan 2024 07:28:08 +0000
+
 budgie-desktop (10.9-1) experimental; urgency=medium
 
   * New upstream release

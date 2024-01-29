@@ -2,7 +2,7 @@ Description: switch to using gnome-session
  temporary patch pending budgie-session upload.  This patch
  switches to using gnome-session
 Author: David Mohammed <fossfreedom@ubuntu.com>
-Forwarded: no
+Forwarded: not-needed
 Reviewed-By: David Mohammed <fossfreedom@ubuntu.com>
 Last-Update: 2024-01-28
 

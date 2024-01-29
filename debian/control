@@ -14,10 +14,11 @@ Build-Depends:
  gtk-doc-tools,
  libaccountsservice-dev,
  libasound2-dev,
+ libcanberra-gtk3-dev,
+ cmake,
  libgdk-pixbuf-2.0-dev,
  libgee-0.8-dev,
  libglib2.0-dev,
- libgnome-bluetooth-dev,
  libgnome-desktop-3-dev,
  libgstreamer1.0-dev,
  libgtk-3-dev,
@@ -106,10 +107,7 @@ Depends:
  xdotool,
 Recommends: gir1.2-budgie-1.0, gir1.2-budgieraven-1.0, ${dist:Recommends}
 Suggests:
- arc-theme,
- gnome-bluetooth-sendto,
- papirus-icon-theme,
- slick-greeter,
+ budgie-desktop-environment,
  ${dist:Suggests},
 Description: Desktop package for budgie-desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on
@@ -140,8 +138,6 @@ Description: documentation files for the budgie-desktop
 Package: gir1.2-budgie-1.0
 Section: introspection
 Architecture: any
-Replaces: gir1.2-budgie-desktop-1.0 (<< 10.3.2)
-Breaks: gir1.2-budgie-desktop-1.0 (<< 10.3.2)
 Depends: ${gir:Depends}, ${misc:Depends}, ${shlibs:Depends}
 Description: GNOME introspection library for budgie-desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on
