@@ -1,3 +1,12 @@
+budgie-desktop (10.9.1-1) experimental; urgency=medium
+
+  * New upstream release
+    - upstream release announcement in install changelogs
+  * Packaging changes
+    - d/budgie-core.manpages - add sendto man-page
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 02 Feb 2024 21:39:24 +0000
+
 budgie-desktop (10.9-2) experimental; urgency=medium
 
   * d/control - replace suggestions with budgie-desktop-environment

@@ -1,5 +1,21 @@
-v10.8.2 Official announcement can be found here:
+v10.9.1 Official announcement can be found here:
+https://buddiesofbudgie.org/blog/budgie-10-9-1-released
+
+Budgie 10.9.1 is the first minor release of Budgie 10.9 series of our Budgie Desktop environment. This release squashes some bugs in the TabSwitcher and Workspace applet.
+Bug Fixes
+
+    TabSwitcher
+        Fixed inconsistent window focusing.
+        Fixed windows from other workspaces showing up when the user has not enabled the "Show all windows" option.
+        Added dynamic max column setting on our switcher's FlowBox, so it will no longer take up more room than necessary.
+    Workspace applet
+        Fixed icon scaling when using scaling that is greater than 100%.
+    Added missing manpage for org.buddiesofbudgie.sendto.
+    Updated default vendor wallpaper.
+
+v10.9 Official announcement can be found here:
 https://buddiesofbudgie.org/blog/budgie-10-9-released
+
 Budgie 10.9 is a brand new release series for Budgie Desktop, introducing a redesigned Bluetooth applet, early porting efforts towards supporting Wayland, and adopting budgie-session for session management.
 Redesigned Bluetooth applet
 Budgie 10.9 features a redesigned Bluetooth applet. This applet now provides direct (dis-)connect functionality for paired Bluetooth devices, battery life indicators, as well as functionality for sending files to Bluetooth devices. Architecturally, our Bluetooth applet eliminates the use of gnome-bluetooth (a helper library on top of bluez D-Bus APIs) and instead directly communicates to BlueZ and UPower over D-Bus. Previously, Budgie Desktop had been using an older version of gnome-bluetooth which did not require Libadwaita and GTK4. As we looked towards expanding our Bluetooth functionality and easing long-term maintenance, we decided to deprecate our use of this older library and similarly leverage BlueZ and UPower D-Bus APIs directly. As an added benefit, this will enable some distributions to completely drop that old gnome-bluetooth from their repositories!
