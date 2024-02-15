@@ -4,10 +4,9 @@ Priority: optional
 Maintainer: David Mohammed <fossfreedom@ubuntu.com>
 Homepage: https://github.com/buddiesofbudgie/budgie-desktop
 Build-Depends:
- debhelper (>= 13),
  debhelper-compat (= 13),
  gir1.2-gee-0.8,
- gnome-common,
+ intltool,
  gnome-screensaver,
  gnome-settings-daemon-dev,
  gobject-introspection,
@@ -47,8 +46,7 @@ Package: budgie-core
 Architecture: any
 Depends:
  gnome-screensaver,
- gnome-session-bin (<< 46) | budgie-session,
- gnome-session-common (<< 46) | budgie-session,
+ budgie-session,
  gnome-settings-daemon,
  zenity (>= 3.99),
  ${misc:Depends},

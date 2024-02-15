@@ -1,3 +1,13 @@
+budgie-desktop (10.9.1-2) experimental; urgency=medium
+
+  * d/control - switch to using budgie-session
+    change runtime dependencies to budgie-session
+    drop switch_to_gnome_session.patch
+    d/control - drop B/D obsolete gnome-common, add intltool
+    d/control - drop B/D debhelper since we are using compat
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 15 Feb 2024 10:02:02 +0000
+
 budgie-desktop (10.9.1-1) experimental; urgency=medium
 
   * New upstream release
