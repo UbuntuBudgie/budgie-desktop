@@ -66,7 +66,6 @@ namespace Budgie {
 		void restart_clicked() {
 			Closed();
 			ConfirmedReboot();
-			hide();
 		}
 
 		[GtkCallback]
@@ -74,7 +73,6 @@ namespace Budgie {
 		void shutdown_clicked() {
 			Closed();
 			ConfirmedShutdown();
-			hide();
 		}
 
 		[DBus (visible=false)]

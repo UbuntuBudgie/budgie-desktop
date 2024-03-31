@@ -1,4 +1,8 @@
 desktopfolder_exename.patch
 Rework-keyboard-ibus-handling.patch
 allow-AppIndicator-if-System-Tray-is-not-present.patch
-enforce-no-implicit-function-declaration.patch
+Update-libxfce4windowing-to-4.19.3-547.patch
+fix-workspace-applet-window-icon-click.patch
+fix-set-budgie-run-dialog-to-skip-pager-and-taskbar.patch
+Use-Enum-DOWN-instead-of-LEFT-to-scroll.patch
+Work-around-even-more-SNI-noncompliance.patch

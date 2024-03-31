@@ -5,7 +5,6 @@ Maintainer: David Mohammed <fossfreedom@ubuntu.com>
 Homepage: https://github.com/buddiesofbudgie/budgie-desktop
 Build-Depends:
  debhelper-compat (= 13),
- dh-sequence-gir,
  gir1.2-gee-0.8,
  intltool,
  gnome-screensaver,
@@ -82,9 +81,6 @@ Depends:
  libpeas-dev,
  libraven0 (= ${binary:Version}),
  ${misc:Depends},
-Provides: gir1.2-budgie-1.0-dev (= ${binary:Version}),
- gir1.2-budgieraven-1.0-dev (= ${binary:Version}),
- ${gir:Provides}
 Suggests: budgie-desktop-doc
 Description: Development package for budgie-desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on

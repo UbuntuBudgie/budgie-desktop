@@ -1,29 +1,3 @@
-budgie-desktop (10.9.2-0ubuntu2) oracular; urgency=medium
-
-  * resolve FTBFS; meson global c_args seem to be ignored, so
-    add c_args at various meson.build files
-    enforce-no-implicit-function-declaration.patch
-  * Packaging Changes
-    d/control introspection packaging changes state that a B/D on
-    dh-sequence-gir is required as will as Provides statements
-    for the gir packages budgie creates for the core dev binary package
-
- -- David Mohammed <fossfreedom@ubuntu.com>  Sat, 17 Aug 2024 11:30:21 +0100
-
-budgie-desktop (10.9.2-0ubuntu1) oracular; urgency=medium
-
-  * * New upstream release
-    - upstream release announcement in install changelogs
-  * Packaging changes
-    - drop the following patches since these are included in this release
-      Update-libxfce4windowing-to-4.19.3-547.patch
-      fix-workspace-applet-window-icon-click.patch
-      fix-set-budgie-run-dialog-to-skip-pager-and-taskbar.patch
-      Use-Enum-DOWN-instead-of-LEFT-to-scroll.patch
-      Work-around-even-more-SNI-noncompliance.patch
-
- -- David Mohammed <fossfreedom@ubuntu.com>  Sat, 22 Jun 2024 14:12:38 +0100
-
 budgie-desktop (10.9.1-3ubuntu4) noble; urgency=medium
 
   * No-change rebuild for CVE-2024-3094

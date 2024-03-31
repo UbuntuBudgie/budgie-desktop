@@ -287,7 +287,8 @@ namespace Budgie {
 			// We have to make sure to add BCC panel items because they
 			// have NoDisplay set, so this would otherwise exclude them.
 			// Showing/hiding them is handled by the UI layer.
-			bool should_skip = !app_info.should_show() && !is_control_center_panel;
+			bool should_skip = (!app_info.should_show() && !is_control_center_panel) ||
+								(app_info.get_boolean("Terminal"));
 
 			if (should_skip) {
 				return;

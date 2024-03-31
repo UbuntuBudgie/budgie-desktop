@@ -1,0 +1,26 @@
+Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/542
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Last-Update: 2024-02-23
+Description: [PATCH] Use Enum DOWN instead of LEFT to scroll in a left-wards
+ direction (closes #541)
+
+---
+ src/panel/applets/workspaces/WorkspacesApplet.vala | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/panel/applets/workspaces/WorkspacesApplet.vala b/src/panel/applets/workspaces/WorkspacesApplet.vala
+index 5d3435ac..aaf8ede9 100644
+--- a/src/panel/applets/workspaces/WorkspacesApplet.vala
++++ b/src/panel/applets/workspaces/WorkspacesApplet.vala
+@@ -207,7 +207,7 @@ namespace Workspaces {
+ 
+ 				unowned libxfce4windowing.Workspace current = workspace_group.get_active_workspace();
+ 				unowned libxfce4windowing.Workspace? next = current.get_neighbor(
+-					(down) ? libxfce4windowing.Direction.RIGHT : libxfce4windowing.Direction.LEFT
++					(down) ? libxfce4windowing.Direction.RIGHT : libxfce4windowing.Direction.DOWN
+ 				);
+ 
+ 				if (next != null) {
+-- 
+2.43.0
+

@@ -85,10 +85,9 @@ namespace Budgie.Notifications {
 			this.add(revealer);
 
 			// Hook up the close button
-			close_button.button_release_event.connect(() => {
+			close_button.clicked.connect(() => {
 				this.Closed(NotificationCloseReason.DISMISSED);
 				this.dismiss();
-				return Gdk.EVENT_STOP;
 			});
 		}
 

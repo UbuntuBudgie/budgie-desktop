@@ -1,0 +1,27 @@
+Applied-Upstream: commit:f936531eb1d29abc6d1d34650939b66032f8f6ae
+Author: Joshua Strobl <JoshStrobl@users.noreply.github.com>
+Last-Update: 2024-02-09
+Description: [PATCH 4/8] fix: set budgie run dialog to skip pager and taskbar
+ (#530)
+
+fixes #529
+---
+ src/dialogs/run/RunDialog.vala | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/dialogs/run/RunDialog.vala b/src/dialogs/run/RunDialog.vala
+index 5138e50a..faa3be5c 100644
+--- a/src/dialogs/run/RunDialog.vala
++++ b/src/dialogs/run/RunDialog.vala
+@@ -44,6 +44,8 @@ namespace Budgie {
+ 		construct {
+ 			set_keep_above(true);
+ 			set_position(Gtk.WindowPosition.CENTER);
++			set_skip_pager_hint(true);
++			set_skip_taskbar_hint(true);
+ 			Gdk.Visual? visual = screen.get_rgba_visual();
+ 			if (visual != null) {
+ 				this.set_visual(visual);
+-- 
+2.43.0
+
