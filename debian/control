@@ -81,7 +81,7 @@ Depends:
  libgtk-3-dev,
  libpeas-dev,
  libraven0 (= ${binary:Version}),
- ${misc:Depends}
+ ${misc:Depends},
 Provides: gir1.2-budgie-1.0-dev (= ${binary:Version}),
  gir1.2-budgieraven-1.0-dev (= ${binary:Version}),
  ${gir:Provides}
