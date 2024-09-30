@@ -1,0 +1,3 @@
+# False positive for plugins as discussed on previous budgie-desktop tracker
+# https://github.com/solus-project/budgie-desktop/issues/1471#issuecomment-417232178
+libbudgie-raven-plugin0: library-not-linked-against-libc [usr/lib/libbudgie-raven-plugin.so.0.0.0]

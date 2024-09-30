@@ -1,0 +1,13 @@
+etc/xdg/autostart
+usr/bin
+usr/lib/budgie-desktop
+usr/share/applications
+usr/share/backgrounds/budgie/default.jpg
+usr/share/budgie/budgie-version.xml
+usr/share/glib-2.0
+usr/share/gnome-session
+usr/share/icons
+usr/share/locale
+usr/share/xsessions/budgie-desktop.desktop
+usr/libexec
+usr/share/xdg-desktop-portal/budgie-portals.conf

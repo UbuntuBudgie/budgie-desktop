@@ -1,0 +1,10 @@
+#!/bin/sh
+
+VAL=`budgie-desktop --version | grep "budgie-desktop" | wc -l`
+
+if [ $VAL -eq '1' ] ; then
+ exit 0
+fi
+
+exit 1
+

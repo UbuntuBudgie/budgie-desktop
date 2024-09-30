@@ -1,0 +1,17 @@
+Description: switch to using budgie-session
+ .
+ upstream have moved to using budgie-session for the v10.9 series
+ This patch ensures the 10.8 series uses this new session manager
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: not-needed
+Last-Update: 2024-02-15
+
+--- budgie-desktop-10.8.2.orig/src/session/budgie-desktop.in
++++ budgie-desktop-10.8.2/src/session/budgie-desktop.in
+@@ -13,4 +13,4 @@ if [ -z $XDG_CURRENT_DESKTOP ]; then
+   export XDG_CURRENT_DESKTOP
+ fi
+ 
+-exec gnome-session --builtin --session=org.buddiesofbudgie.BudgieDesktop $*
++exec budgie-session --builtin --session=org.buddiesofbudgie.BudgieDesktop $*

@@ -1,0 +1,5 @@
+libbudgietheme.so.0 libbudgietheme0 #MINVER#
+* Build-Depends-Package: budgie-core-dev
+ budgie_form_theme_path@Base 10.3
+ budgie_theme_manager_get_type@Base 10.3
+ budgie_theme_manager_new@Base 10.3

@@ -1,0 +1,984 @@
+v10.8.2 Official announcement can be found here:
+https://buddiesofbudgie.org/blog/budgie-10-8-2-released
+
+Budgie 10.8.2 is the second minor release in the 10.8 series of our Budgie Desktop environment. This release features some bug fixes around the system tray, notifications, and a small improvement to Budgie Screenshot.
+Bug Fixes
+
+    System Tray icon scaling will now be correctly applied on initial launch, fixing a bug where you needed to toggle the scaling on and off again for it to re-apply in the "off" position. #467
+    Fix custom icon path reading in System Tray, resulting in an unresponsive panel over time for some users. #456
+    Added fallback logic to our AppInfo fetching for Notifications. Some applications (such as nemo and streamlink-twitch-gui) have a mismatch between the desktop-entry they provide and their desktop file. In cases where the hint fails, we will now try to guess the ID using the application's name given to us from DBus. #477
+
+Improvements
+
+    Budgie Screenshot will now use a more limited scoped directory for the temporary image it generates. This temporary image will attempt to store itself as .budgiescreenshot_tempfile in the user's XDG_RUNTIME_DIR, falling back to the user's HOME directory if that runtime directory does not exist. This is more aligned with the XDG Base Directory Specification, which specifies that user-specific runtime and other file objects should be placed in XDG_RUNTIME_DIR.
+
+
+v10.8.1 Official announcement can be found here:
+https://buddiesofbudgie.org/blog/budgie-10-8-1-released
+
+Budgie 10.8.1 is the first minor release in the 10.8 series of our Budgie Desktop environment. This release adds dark style preference support, squashes some bugs around our new StatusNotifierItem implementation, adds keyword support for search, and more!
+Dark Style Preference Support
+For years, Budgie Desktop Settings has provided a "Dark Theme" toggle in its Style settings. This setting has been used to set the preference for Budgie Desktop itself to be light or dark, depending various factors such as if Built-in theme is toggled off and GTK theme support. However, this setting would not apply to applications themselves, which resulted in a confusing user experience. While there are still some improvements we plan on making to further improve application styling consistency, we are excited to announce that with Budgie 10.8.1 our Dark Theme toggle will now set the Dark Style Preference! When supported by the application or its toolkit, Dark Style Preference can be used to provide the suggested user preference for light or dark theming (prefer-light and prefer-dark respectively). Some applications may enforce a specific color scheme, for example a photo editor may prefer a dark canvas to enable content to stand out, however overall this standardized, vendor-neutral setting should help to create a more consistent experience for our users.
+System Tray Improvements and Fixes
+Budgie now has an option to toggle scaling of tray icons with the panel size. With the introduction of StatusNotifierItem support for our System Tray in Budgie 10.8, the default was to scale these icons, however based on user feedback and in our own testing, it was found that this did not pair well with the Status Indicator. With 10.8.1, we have provided the option to enable this scaling should you desire and have turned it off by default. Thanks to issues filed by our users, we have also identified and now handle several instances of inconsistent StatusNotifierItem implementations. These inconsistencies could result in crashes or blank menus, which are certainly not ideal!
+
+    nm-applet (NetworkManager Applet) would occasionally have blank menus.
+    TeamViewer's incorrect implementation of the StatusNotifierItem specification would trigger panel crashes. Added stronger value VariantType checking to prevent this from happening.
+
+Notification System Improvements
+Our Notification System has seen several improvements and fixes in Budgie 10.8.1. Building on significant notification work done in past releases of Budgie (10.7 and 10.7.2), we were able to simplify our logic around constructing and fetching of existing Notification Groups in Raven by taking advantage of improvements to our Notification objects from Budgie Daemon. This should result in a slight reduction in overall memory usage as we no longer need to leverage a Hash Table of application names to groups for lookups, rather we are able find any existing relevant Notification Group via GtkListBox children iteration. Icons rendered in both Notifications (external to Raven and in Notification Groups) are now consistent as we are handling more of the logic in the Notification object, with Raven simply using the Notification's provided application icon or notification icon (app icon taking precedence) rather than doing lookups itself. During this testing, we identified a couple bugs for squashing as well:
+
+    Spotify nowadays reports as com.spotify.Client instead of just Spotify in its notifications, which resulted in it being unintentionally stored in Raven. This ID has been added to our "spam-apps" list, which is a list of applications that emit notifications which should be considered ephemeral or not expected to provide the end user any added value.
+    Missing markup on Notification titles resulting in ampersands not being parsed.
+
+Other Fixes and Improvements
+
+    Keyword support is now supported in our fuzzy searching across Budgie Menu and Run Dialog. You can now search for things like "browser", "editor", "performance" and get more relevant results!
+    We now ship an XDG Desktop Portal configuration with the default portal being gtk. This should fix support for applications running in flatpak when using xdg-desktop-portal 1.18.0+, such as the FileChooser portal.
+    Fixed compilation errors against latest GCC in Fedora 39+.
+    Active Profile initialization has been moved to occur after we have added the radio buttons, which should fix a mismatch between what Budgie Control Center reports and what the Power Indicator shows.
+
+
+v10.8 Official announcement can be found here:
+https://buddiesofbudgie.org/blog/budgie-10.8-released
+
+Budgie 10.8 is a brand new release series for Budgie Desktop, featuring improvements to Budgie Menu, adoption of StatusNotifier support in System Tray, Magpie v0.x support, and more!
+Budgie Trash Applet
+
+The previously third-party Budgie Trash Applet, developed by Buddies of Budgie team member Evan Maddock, has been merged into mainline Budgie Desktop to become a part of the default applets available to users out-of-the-box. This trash applet enables the user to quickly access and empty the contents of their trashcan as well as restore files.
+Magpie v0.x Support
+Budgie 10.8 is the first release which includes support for our Magpie ABI. To quickly summarize for those that did not catch our blog post on planned Wayland support and may not be familiar with Magpie, as well as to offer a bit of a history lesson, we will quickly go over the important parts. Historically, Budgie Desktop has used GNOME's Mutter window manager (nowadays Mutter is also a Wayland compositor) to do the heavy lifting for budgie-wm. budgie-wm has served as a small layer on top of Mutter, handling select keybindings for Budgie-specific functionality, input management, animations, screenshot management, backgrounds, and so forth. With every GNOME Stack release, Mutter ABI would change and Budgie Desktop would need to be updated to support the latest ABI and typically two or three ABIs prior so those on older GNOME stacks could still get newer Budgie Desktop releases. On many occasions, this resulted in significant pressure on the team as late ABI changes would land and we would need to work quickly to adapt to them. As GNOME has pursued improvements around their Wayland support, this has understandably at times resulted in regressions in its support for X11. As Budgie Desktop currently uses X11, this has created a less optimal user experience for our users. This reached a turning point with GNOME 44 / mutter-12 ABI when there was a larger split between Wayland and X11 support in Mutter, resulting in many regressions in its X11 support that to this day remain unresolved. During our team discussions, we came to the conclusion that we wanted to address this in two manners:
+
+    Restore X11 support / functionality expected by our users for the immediate future.
+    Prioritize adoption of Wayland, a longer-term goal, by developing a wlroots-based compositor that would serve as our window manager for both future Budgie 10.x releases when we go Wayland-only, as well as Budgie 11.
+
+To accomplish these goals, we first decided to soft-fork Mutter at the state it was in for GNOME 43, eliminating the regressions introduces in GNOME 44 / mutter-12. This version of Magpie is < 1.0 (e.g. 0.9.x) and is designed to be a temporary fork catered to Budgie and its current X11-only support. Alongside this effort, we are building "Magpie 1.0" as the wlroots-based Wayland compositor, with the plan to fully drop X11 support once Magpie 1.0 is ready for consumption. In the case of Budgie 10.8, this series supports magpie-0 ABI, which is effectively identical to the mutter-12 ABI. This provides us a stable ABI that can be leveraged across multiple GNOME Stack releases until Magpie 1.0 is released. Magpie v0.x should be used for GNOME 44+ and we will not be pursuing support for newer mutter ABIs, such as mutter-13 ABI for GNOME 45, as this would not be the most optimal use of our engineering bandwidth over development efforts around Wayland and Budgie 11.
+Privilege Escalation Dialog Improvements
+Wonder what is prompting that PolicyKit authentication dialog? Wonder no longer! In this release of Budgie Desktop, our polkit dialog will now show the action description and action ID when graphical privilege escalation is requested. Alongside this change, we made sure the dialog could no longer be resized.
+Performance / Power Modes In Battery Status Applet
+Budgie's battery indicator in the Status applet now provides the ability to control the Performance / Power profile modes offered by power-profiles-daemon. When available on a supported system, you will get access to various options such as:
+
+    Balanced
+    Power Saver
+    Performance
+
+System Tray Adopts Status Notifier Specification
+The System Tray applet has been overhauled for Budgie 10.8. As we elaborated on in our Wayland blog post, historically we have used either na-tray or the XEmbed Protocol for the creation, management, and rendering of trays icons. This had notable downsides, such as:
+
+    Icons not scaling with panel size
+    High DPI scaling relied on the application providing the icon to support DPI scaling
+    Inconsistent styling of tray menus
+    Relies on X11 APIs, which is not viable for our Wayland-only future
+
+For Budgie 10.8, our System Tray has adopted the Status Notifier specification. This is a modern, vendor-agnostic solution that enables applications to communicate all relevant information for the rendering of their tray icon over DBus rather than being responsible for drawing tray icons and menus themselves, promoting the development of catered solutions by desktop environments and those developing panels for user experiences such as tiling window managers. The result of this on the Budgie Desktop side is that we can draw all menus and items in a manner that is visually consistent. Going into Budgie 11, we will have a similar solution and paired with multiple panels across multiple monitors (a requirement for Budgie 11), you will even be able to have multiple tray applet instances enabled, which was not otherwise possible with the XEmbed-based solutions.
+General Improvements
+Budgie 10.8 features a bunch of smaller improvements, complementing our major new features and changes.
+Budgie Menu
+Our Application Indexer's fuzzy scoring function has been ported to C. When transpiling to C, Vala would mangle this function, causing it to crash randomly on non-Latin text. Porting it to C fixed the crashing issue while still producing the desired search results. For Budgie Menu, we made changes to the organization of some applications based on user feedback. Applications that previously were put into the Other category ended up fitting better in other existing categories and some application exclusions no longer making sense either. The Utilities category has been removed entirely, as we found it had considerable overlap with the System Tools category and it was not immediately clear what the difference was between Accessories and Utilities. Now, applications previously in Utilities can be found in the System Tools category.
+Internal Theme Refinements
+We have made some small refinements and recoloring to our internal theme. Historically, the primary accent color in our internal theme mirrored that of the Solus blue. When Budgie Desktop development began under Buddies of Budgie, the decision was made early on to move to our adopted light green primary color. This was chosen to be more like greenery and common (green) budgerigars. The first to be updated was the Budgie logo itself and the color has finally made its way to our default internal theme as well. Alongside this change, we have darkened some elements such as Budgie Menu, the panel, and Raven's background. Raven widgets, text, and iconography should contrast better against the darker background as a result!
+Other Small Things
+
+    Kvantum and Murrine themes are now hidden in Budgie Desktop Settings #393
+    power-dialog: We have removed style class changes and made it behave more like polkit dialog. This fixes the case where themes which do not style the dialog end up having a transparent background, making it very hard to see and use the dialog #381
+    We now search for plugins in both /usr and /usr/local #404
+    We have moved the battery label setting to Budgie Desktop Settings as well as moved the percentage label from left of icon to right #389
+
+Bug Fixes
+It would not be a Budgie release without some bug squashing. In this release, we have:
+
+    Enabled ellipsize for Style boxes in BDS #403
+    Fixed Icon Tasklist not showing Private Internet Access #379
+    Fixed Polkit dialog resizing
+    Prevented notifications and screenshot from locking up when sink is locked
+    keyboard-layout: Don't try to initialize IBus #418
+        IBus already gets initialized in wm, and calling that function here causes severe breakage, leading to budgie-panel being repeatedly killed for OOM.
+
+Code Cleanup & Improvements
+While working on bug squashing and new features, we did not forget to go back and clean up some legacy cruft!
+
+    We now use is_empty() instead of length checks on collections #407
+    vapi: We have dropped all Vapi files that are included with Vala
+    We now look for dart-sass or ruby-sass before sassc
+    Adopted ngettext for plural strings #400
+
+
+v10.7.2 Official announcement can be found here:
+https://blog.buddiesofbudgie.org/budgie-10-7-2/
+
+# Budgie 10.7.2 Released
+
+Budgie 10.7.2 is the second minor release in the 10.7 series of our Budgie Desktop environment, primarily focused on bug fixes, additional compatibility with GNOME 44 stack, and various quality-of-life improvements.
+
+GNOME 44 Support
+
+While Budgie 10.7.1 introduced initial support for GNOME 44 through our Mutter 12 ABI support, Budgie 10.7.2 expands on it with additional changes centered around three key areas:
+
+    Workarounds for functionality broken as a result of changes upstream in Mutter with regards to X11 support.
+    Updates to support changes in tooling we use for out-of-process dialogs / prompts, primarily via zenity.
+    Backporting of functionality from our work-in-progress 10.8 that resolves some crashes seen as a result of changes in Vala.
+
+In the first area, we have updated our screenshot area selector to be now explicitly call for no decorations, to prevent the selection overlay from showing decorators, resulting in a non-fullscreen overlay.
+
+In the second area, upstream zenity was rewritten to use GTK4 and libadwaita. In the process of this change the command-line flags were changed (with some removals), resulting in some dialogs no longer appearing, such as those to handle confirmation of display changes when applied in Budgie Control Center. We now support both the "old" zenity (pre-3.90) and new (3.90+), and compile-time we will now bake in the appropriate options.
+
+In the third area, we noticed a spike in reported segfaults / abrts in Budgie Desktop recently related to functionality in our AppIndexer. This functionality was used to calculate the Levenshtein Distance of your search queries in our Budgie Menu and Budgie Run Dialog. In normal human language, we had implemented a common string metric that was used to determine the difference between what you are searching and various metadata, such as the name, of an application. This difference was used as part of the scoring of the app based on your query and helped to sort them in a manner that was most relevant, such as making sure "fir" actually scored "firefox" better than something like "ferdium". This was implemented using a matrix of numbers. Changes in the generated C in a newer version of Vala resulted in it being improperly freed, causing segfaults when opening and searching in either Budgie Menu or Budgie Run Dialog. Yikes.
+
+Fortunately, we already had a change for Budgie 10.8 that changed us from using Levenstein Distance to Fuzzy Bitap, resulting in better matches with the neat side-effect of no longer having bad C generated by Vala causing crashes! So instead of going down the rabbit hole even further to see where it went, we just decided to bring you that improvement early!
+
+Optimizations around Notifications
+
+Budgie 10.7.2 introduces optimizations around Notifications in Raven.
+
+Due to known scalability problems in GtkListBox and Co in GTK3, Raven could begin to feel sluggish or less responsive when a large amount of notifications had been accrued in its Notifications view. This was typically seen around the 800 notifications mark. To address this sluggishness, we have implement a global cap on the amount of notifications in Raven, with older notifications in each Notification Group being gradually culled as you hit the cap and more notifications come in.
+
+This global cap is set to 500 and is divided equally among all the Notification Groups (per app). So if you just had Discord firing away but nothing else, it would start culling Discord notifications once you hit that 500 mark. Once you add another group to it, it'd halve to 250, 3 to 166ish, 4 to 125, and so on. As you remove Notification Groups or clean up notifications, the caps automatically balance out.
+
+This should help to address long-term sluggishness typically seen on high uptime systems or those where the end user may not have as strongly implemented their own filters for disabling specific application notifications. We have also optimized notification destruction to tackle growing memory consumption.
+Other Fixes & Improvements
+
+Alongside the improvements / fixes above, we have backported the following for 10.7.x:
+
+    Fix Gtk gdk_x11_window_get_frame_extents, tackling some scaling issues with popovers.
+    Ensure Budgie Menu application lists height allocation accounts for GTK scaling factor. This ensures all parts of Budgie Menu are visible when used on resolutions such as 1080p with 200% scaling, rather than parts of it being cut off.
+    Use correct C header for meta_keybindings_set_custom_handler. This is necessary to avoid a build failure with future compilers which do not accept implicit function declarations by default.
+    budgie-menu: Change the selection policy from NONE to SINGLE. When set to NONE, keyboard navigation works, but there is no visual indicator. Changing it to SINGLE allows themes to show a visual indication that an item is selected, and that the arrow keys on the keyboard changes the selection.
+    budgie-menu: Make category buttons keyboard navigable
+
+Contributor List
+
+Budgie Desktop is developed by Buddies of Budgie and contributors from around the world. Here is a list of all the code contributors that made this release possible:
+
+    Campbell Jones
+    David Mohammed
+    Florian Weimer
+    Evan Maddock
+    Jacob Vlijm
+    Joshua Strobl
+
+
+v10.7.1 Official announcement can be found here:
+https://blog.buddiesofbudgie.org/budgie-10-7-1-released/
+
+# Budgie 10.7.1
+
+Budgie 10.7.1 is the first minor release in the 10.7 series of our Budgie Desktop environment, introducing some improvements, bug fixes, and updated translations.
+
+Improvements
+
+    Our settings / functionality for toggling unredirection has been improved. Unredirection allows frames to bypass the compositor for fullscreen applications, reducing overhead and improving performance in scenarios such as gaming. In previous releases, the option would be for disabling unredirection with the setting being off by default, meaning unredirection was enabled. This was confusing for both end users as well as in the implementation of the functionality. This setting has now been updated to be Enable unredirection, with the option enabled by default, with clearer explanation for the end user. #300
+    Initial Mutter 12 ABI support has been added in preparation for the upcoming GNOME 44 release. #305
+    Margins have been refined in the Budgie Desktop Settings panel settings layout to be aligned with that of the settings layout for Raven settings. #295
+    Updated translations. Thank you to all of our amazing translators on our Transifex ❤️
+
+Bug Fixes
+
+    Fix inability to capture full-screen applications with Budgie Screenshot. #298
+    Fix missing translatable strings in Budgie Screenshot. #299
+    Fix ellipsizing overflowing text in media control widget header resulting in Raven expansion. #302
+    Fix Budgie Menu handling of partial application name sorting and searching. #284 / #291
+    Fix plugins with ampersands (&) in description failing to render correctly. #292 / #293
+
+Contributor List
+
+Budgie Desktop is developed by Buddies of Budgie and contributors from around the world. Here is a list of all the code contributors that made this release possible:
+
+    Campbell Jones
+    David Mohammed
+    Eli Schwartz
+    Evan Maddock
+    Joshua Strobl
+
+
+v10.7 Official announcement can be found here:
+https://blog.buddiesofbudgie.org/budgie-10-7-released/
+
+# Budgie 10.7
+
+Budgie 10.7 is a brand new release series for Budgie Desktop, featuring major re-architectures, new APIs for extensibility, and polish to the user experience.
+
+This macrocosm in Budgie 10 series is currently the following:
+
+    Budgie Desktop
+    Budgie Desktop View: A dedicated desktop icons implementation.
+    Budgie Control Center: A fork of GNOME Control Center with various value-add such as Raven keybind support, improved fractional scaling support when supported by the operating system, re-organization of functionality.
+    Budgie Screensaver: Budgie Screensaver is a fork of gnome-screensaver intended for use with Budgie Desktop and is similar in purpose to other screensavers such as MATE Screensaver.
+
+We expect downstream consumers of Budgie to use following:
+
+    Budgie Desktop 10.7+
+    Budgie Desktop View 1.2.1+
+    Budgie Control Center 1.2.0+
+    Budgie Screensaver 5.1.0+
+
+New Application Indexer
+
+Budgie 10.7 introduces a new application indexer, replacing our use of libgnome-menus and unifying our logic used in both Budgie Menu and Budgie Run Dialog, for consistency in the applications we show. This new indexer provides more reliable indexing of applications across several directories which are used to store desktop files.
+
+Our implementation improves the categorization of applications, aggregating entries into more relevant and used categories (for example, "Administation", "Settings", and "System" would all be aggregated into "System"), while respecting custom desktop directories created by the users through third-party menu editors that write to the user's .local/share/desktop-directories folder.
+
+Related to the application indexer, our searching in Budgie Menu has been abstracted out into its own "relevancy search" that is now used in both Budgie Menu and Budgie Run Dialog, providing a consistent search experience.
+Budgie Desktop Settings
+
+Budgie Desktop Settings now has a new design for widget selection, applying to both panel widgets and our new Raven widget system. This design shows relevant developer information such as the author, website, description, and copyright information. We also communicate if the widget plugin is "built-in" (ships with Budgie).
+Budgie Menu
+
+Budgie Menu has been drastically improved in 10.7, with new functionality and improvements to application launching.
+Dual-GPU Support
+
+Budgie Menu now leverages switcheroo-control if available to switch between GPU environments when launching applications that request it. Users with dual-GPU setups can now launch their applications without necessarily having to worry about which GPU is in use and manually switching between them.
+Personal User Menu
+
+Budgie Menu now provides a "personal user menu" which has quick XDG directory access. This feature enables you to open up a file manager (or technically whatever your inode/directory handler is) directly to folders like Home, Documents, Music, etc. This follows the XDG Base Directory Specification, so if you have for example a different path set for Music (or your system locale is not English) that will be respected. Folders which do not exist will be automatically hidden, so the menu will only
+show items which are relevant to you!
+Quick Settings and Power Access
+
+In the new bottom strip of Budgie Menu, we now have buttons for launching Budgie Desktop Settings, Budgie Control Center, and our new Power Dialog (which we will get into later). You no longer need to search for these in the menu or access them by right-clicking on the desktop.
+Improvements to accessing Budgie Control Center panels
+
+An option has been added to the Budgie Menu widget settings to show Budgie Control Center settings items (such as bluetooth, sound, and power panels) in the applications list. You will always be able to search for these items regardless of the option being enabled though, so you can have less clutter in your menu while still having quick access to various settings panels.
+Other Improvements
+
+Here is a short list of other improvements to Budgie Menu:
+
+    We no longer reload the Budgie Menu during a AppIndex change when the menu is open, preventing your category and application list from re-rendering while you are actively using the menu.
+    We now ship a default menu icon that is similar in design to the grid icon that is used when the user enables the new "Use Default Menu Icon" option in the Budgie Menu widget settings, or if the currently selected icon theme is in the following list:
+        Adwaita
+        HighContrast
+        hicolor
+        "default"
+
+Budgie Run Dialog
+
+Budgie Run Dialog has been updated in 10.7 to leverage the new application indexer and relevancy search service, enabling it to have consistent search results compared to Budgie Menu.
+
+Alongside this update, we have introduced a couple visual changes as well:
+
+    The width is now computed from the work area of the screen that the Run Dialog is opened on. This should make it look good on different sized monitors.
+    The label for the name and description of applications in the launcher buttons has been split into two labels. This allows more fine-grained styling than was previously possible.
+
+Budgie Screenshot
+
+Budgie 10.7 introduces a new Budgie Screenshot application built into the desktop that enables you to quickly take screenshots of windows, areas, or your entire screen. Budgie Desktop no longer relies on gnome-screenshot for its screenshotting capabilities, all of the existing default keybinds will now call org.buddiesofbudgie.BudgieScreenshot. Users still have the option to use a different screenshotting solution (e.g. Flameshot) should they desire.
+Notification Enhancements
+
+Significant improvements around Notifications have landed in 10.7.
+General UX Improvements
+
+There has been a swath of improvements to our rendering of notifications:
+
+    Notifications will now fade in and out upon showing and closing.
+    Fix large fonts pushing the close button out of the popup
+        This sets the notification body to use the size of the widget for wrapping instead of a character length. Notification titles also were given a margin-end to prevent overlapping the close button.
+    Prevent notification popups from stealing input focus
+    Notifications should no longer cause screen flickering when in a fullscreen application.
+
+BudgieNotificationsBodyText
+
+    Width chars were added so that the body text always has the same minimum and maximum size per line, so the entire popup body is filled by the label. Lines is set to 2, so only two lines of text is displayed. Note that this does not mean two lines in the popup; it's two lines of the actual notification text. This allows long lines to wrap (and wrapped lines don't count towards lines, because reasons) without popups taking up large amounts of screen real-estate. Xalign is set to 0 to ensure that the
+    text always starts at the left (because halign and justify isn't enough).
+
+Notification Summary
+
+When a window leaves fullscreen mode, Budgie will now show a notification popup to alert the user that there are notifications that they didn't see. This notification is only shown if there are actually notifications.
+Spec and Control Center Setting Compliance
+
+Improvements have been made in supporting more of the FreeDesktop Notification spec, namely notification sounds are now supported. As not all applications will be displayed currently in Budgie Control Center and some applications such as Element and Discord have separate capabilities to play notifications sounds, we do not have sounds enabled by default.
+
+Applications that show in Budgie Control Center under its Notifications panel can be configured to have sounds on or off. Alongside this, we now respect the "Show Message Content in Popups" option in Budgie Control Center's Notification panel for an application and will hide content when it is disabled there.
+
+Some notifications set a timeout of 0, which the spec says means that it should never expire. Our implementation doesn't really fit that, since persistence is done by Raven, not the notification server. As such, we set a different minimum show time for the popups to ensure that one is actually shown when it should be.
+Raven
+
+Budgie 10.7 introduces the largest set of changes and features since the 10.5 release. It has largely been re-architected with a brand new pluggable Raven widget API system, allowing third-party developers to build their own Raven widgets, as well as seeing new widgets and updated designs to existing widgets.
+Raven Widget API
+
+Like our Budgie Panel widget API, you can now build widgets for Raven leveraging libpeas (providing support for writing plugins in C, Python, and Vala) and our set of APIs. This finally achieves our end goal for Raven since the beginning of Budgie 10, which has been to provide a extensible widget and notification center.
+
+This documentation, like the panel API, is currently provided via gtk-doc and browsable via devhelp. In the future, it will be available directly from our documentation center with reference examples.
+
+These widgets will automatically show up in Budgie Desktop Settings.
+
+As a result of this re-architecture around Raven and leveraging past work on the panel widget plugin API, Raven widgets can now be positioned to your heart's content and you can even remove the ones you don't want (as opposed to just hiding them like our past implementation). All of the widgets that ship with Budgie Desktop leverage the same plugin architecture as third-party ones will.
+New and improved Raven widgets
+
+Budgie 10.7 includes updates to some of our existing Raven widgets alongside a brand new one!
+
+    The Media Player widget now has a more compact design.
+    You can now click on the widget header icons for sound output and input to mute the respective device.
+    You can now turn off day names in the Calendar widget.
+    We now have a new Raven widget called Usage Monitor. This is a minimalistic widget that displays CPU, RAM, and Swap usage.
+
+Other Changes
+
+Here is a short list of some other changes to Raven:
+
+    The Power Strip, which has been off by default since 10.5, has been deprecated in favor of our improvements around the power dialog and more accessible power options via Budgie Menu.
+    Refinements have been made to margins and paddings of widget components.
+    Notifications are now sorted oldest to newest.
+
+Power Dialog
+
+Budgie 10.7 introduces a new Power Dialog for common actions such as shutdown, reboot, suspend, and more. This functionality replaces the actions exposed through the User Indicator applet, no longer requiring it to be added to the panel. The User Indicator will now invoke the Power Dialog and the new button in Budgie Menu will do the same!
+
+The Power Dialog is invokable through D-Bus, allowing third-party applet developers such as those making their own menu implementations to easily incorporate our power dialog options without much effort or requiring them to implement duplicate functionality. You can also invoke the power dialog with our handy (Win/Super)+Shift+P keybind.
+
+Hibernation is dynamically enabled / disabled based off system support and is offered as a compile-time option to disable on operating systems which do not provide hibernation support out-of-the-box, such as Fedora.
+Other Improvements and Bug Fixes
+Bug Fixes
+
+    Fix repeated terminal messages about non-existent desktop-directories folder. #232
+
+Other Improvements
+
+IconTasklist icons will now be scaled to the target size of approximately 2/3 that of the size of the panel itself, up to an icon size of 54px, where it shifts to the panel size minus 18. This allows for icons to scale to much smaller and much larger sizes, while retaining desirable icon sizes for dock setups, and while maintaining the same icon size for the default panel size of 36px.
+
+    Add dock ability for panel.ini / layouts. #88
+    Configurable size for the Workspace switcher widget, enabling a selection of predefined multipliers for how many icons to show in each workspace. #163
+    Move polkit and power dialogs to libexecdir. #260
+    Update workspace item icons when the window icon changes. #230
+
+Contributor List
+
+Budgie Desktop is developed by Buddies of Budgie and contributors from around the world. Here is a list of all the contributors that made this release possible:
+
+    Campbell Jones
+    David Mohammed
+    Evan Maddock
+    Jacob Vlijm
+    Joshua Strobl
+
+
+v10.6.2 Official announcement can be found here:
+https://blog.buddiesofbudgie.org/budgie-10-6-2-released/
+
+# Budgie 10.6.2
+
+Budgie 10.6.2 is the second minor release in the 10.6 series of our Budgie Desktop environment, introducing fixes for bugs and improving code quality!
+
+These fixes are backported from our in-progress 10.7 series, which will feature major upgrades to Budgie Menu, our internal theming, and more. This development process allows us to focus longer-term on features and larger overhauls while still being able to address issues raised on our issue tracker in a timely manner.
+Bug Fixes & Improvements
+
+    Abomination
+        Attempt re-adding nameless windows on name change. Fixes an issue with application tracking of some Flatpak-based applications like Spotify. #105
+    Budgie Daemon
+        Disconnect from the allocation changed signal to avoid having notification popups move unexpectedly. Fixes an issue where Notifications could move when trying to close them. #147
+        Drop unnecessary Comment in daemon desktop that produces warning.
+        Fixes spec compliance for closing notifications. #118
+        Set notif popup position after size allocation. Fixes an issue with notification positioning. #139
+        Set a minimum expiry timeout for notification popups. Some applications set a timeout of 0, which the spec says means that it should never expire. Our implementation doesn't really fit that, since persistence is done by Raven, not the notification server. So, we should have a minimum show time for the popups to ensure that one is actually shown when it should be. #129
+    Budgie Panel
+        Fix math for calculating right panel strut. This fixes an issue where a right-positioned panel could overlap with windows. #145
+        IconTasklist: Swap button key in hashtable when first_app changes. Fixes an issue when multiple apps could be shown as active. #93
+        Rewrite initial applet layout to prevent position desync. #72
+    Icon Tasklist
+        Prevent segfault when attempting to swap buttons.
+        Reset ITL buttons if group updated while pinned. This fixes an issue where pinned LibreOffice buttons would no longer appear when launching its instance. #107
+        Reset ITL button's first_app and class group app on swap. This allows the tooltip of affected apps like Discord to update after the app is initially launched.
+    Power Indicator
+        Fix journal spam by only emitting warning once when we fail to get device data. This is typically seen on virtual environments. #151
+    Workspace Applet
+        Adjust app spacing and align with panel edges. #108
+        Increase size and density of workspaces in workspace applet. #106
+        Workspace item size now independent of workspace width
+
+Alongside the above mentioned fixes, this release has code quality improvements, such as updates to our Meson build system support, cleanup of deprecated functions from third-party libraries, and reducing compiler warnings.
+Contributor List
+
+Budgie Desktop is developed by Buddies of Budgie and contributors from around the world. Here is a list of all the contributors that made this release possible:
+
+    Campbell Jones
+    David Mohammed
+    Evan Maddock
+    Joshua Strobl
+
+
+v10.6.1 Official announcement can be found here:
+https://blog.buddiesofbudgie.org/budgie-10-6-1-released/
+
+# Budgie 10.6.1
+
+Budgie 10.6.1 is the first minor release that introduces fixes for bugs in the 10.6 series of our Budgie Desktop environment.
+Bug Fixes
+
+    Icon Tasklist
+        Fixed new applications not displaying in the tasklist when using restrict-to-workspace. #73
+        Fixed a regression in no longer being able to move non-favorited / non-pinned applications. #79
+        Fixed a regression where some IconButtons would remain in the IconTasklist. #78
+        Introduced a supplmental buttons check that will also attempt to filter out any .desktop from an application ID for buttons, if we cannot find the button with an app id.
+        Removed delay when opening apps. This was introduced in Abomination in an attempt to fix Chrome profile manager closing sequence but endend up breaking some other apps (such as Steam) closing sequence. Instead, try to reparent first app of group when an app associated with a pinned icon is closed so that the pinned button is reused. #85
+    Notification Server
+        Improved racyness when a notification is closed and another one shown in quick succession, causing incorrect notification positioning. This was noticeable when using applications that did not fully adhere to the Desktop Notifications Spec and the Replaces ID component of a Notification (to replace an existing notification), such as in the Lollypop audio player.
+    Popover Manager
+        Added a null check to budgie_popover_manager_ungrab for added safety.
+    Raven
+        No longer modify NotificationGroup HashTables while iterating over them. This prevents a critical message when dismissing notification groups. When iterating over a HashTable using the foreach method, the table should not be modified. Instead, use foreach_steal to iterate and remove from the notifications table.
+        Fixed use of the Raven "Clear All Notifications" shortcut. #75
+        Introduced a fix where clicking the notification bell, or alternatively when clicking the Raven trigger for the first time, would sometimes fail to open the correct page. This was due to those pages not yet being visible and in that scenario, GTK would silently fail during the GtkStack page changing. #31
+
+Contributor List
+
+Budgie Desktop is developed by Buddies of Budgie and contributors from around the world. Here is a list of all the contributor that made this release possible:
+
+    Campbell Jones
+    Evan Maddock
+    Guillot Julien
+    Joshua Strobl
+
+
+v10.6 Official announcement can be found here:
+https://github.com/BuddiesOfBudgie/budgie-desktop/releases/tag/v10.6
+
+# Budgie 10.6
+
+Budgie 10.6 is the first release of Budgie under the new Buddies Of Budgie organization! :rocket:  
+&:rocket: :rocket: 
+
+If you would like to support our work, you can contribute financially on our [OpenCollective](https
+&://opencollective.com/buddies-of-budgie), as well as buy official Budgie merchandise (non-EU shop 
+[&here](https://buddies-of-budgie.myspreadshop.com), EU shop [here](https://buddies-of-budgie.myspr
+ea&dshop.net)) with the profits from sales going directly to our OpenCollective!
+
+Budgie 10.6 is not just a reflection of our organization change for the development of Budgie, it r
+&eflects an expansion on Budgie 10.x series with new features and re-architectures, applying the le
+s&sons learned from those into our next generation version of Budgie. Buddies of Budgie views Budgi
+e &Desktop as a platform rather than a product. Distributors of Budgie Desktop and users should not
+ fe&el like their choice of theming, applications, or default styles should be at odds with the goa
+ls o&f the project.
+
+Budgie 10.6 aims to eliminate the divide between traditional "downstream" consumers of Budgie and t
+&he development organization itself, but enabling those downstreams like Ubuntu Budgie to get more 
+i&ntimately involved in its development.
+
+Applying one of our core pillars of being a platform rather than a product, the goal with Budgie 10
+&.6 and future releases of Budgie is to provide a macrocosm, or a minimal set of tightly coupled co
+m&ponents, and leave the rest of the ecosystem up to the decisions and values of downstream consume
+rs&, be that distributions or end users.
+
+This macrocosm in Budgie 10 series is currently the following:
+
+- Budgie Desktop (this repository)
+- Budgie Desktop View: A dedicated desktop icons implementation.
+- Budgie Control Center: A fork of GNOME Control Center with various value-add such as Raven keybin
+&d support, improved fractional scaling support when supported by the operating system, re-organiza
+t&ion of functionality.
+
+We expect downstream consumers of Budgie to use following:
+
+- Budgie Desktop 10.6+
+- [Budgie Desktop View](https://github.com/BuddiesOfBudgie/budgie-desktop-view) 1.2+
+- [Budgie Control Center](https://github.com/BuddiesOfBudgie/budgie-control-center) 1.0.0+
+
+Budgie Desktop 10.6 introduces changes to various components which expects the aforementioned forks
+& + versions, for example schema changes for Budgie Desktop View and opening of GNOME Control Cente
+r& now opens Budgie Control Center.
+
+## Application Tracking and Icon Tasklist Improvements
+
+In Budgie 10.6, the Icon Tasklist and application tracking system saw rewrites or changes to:
+
+- Application Grouping
+- Fix exclusion of valid applications. Because a window type returned can be a list of types, we sh
+&ould actually check that the window has in its list a _NET_WM_WINDOW_TYPE_NORMAL or _NET_WM_WINDOW
+_&TYPE_TOOLBAR. If this type is *in* the types, then we should allow this item to be tracked, other
+wi&se ignore. This fixes cases with some KDE applications like Spectacle and KColorChooser not show
+ing& up.
+- Fixes to applications that do not provide a WM_CLASS
+- Fixes to LibreOffice application grouping
+- Improved single-instance application tracking
+
+
+## Internal Theme and Panel Refinements
+
+![before-after-budgie](https://user-images.githubusercontent.com/156574/156933142-6c550f2c-cc32-4d0
+&1-8eed-7632f0398645.jpg)
+
+
+The primary goals with the internal theme rewrite were to address inconsistencies across all Budgie
+& components. This has been achieved with changes to:
+
+1. Border radiuses on most dialogs, Raven Widgets, Panel Popover content.
+2. Spacing in the form of padding and margins, alongside minimum width for applets which promotes u
+&niform spacing on the panel.
+3. Unified color scheme for widgets within the panel
+4. Reduction in semi-transparency to improve readability.
+5. Reduction in our use of borders and shadows.
+6. Removing of "stylized end regions" due to inconsistencies across GTK themes and internal theme.
+7. General improvements to our support for GTK themes, such as with Budgie Menu.
+
+We didn't just improve the styling of the internal theme however! Alongside those changes, there ha
+&ve been improvements to the panel and its widgets:
+
+- Adjusted raven sizing to fix panel size changes, fixes an issue where Raven could overlap the Pan
+&el.
+- Precise battery levels icons are now used when supported by the icon theme. This means the icon w
+&ill get updated on 10% intervals.
+- The Clock Applet text will now wrap on vertical panels.
+- Increased the default panel size to 36 pixels, which is the result of us no longer calculating in
+& the size of the shadow.
+- Prevented a crash when somehow deleting the same applet twice.
+- Updated the default panel configuration to reflect the one that was used in Solus via its Budgie 
+&Desktop Branding package. This change better communicates our expectation for the default Budgie e
+x&perience. Prior to this change, there were large inconsistencies such as panel location and widge
+ts&, between distributors such as Arch Linux and other consumers like Solus.
+
+## Notification System Rewrite
+
+In Budgie 10.6, our Notification Server saw a rewrite and move out of Raven, enabling it to be util
+&ized in other Budgie components, for example unlocking the capability to support notification badg
+e&s in Icon Tasklist in the future.
+
+When rewriting the Notification Server, we took this opportunity to fix long-standing issues as wel
+&l as introduce subtle improvements to the Notification popups themselves.
+
+- We now use the GTK.Stack for Notification popup bodies, providing a better way to reflect notific
+&ation body content.
+- We have improved the last Notification tracking and pausing, reducing weirdness with some edge ca
+&ses like Discord and Firefox.
+- We now properly utilize the Notification's appinfo, fixing issues where Notification Groups could
+& present the wrong name (such as with Evolution and its calendar events).
+- Fixed notification mute button sometimes starting without an image.
+- Fixed a long-standing issue with our Notification Server returning the incorrect Notification ID,
+& which could impact notification replacement.
+- Clicking on a Notification Popup will now trigger the default action instead of adding a button f
+&or the default action.
+ 
+ 
+## Other Changes
+
+Here are some other changes that we made in Budgie 10.6:
+
+- Elimination of some legacy queue_layout calls in the window manager, which should reduce unnecess
+&ary redraws
+- Use of tabs instead of spaces, general reformatting of some code
+- Reintroduce support for GNOME 40, to enable Ubuntu LTS support
+- Moved from Weblate to Transifex for translations
+- Renamed Budgie Desktop View schema to support its rebrand
+- Renamed GNOME Control Center references to Budgie Control Center
+- Ensure gschema override for switch-input-source* is formatted correctly, which fixes a gschema co
+&mpilation warning.
+- Fix SEGV when input source was switched by Alt+Shift_L, caused by using a non-ibus input method.
+- Fixes to expanding Raven thumbnail causing Raven itself to resize
+
+---
+
+## Thank You
+
+I would like to thank all the amazing contributors that have made this release possible, provided f
+&eedback on our [Matrix Server](https://matrix.to/#/#buddies-of-budgie:matrix.org), and supported o
+u&r vision of Budgie. Special thanks go to:
+
+- @EbonJaeger
+- @fossfreedom
+- @guillotjulien
+- @kenhys
+- @serebit
+
+v10.5.3 Official announcement can be found here:
+https://getsol.us/2021/04/27/fashionable-gnome-forty/
+
+Text of the announcement reproduced below:
+Fashionable GNOME Forty
+
+Budgie 10.5.3 is a minor release that introduces fixes for bugs, various quality-of-life improvemen
+&ts, and support for the GNOME 40 stack.
+Bug Fixes and Cleanup
+
+Budgie 10.5.3 introduces fixes to Budgie panel applets, Raven, and various window state tracking.
+
+    Drop use of Queue and Cancellable in Raven’s NotificationView.
+        Instead of using a Queue (which is not thread safe anyways), just update a reference to a N
+&otificationWindow since we only really cared about the head of the Queue to begin with.
+        Dropped Cancellable usage for async pixbuf scaling. There has not really been a scenario ye
+&t where we have not been able to scale an icon within the amount of time before a NotificationWind
+o&w is removed.
+    Fix application icons not scaling in Raven’s Notification Group headers.
+    Fix issue with VirtualBox icon not being displayed in IconTaskList applet
+    Fix regression in Budgie Desktop Settings icon handling.
+    MPRIS metadata, playback status, and CanGoPrevious / CanGoNext fetching is now performed immedi
+&ately rather than being an unnecessary idle operation.
+    Notifications now use a high priority timeout.
+    Notification iconography now uses a consistent IconSize.DIALOG instead of IconSize.INVALID and 
+&only scales if the icon provided is not already the desired height.
+    Prevent Budgie Desktop Settings from being pinned via drag-and-drop, fixing an issue where Budg
+&ie Desktop Settings was inadvertently pinnable and unable to be unpinned.
+    Sound Indicator applet and Raven
+        Use standard mute/unmute methods, fixing issues like muting with media keys and then trying
+& to unmute via the applet, which would previously not work.
+    System Tray applet
+        Fix issue with KeePass causing panel segfaults.
+        Various stability improvements, such as more proactive X11 error trapping.
+
+GNOME 40 Support
+
+Budgie 10.5.3 introduces support for the GNOME 40 stack. GNOME 40 introduced various changes in Mut
+&ter, gsettings-desktop-schemas, and gnome-shell which impacted the ability to use Budgie under a G
+N&OME 40 stack or in conjunction with GDM (GNOME’s login manager which leverages gnome-shell).
+
+When compiled alongside GNOME Settings Daemon 40.x, Budgie will use the migrated font anti-aliasing
+& and hinting options, which were moved from org.gnome.settings-daemon.plugins.xsettings to org.gno
+m&e.desktop.interface. In GNOME Shell and GNOME Settings Daemon 40, there were changes introduced w
+hi&ch impacted Budgie’s ability to use dedicated screensavers, such as Solus' fork of gnome-scree
+nsa&ver (which we have been using since 2017). This fork has now been formally renamed to budgie-sc
+reen&saver, bumped to v4, and promoted to a required component of Budgie Desktop, with changes intr
+oduce&d to facilitate Budgie’s continued ability to lock the session and attempt to co-exist in a
+n inst&allation environment alongside GNOME Shell and GDM. As always, we encourage that Budgie be u
+sed wit&h lightdm and an optional greeter such as slick-greeter, as opposed to being installed alon
+gside GD&M and GNOME Shell.
+Quality-of-life Improvements
+2021 04 Budgie Desktop Settings
+
+Here are some quality-of-life improvements shipping in Budgie 10.5.3
+
+    Filter out audacious notifications so they do not clutter up Raven.
+    Hide “Default”, which is typically Adwaita / GTK’s internal theme. We continue to encoura
+&ge the use of theming that officially supports Budgie, such as Materia and Plata.
+    Mutter and WM preference schema settings are now only applied for Budgie session.
+    Spacing is now configurable in the Status applet.
+    The application fullscreen state tracking has been slightly rewritten to use the window XIDs, o
+&nly call our track window state function on specific flags in the changed or current state, and re
+d&ucing instances where some unset flags would not result in the application being removed as a ful
+ls&creen application.
+    There is now an option in Budgie and exposed via Budgie Desktop Settings' “Windows” section
+& to automatically pause notifications when a window is fullscreen and unpause when there no longer
+ &is a fullscreen window. This is useful in reducing distractions when gaming or watching content!
+    To improve the default user experience of Budgie on some downstream operating systems such as A
+&rch Linux, Budgie now ships with a default wallpaper, eliminating the need for downstreams to appl
+y& supplemental changes or ship a wallpaper package.
+    We will no longer filter device added / removed notifications. This resolves issues where eject
+&ion notifications for external media would not get stored in Raven’s Notifications section.
+    When xdotool is available on the operating system, the Lock Keys applet can be clicked to toggl
+&e CapsLock and NumLock!
+
+
+v10.5.2 Official announcement can be found here:
+https://getsol.us/2020/12/02/budgie-10-5-2-released/
+
+Text of the announcement reproduced below:
+Quality of Life
+
+Budgie 10.5.2 introduces new goodies to make your Budgie experience even better!
+Applets
+Budgie Menu
+
+Budgie Menu has received various refinements for this release:
+
+    Budgie Menu introduces additional checks for an application’s DesktopAppInfo, ensuring that w
+&e consistently skip apps and exclude them from calculations when they have Hidden or NoDisplay set
+,& as well as if the NotShowIn contains Budgie.
+    Budgie Menu will no longer show empty categories, a common occurrence when installing applicati
+&ons via WINE.
+    Budgie Menu will now alphabetically sort category names, which is useful when you have custom u
+&ser desktop directories for applications. They are no longer forced to be below default system-wid
+e& desktop directories such as Internet / Networking, Office, Sound & Video, etc.
+    Applications which utilize pkexec in their desktop info will now spawn an asynchronous process,
+& with pkexec being the command and passing the rest of the command line content as arguments.
+
+Icon Tasklist
+The Icon Tasklist applet has seen new features and behaviour refinements in Budgie 10.5.2.
+
+There are now two new options available, disabled by default, to launch a new instance of an applic
+&ation via the respective button for the application: middle click and double click. This expands o
+n& our existing option to create a new instance of an application by clicking the + button in the p
+op&over of each Icon Button.
+
+The behavior of the Icon Tasklist has been refined in Budgie 10.5.2. We have consolidated duplicate
+& logic in other less used classes into our dedicated application state tracking class, which is us
+e&d by the Icon Tasklist and IconPopover to provide a list of running applications, their AppInfo, 
+an&y group they belong to, and more. This consolidation has meant more consistent “skip pager” 
+che&cks, as well as more consistent rejection of various types of windows, such as:
+
+    DOCK (like budgie-panel)
+    SPLASHSCREEN (temporary splash screen apps, like what you would see for GIMP or LibreOffice)
+    UTILITY (like controls for an emulator).
+
+Thanks to this more consistent window type rejection, we are able to more closely discern between w
+&hat is budgie-panel versus what is budgie-desktop-settings, which is part of the panel but is othe
+r&wise a NORMAL type application. This enabled us to resolve an issue where the pin and new instanc
+e &buttons were being unintentionally shown, as well as an issue where you could not close Budgie D
+esk&top Settings via the IconPopover controls (right click popover for each Icon Button in the task
+list&).
+
+After close discussions with members of the community on our forums on the expected behaviour of th
+&e Icon Tasklist, time was spent refining the behaviour of Icon Tasklist and individual Icon Button
+s& to be more consistent. Here are some examples:
+
+    When the “Show All Windows on Click” option is enabled, we will now more consistently show 
+&or minimize all windows on click if one of them is currently active.
+    If only one instance of an application is open and it is on another workspace (in this case the
+& “Restrict to Workspace” option is not enabled), we switch to that workspace and unminimize th
+e& window (since the chances are you probably want to see the application in the first place).
+
+We are always listening to feedback on how to improve the behaviour of Icon Tasklist while ensuring
+& it remains simple and approachable to use. If you have an idea on how to improve it further, feel
+ &free to file an issue on Budgie’s issue tracker.
+
+Sound
+The Sound applet has seen a redesign and now features a dedicated button for mute toggling, as well
+& as leveraging iconography for the System Settings button rather than text.
+
+System Tray
+Dating back to the days of Budgie 7 in 2014, Budgie had been using an na-tray implementation also s
+&een in desktop environments such as Cinnamon for the creation and management of system tray icons.
+ &Thanks to the incredible work by Solus contributor Campbell Jones, the System Tray has been compl
+et&ely rewritten from scratch, supporting tray icons leveraging the XEmbed Protocol. This new imple
+men&tation resolves numerous issues such as:
+
+    Background icons not refreshing, resulting in instances where it may appear that multiple icons
+& are overlapping.
+    Tray icons not consistently hiding when a panel hides (during “Intelligent” mode).
+    Tray icons blinking when panel transparency is set to “Dynamic”
+    Tray icons getting hidden when switching icon themes.
+
+Additionally, a configuration option has been added for the System Tray that enables the setting of
+& spacing between individual icons, making it perfect for those that want both their applets and tr
+a&y icons to be equidistant!
+
+Budgie Desktop Settings
+Budgie Desktop View has been updated to provide a clearer differentiation between removing a Panel 
+&and removing an applet from a Panel. A dedicated button for removing a panel has been added below 
+t&he Panel’s applet list, with a description that makes its purpose clearer. This button will not
+ a&ppear when you only have one panel in your Budgie setup. Building on this, we have removed the o
+pti&on to disable the panel removal confirmation dialog. From user reports, the consensus was that 
+this& option was too easy to enable, would result in accidental permanent removal of panels more fr
+equen&tly than desired, and lacked a clear user-friendly method to re-enable the prompt.
+
+For those which use Budgie in another language than English, the menu items presented when adding a
+& new Autostart application or command via the Autostart section are now translatable. For any lang
+u&age which has the terms translated, those will be used instead.
+
+Budgie Desktop View
+Budgie 10.5.2 is the first release of Budgie to feature our new desktop icons implementation. In re
+&leases dating back to the beginning of Budgie 10, we had been using Nautilus' (now legacy) desktop
+ &icons implementation to provide such support. When Nautilus removed their desktop icons support, 
+So&lus used an older version of Nautilus to retain it, while some other downstream consumers of Bud
+gie& used alternative file managers with similar features to that version of Nautilus, such as Nemo
+. Du&ring that time, other desktop environments have strayed away from providing this functionality
+ with& some going so far as to remove it entirely, requiring you to install third-party extensions 
+to re-&introduce the functionality.
+
+We have always recognized that for many, desktop icons is an important part of their workflow, and 
+&so retaining that support in a sustainable manner was paramount for the release of Budgie 10.5.2. 
+W&e wanted to enable our downstreams to ship Budgie akin to how Solus does without potentially comp
+ro&mising on functionality.
+
+To facilitate this, our goal from the start for Budgie 10.5.2 was to introduce a new, separate proj
+&ect that could be iterated on independently from Budgie Desktop itself. This project needed to be 
+r&igorously focused and developed with an understanding of the scope and intent of the project, not
+ t&rying to be a file manager but rather a method of quickly accessing the content and applications
+ yo&u consider most important.
+
+Last week, we debuted the first generally public development release of Budgie Desktop View and the
+& feedback has been fantastic, giving us numerous places where we can continue to improve this new 
+p&roject, in addition to what we already have planned for the upcoming releases.
+
+Alongside Budgie 10.5.2, we have just released our first stable 1.0 release of Budgie Desktop View,
+& which builds on the features and focus of the prior development releases with a new option to cho
+o&se between using a single and double-click to launch items. This enables you to curate the launch
+ b&ehaviour to mimic your favorite graphical file manager, many of which have such “click policie
+s�&�. By default, we default to a single-click behavior.
+
+This release refactors many of the shared logic between the various item and view classes we have a
+&s well, reducing references or copies of values (resulting in reduced memory usage) and paving the
+ &way for easier iteration on upcoming functionality.
+
+However 1.0 is not the final form Budgie Desktop View will take! Drag & Drop support will be added 
+&in 1.1, keyboard navigation with arrow keys will be implemented in 1.2, and once GTK4 introduces i
+t&s first stable release, we will also be assessing moving Budgie Desktop View to it to take advant
+ag&e of all the improvements the GNOME team has done to the latest generation of its toolkit.
+
+Budgie has always been about striking a balance in customization and that extends to the support we
+& provide downstreams like Ubuntu Budgie as well. That is why we worked hard on introducing a new v
+e&ndor-oriented mechanism to enable downstreams to choose a desktop icons implementation that fits 
+th&em and their users best. Alongside our own “native” Budgie Desktop View implementation, we a
+re &providing official support in the Budgie Desktop Settings application for the configuration of 
+Desk&topFolder and Nemo. Our OS Integration wiki page provides details on the typical method that d
+ownst&reams can leverage to override default GSettings key / values, as well as providing the key s
+hould &any savvy user decide to do some tinkering themselves!
+
+Raven
+Thanks to Solus contributor Evan Maddock, Budgie 10.5.2 introduces a new option to choose which sid
+&e of the screen Raven should be. Prior to Budgie 10.5.2, Raven would always appear on the left sid
+e& when the main panel and trigger were on the left, and appear on the right when the main panel wa
+s &anywhere else.
+
+Users will be able to choose between this behaviour, called “Automatic”, as well as left and ri
+&ght sides!
+
+Translations
+Thanks to our incredible community members that have stepped up to translate Budgie, Budgie is now 
+&more accessible than ever. Budgie 10.5.2 introduces support for three new languages: Afrikaans, Al
+b&anian, and Hindi. Budgie now has 40 languages which have 90% or more coverage and we have seen de
+di&cated translators step up for a wide range of languages, many of which are now completely transl
+ate&d, such as:
+
+    Croatian
+    Finnish
+    Malay
+    Punjabi
+    Spanish (Argentina)
+    Spanish (Chile)
+
+We are still working hard to get Budgie translated 100% into many languages. If you are interested 
+&in helping translate Budgie into your language, feel free to reach out!
+Other
+
+Here are some other aspects of Budgie that received refinements:
+
+    Animation disabling: Background transitions and workspace switching are no longer always enable
+&d but now honor the option to disable animations in Budgie Desktop Settings
+    Budgie’s Application Switcher
+        Typically referred to as the Alt+Tab switcher, this switcher now supports the Ctrl modifier
+&, adding support for more custom keyboard layouts and mappings.
+        We now support an option to show all windows from all workspaces in the switcher, enabling 
+&you to switch between applications and workspaces simultaneously.
+    Budgie Run Dialog can now check keywords, improving search and aligning its behaviour closer to
+& that of Budgie Menu.
+    Budgie now provides a new meson option: xdg-appdir
+        This option enables downstreams such as openSUSE to use its own stateless XDG path.
+    Caffeine Applet: When Caffeine Mode is enabled, the timer will now update the spin button value
+& based on how many minutes are remaining.
+    Forward-specific keyboard layout switching can now be done with Alt+Shift.
+    Transparency is now supported in background images, falling back to the fixed color or gradient
+& behind it.
+    We now provide an option via GSettings to configure the desired screenshot commands, so downstr
+&eams can use alternatives to gnome-screenshot.
+
+Bug Fixes
+
+In addition to all the quality of life improvements and features we have added, Budgie 10.5.2 intro
+&duces many bug fixes including for some issues dating back years to the early days of Budgie 10.
+
+    Applets
+        Fix Workspace Applet allowing more than max supported workspace count. We will now return a
+& -1 on our WM AppendNewWorkspace if we are rejecting more additions of workspaces, which informs o
+u&r WorkspaceApplet to not show the + button (even if set to always show) and reject drag actions o
+nt&o new workspaces.
+    Panel
+        Added missing LEFT and RIGHT panel layouts in the manager, which prevented downstreams and 
+&users from using panel.ini files with left or right panels.
+        During panel initialization, we will now appropriately set dock-mode if needed, which fixes
+& an issue where the class would only be applied if the dock mode setting actually changed.
+        Fix a crash when removing an applet with missing information.
+        The Tasklist applet will no longer cause the rest of the panel contents to be thrown into t
+&he aether when you have many windows open. You will be able to scroll up / down to get all the win
+d&ows and we will be working on dedicated buttons in the tasklist applet in Budgie 10.5.3. This res
+ol&ves two bugs, one from 2014 and another from 2017.
+        Regions which do not have any panel widgets / applets will no longer be shown, allowing app
+&lets to take up more space and eliminates weird spacing related issues.
+        When changing away from dock mode on a panel, we will now correctly remove the dock-mode CS
+&S class.
+    Raven
+        Chromium-based browser notifications no longer display with broken icon images. This was du
+&e to the fact that these browsers would prefix the icon with file:/// and Chromium-based browsers 
+w&ould not pass the correct path. We will now default to the fallback mail-unread-symbolic icon for
+ t&hese applications.
+        Notifications and Notification Groups can no longer be selected, which would result in a vi
+&sual change with no obvious or easy way to deselect them. There are no functional changes, as ther
+e& are no actions which make use of the selection of Notifications or Notification Groups.
+        Notifications are no longer appended to Notification Groups, resulting in older Notificatio
+&ns being higher in a Notification Group’s list than newer ones.
+        The Sound widget will no longer allow raising the volume above 100% when the option is off.
+        The MPRIS player will correct the album art URLs provided by Spotify, which would otherwise
+& be misreported by Spotify, resulting in images which could not be found.
+    Other
+        Budgie Popovers will now properly handle window scale factors.
+        Crash fixes related to the usage of Wnck have been resolved.
+        Fix some custom keyboard shortcuts and media keys not correctly applying after boot or rebo
+&ot.
+        Night Light will now appropriately start or end if an application has the fullscreen state 
+&amongst its many states, and not just being fullscreen. This is useful if you have an application 
+w&hich is fullscreen and above or below other windows, is sticky (maintains position regardless of 
+wo&rkspace), shaded, etc.
+
+
+v10.5.1 Official announcement can be found here:
+https://getsol.us/2019/10/03/budgie-and-its-army-of-gnomes/
+
+Text of the announcement reproduced below:
+Budgie 10.5.1 is the first minor release of the Budgie 10.5 series, introducing a multitude of qual
+&ity-of-life changes, bug fixes, and support for new GNOME Stacks. This Budgie 10.5 series release 
+a&lso brings new and updated translations thanks to our amazing community!
+Bug Fixes
+
+Bug fixes are the cornerstone of Budgie 10.5 series releases, ensuring existing Budgie user experie
+&nces are smoother than ever.
+
+Budgie 10.5.1 introduces some bug fixes around Budgie Menu artifacting, notifications, improving wi
+&ndow raise performance, and more. Let’s break down the big items that were addressed!
+
+    Budgie Menu
+        Menu artificating (such as window borders still showing in some cases) is now fixed.
+        Menu items are now sorted using locale linguist rules.
+    IconTasklist
+        Fixed instances of window tracking in multi-window scenarios by invalidating our window on 
+&close in our AbominationRunningApp and picking another window of the same WM_CLASS.
+        Fixed the ability to move non-favorited running applications / windows in IconTasklist acro
+&ss grouping and non-grouping modes. These are now allowed to intermingle with your favorited appli
+c&ations without concern for a panel crash. We’re doing this by more heavily leveraging our Abomi
+na&tionRunningApp to provide more consistent window-specific IDs.
+    Raven
+        Notification body alignment is now properly justified.
+        Notifications will now properly wrap using WORD_CHAR, so we’ll be more aggressive on wrap
+&ping on words when possible, but fallback to characters for longer running strings like URLs.
+        Application controls in the Sound applet will now handle Gvc ChannelMap changes. This is us
+&eful since some applications do not provide accurate GvcStream volume immediately when creating th
+e&ir stream, such as Firefox when starting a video. We’ll now ensure we’re updating those value
+s &and ensuring applications like Firefox more accurately reflect muted states over Gvc.
+    Polkit: We now correctly handle user dismissing authentication dialogs
+    WM: We now enforce an instant auto raise of windows when the focus-mode is set to mouse over / 
+&mouse focus and 250ms on click, resulting in speedy window raising.
+
+Quality of Life
+
+Budgie 10.5.1 introduces a few new goodies to make your Budgie experience, as well as those of our 
+&Budgie theme authors, even better!
+Budgie Desktop Settings
+2019/10/Budgie Desktop Settings Fonts
+
+Budgie 10.5.1 introduces hinting and anti-aliasing settings in our Fonts section of Budgie Desktop 
+&Settings, allowing you even more flexibility with how document, interface, monospace, and window t
+i&tle fonts render:
+
+    For font hinting, you can choose between a range of options ranging from no font hinting to ful
+&l font hinting.
+    For antialiasing, you can choose between subpixel antialiasing, standard grayscale, and no anti
+&aliasing.
+
+GNOME Stack Support
+
+Budgie 10.5.1 provides support for several GNOME stack releases, allowing for an ever growing amoun
+&t of Budgie users to get the latest updates! Budgie supports GNOME 3.30, 3.32, and now 3.34, inclu
+d&ing recent changes in GNOME Settings Daemon.
+
+Thanks to the folks over at Ubuntu Budgie for their patches, it’s greatly appreciated!
+Icon Tasklist
+2019/10/Budgie Desktop Icon Tasklist Hover
+
+If you have a single window open for a given IconButton in the Icon Tasklist, we will now update th
+&e tooltip when you hover over.
+Workspaces
+2019/10/Budgie Desktop Settings Desktop
+
+Budgie 10.5.1 introduces the ability to have persistent workspaces created at the launch of Budgie,
+& with a configurable amount of default workspaces.
+
+Under the Desktop section of Budgie Desktop Settings, you’ll find a new option called “Number o
+&f virtual desktops”, where you can go from just having one workspace up to eight! A perfect oppo
+r&tunity to hide away all those Electron apps you’re ashamed to be running!
+
+If you want more workspaces dynamically, you can still use our Workspace Applet to add more as you 
+&need them.
+Styling
+
+Budgie 10.5.1 introduces a multitude of new CSS classes to ease Budgie Desktop theme development:
+
+    Icon Popover: Now has the icon-popover class
+    Night Light Applet: The container for the Night Light applet popover now uses the night-light-i
+&ndicator class
+    Raven
+        MPRIS widget now has an mpris-widget class
+        MPRIS widget controls now have a raven-mpris-controls class
+        Notifications View now has the raven-notifications-view class
+        Internal to the Notifications View, we now provide the raven-header class, as well as dedic
+&ated classes for 

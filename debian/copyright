@@ -1,0 +1,157 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: budgie-desktop
+Upstream-Contact: Budgie Developers <admin@buddiesofbudgie.org>
+Source: https://github.com/buddiesofbudgie/budgie-desktop
+
+Files: *
+Copyright: 2014-2023, Budgie Desktop Developers
+License: GPL-2+
+
+Files: data/icons/*
+Copyright: 2016-2017, Sam Hewitt
+License: GPL-2+
+
+Files: data/icons/actions/notification-disabled-symbolic.svg
+Copyright: 2008, Brian Tarricone <bjt23@cornell.edu>
+License: GPL-2+
+
+Files: data/icons/actions/pane-show-symbolic.svg
+ data/icons/actions/pane-hide-symbolic.svg
+Copyright: 2018, horst3180
+License: GPL-2
+
+Files: debian/*
+Copyright: 2017, Jeremy Bicha <jbicha@debian.org>
+  2016-2023, David Mohammed <fossfreedom@ubuntu.com>
+  2016, 2017, David Mohammed <foss.freedom@gmail.com>
+License: GPL-2+
+
+Files: src/panel/applets/icon-tasklist/animation.vala
+Copyright: 2015-2022, Budgie Desktop Developers
+License: LGPL-2.1+
+
+Files: src/panel/applets/status/BluetoothIndicator.vala
+Copyright: 2015-2022, Budgie Desktop Developers
+  2015, Alberts Muktupāvels
+License: GPL-2+
+
+Files: src/config/*
+Copyright: 2015-2021, Budgie Desktop Developers
+License: LGPL-2.1+
+
+Files: src/daemon/tabswitcher.vala
+Copyright: 2017, 2018, taaem <taaem@mailbox.org>
+License: GPL-2+
+
+Files: src/lib/*
+Copyright: 2015-2021, Budgie Desktop Developers
+License: LGPL-2.1+
+
+Files: src/libsession/*
+Copyright: 2015-2021, Budgie Desktop Developers
+License: LGPL-2.1+
+
+Files: src/panel/uuid.vala
+Copyright: 2015-2021, Budgie Desktop Developers
+License: LGPL-2.1+
+
+Files: src/plugin/*
+Copyright: 2015-2021, Budgie Desktop Developers
+License: LGPL-2.1+
+
+Files: src/raven/notifications_view.vala
+Copyright: 2015-2021, Budgie Desktop Developers
+  2014, Josh Klar <j@iv597.com> (original Budgie work, prior to Budgie 10)
+License: GPL-2+
+
+Files: src/theme/*
+Copyright: 2015-2021, Budgie Desktop Developers
+License: LGPL-2.1+
+
+Files: src/theme/render-assets.sh
+Copyright: 2015-2021, Budgie Desktop Developers
+License: LGPL-2.1+
+
+Files: src/wm/ibus.vala
+Copyright: GNOME Shell Developers (Heavy inspiration, logic theft) / 2016-2021, Budgie Desktop Developers
+License: GPL-2+
+
+Files: src/wm/keyboard.vala
+Copyright: GNOME Shell Developers (Heavy inspiration, logic theft) / 2015-2021, Budgie Desktop Developers
+License: GPL-2+
+
+Files: subprojects/gvc/*
+Copyright: 2008, 2009, Red Hat, Inc.
+License: GPL-2+
+
+Files: subprojects/gvc/gvc-channel-map.c
+  subprojects/gvc/gvc-mixer-event-role.c
+  subprojects/gvc/gvc-mixer-sink-input.c
+  subprojects/gvc/gvc-mixer-sink.c
+  subprojects/gvc/gvc-mixer-source-output.c
+  subprojects/gvc/gvc-mixer-source.c
+  subprojects/gvc/gvc-mixer-stream.c
+Copyright: 2008, William Jon McCann
+License: GPL-2+
+
+Files: subprojects/gvc/gvc-mixer-card.c
+Copyright: Conor Curran 2011, <conor.curran@canonical.com> / 2009, Bastien Nocera / 2008, William Jon McCann
+License: GPL-2+
+
+Files: subprojects/gvc/gvc-mixer-card.h
+Copyright: Conor Curran 2011, <conor.curran@canonical.com> / 2008-2009, Red Hat, Inc.
+License: GPL-2+
+
+Files: subprojects/gvc/gvc-mixer-control.c
+Copyright: 2012, Conor Curran
+  2008, William Jon McCann
+  2008, Sjoerd Simons <sjoerd@luon.net>
+  2006-2008, Lennart Poettering
+License: GPL-2+
+
+Files: subprojects/gvc/gvc-mixer-ui-device.c
+Copyright: Conor Curran 2011, <conor.curran@canonical.com> / 2012, David Henningsson, Canonical Ltd. <david.henningsson@canonical.com>
+License: GPL-2+
+
+Files: subprojects/gvc/gvc-mixer-ui-device.h
+Copyright: Conor Curran 2011, <conor.curran@canonical.com>
+License: GPL-2+
+
+Files: data/backgrounds/default.jpg
+Copyright: Budgie Desktop Developers
+License: CC0-1.0
+ To the extent possible under law, the author(s) have dedicated all copyright
+ and related and neighboring rights to this software to the public domain
+ worldwide. This software is distributed without any warranty.
+ .
+ You should have received a copy of the CC0 Public Domain Dedication along with
+ this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+ .
+ On Debian systems, the complete text of the CC0 1.0 Universal license can be
+ found in "/usr/share/common-licenses/CC0-1.0".
+
+License: GPL-2+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 2 dated June, 1991, or (at
+ your option) any later version.
+ .
+ On Debian systems, the complete text of version 2 of the GNU General
+ Public License can be found in '/usr/share/common-licenses/GPL-2'.
+
+License: LGPL-2.1+
+ This program is free software; you can redistribute it and/or modify it
+ under the terms of the GNU Lesser General Public License as published by the
+ Free Software Foundation; version 2.1 of the License, or (at
+ your option) any later version.
+ .
+ On Debian systems, the complete text of version 2.1 of the GNU Lesser
+ General Public License can be found in `/usr/share/common-licenses/LGPL-2.1'.
+
+License: GPL-2
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 2 dated June, 1991.
+ .
+ On Debian systems, the complete text of version 2 of the GNU General
+ Public License can be found in '/usr/share/common-licenses/GPL-2'.
