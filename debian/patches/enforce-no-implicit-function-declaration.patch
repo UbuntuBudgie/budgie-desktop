@@ -20,7 +20,7 @@ Last-Update: 2024-08-17
  )
 --- a/src/daemon/meson.build
 +++ b/src/daemon/meson.build
-@@ -93,6 +93,7 @@
+@@ -95,6 +95,7 @@
      ],
      c_args: [
          '-DWNCK_I_KNOW_THIS_IS_UNSTABLE',
@@ -30,11 +30,13 @@ Last-Update: 2024-08-17
  )
 --- a/src/panel/applets/workspaces/meson.build
 +++ b/src/panel/applets/workspaces/meson.build
-@@ -51,6 +51,7 @@
+@@ -50,6 +50,9 @@
+         '--target-glib=2.38',
+         '--gresources=' + gresource,
      ],
-     c_args: [
-         '-DWNCK_I_KNOW_THIS_IS_UNSTABLE',
-+        '-Wno-implicit-function-declaration'
-     ],
++    c_args: [
++        '-Wno-implicit-function-declaration',
++    ],
      install: true,
      install_dir: applet_workspaces_dir,
+ )

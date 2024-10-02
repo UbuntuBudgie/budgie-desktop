@@ -1,3 +1,60 @@
+v10.9.2 Official announcement can be found here:
+https://buddiesofbudgie.org/blog/budgie-10-9-2-released
+Budgie 10.9.2 is the second minor release of Budgie 10.9 series of our Budgie Desktop environment. This release fixes some bugs related to notifications, workspace applet, TabSwitcher and more. While we have been hard at work on our Wayland porting efforts for our upcoming 10.10 release, we felt it important to provide a small release to address some of the issues that have been reported by our users, as well as to make it easier for packagers of Budgie to get the most relevant fixes to users without introducing any of the larger Wayland-related changes that have either already landed in our main development branch or will be over the course of 10.10's development.
+Bug Fixes
+
+    Budgie Menu: We will now show applications which report as being Terminal-based (e.g. Terminal=true in their desktop file). Users of applications like Neovim rejoice!
+    Budgie Run Dialog: Fixed a regression where our setting of skip pager and taskbar was not being called during construction, which resulted in it showing up in our task switchers (IconTasklist and Task List).
+    Dialogs: Fixed end session dialogs blocking authentication dialogs.
+    Notifications: Fixed an issue where a notification's default action would be performed when the close button was clicked.
+    Specification Compliance: Fixed an issue where we referred to the restart / reboot icon as "system-restart-symbolic" instead of "system-reboot-symbolic". This should improve compatibility with icon themes while retaining our own icon as a fallback in the event the icon theme does not provide it.
+    System Tray: Fixed an issue whereby some applications would not show with their intended icon. This is the result of such applications (e.g. Cinny and Tauon) being non-compliant with the StatusNotifierItem specification by providing absolute paths to icons instead of either an icon name or icon data.
+    TabSwitcher: We will no longer show an empty switcher when there are no windows to actually switch between.
+    Workspace Applet
+        Fixed an issue where clicking a window icon would not perform an intended workspace switch.
+        Fixed left scroll direction. In libxfce4windowing, our concept of "left" maps to their "down", but "right" is still "right".
+    build: Re-hide warnings that were previously hidden in Meson < 1.4.0. In 1.4.0, it began to show warnings that are largely the result of bad C codegen in the Vala compiler, resulting in unreadable log spam and making it substantially more difficult to see actual warnings that need to be addressed.
+    vapi: update to support libxfce4windowing 4.19.3
+
+
+v10.9.1 Official announcement can be found here:
+https://buddiesofbudgie.org/blog/budgie-10-9-1-released
+
+Budgie 10.9.1 is the first minor release of Budgie 10.9 series of our Budgie Desktop environment. This release squashes some bugs in the TabSwitcher and Workspace applet.
+Bug Fixes
+
+    TabSwitcher
+        Fixed inconsistent window focusing.
+        Fixed windows from other workspaces showing up when the user has not enabled the "Show all windows" option.
+        Added dynamic max column setting on our switcher's FlowBox, so it will no longer take up more room than necessary.
+    Workspace applet
+        Fixed icon scaling when using scaling that is greater than 100%.
+    Added missing manpage for org.buddiesofbudgie.sendto.
+    Updated default vendor wallpaper.
+
+v10.9 Official announcement can be found here:
+https://buddiesofbudgie.org/blog/budgie-10-9-released
+
+Budgie 10.9 is a brand new release series for Budgie Desktop, introducing a redesigned Bluetooth applet, early porting efforts towards supporting Wayland, and adopting budgie-session for session management.
+Redesigned Bluetooth applet
+Budgie 10.9 features a redesigned Bluetooth applet. This applet now provides direct (dis-)connect functionality for paired Bluetooth devices, battery life indicators, as well as functionality for sending files to Bluetooth devices. Architecturally, our Bluetooth applet eliminates the use of gnome-bluetooth (a helper library on top of bluez D-Bus APIs) and instead directly communicates to BlueZ and UPower over D-Bus. Previously, Budgie Desktop had been using an older version of gnome-bluetooth which did not require Libadwaita and GTK4. As we looked towards expanding our Bluetooth functionality and easing long-term maintenance, we decided to deprecate our use of this older library and similarly leverage BlueZ and UPower D-Bus APIs directly. As an added benefit, this will enable some distributions to completely drop that old gnome-bluetooth from their repositories!
+Initial Wayland ports
+Budgie 10.9 features some initial ports of various applets and components of Budgie Desktop to a Wayland-compatible library: libxfce4windowing. libxfce4windowing is an abstraction library developed by XFCE that "attempts to present windowing concepts (screens, toplevel windows, workspaces, etc.) in a windowing-system-independent manner". It aims to accomplish this by supporting X11 through libwnck and support for various Wayland protocols (e.g. wlr foreign toplevel management). While libxfce4windowing is under active development and not yet ABI stable, we choose to already adopt it to make the transition from Budgie 10 under X11 to Budgie 10 under Wayland as seamless as possible. libxfce4windowing enables us to port functionality to support Wayland without negatively impacting use under X11, facilitate early "dogfooding" when our porting work is complete, and more effortlessly "flip the switch" to support Wayland and fully drop X11. The following parts of Budgie have been ported to libxfce4windowing in this release:
+
+    Show Desktop applet
+    TabSwitcher (Alt+Tab window switcher)
+    Workspace applet
+
+While porting, we took the opportunity to rewrite most of the TabSwitcher. Its window list is no longer rebuilt every time it is invoked and we no longer pass around window IDs between the window manager and tab switcher to build the UX. All of the relevant state and functionality is now internal to the switcher.
+Note for packagers: You may wish to reference Fedora's packaging spec when packaging libxfce4windowing, if it is not already available in your repository. This provides a clear example of using the "dist" tarballs as well as configuring the library without needing xfce-dev-tools 4.19.x. Do not use xfce-dev-tools 4.19.x unless it is already available in your repository, as this may negatively impact XFCE packaging.
+Use of budgie-session
+Budgie 10.9 takes into use budgie-session, our "softish fork of gnome-session, designed to provide a stable session manager for Budgie 10.x". budgie-session v0.9.x is forked from GNOME Session 44.x, ensuring that we retain:
+
+    X11-related session code up until we are ready to switch Budgie to being Wayland-only
+    ConsoleKit support for our BSD friends.
+
+Note for packagers: budgie-session is co-installable with gnome-session. Budgie 10.9 will not launch without budgie-session being available, so be sure to package it for your respective distributions and have it as a dependency of budgie-desktop!
+
 v10.8.2 Official announcement can be found here:
 https://buddiesofbudgie.org/blog/budgie-10-8-2-released
 

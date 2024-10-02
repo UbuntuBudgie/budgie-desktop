@@ -7,17 +7,18 @@ Build-Depends:
  debhelper-compat (= 13),
  dh-sequence-gir,
  gir1.2-gee-0.8,
+ intltool,
  gnome-screensaver,
  gnome-settings-daemon-dev,
  gobject-introspection,
  gtk-doc-tools,
- intltool,
  libaccountsservice-dev,
  libasound2-dev,
+ libcanberra-gtk3-dev,
+ cmake,
  libgdk-pixbuf-2.0-dev,
  libgee-0.8-dev,
  libglib2.0-dev,
- libgnome-bluetooth-dev,
  libgnome-desktop-3-dev,
  libgstreamer1.0-dev,
  libgtk-3-dev,
@@ -29,14 +30,15 @@ Build-Depends:
  libpolkit-gobject-1-dev,
  libpulse-dev,
  libpulse-mainloop-glib0,
- libupower-glib-dev,
+ libupower-glib-dev (>= 1.0),
  libwnck-3-dev,
+ libxfce4windowing-0-dev (>= 4.19.3),
  meson,
  sassc,
  uuid-dev,
  valac,
  zenity (>= 3.99),
-Standards-Version: 4.7.0
+Standards-Version: 4.6.2
 Vcs-Browser: https://github.com/ubuntubudgie/budgie-desktop/tree/debian
 Vcs-Git: https://github.com/ubuntubudgie/budgie-desktop.git -b debian
 Rules-Requires-Root: no
@@ -81,8 +83,8 @@ Depends:
  libraven0 (= ${binary:Version}),
  ${misc:Depends}
 Provides: gir1.2-budgie-1.0-dev (= ${binary:Version}),
-  gir1.2-budgieraven-1.0-dev (= ${binary:Version}),
-  ${gir:Provides}
+ gir1.2-budgieraven-1.0-dev (= ${binary:Version}),
+ ${gir:Provides}
 Suggests: budgie-desktop-doc
 Description: Development package for budgie-desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on
@@ -107,10 +109,7 @@ Depends:
  xdotool,
 Recommends: gir1.2-budgie-1.0, gir1.2-budgieraven-1.0, ${dist:Recommends}
 Suggests:
- arc-theme,
- gnome-bluetooth-sendto,
- papirus-icon-theme,
- slick-greeter,
+ budgie-desktop-environment,
  ${dist:Suggests},
 Description: Desktop package for budgie-desktop
  Budgie-Desktop is a GTK+ based desktop environment which focuses on

@@ -1,26 +1,76 @@
-budgie-desktop (10.8.2-4) unstable; urgency=medium
+budgie-desktop (10.9.2-2) experimental; urgency=medium
 
-  * d/control B/D switch from libmutter to libmagpie to resolve
-    FTBFS (Closes: #1067117)
-  * Add disable-warnings.patch to not error for valac-meson 1.4 issues
+  * Switch to using magpie
+  * Re-add Rework-keyboard-ibus-handling.patch since we are now using
+    magpie
   * Add enforce-no-implicit-function-declaration.patch for meson 1.4 issues
-  * Additional Packaging changes to tidy up lintian issues
-    d/control - drop B/D obsolete gnome-common, add intltool
-    d/control - drop B/D debhelper since we are using compat
-    d/control - gir1.2-budgie-1.0 remove now obsolete replace/breaks
+  * Packaging changes
+    d/control B/D magpie
     d/control introspection packaging changes state that a B/D on
     dh-sequence-gir is required as will as Provides statements
     for the gir packages budgie creates for the core dev binary package
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 30 Sep 2024 22:22:36 +0100
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 02 Oct 2024 17:55:13 +0100
 
-budgie-desktop (10.8.2-3) unstable; urgency=medium
+budgie-desktop (10.9.2-1) experimental; urgency=medium
 
-  * d/control - switch from gnome-session to budgie-session
-    switch-to-budgie-session.patch
-    d/control - update descriptions of GNOME components budgie uses
+  * New upstream release
+    - upstream release announcement in install changelogs
+  * Packaging changes
+    - drop Update-libxfce4windowing-to-4.19.3-547.patch since this is
+      included with this release
 
- -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 15 Feb 2024 09:46:00 +0000
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sat, 22 Jun 2024 14:00:57 +0100
+
+budgie-desktop (10.9.1-3) experimental; urgency=medium
+
+  * Fix FTBFS with v4.19.3 of libxfce4windowing
+    Update-libxfce4windowing-to-4.19.3-547.patch
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 12 Mar 2024 18:59:21 +0000
+
+budgie-desktop (10.9.1-2) experimental; urgency=medium
+
+  * d/control - switch to using budgie-session
+    change runtime dependencies to budgie-session
+    drop switch_to_gnome_session.patch
+    d/control - drop B/D obsolete gnome-common, add intltool
+    d/control - drop B/D debhelper since we are using compat
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 15 Feb 2024 10:02:02 +0000
+
+budgie-desktop (10.9.1-1) experimental; urgency=medium
+
+  * New upstream release
+    - upstream release announcement in install changelogs
+  * Packaging changes
+    - d/budgie-core.manpages - add sendto man-page
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 02 Feb 2024 21:39:24 +0000
+
+budgie-desktop (10.9-2) experimental; urgency=medium
+
+  * d/control - replace suggestions with budgie-desktop-environment
+    d/control - gir1.2-budgie-1.0 remove now obsolete replace/breaks
+    d/control - drop B/D libgnome-bluetooth-dev (Closes: #1059486)
+    d/control - add B/D cmake, libcanberra-gtk3-dev
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 29 Jan 2024 07:28:08 +0000
+
+budgie-desktop (10.9-1) experimental; urgency=medium
+
+  * New upstream release
+    - upstream release announcement in install changelogs
+  * switch to using gnome-session
+    switch_to_gnome_session.patch
+  * d/control - update packaging descriptions
+    Add B/D with libxfce4windowing-0-dev
+  * d/control - restrict gnome-session to less than v46 since budgie
+    will not launch with v46 and later; add budgie-session as an alternate
+  * d/patches - refresh Rework-keyboard-ibus-handling.patch that will
+    work with magpie; not built with patch until the magpie switch occurs
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 28 Jan 2024 15:18:12 +0000
 
 budgie-desktop (10.8.2-2) unstable; urgency=medium
 
