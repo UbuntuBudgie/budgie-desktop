@@ -1,4 +1,4 @@
 desktopfolder_exename.patch
-#Rework-keyboard-ibus-handling.patch
+Rework-keyboard-ibus-handling.patch
 allow-AppIndicator-if-System-Tray-is-not-present.patch
-Update-libxfce4windowing-to-4.19.3-547.patch
+enforce-no-implicit-function-declaration.patch

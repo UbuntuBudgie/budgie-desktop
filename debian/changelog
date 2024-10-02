@@ -1,3 +1,27 @@
+budgie-desktop (10.9.2-2) experimental; urgency=medium
+
+  * Switch to using magpie
+  * Re-add Rework-keyboard-ibus-handling.patch since we are now using
+    magpie
+  * Add enforce-no-implicit-function-declaration.patch for meson 1.4 issues
+  * Packaging changes
+    d/control B/D magpie
+    d/control introspection packaging changes state that a B/D on
+    dh-sequence-gir is required as will as Provides statements
+    for the gir packages budgie creates for the core dev binary package
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Wed, 02 Oct 2024 17:55:13 +0100
+
+budgie-desktop (10.9.2-1) experimental; urgency=medium
+
+  * New upstream release
+    - upstream release announcement in install changelogs
+  * Packaging changes
+    - drop Update-libxfce4windowing-to-4.19.3-547.patch since this is
+      included with this release
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sat, 22 Jun 2024 14:00:57 +0100
+
 budgie-desktop (10.9.1-3) experimental; urgency=medium
 
   * Fix FTBFS with v4.19.3 of libxfce4windowing
