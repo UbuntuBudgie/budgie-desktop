@@ -1,0 +1,17 @@
+@mixin borders($pos_list) {
+    @each $pos, $b_pos in $pos_list {
+        // Raven borders
+        .#{$pos} .raven-frame {
+            padding: 0;
+            background: none;
+        }
+
+        // Shadows
+        .#{$pos} .shadow-block {
+            background-color: transparent;
+            background-image: linear-gradient(to $b_pos,
+                                              $panel_shadow,
+                                              transparent);
+        }
+    }
+}

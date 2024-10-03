@@ -1,0 +1,96 @@
+@mixin workspaces($frame:'',$button:'', $iname:'-gtk-icon-effect') {
+    .workspace-popover {
+        #{$frame}.container { padding: 0; }
+
+        #{$button}.workspace-icon-button {
+            padding: 2px;
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            background: transparent;
+
+            &:hover {
+                background: $button_bg;
+                #{$iname}: none;
+            }
+        }
+
+        .workspace-popover-button-box > button {
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            &:dir(ltr) { padding-left: 5px; }
+            &:dir(rtl) { padding-right: 5px; }
+            &:last-child {
+                border-bottom-left-radius: 3px;
+                border-bottom-right-radius: 3px;
+            }
+        }
+    }
+
+    .workspace-switcher {
+        .workspace-item {
+            transition: 170ms ease-out;
+            transition-property: background-color;
+        }
+
+        .workspace-item.current-workspace {
+            background-color: $panel_bg;
+        }
+
+        label.workspace-more-label {
+            padding: 0;
+            margin: 0;
+        }
+
+        #{$button}.workspace-icon-button {
+            padding: 0;
+            border-color: transparent;
+            background: transparent;
+        }
+
+        .workspace-layout {
+            background-color: darken($panel_bg, 7%);
+        }
+
+        @at-root .right, .left {
+            revealer > .workspace-item {
+                border-bottom: 1px solid transparentize($fg_color, 0.8);
+            }
+
+            revealer:first-child > .workspace-item {
+                border-top: 1px solid transparentize($fg_color, 0.8);
+            }
+        }
+
+        @at-root .bottom, .top {
+            revealer > .workspace-item {
+                border-right: 1px solid transparentize($fg_color, 0.8);
+            }
+
+            revealer:first-child > .workspace-item {
+                border-left: 1px solid transparentize($fg_color, 0.8);
+            }
+
+            .workspace-layout {
+                padding: 0 3px;
+            }
+        }
+    }
+
+    @at-root .transparent .workspace-switcher {
+        .workspace-item.current-workspace {
+            background-color: transparentize($fg_color, 0.85);
+            border: 1px solid transparentize($fg_color, 0.7);
+        }
+
+        revealer:not(:last-child) > .workspace-item {
+            border-color: transparentize($fg_color, 0.7);
+        }
+
+        .workspace-layout {
+            background-color: transparent;
+            padding: 0;
+        }
+    }
+}

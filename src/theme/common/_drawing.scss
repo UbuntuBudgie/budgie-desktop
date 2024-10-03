@@ -1,0 +1,50 @@
+// Entries
+@mixin entry($selected,$insensitive) {
+    padding: 4px 8px;
+    border-radius: $roundness;
+
+    color: $entry_fg;
+    background-color: $entry_bg;
+
+    &:focus {
+        color: $entry_fg;
+        background-color: $entry_bg;
+    }
+
+    &:#{$insensitive} {
+        color: transparentize($entry_fg, 0.65);
+        background-color: transparentize($entry_bg, 0.3);
+    }
+
+    #{$selected},
+    #{$selected}:focus {
+        color: $selected_fg_color;
+        background-color: $selected_bg_color;
+    }
+
+}
+
+// Buttons
+@mixin button-normal($fg:$button_fg, $bg:$button_bg) {
+    color: $fg;
+    background-color: $bg;
+}
+
+@mixin button-hover($fg:$button_fg, $bg:$button_bg) {
+    color: $fg;
+    background-color: opacify(lighten($bg, 15%), 0.1);
+}
+
+@mixin button-active($fg:$selected_fg_color, $bg:$selected_bg_color) {
+    color: $fg;
+    background-color: $bg;
+}
+
+@mixin button-insensitive($fg:$button_fg, $bg:$button_bg) {
+    color: transparentize($fg, 0.65);
+    background-color: transparentize($bg, 0.1);
+}
+
+@mixin button-flat($fg:$button_fg, $bg:$button_bg) {
+    background-color: transparentize($bg, 1); // makes transitions nicer
+}

@@ -1,0 +1,16 @@
+// Alt+tab switcher in Budgie
+@mixin budgie_switcher_child($insensitive, $label) {
+    padding: 4px;
+    color: $fg_color;
+    border-radius: 3px;
+    transition: background-color 75ms ease-out;
+
+    &:hover, &:active, &:selected {
+        background-color: transparentize($fg_color, 0.84);
+    }
+}
+
+// Internal part of the Switcher
+.budgie-switcher {
+    @extend .budgie-notification;
+}

@@ -1,0 +1,10 @@
+/*build*/
+*.tar.*
+
+*.out
+*.vgcore
+
+justfile
+/.fleet/
+/.idea/
+/.cache/

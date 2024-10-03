@@ -1,2 +1,0 @@
-rm_conffile /etc/xdg/autostart/budgie-desktop-nm-applet.desktop 10.6.2+git20220728-1~ budgie-core
-rm_conffile /etc/xdg/autostart/budgie-desktop-screensaver.desktop 10.6.2+git20220728-1~ budgie-core

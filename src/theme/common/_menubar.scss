@@ -1,0 +1,30 @@
+@mixin budgie_menubar($menu, $arrow, $item, $accelerator) {
+    @extend %menu;
+    #{$menu} {
+        margin: 4px;
+        padding: 5px;
+        border-radius: 0;
+        background-color: $panel_bg;
+
+        #{$item}:hover {
+            background-color: $selected_bg_color;
+            color: $fg_color;
+        }
+    }
+    #{$arrow} {
+        border:none;
+
+        &.top {
+            -gtk-icon-source:-gtk-icontheme("pan-up-symbolic");
+        }
+
+        &.bottom {
+            -gtk-icon-source:-gtk-icontheme("pan-down-symbolic");
+        }
+    }
+    #{$item} {
+        #{$accelerator} {
+            color: transparentize($fg_color, 0.65);
+        }
+    }
+}

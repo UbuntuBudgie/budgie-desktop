@@ -1,0 +1,39 @@
+// Notifications
+.budgie-notification-window {
+    background: none;
+
+    .drop-shadow {
+        border-radius: 8px;
+        padding: 8px;
+        margin: 0;
+    }
+}
+
+.budgie-notification {
+    .notification-title {
+        font-size: 110%;
+        color: $fg_color;
+    }
+    .notification-body { color: transparentize($fg_color, 0.3); }
+}
+
+// On Screen Display in Budgie
+.budgie-osd-window {
+    background: none;
+
+    > box {
+        border-radius: 8px;
+        padding: 2px;
+        margin: 0;
+    }
+}
+
+// Internal part of the OSD
+.budgie-osd {
+    color: $fg_color;
+}
+
+// Alt+tab switcher in Budgie
+.budgie-switcher-window {
+    @extend .budgie-notification-window;
+}

@@ -1,0 +1,7 @@
+{
+	"editor.detectIndentation": true,
+	"[vala]": {
+		"editor.insertSpaces": false,
+		"editor.tabSize": 4
+	}
+}

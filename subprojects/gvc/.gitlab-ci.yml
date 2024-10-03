@@ -1,0 +1,13 @@
+stages:
+- test
+
+build-fedora:
+  image: fedora:latest
+  stage: test
+  before_script:
+    - dnf install -y redhat-rpm-config gcc meson pulseaudio-libs-devel alsa-lib-devel gtk3-devel
+  script:
+    - cd .gitlab-ci
+    - meson _build
+    - ninja -C _build
+

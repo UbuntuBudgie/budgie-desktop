@@ -1,0 +1,93 @@
+// Base class for dialogs
+@mixin budgie_dialog() {
+    background-color: transparent;
+    font-weight: normal;
+
+    > decoration {
+        box-shadow: 0 2px 4px $panel_shadow;
+        border-radius: 16px;
+    }
+
+    > box {
+        background-color: $panel_bg;
+        border-radius: 16px;
+    }
+}
+
+// Session Dialog
+@mixin budgie_session_dialog($button) {
+    @include budgie_dialog();
+
+    .dialog-title { font-size: 120%; }
+
+    .linked.horizontal > #{$button} {
+        @extend %reset_style;
+
+        padding: 8px;
+        background-color: transparentize(white, 0.9);
+        transition: background-color 170ms ease-out;
+
+        &:hover { background-color: transparentize(white, 0.8); }
+        &:active { background-color: transparentize(white, 0.7); }
+
+        &:first-child { border-radius: 0 0 0 8px; }
+        &:last-child { border-radius: 0 0 8px 0; }
+
+        &.suggested-action {
+            background-color: $suggested_color;
+
+            &:hover { background-color: saturate(lighten($suggested_color, 10%), 15%); }
+            &:active { background-color: saturate(lighten($suggested_color, 20%), 30%); }
+        }
+
+        &.destructive-action {
+            background-color: $destructive_color;
+
+            &:hover { background-color: saturate(lighten($destructive_color, 10%), 15%); }
+            &:active { background-color: saturate(lighten($destructive_color, 20%), 30%); }
+        }
+    }
+}
+
+// Power Dialog
+@mixin budgie_power_dialog() {
+    @include budgie_dialog();
+
+    .power-dialog-button {
+        transition: background-color 170ms ease-out;
+        border-radius: 12px;
+        background: none;
+        color: $fg_color;
+
+        &:hover {
+            color: $fg_color;
+            background-color: transparentize($fg_color, 0.9);
+        }
+
+        &:active {
+            color: $selected_fg_color;
+            background-color: $selected_bg_color;
+        }
+    }
+}
+
+// PolKit Dialog
+.budgie-polkit-dialog {
+    @extend .budgie-session-dialog;
+
+    .message { color: transparentize($fg_color, 0.3); }
+    .failure { color: $error_color; }
+}
+
+// Run Dialog
+%budgie_run_dialog_entry {
+    font-size: 120%;
+    padding: 8px 5px;
+    border: none;
+    box-shadow: none;
+}
+
+%budgie_run_dialog_image {
+    &:dir(ltr) { padding-left: 8px; padding-right: 12px; }
+    &:dir(rtl) { padding-left: 12px; padding-right: 8px; }
+}

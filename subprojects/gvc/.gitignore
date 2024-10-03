@@ -1,0 +1,11 @@
+.deps/
+.libs/
+.dirstamp
+Makefile.in
+Makefile
+*.la
+*.lo
+*.o
+*.gir
+*.typelib
+test-audio-device-selection

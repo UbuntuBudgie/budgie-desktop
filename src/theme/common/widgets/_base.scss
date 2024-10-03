@@ -1,0 +1,41 @@
+%widgets {
+    * {
+        @extend %reset_style;
+
+        padding: 0;
+    }
+
+    .dim-label { opacity: 0.55; }
+
+    // used to indicate unread notifications
+    .alert { color: $alert_color; }
+}
+
+.start-region, .center-region, .end-region {
+    &.horizontal > widget > widget > * { min-width: 18px; }
+    &.vertical > widget > widget > * { min-height: 18px; }
+}
+
+.start-region {
+    &.horizontal > widget > widget > * { margin-right: 2px; }
+    &.vertical > widget > widget > * { margin-bottom: 2px; }
+}
+
+.center-region {
+    &.horizontal > widget > widget > * { margin: 0 1px; }
+    &.vertical > widget > widget > * { margin: 1px 0; }
+}
+
+.end-region {
+    &.horizontal > widget > widget > * { margin-left: 2px; }
+    &.vertical > widget > widget > * { margin-top: 2px; }
+}
+
+.drop-shadow {
+    @extend %widgets;
+
+    color: $fg_color;
+    background-color: $panel_bg;
+    box-shadow: 0 2px 4px 0 $panel_shadow;
+    border-radius: 1px;
+}

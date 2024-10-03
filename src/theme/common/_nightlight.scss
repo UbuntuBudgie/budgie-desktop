@@ -1,0 +1,16 @@
+// Night Light indicator
+.night-light-indicator {
+    .container { padding: 0; }
+
+    .view-header {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .display-settings-button {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border: none;
+        padding: 3px;
+    }
+}

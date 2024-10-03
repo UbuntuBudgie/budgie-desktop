@@ -1,0 +1,113 @@
+// Raven
+@mixin raven($button) {
+    @extend %widgets;
+    @extend %menu;
+    @extend %reset_style;
+
+    color: $fg_color;
+    background-color: $raven_bg;
+    transition: 170ms ease-out;
+
+    .raven-header {
+        color: $fg_color;
+        background-color: $raven_expander_bg;
+    }
+
+    > .vertical > stack > *:not(.raven-notifications-view) > .frame {
+        margin: 0 8px;
+    }
+
+    @if $variant=='default' {
+        .expander-button { color: gtkalpha(currentColor, 0.5); }
+    }
+
+    .raven-background {
+        color: $fg_color;
+        background-color: $raven_background_bg;
+
+        &.middle { border-bottom-style: none; }  // applet background between two headers
+    }
+
+    .raven-notifications-view > .raven-background > .frame > list {
+        @extend %reset_style;
+
+        .raven-notifications-group {
+            .raven-notifications-group-header {
+                padding: 0 4px;
+            }
+
+            // single notification
+            box > list > row.activatable {
+                @extend %reset_style;
+
+                padding: 3px 6px;
+                margin-bottom: 4px;
+                border-radius: 3px;
+                background-color: transparent;
+                transition-property: background-color;
+
+                &:hover { background-color: transparentize(white, 0.9); }
+                &:active { background-color: transparentize(white, 0.8); }
+
+                // notification title
+                .notification-clone > box.horizontal > label {
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+
+    .powerstrip #{$button} {
+        padding: 10px;
+    }
+
+    .option-subtitle {
+        font-size: smaller;
+    }
+
+    levelbar > trough {
+        background: transparentize(white, 0.9);
+
+        > block.filled {
+            background: #46ca72;
+
+            &.high {
+                background: #c9ca46;
+            }
+
+            &.low {
+                background: #ca5746;
+            }
+        }
+    }
+}
+
+.raven-frame > border {
+    @extend %reset_style;
+}
+
+// Raven Trigger
+@mixin raven-trigger($button) {
+    #{$button}.raven-trigger {
+        @extend %reset_style;
+
+        padding: 0 2px;
+        transition: background-color 170ms ease-out;
+
+        &:hover { background-color: transparentize(white, 0.9); }
+        &:active {
+            color: $selected_fg_color;
+            background-color: $selected_bg_color;
+        }
+    }
+}
+
+// MPRIS Applet
+@mixin raven-mpris($button){
+    .raven-mpris {
+        color: $mpris_overlay_fg;
+        background-color: $mpris_overlay_bg;
+
+        #{$button}.image-button { padding: 6px; }
+    }
+}
