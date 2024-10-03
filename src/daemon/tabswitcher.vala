@@ -61,7 +61,7 @@ namespace Budgie {
 		public TabSwitcherWidget(Budgie.AppSystem app_system, libxfce4windowing.Window? win) {
 			Object();
 			window = win;
-			ulong uid = (ulong) window.x11_get_xid();
+			var uid = window.get_id();
 			id = uid.to_string();
 			set_title();
 
@@ -256,7 +256,7 @@ namespace Budgie {
 			return pos1 < pos2 ? -1 : 1;
 		}
 
-		public uint get_visible_children() {
+		private uint get_visible_children() {
 			uint visible_children = 0;
 			foreach (var child in window_box.get_children()) {
 				var tab = child as TabSwitcherWidget;
@@ -334,7 +334,7 @@ namespace Budgie {
 		}
 
 		private void set_window_as_activated(libxfce4windowing.Window window) {
-			string id = ((ulong) window.x11_get_xid()).to_string();
+			string id = window.get_id().to_string();
 			unowned List<string> entries = recency.find_custom(id, strcmp);
 			recency.remove_link(entries);
 			recency.prepend(id);
@@ -365,7 +365,7 @@ namespace Budgie {
 		/* Switch focus to the item with the xid */
 		public void focus_item(bool backwards) {
 			unowned libxfce4windowing.Window? active_window = xfce_screen.get_active_window();
-			TabSwitcherWidget? widget = active_window != null ? ids.get(((ulong) active_window.x11_get_xid()).to_string()) : null;
+			TabSwitcherWidget? widget = active_window != null ? ids.get(active_window.get_id().to_string()) : null;
 
 			// Visible, each input should cycle to previous / next
 			if (visible) {
@@ -456,7 +456,6 @@ namespace Budgie {
 			}
 
 			public void ShowSwitcher(bool backwards) throws DBusError, IOError {
-				if (switcher_window.get_visible_children() == 0) return;
 				this.add_mod_key_watcher();
 
 				switcher_window.move_switcher();

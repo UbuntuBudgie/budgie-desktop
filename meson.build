@@ -1,7 +1,7 @@
 project(
     'budgie-desktop',
     ['c', 'vala'],
-    version: '10.9.2',
+    version: '10.9.1',
     license: [
         'GPL-2.0',
         'LGPL-2.1',
@@ -11,16 +11,6 @@ project(
         'warning_level=3'
     ],
 )
-
-# Vala generates bad C code and missing these on gcc 14 will cause FTBFS
-# Additionally, Meson 1.4 unhides warnings from valac-generated C code,
-# which causes unreadable logspam. Reenables prior behavior.
-am_cflags = [
-    '-w',
-    '-Wno-incompatible-pointer-types',
-    '-Wno-implicit-function-declaration',
-]
-add_global_arguments(am_cflags, language: 'c')
 
 budgie_screensaver  = find_program('budgie-screensaver', required: false)
 gnome_screensaver = find_program('gnome-screensaver', required: false)
@@ -80,8 +70,7 @@ cdata = configuration_data()
 # Inspired by https://github.com/GNOME/recipes/blob/master/meson.build
 package_version = meson.project_version()
 
-ci = get_option('ci')
-if fs.exists('.git') and ci == false
+if fs.exists('.git')
     git = find_program('git')
     git_version = run_command('git', ['rev-parse', 'HEAD'], check: true)
     package_version += ' (git-'+git_version.stdout().strip()+')'
