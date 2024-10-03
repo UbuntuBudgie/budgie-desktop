@@ -10,18 +10,20 @@
  */
 
 namespace Workspaces {
-	public class WindowIcon : Gtk.Button {
-		private Wnck.Window window;
+	public const int WORKSPACE_ICON_SIZE = 16;
 
-		public WindowIcon(Wnck.Window window) {
+	public class WindowIcon : Gtk.Button {
+		private libxfce4windowing.Window window;
+
+		public WindowIcon(libxfce4windowing.Window window) {
 			this.window = window;
 
 			this.set_relief(Gtk.ReliefStyle.NONE);
 			this.get_style_context().add_class("workspace-icon-button");
 			this.set_tooltip_text(window.get_name());
 
-			Gtk.Image icon = new Gtk.Image.from_pixbuf(window.get_mini_icon());
-			icon.set_pixel_size(16);
+			Gtk.Image icon = new Gtk.Image.from_gicon(window.get_gicon(), Gtk.IconSize.INVALID);
+			icon.set_pixel_size(WORKSPACE_ICON_SIZE);
 			this.add(icon);
 			icon.show();
 
@@ -30,7 +32,7 @@ namespace Workspaces {
 			});
 
 			window.icon_changed.connect(() => {
-				icon.set_from_pixbuf(window.get_mini_icon());
+				icon.set_from_gicon(window.get_gicon(), Gtk.IconSize.INVALID);
 				icon.queue_draw();
 			});
 
@@ -41,7 +43,7 @@ namespace Workspaces {
 				Gdk.DragAction.MOVE
 			);
 
-			Gtk.drag_source_set_icon_pixbuf(this, window.get_icon());
+			Gtk.drag_source_set_icon_gicon(this, window.get_gicon());
 
 			this.drag_begin.connect(on_drag_begin);
 			this.drag_end.connect(on_drag_end);
@@ -51,16 +53,14 @@ namespace Workspaces {
 		}
 
 		public override bool button_release_event(Gdk.EventButton event) {
-			if (event.button != 1) {
-				return false;
-			}
-			var workspace = WorkspacesApplet.wnck_screen.get_active_workspace();
-			if (workspace != null && workspace == window.get_workspace()) {
+			if (event.button != 1) return Gdk.EVENT_STOP;
+
+			try {
 				window.activate(event.time);
-				return false;
+			} catch (Error e) {
+				warning("Failed to activate window: %s", e.message);
 			}
-			window.get_workspace().activate(event.time);
-			return false;
+			return Gdk.EVENT_STOP;
 		}
 
 		private void on_drag_begin(Gtk.Widget widget, Gdk.DragContext context) {
@@ -72,7 +72,7 @@ namespace Workspaces {
 		}
 
 		public void on_drag_data_get(Gtk.Widget widget, Gdk.DragContext context, Gtk.SelectionData selection_data, uint target_type, uint time) {
-			ulong window_xid = window.get_xid();
+			ulong window_xid = (ulong)window.x11_get_xid();
 			uchar[] buf;
 			convert_ulong_to_bytes(window_xid, out buf);
 			selection_data.set(
