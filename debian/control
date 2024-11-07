@@ -105,7 +105,7 @@ Depends:
  budgie-core,
  dconf-cli,
  ${misc:Depends},
- network-manager-gnome,
+ network-manager-applet,
  xdotool,
 Recommends: gir1.2-budgie-1.0, gir1.2-budgieraven-1.0, ${dist:Recommends}
 Suggests:
