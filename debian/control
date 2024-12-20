@@ -32,7 +32,7 @@ Build-Depends:
  libpulse-mainloop-glib0,
  libupower-glib-dev (>= 1.0),
  libwnck-3-dev,
- libxfce4windowing-0-dev (>= 4.19.3),
+ libxfce4windowing-0-dev (>= 4.19.7),
  meson,
  sassc,
  uuid-dev,

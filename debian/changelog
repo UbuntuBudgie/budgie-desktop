@@ -1,3 +1,17 @@
+budgie-desktop (10.9.2-5) unstable; urgency=medium
+
+  * Upload to unstable now that libxfce4windowing is available
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 20 Dec 2024 15:56:45 +0000
+
+budgie-desktop (10.9.2-4) experimental; urgency=medium
+
+  * Add compatibility for the latest libxfce4windowing
+    0001-Adapt-to-xf4w-v4.19.8-630.patch
+    d/control bump versioning for libxfce4windowing
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 05 Dec 2024 19:27:06 +0000
+
 budgie-desktop (10.9.2-3) experimental; urgency=medium
 
   * d/control budgie-desktop - update to depends on network-manager-applet
