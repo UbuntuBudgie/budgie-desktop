@@ -1,0 +1,27 @@
+Description: Switch to using blueman
+ BCC has been patched to no longer build with a deprecated bluetooth
+ library and as such cannot be used to connect bluetooth devices
+ (#1059485)
+ This patch switches to using blueman instead
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Forwarded: not-needed
+Last-Update: 2025-01-02
+
+--- a/src/panel/applets/status/BluetoothIndicator.vala
++++ b/src/panel/applets/status/BluetoothIndicator.vala
+@@ -197,13 +197,13 @@
+ 	private void on_settings_activate() {
+ 		this.popover.hide();
+ 
+-		var app_info = new DesktopAppInfo("budgie-bluetooth-panel.desktop");
++		var app_info = new DesktopAppInfo("blueman-manager.desktop");
+ 		if (app_info == null) return;
+ 
+ 		try {
+ 			app_info.launch(null, null);
+ 		} catch (Error e) {
+-			warning("Unable to launch budgie-bluetooth-panel.desktop: %s", e.message);
++			warning("Unable to launch blueman-manager.desktop: %s", e.message);
+ 		}
+ 	}
+ 

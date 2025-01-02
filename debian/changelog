@@ -1,3 +1,14 @@
+budgie-desktop (10.9.2-6) unstable; urgency=medium
+
+  * Switch to using blueman for connection services since BCC
+    has been patched to no longer display the bluetooth panel (#1059485)
+    d/control budgie-desktop add blueman
+    d/*.gschema.override - patch to hide the statusnotifier plugin
+    switch-to-blueman.patch
+  * d/changelog merge is missing 10.8.x changelogs
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 02 Jan 2025 19:34:21 +0000
+
 budgie-desktop (10.9.2-5) unstable; urgency=medium
 
   * Upload to unstable now that libxfce4windowing is available
@@ -27,7 +38,7 @@ budgie-desktop (10.9.2-2) experimental; urgency=medium
     magpie
   * Add enforce-no-implicit-function-declaration.patch for meson 1.4 issues
   * Packaging changes
-    d/control B/D magpie
+    d/control B/D magpie (Closes: #1067117)
     d/control introspection packaging changes state that a B/D on
     dh-sequence-gir is required as will as Provides statements
     for the gir packages budgie creates for the core dev binary package
@@ -93,6 +104,38 @@ budgie-desktop (10.9-1) experimental; urgency=medium
     work with magpie; not built with patch until the magpie switch occurs
 
  -- David Mohammed <fossfreedom@ubuntu.com>  Sun, 28 Jan 2024 15:18:12 +0000
+
+budgie-desktop (10.8.2-5) unstable; urgency=medium
+
+  * d/control budgie-desktop - update to depends on network-manager-applet
+    not the now transition package network-manager-gnome
+    (Closes: #1086814)
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 07 Nov 2024 19:48:39 +0000
+
+budgie-desktop (10.8.2-4) unstable; urgency=medium
+
+  * d/control B/D switch from libmutter to libmagpie to resolve
+    FTBFS (Closes: #1067117)
+  * Add disable-warnings.patch to not error for valac-meson 1.4 issues
+  * Add enforce-no-implicit-function-declaration.patch for meson 1.4 issues
+  * Additional Packaging changes to tidy up lintian issues
+    d/control - drop B/D obsolete gnome-common, add intltool
+    d/control - drop B/D debhelper since we are using compat
+    d/control - gir1.2-budgie-1.0 remove now obsolete replace/breaks
+    d/control introspection packaging changes state that a B/D on
+    dh-sequence-gir is required as will as Provides statements
+    for the gir packages budgie creates for the core dev binary package
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Mon, 30 Sep 2024 22:22:36 +0100
+
+budgie-desktop (10.8.2-3) unstable; urgency=medium
+
+  * d/control - switch from gnome-session to budgie-session
+    switch-to-budgie-session.patch
+    d/control - update descriptions of GNOME components budgie uses
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Thu, 15 Feb 2024 09:46:00 +0000
 
 budgie-desktop (10.8.2-2) unstable; urgency=medium
 

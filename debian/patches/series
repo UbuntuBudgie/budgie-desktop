@@ -3,3 +3,4 @@ Rework-keyboard-ibus-handling.patch
 allow-AppIndicator-if-System-Tray-is-not-present.patch
 enforce-no-implicit-function-declaration.patch
 0001-Adapt-to-xf4w-v4.19.8-630.patch
+switch-to-blueman.patch

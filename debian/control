@@ -104,6 +104,7 @@ Depends:
  budgie-control-center,
  budgie-core,
  dconf-cli,
+ blueman,
  ${misc:Depends},
  network-manager-applet,
  xdotool,

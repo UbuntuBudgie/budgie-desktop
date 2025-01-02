@@ -3,3 +3,6 @@ overrides={'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DecorationLayout': <'menu:minimize
 
 [com.solus-project.budgie-wm]
 desktop-type-override='nemo'
+
+[org.blueman.general:Budgie]
+plugin-list=['!StatusNotifierItem']
