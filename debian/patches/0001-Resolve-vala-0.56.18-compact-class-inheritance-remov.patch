@@ -1,0 +1,53 @@
+Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/680
+Author: David Mohammed <fossfreedom@ubuntu.com>
+Date: 2025-03-04
+Description: [PATCH] Resolve vala 0.56.18 compact class inheritance removal
+ - This PR has been modified to include usage of [Compact] that is
+   specific to 10.9.2 series
+
+---
+ src/lib/animation.vala         | 1 -
+ src/panel/manager.vala         | 1 -
+ src/panel/settings/themes.vala | 1 -
+ 3 files changed, 3 deletions(-)
+
+--- a/src/lib/animation.vala
++++ b/src/lib/animation.vala
+@@ -27,7 +27,6 @@
+ 	* Utility to struct to enable easier animations
+ 	* Inspired by Clutter.
+ 	*/
+-	[Compact]
+ 	public class Animation : GLib.Object {
+ 		public int64 start_time; /**<Start time (microseconds) of animation */
+ 		public int64 length; /**<Length of animation in microseconds */
+--- a/src/panel/manager.vala
++++ b/src/panel/manager.vala
+@@ -23,7 +23,6 @@
+ 	/**
+ 	* Available slots
+ 	*/
+-	[Compact]
+ 	class Screen : GLib.Object {
+ 		public PanelPosition slots;
+ 		public Gdk.Rectangle area;
+--- a/src/panel/settings/themes.vala
++++ b/src/panel/settings/themes.vala
+@@ -15,7 +15,6 @@
+ 	CURSOR_THEME
+ }
+ 
+-[Compact]
+ class ThemeInfo : GLib.Object {
+ 	private ThemeType theme_type;
+ 	private List<string> paths;
+--- a/src/panel/applets/icon-tasklist/animation.vala
++++ b/src/panel/applets/icon-tasklist/animation.vala
+@@ -27,7 +27,6 @@
+ 	* Utility to struct to enable easier animations
+ 	* Inspired by Clutter.
+ 	*/
+-	[Compact]
+ 	public class Animation : GLib.Object {
+ 		public int64 start_time; /**<Start time (microseconds) of animation */
+ 		public int64 length; /**<Length of animation in microseconds */

@@ -1,3 +1,10 @@
+budgie-desktop (10.9.2-7) unstable; urgency=medium
+
+  * Resolve FTBFS due to vala change
+    0001-Resolve-vala-0.56.18-compact-class-inheritance-remov.patch
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Tue, 04 Mar 2025 20:00:25 +0000
+
 budgie-desktop (10.9.2-6) unstable; urgency=medium
 
   * Switch to using blueman for connection services since BCC
