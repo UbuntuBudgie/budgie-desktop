@@ -1,3 +1,11 @@
+budgie-desktop (10.9.2-8) unstable; urgency=medium
+
+  * Resolve window-manager crash immediately on logon due to changes
+    with mutter-48-rc (LP: #2102655)
+    0001-Add-override-for-overlay-key-to-prevent-crash-with-m.patch
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Sat, 15 Mar 2025 09:33:01 +0000
+
 budgie-desktop (10.9.2-7) unstable; urgency=medium
 
   * Resolve FTBFS due to vala change
