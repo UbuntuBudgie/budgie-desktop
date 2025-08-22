@@ -1,3 +1,10 @@
+budgie-desktop (10.9.2-9) unstable; urgency=medium
+
+  * Resolve crash on logon due to GNOME-49 wacom removal
+    gnome-49-wacom.patch
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 22 Aug 2025 19:39:18 +0100
+
 budgie-desktop (10.9.2-8) unstable; urgency=medium
 
   * Resolve window-manager crash immediately on logon due to changes

@@ -6,3 +6,4 @@ enforce-no-implicit-function-declaration.patch
 switch-to-blueman.patch
 0001-Resolve-vala-0.56.18-compact-class-inheritance-remov.patch
 0001-Add-override-for-overlay-key-to-prevent-crash-with-m.patch
+gnome-49-wacom.patch
