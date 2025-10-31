@@ -1,5 +1,5 @@
 Forwarded: https://github.com/BuddiesOfBudgie/budgie-desktop/pull/168
-Authord: David Mohammed <fossfreedom@ubuntu.com>
+Author: David Mohammed <fossfreedom@ubuntu.com>
 Last-Update: 2023-10-06
 Description: Rework keyboard handling to layouts & ibus handling
  Combined patch created by squashing all the commits in the above PR

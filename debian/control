@@ -9,7 +9,7 @@ Build-Depends:
  gir1.2-gee-0.8,
  intltool,
  gnome-screensaver,
- gnome-settings-daemon-dev,
+ gnome-settings-daemon-dev (>=49),
  gobject-introspection,
  gtk-doc-tools,
  libaccountsservice-dev,
@@ -32,13 +32,16 @@ Build-Depends:
  libpulse-mainloop-glib0,
  libupower-glib-dev (>= 1.0),
  libwnck-3-dev,
+   libwacom-dev,
+   libgudev-1.0-dev,
+   systemd-dev,
  libxfce4windowing-0-dev (>= 4.19.7),
  meson,
  sassc,
  uuid-dev,
  valac,
  zenity (>= 3.99),
-Standards-Version: 4.6.2
+Standards-Version: 4.7.2
 Vcs-Browser: https://github.com/ubuntubudgie/budgie-desktop/tree/debian
 Vcs-Git: https://github.com/ubuntubudgie/budgie-desktop.git -b debian
 Rules-Requires-Root: no
@@ -48,7 +51,7 @@ Architecture: any
 Depends:
  gnome-screensaver,
  budgie-session,
- gnome-settings-daemon,
+ gnome-settings-daemon (>= 49),
  zenity (>= 3.99),
  ${misc:Depends},
  ${shlibs:Depends},

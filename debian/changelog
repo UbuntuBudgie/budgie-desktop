@@ -1,3 +1,33 @@
+budgie-desktop (10.9.3-1) unstable; urgency=medium
+
+  * New upstream release
+    - micro release which resolves GNOME 49 incompatibilities with Budgie
+    (Closes: #1119786)
+    In GNOME 49.x, gnome-settings-daemon received various changes including
+    the deprecation of their .desktop files as well as deprecation of
+    functionality such as MediaKeys (brightness) (moved into Shell). We now
+    have an in-tree fork of GSD, specifically targeted at:
+    MediaKeys (bsd-media-keys)
+    Power (bsd-power)
+    Wacom (bsd-wacom)
+    All other components will continue to be pulled in from GSD, with our
+    executables being co-installable with GSD. Alongside this, we ship with
+    a range of autostart desktop files to ensure the appropriate execs are
+    launched with Budgie Desktop.
+  * Drop the following patches since these are incorporated in this release
+    gnome-49-wacom.patch
+    0001-Adapt-to-xf4w-v4.19.8-630.patch
+    0001-Add-override-for-overlay-key-to-prevent-crash-with-m.patch
+    0001-Resolve-vala-0.56.18-compact-class-inheritance-remov.patch
+  * d/control - add B/D required for the above patch:
+    libwacom-dev, libgudev-1.0-dev, systemd-dev
+  * d/control - Bump StandardsVersion - no further changes required
+  * d/copyright - update for the microrelease
+  * d/control - add gnome-settings-daemon version restriction to support
+    migration to GNOME 49
+
+ -- David Mohammed <fossfreedom@ubuntu.com>  Fri, 31 Oct 2025 18:33:51 +0000
+
 budgie-desktop (10.9.2-9) unstable; urgency=medium
 
   * Resolve crash on logon due to GNOME-49 wacom removal

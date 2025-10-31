@@ -15,6 +15,7 @@ endif
 	dh $@ --with gir
 
 override_dh_auto_configure:
+	touch src/daemon/bsd/plugins/common/gtk.css
 	dh_auto_configure -- --prefix=/usr --libdir=/usr/lib -Dwith-gnome-screensaver=true
 
 override_dh_gencontrol:
